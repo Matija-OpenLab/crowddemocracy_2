@@ -1,0 +1,1 @@
+nanana, vytvoril som text file, napise sem haluze o nasom projekte a vlastne je to len read me aby som mohol spravit 
