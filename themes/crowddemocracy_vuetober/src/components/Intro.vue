@@ -5,7 +5,9 @@
             Na crowd democracy mozte dat svoj hlas novym navrhom alebo ho
             odovzdat ludom ktorym doverujete
         </h3>
-        <b-button>Registrovať sa</b-button>
+        <router-link to="/registration" tag="b-button"
+            >Registrovať sa</router-link
+        >
         <b-button>Prihlásiť sa</b-button>
 
         <!-- sekcia na zobrazovanie aktualnych hlasovani -->
