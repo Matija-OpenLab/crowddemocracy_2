@@ -1,0 +1,15 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Database implementation'
+1.0.3:
+    - 'add builder plugin on requirements dependency'
+    - builder_table_create_ahmadfatoni_apigenerator_data.php
+1.0.4:
+    - 'fixing bug on PHP 7'
+1.0.5:
+    - 'fixing bug on request delete data'
+1.0.6:
+    - 'fixing bug on generate endpoint'
+1.0.7:
+    - 'fixing bug on October CMS v1.0.456'

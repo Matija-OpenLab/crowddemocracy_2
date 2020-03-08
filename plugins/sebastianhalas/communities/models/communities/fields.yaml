@@ -1,0 +1,19 @@
+fields:
+    name:
+        label: 'Name:'
+        span: auto
+        type: text
+    description:
+        label: Description
+        span: auto
+        type: text
+    created_at:
+        label: 'Created At'
+        mode: datetime
+        span: auto
+        type: datepicker
+    updated_at:
+        label: 'Updated AT'
+        mode: datetime
+        span: auto
+        type: datepicker

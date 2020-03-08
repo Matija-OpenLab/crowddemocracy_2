@@ -1,0 +1,26 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table sebastianhalas_communities_main'
+    - builder_table_create_sebastianhalas_communities_main.php
+1.0.3:
+    - 'Created table sebastianhalas_communities_roles'
+    - builder_table_create_sebastianhalas_communities_roles.php
+1.0.4:
+    - 'Updated table sebastianhalas_communities_main'
+    - builder_table_update_sebastianhalas_communities_main.php
+1.0.5:
+    - 'Updated table sebastianhalas_communities_main'
+    - builder_table_update_sebastianhalas_communities_main_2.php
+1.0.6:
+    - 'Updated table sebastianhalas_communities_main'
+    - builder_table_update_sebastianhalas_communities_main_3.php
+1.0.7:
+    - 'Updated table sebastianhalas_communities_main'
+    - builder_table_update_sebastianhalas_communities_main_4.php
+1.0.8:
+    - 'Updated table sebastianhalas_communities_main'
+    - builder_table_update_sebastianhalas_communities_main_5.php
+1.0.9:
+    - 'Updated table sebastianhalas_communities_main'
+    - builder_table_update_sebastianhalas_communities_main_6.php

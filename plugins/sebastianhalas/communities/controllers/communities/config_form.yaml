@@ -1,0 +1,11 @@
+name: Communities
+modelClass: SebastianHalas\Communities\Models\Communities
+form: $/sebastianhalas/communities/models/communities/fields.yaml
+defaultRedirect: sebastianhalas/communities/communities
+create:
+    redirect: 'sebastianhalas/communities/communities/update/:id'
+    redirectClose: sebastianhalas/communities/communities
+update:
+    redirect: sebastianhalas/communities/communities
+    redirectClose: sebastianhalas/communities/communities
+preview: {  }

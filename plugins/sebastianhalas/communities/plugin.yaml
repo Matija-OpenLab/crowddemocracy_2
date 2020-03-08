@@ -1,0 +1,11 @@
+plugin:
+    name: 'sebastianhalas.communities::lang.plugin.name'
+    description: 'sebastianhalas.communities::lang.plugin.description'
+    author: 'Sebastian Halas'
+    icon: oc-icon-adjust
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Communities
+        url: sebastianhalas/communities/communities
+        icon: icon-area-chart
