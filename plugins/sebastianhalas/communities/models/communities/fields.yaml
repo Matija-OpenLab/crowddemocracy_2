@@ -4,9 +4,10 @@ fields:
         span: auto
         type: text
     description:
-        label: Description
+        label: Desciption
+        size: large
         span: auto
-        type: text
+        type: textarea
     created_at:
         label: 'Created At'
         mode: datetime
@@ -15,5 +16,5 @@ fields:
     updated_at:
         label: 'Updated AT'
         mode: datetime
-        span: auto
+        span: left
         type: datepicker
