@@ -1,6 +1,6 @@
 <template>
   <div>
     <h1>Registration page</h1>
-    <router-link to="/" tag="b-button">Home</router-link>
+    <b-button to="home">Home<b-button>
   </div>
 </template>

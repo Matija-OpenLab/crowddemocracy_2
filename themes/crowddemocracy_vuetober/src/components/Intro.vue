@@ -11,8 +11,8 @@
         </b-col>
 
         <b-col class="buttons">
-          <router-link to="/registration" tag="b-button">Registrovať sa</router-link>
-          <router-link to="/login" tag="b-button">Prihlásiť sa</router-link>
+          <b-button to="/registration">Registrovať sa</b-button>
+          <b-button to="/login">Prihlásiť sa</b-button>
         </b-col>
       </b-row>
     </b-container>
