@@ -24,3 +24,9 @@
 1.0.9:
     - 'Updated table sebastianhalas_communities_main'
     - builder_table_update_sebastianhalas_communities_main_6.php
+1.0.10:
+    - 'Updated table sebastianhalas_communities_main'
+    - builder_table_update_sebastianhalas_communities_main_7.php
+1.0.11:
+    - 'Drop table sebastianhalas_communities_roles'
+    - builder_table_delete_sebastianhalas_communities_roles.php

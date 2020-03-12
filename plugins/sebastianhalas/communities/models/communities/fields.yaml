@@ -18,3 +18,11 @@ fields:
         mode: datetime
         span: left
         type: datepicker
+    owner:
+        label: 'Owned by'
+        span: left
+        type: text
+    user_count:
+        label: 'User Count'
+        span: right
+        type: text

@@ -2,9 +2,11 @@ columns:
     id:
         label: ID
         type: number
+        invisible: true
     name:
         label: Name
         type: text
+        searchable: true
     description:
         label: Description
         type: text
@@ -14,3 +16,9 @@ columns:
     updated_at:
         label: 'Updated At'
         type: datetime
+    owner:
+        label: 'Owned By'
+        type: text
+    user_count:
+        label: 'Amount Of Users'
+        type: number
