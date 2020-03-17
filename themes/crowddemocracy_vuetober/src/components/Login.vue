@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <h1>Login page</h1>
     <b-button to="home">Home</b-button>
   </div>

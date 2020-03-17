@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrap">
         <h1>Crowddemocracy</h1>
         <h3>Registrácia</h3>
 
