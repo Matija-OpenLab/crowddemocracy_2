@@ -4,6 +4,7 @@ import Intro from '../components/Intro'
 import Registration from '../components/Registration'
 import Login from '../components/Login'
 import Homepage from '../components/Homepage'
+import CommunityInfo from '../components/CommunityInfo'
 
 
 Vue.use(VueRouter)
@@ -27,6 +28,12 @@ const routes = [{
         path: '/home',
         name: 'Home',
         component: Homepage
+    },
+    {
+        path: '/communityInfo/:name',
+        name: 'CommunityInfo',
+        component: CommunityInfo,
+        props: true
     }
 ]
 
