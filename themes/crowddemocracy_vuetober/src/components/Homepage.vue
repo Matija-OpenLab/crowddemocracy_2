@@ -3,10 +3,11 @@
     <h1>Crowddemocracy</h1>
     <b-button :to="'/'" variant="danger">Odhlásiť sa</b-button>
     <div class="communities" v-for="(communitie, index) in communities" :key="index">
+      <!--TENTO DIV JE CELA KOMUNITA-->
       <div class="communitie" @click="redirectToComm(index)">
-        <h1>{{communitie.name}}</h1>
-        <p>{{communitie.user_count}}</p>
-        <p>{{communitie.owner}}</p>
+        <p class="com-name">{{communitie.name}}</p>
+        <p class="com-count">{{communitie.user_count}}</p>
+        <p class="com-owner">{{communitie.owner}}</p>
       </div>
     </div>
     <div class="tops">

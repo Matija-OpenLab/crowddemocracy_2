@@ -15,11 +15,12 @@
         doubt the will even try or that if they do that the will be successful.
       </h5>
 
-      <b-button class="login" to="/login">
-        <p class="logintext">Prihlásiť sa</p>
-      </b-button>
+      <b-button class="login" to="/login">Prihlásiť sa</b-button>
       <b-row class="footer">
-        <b-col class="footer-col1">® 2020 všetky práva vyhradené CROWDDEMOCRACY</b-col>
+        <b-col class="footer-col1">
+          &reg; 2020 všetky práva vyhradené
+          <span class="footer-logo">CROWD</span>DEMOCRACY
+        </b-col>
         <b-col class="footer-col2">Sledujte nás na sociálnych sieťach</b-col>
         <b-col class="footer-col3">social media</b-col>
       </b-row>
@@ -93,9 +94,7 @@ export default {};
   height: 60px;
   margin-top: 40px;
   margin-left: 115px;
-}
-.logintext {
-  margin: auto;
+  line-height: 43px;
 }
 .footer {
   margin-top: 500px;
@@ -103,7 +102,8 @@ export default {};
 .footer-col1 {
   font-size: 14px;
   color: #330066;
-  margin-left: 115px;
+  margin-left: 40px;
+  white-space: nowrap;
 }
 .footer-col2 {
   font-size: 14px;
@@ -113,5 +113,8 @@ export default {};
 }
 .footer-col3 {
   color: white;
+}
+.footer-logo {
+  font-weight: 900;
 }
 </style>
