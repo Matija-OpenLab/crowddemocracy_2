@@ -1,24 +1,32 @@
 <template>
   <div class="wrap">
-    <h1 class="text-center header">CrowdDemocracy</h1>
     <b-container class="content">
-      <b-row>
-        <b-col>
-          <h3>
-            Na crowd democracy mozte dat svoj hlas novym navrhom alebo ho
-            odovzdat ludom ktorym doverujete
-          </h3>
+      <b-row class="navbar">
+        <b-col class="logo">logo</b-col>
+        <b-col class="question">Ešte nemáš účet?</b-col>
+        <b-col class="button">
+          <b-button class="registration" to="/registration">Registruj sa</b-button>
         </b-col>
+      </b-row>
+      <h4 class="header">Ako využijete svoj hlas?</h4>
+      <h5 class="intro">
+        Many people were hoping that if the Democrats won control
+        of Congress the wold reverse the online gabling ban, but experts
+        doubt the will even try or that if they do that the will be successful.
+      </h5>
 
-        <b-col class="buttons">
-          <b-button to="/registration">Registrovať sa</b-button>
-          <b-button to="/login">Prihlásiť sa</b-button>
-        </b-col>
+      <b-button class="login" to="/login">
+        <p class="logintext">Prihlásiť sa</p>
+      </b-button>
+      <b-row class="footer">
+        <b-col class="footer-col1">® 2020 všetky práva vyhradené CROWDDEMOCRACY</b-col>
+        <b-col class="footer-col2">Sledujte nás na sociálnych sieťach</b-col>
+        <b-col class="footer-col3">social media</b-col>
       </b-row>
     </b-container>
     <!-- sekcia na zobrazovanie aktualnych hlasovani -->
     <section>
-      <p>Post..</p>
+      <p></p>
     </section>
   </div>
 </template>
@@ -27,26 +35,83 @@ export default {};
 </script>
 <style scoped>
 .wrap {
-  /* background-image: url(../../../../assets/camera.jpg); */
-  background-image: url(../assets/backg.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
+  height: 1200px;
+  margin: 0px;
+}
+.navbar {
+  width: 1450px;
 }
 .content {
-  height: 75vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 0px;
 }
-.buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.registration {
+  border-color: #330066;
+  color: #330066;
+  background-color: white;
+  width: 140px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.button {
+  width: 500px;
+  margin-left: 0px;
+}
+.logo {
+  width: 500px;
+  color: white;
+}
+
+.question {
+  width: 500px;
+  margin-left: 700px;
+  padding: 0px;
+  font-size: 14px;
+  text-align: right;
+  margin-top: 4px;
+  color: #330066;
 }
 .header {
-  line-height: 1em;
-  font-size: 5em;
-  padding-top: 1em;
+  margin-top: 280px;
+  font-size: 50px;
+  font-weight: 50;
+  color: #9900cc;
+  margin-left: 115px;
+}
+.intro {
+  width: 500px;
+  font-weight: 50;
+  color: #9900cc;
+  margin-left: 115px;
+  margin-top: 50px;
+}
+.login {
+  background-color: #330066;
+  color: white;
+  width: 215px;
+  height: 60px;
+  margin-top: 40px;
+  margin-left: 115px;
+}
+.logintext {
+  margin: auto;
+}
+.footer {
+  margin-top: 500px;
+}
+.footer-col1 {
+  font-size: 14px;
+  color: #330066;
+  margin-left: 115px;
+}
+.footer-col2 {
+  font-size: 14px;
+  color: #330066;
+  margin-left: 115px;
+  text-align: right;
+}
+.footer-col3 {
+  color: white;
 }
 </style>
