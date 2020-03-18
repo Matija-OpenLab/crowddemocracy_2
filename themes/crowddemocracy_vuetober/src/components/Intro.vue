@@ -10,9 +10,8 @@
       </b-row>
       <h4 class="header">Ako využijete svoj hlas?</h4>
       <h5 class="intro">
-        Many people were hoping that if the Democrats won control
-        of Congress the wold reverse the online gabling ban, but experts
-        doubt the will even try or that if they do that the will be successful.
+        Na crowd democracy môžete dať svoj hlas novým návrhom alebo ho odovzdať
+        ľudom ktorým dôverujete.
       </h5>
 
       <b-button class="login" to="/login">Prihlásiť sa</b-button>
@@ -36,7 +35,7 @@ export default {};
 </script>
 <style scoped>
 .wrap {
-  height: 1200px;
+  height: 100vh;
   margin: 0px;
 }
 .navbar {
@@ -97,7 +96,7 @@ export default {};
   line-height: 43px;
 }
 .footer {
-  margin-top: 500px;
+  margin-top: 400px;
 }
 .footer-col1 {
   font-size: 14px;
