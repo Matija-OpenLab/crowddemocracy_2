@@ -3,9 +3,11 @@
     <h1>Crowddemocracy</h1>
     <b-button :to="'/'" variant="danger">Odhlásiť sa</b-button>
     <div class="communities" v-for="(communitie, index) in communities" :key="index">
-      <div class="communitie">
-        <h1>{{communitie.name}}</h1>
-        <p>{{communitie.description}}</p>
+      <!--TENTO DIV JE CELA KOMUNITA-->
+      <div class="communitie" @click="redirectToComm(index)">
+        <p class="com-name">{{communitie.name}}</p>
+        <p class="com-count">{{communitie.user_count}}</p>
+        <p class="com-owner">{{communitie.owner}}</p>
       </div>
     </div>
     <div class="tops">
@@ -29,6 +31,13 @@ export default {
       .then(json => {
         this.communities = json.data;
       });
+  },
+  methods: {
+    redirectToComm(index) {
+      this.$router.push({
+        path: `/communityInfo/:${index}`
+      });
+    }
   }
 };
 </script>
@@ -36,5 +45,12 @@ export default {
 .wrap {
   background-color: lightgray;
   height: 100vh;
+}
+.communitie {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
 }
 </style>

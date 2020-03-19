@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="wrap">
         <h1>Crowddemocracy</h1>
         <h3>Registrácia</h3>
 
-        <div class="email">
+        <!-- <div class="email">
             <div
                 class="form-group"
                 :class="{ 'form-group--error': $v.email.$error }"
@@ -62,36 +62,57 @@
             All fields must be filled in
         </div>
         <b-button variant="success">Registrovať sa</b-button>
-        <b-button to="home">Home</b-button>
+        <b-button to="home">Home</b-button> -->
+
+        <ValidationProvider name="email" rules="required|email">
+            <div slot-scope="{ errors }">
+                <input v-model="email" />
+                <h3>{{ errors[0] }}</h3>
+            </div>
+        </ValidationProvider>
+        <ValidationProvider rules="odd" v-slot="{ errors }">
+            <input v-model="value" type="text" />
+            <span>{{ errors[0] }}</span>
+        </ValidationProvider>
     </div>
 </template>
 <script>
-import { required, minLength } from "vuelidate/lib/validators";
+import { extend } from "vee-validate";
+import { required } from "vee-validate/dist/rules";
+
+// Add the required rule
+extend("required", {
+    ...required,
+    message: "This field is required"
+});
+extend("odd", value => {
+    return value % 2 !== 0;
+});
 
 export default {
-    data() {
-        return {
-            email: "",
-            username: ""
-        };
-    },
-    validations: {
-        email: {
-            required,
-            minLength: minLength(3)
-        },
-        username: {
-            required,
-            minLength: minLength(3)
-        },
-        pass: {
-            required,
-            minLength: minLength(8)
-        },
-        passCheck: {
-            required
-        }
-    }
+    // data() {
+    //     return {
+    //         email: "",
+    //         username: ""
+    //     };
+    // },
+    // validations: {
+    //     email: {
+    //         required,
+    //         minLength: minLength(3)
+    //     },
+    //     username: {
+    //         required,
+    //         minLength: minLength(3)
+    //     },
+    //     pass: {
+    //         required,
+    //         minLength: minLength(8)
+    //     },
+    //     passCheck: {
+    //         required
+    //     }
+    // }
 };
 </script>
 <style lang="css" scoped>
