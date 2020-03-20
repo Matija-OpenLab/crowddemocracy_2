@@ -35,7 +35,7 @@ export default {
   methods: {
     redirectToComm(index) {
       this.$router.push({
-        path: `/communityInfo/:${index}`
+        path: `/communityInfo/${index + 1}` //Datebase table starts at 1
       });
     }
   }
