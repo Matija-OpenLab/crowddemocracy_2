@@ -39,7 +39,7 @@ export default {};
   margin: 0px;
 }
 .navbar {
-  width: 1450px;
+  width: 100vw;
 }
 .content {
   margin: 0px;
@@ -85,6 +85,7 @@ export default {};
   color: #9900cc;
   margin-left: 115px;
   margin-top: 50px;
+  text-align: center;
 }
 .login {
   background-color: #330066;

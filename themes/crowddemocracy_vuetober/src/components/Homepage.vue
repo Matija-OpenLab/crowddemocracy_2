@@ -8,6 +8,9 @@
         <p class="com-name">{{communitie.name}}</p>
         <p class="com-count">{{communitie.user_count}}</p>
         <p class="com-owner">{{communitie.owner}}</p>
+        <p class="com-desc">{{communitie.description}}</p>
+        <p class="com-create">{{communitie.created_at}}</p>
+        <p class="com-moderators">IN DEVELOPMENT</p>
       </div>
     </div>
     <div class="tops">
@@ -35,7 +38,7 @@ export default {
   methods: {
     redirectToComm(index) {
       this.$router.push({
-        path: `/communityInfo/${index + 1}` //Datebase table starts at 1
+        path: `/community/${index + 1}` //Datebase table starts at 1
       });
     }
   }

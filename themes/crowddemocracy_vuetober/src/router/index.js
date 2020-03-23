@@ -4,7 +4,8 @@ import Intro from '../components/Intro'
 import Registration from '../components/Registration'
 import Login from '../components/Login'
 import Homepage from '../components/Homepage'
-import CommunityInfo from '../components/CommunityInfo'
+// import CommunityInfo from '../components/CommunityInfo'
+import Community from '../components/Community'
 
 
 Vue.use(VueRouter)
@@ -30,9 +31,9 @@ const routes = [{
         component: Homepage
     },
     {
-        path: '/communityInfo/:name',
-        name: 'CommunityInfo',
-        component: CommunityInfo,
+        path: '/community/:id',
+        name: 'Community',
+        component: Community,
         props: true
     }
 ]
