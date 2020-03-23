@@ -1,33 +1,24 @@
 <template>
   <div class="wrap">
-    <b-row>
-      <b-col cols="6" class="list">
-        <div class="tops">
-          <p>Zoznam komunít, kde si členom</p>
-          <div class="names" v-for="(communitie, index) in communities" :key="index">
-            <h4>{{communitie.name}}</h4>
-          </div>
-        </div>
-      </b-col>
-      <b-col>
-        <b-button :to="'/'" variant="danger">Odhlásiť sa</b-button>
-        <h1>Crowddemocracy</h1>
-        <b-row>
-          <b-col>
-            <div class="communities" v-for="(communitie, index) in communities" :key="index">
-              <!--TENTO DIV JE CELA KOMUNITA-->
-              <div class="communitie" @click="redirectToComm(index)">
-                <p class="com-count">{{communitie.user_count}}</p>
-                <p class="com-name">{{communitie.name}}</p>
-                <p class="com-owner">{{communitie.owner}}</p>
-              </div>
-            </div>
-          </b-col>
-          <b-col>2 of 3</b-col>
-          <b-col>3 of 3</b-col>
-        </b-row>
-      </b-col>
-    </b-row>
+    <h1>Crowddemocracy</h1>
+    <b-button :to="'/'" variant="danger">Odhlásiť sa</b-button>
+    <div class="communities" v-for="(communitie, index) in communities" :key="index">
+      <!--TENTO DIV JE CELA KOMUNITA-->
+      <div class="communitie" @click="redirectToComm(index)">
+        <p class="com-name">{{communitie.name}}</p>
+        <p class="com-count">{{communitie.user_count}}</p>
+        <p class="com-owner">{{communitie.owner}}</p>
+        <p class="com-desc">{{communitie.description}}</p>
+        <p class="com-create">{{communitie.created_at}}</p>
+        <p class="com-moderators">IN DEVELOPMENT</p>
+      </div>
+    </div>
+    <div class="tops">
+      <h2>Top Komunity</h2>
+      <div class="names" v-for="(communitie, index) in communities" :key="index">
+        <h4>{{communitie.name}}</h4>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -47,7 +38,7 @@ export default {
   methods: {
     redirectToComm(index) {
       this.$router.push({
-        path: `/communityInfo/:${index}`
+        path: `/community/${index + 1}` //Datebase table starts at 1
       });
     }
   }

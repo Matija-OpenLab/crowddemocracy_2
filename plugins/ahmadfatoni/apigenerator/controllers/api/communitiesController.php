@@ -31,13 +31,13 @@ class communitiesController extends Controller
 
         $data = $this->Communities->where('id',$id)->first();
 
-        if( count($data) > 0){
+        //if( !empty($data)){
 
             return $this->helpers->apiArrayResponseBuilder(200, 'success', $data);
 
-        }
+        //}
 
-        $this->helpers->apiArrayResponseBuilder(400, 'bad request', ['error' => 'invalid key']);
+       // $this->helpers->apiArrayResponseBuilder(400, 'bad request', ['error' => 'invalid key']);
 
     }
 
