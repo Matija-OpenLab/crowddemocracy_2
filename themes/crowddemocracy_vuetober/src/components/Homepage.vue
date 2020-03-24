@@ -5,18 +5,18 @@
     <div class="communities" v-for="(communitie, index) in communities" :key="index">
       <!--TENTO DIV JE CELA KOMUNITA-->
       <div class="communitie" @click="redirectToComm(index)">
-        <p class="com-name">{{communitie.name}}</p>
-        <p class="com-count">{{communitie.user_count}}</p>
-        <p class="com-owner">{{communitie.owner}}</p>
-        <p class="com-desc">{{communitie.description}}</p>
-        <p class="com-create">{{communitie.created_at}}</p>
+        <p class="com-name">{{ communitie.name }}</p>
+        <p class="com-count">{{ communitie.user_count }}</p>
+        <p class="com-owner">{{ communitie.owner }}</p>
+        <p class="com-desc">{{ communitie.description }}</p>
+        <p class="com-create">{{ communitie.created_at }}</p>
         <p class="com-moderators">IN DEVELOPMENT</p>
       </div>
     </div>
     <div class="tops">
       <h2>Top Komunity</h2>
       <div class="names" v-for="(communitie, index) in communities" :key="index">
-        <h4>{{communitie.name}}</h4>
+        <h4>{{ communitie.name }}</h4>
       </div>
     </div>
   </div>
@@ -29,10 +29,10 @@ export default {
     };
   },
   mounted() {
-    fetch("http://crowddemocracy.test/api/communities")
+    fetch("http://crowddemocracy.test/api/v1/communities")
       .then(res => res.json())
       .then(json => {
-        this.communities = json.data;
+        this.communities = json;
       });
   },
   methods: {
