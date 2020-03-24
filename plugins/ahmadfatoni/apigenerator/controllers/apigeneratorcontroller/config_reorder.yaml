@@ -1,4 +1,0 @@
-title: ApiGeneratorController
-modelClass: AhmadFatoni\ApiGenerator\Models\ApiGenerator
-toolbar:
-    buttons: reorder_toolbar

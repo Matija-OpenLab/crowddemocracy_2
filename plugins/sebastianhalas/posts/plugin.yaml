@@ -1,0 +1,11 @@
+plugin:
+    name: 'sebastianhalas.posts::lang.plugin.name'
+    description: 'sebastianhalas.posts::lang.plugin.description'
+    author: 'Sebastian Halas'
+    icon: oc-icon-align-justify
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Posts
+        url: sebastianhalas/posts/postss
+        icon: icon-align-justify
