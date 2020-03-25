@@ -1,0 +1,27 @@
+fields:
+    content:
+        label: Content
+        span: auto
+        type: text
+    community_id:
+        label: 'Community id'
+        span: auto
+        type: number
+    vote_yes:
+        label: 'Voted yes'
+        span: auto
+        type: number
+    vote_no:
+        label: 'Voted no'
+        span: auto
+        type: number
+    created_at:
+        label: 'Created At'
+        mode: datetime
+        span: auto
+        type: datepicker
+    updated_at:
+        label: 'Updated at'
+        mode: datetime
+        span: auto
+        type: datepicker

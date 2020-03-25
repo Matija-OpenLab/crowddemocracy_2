@@ -21,10 +21,10 @@ export default {
     };
   },
   mounted() {
-    fetch(`http://crowddemocracy.test/api/communities//${this.$props.id}/show`)
+    fetch(`http://crowddemocracy.test/api/v1/communities/${this.$props.id}`)
       .then(res => res.json())
       .then(json => {
-        this.community = json.data;
+        this.community = json[0];
       });
   }
 };

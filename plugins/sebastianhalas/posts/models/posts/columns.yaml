@@ -1,0 +1,24 @@
+columns:
+    id:
+        label: ID
+        type: number
+        sortable: true
+    community_id:
+        label: 'COMMUNITY ID'
+        type: number
+        searchable: true
+    content:
+        label: MESSAGE
+        type: text
+    vote_yes:
+        label: 'Voted yes'
+        type: number
+    vote_no:
+        label: 'Voted no'
+        type: number
+    updated_at:
+        label: 'Updated at'
+        type: datetime
+    created_at:
+        label: 'Created at'
+        type: datetime

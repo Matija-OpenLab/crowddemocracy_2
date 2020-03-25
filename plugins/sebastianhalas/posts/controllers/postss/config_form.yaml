@@ -1,0 +1,10 @@
+name: Postss
+form: $/sebastianhalas/posts/models/posts/fields.yaml
+modelClass: SebastianHalas\Posts\Models\Posts
+defaultRedirect: sebastianhalas/posts/postss
+create:
+    redirect: 'sebastianhalas/posts/postss/update/:id'
+    redirectClose: sebastianhalas/posts/postss
+update:
+    redirect: sebastianhalas/posts/postss
+    redirectClose: sebastianhalas/posts/postss

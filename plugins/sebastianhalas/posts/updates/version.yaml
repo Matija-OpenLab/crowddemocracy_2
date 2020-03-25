@@ -1,0 +1,11 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table sebastianhalas_posts_'
+    - builder_table_create_sebastianhalas_posts_.php
+1.0.3:
+    - 'Updated table sebastianhalas_posts_'
+    - builder_table_update_sebastianhalas_posts_.php
+1.0.4:
+    - 'Updated table sebastianhalas_posts_'
+    - builder_table_update_sebastianhalas_posts__2.php
