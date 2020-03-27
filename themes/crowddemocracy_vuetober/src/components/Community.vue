@@ -8,8 +8,8 @@
     <b-button>Nehlasoval som</b-button>
     <div class="posts" v-for="(post, index) in community_posts" :key="index">
       <h2 class="question">{{post.content}}</h2>
-      <p class="vote_yes">{{post.vote_yes}}</p>
-      <p class="vote_no">{{post.vote_no}}</p>
+      <button class="vote_yes">YES</button>
+      <button class="vote_no">NO</button>
       <p>{{totalVotes}}</p>
     </div>
   </div>
