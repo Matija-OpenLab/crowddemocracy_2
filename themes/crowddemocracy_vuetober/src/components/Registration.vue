@@ -46,8 +46,6 @@ export default {};
   display: inline;
 }
 
-/*Dominikin code skopirovany z Intor.vue*/
-
 .login {
   border-color: #330066;
   color: #330066;
@@ -93,13 +91,21 @@ export default {};
   margin-top: 25px;
   color: black;
 }
-.placeholder {
+.form input {
   width: 500px;
   margin-top: 15px;
   height: 50px;
-  border: white;
+  border: none;
   color: black;
   border-bottom: 1px solid #d7d7c1;
+}
+.form input:focus {
+  outline: none;
+}
+.form .checkbox {
+  width: auto;
+  margin: 0;
+  height: auto;
 }
 .registration {
   background-color: #330066;
