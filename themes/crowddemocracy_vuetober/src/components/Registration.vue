@@ -1,122 +1,32 @@
 <template>
-    <div class="wrap">
-        <h1>Crowddemocracy</h1>
-        <h3>Registrácia</h3>
+  <div class="wrap">
+    <p class="login_text">Už máte účet?</p>
+    <b-button to="/login">Prihlásiť</b-button>
 
-        <!-- <div class="email">
-            <div
-                class="form-group"
-                :class="{ 'form-group--error': $v.email.$error }"
-            >
-                <label class="form__label">Email</label>
-                <input
-                    type="email"
-                    class="form__input"
-                    v-model.trim="$v.email.$model"
-                />
-            </div>
-        </div>
+    <h1 class="title">Registrácia</h1>
+    <form class="form">
+      <input type="email" placeholder="Email" />
+      <input type="text" placeholder="Používateľské meno" />
+      <input type="password" placeholder="Heslo" />
+      <input type="password" placeholder="Potvrdenie hesla" />
+      <div class="check">
+        <input type="checkbox" />
+        Súhlasím so spracovaním údajov
+      </div>
 
-        <div for="username">
-            <div
-                class="form-group"
-                :class="{ 'form-group--error': $v.username.$error }"
-            >
-                <label class="form__label">Používateľské meno</label>
-                <input class="form__input" v-model.trim="$v.username.$model" />
-            </div>
-        </div>
-
-        <div for="pass">
-            <div
-                class="form-group"
-                :class="{ 'form-group--error': $v.pass.$error }"
-            >
-                <label class="form__label">Heslo</label>
-                <input
-                    type="password"
-                    class="form__input"
-                    v-model.trim="$v.pass.$model"
-                />
-            </div>
-        </div>
-        <div for="passCheck">
-            <div
-                class="form-group"
-                :class="{ 'form-group--error': $v.passCheck.$error }"
-            >
-                <label class="form__label">Zopakujte heslo</label>
-                <input
-                    type="password"
-                    class="form__input"
-                    v-model.trim="$v.passCheck.$model"
-                />
-            </div>
-        </div>
-        <div
-            class="error"
-            v-if="
-                !$v.username.required || !$v.email.required || !$v.pass.required
-            "
-        >
-            All fields must be filled in
-        </div>
-        <b-button variant="success">Registrovať sa</b-button>
-        <b-button to="home">Home</b-button> -->
-
-        <ValidationProvider name="email" rules="required|email">
-            <div slot-scope="{ errors }">
-                <input v-model="email" />
-                <h3>{{ errors[0] }}</h3>
-            </div>
-        </ValidationProvider>
-        <ValidationProvider rules="odd" v-slot="{ errors }">
-            <input v-model="value" type="text" />
-            <span>{{ errors[0] }}</span>
-        </ValidationProvider>
-    </div>
+      <span class="error"></span>
+      <b-button type="submit">Registrácia</b-button>
+    </form>
+  </div>
 </template>
 <script>
-import { extend } from "vee-validate";
-import { required } from "vee-validate/dist/rules";
-
-// Add the required rule
-extend("required", {
-    ...required,
-    message: "This field is required"
-});
-extend("odd", value => {
-    return value % 2 !== 0;
-});
-
-export default {
-    // data() {
-    //     return {
-    //         email: "",
-    //         username: ""
-    //     };
-    // },
-    // validations: {
-    //     email: {
-    //         required,
-    //         minLength: minLength(3)
-    //     },
-    //     username: {
-    //         required,
-    //         minLength: minLength(3)
-    //     },
-    //     pass: {
-    //         required,
-    //         minLength: minLength(8)
-    //     },
-    //     passCheck: {
-    //         required
-    //     }
-    // }
-};
+export default {};
 </script>
 <style lang="css" scoped>
-.error {
-    color: red;
+.form input {
+  display: block;
+}
+.login_text {
+  display: inline;
 }
 </style>
