@@ -81,6 +81,7 @@ export default {
     background-color: white;
     border-radius: 15px;
     cursor: pointer;
+    margin-bottom: 2em;
 }
 .com-name {
     text-align: center;
