@@ -39,7 +39,7 @@ export default {};
   margin: 0px;
 }
 .navbar {
-  width: 100vw;
+  width: 95vw;
 }
 .content {
   margin: 0px;

@@ -11,11 +11,16 @@
     </b-row>
 
     <h1 class="title">Registrácia</h1>
-    <form class="form">
-      <input class="placeholder" type="email" placeholder="Email" />
-      <input class="placeholder" type="text" placeholder="Používateľské meno" />
-      <input class="placeholder" type="password" placeholder="Heslo" />
-      <input class="placeholder" type="password" placeholder="Potvrdenie hesla" />
+    <form class="form" @submit.prevent="registerUser">
+      <input class="placeholder" type="email" placeholder="Email" v-model="email" />
+      <input class="placeholder" type="text" placeholder="Používateľské meno" v-model="username" />
+      <input class="placeholder" type="password" placeholder="Heslo" v-model="password" />
+      <input
+        class="placeholder"
+        type="password"
+        placeholder="Potvrdenie hesla"
+        v-model="password_confirmation"
+      />
       <div class="check">
         <input class="checkbox" type="checkbox" />
         <p class="check-text">Súhlasím so spracovaním údajov</p>
@@ -35,7 +40,27 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      email: "",
+      username: "",
+      password: "",
+      password_confirmation: ""
+    };
+  },
+  methods: {
+    registerUser() {
+      const user = new URLSearchParams();
+
+      user.append("email", this.email);
+      user.append("username", this.username);
+      user.append("password", this.password);
+      user.append("password_confirmation", this.password_confirmation);
+      this.$store.dispatch("registerUser", user);
+    }
+  }
+};
 </script>
 
 <style lang="css" scoped>
