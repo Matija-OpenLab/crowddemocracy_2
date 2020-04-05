@@ -9,6 +9,7 @@ import router from "./router";
 import Vuelidate from "vuelidate";
 
 import { ValidationProvider } from "vee-validate";
+import store from './store'
 
 // Register it globally
 // main.js or any entry file.
@@ -20,5 +21,6 @@ Vue.config.productionTip = false;
 
 new Vue({
     router,
+    store,
     render: h => h(App)
 }).$mount("#app");

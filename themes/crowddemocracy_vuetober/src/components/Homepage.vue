@@ -26,16 +26,16 @@
                 </b-row>
                 <div
                     class="communities"
-                    v-for="(communitie, index) in communities"
+                    v-for="(community, index) in communities"
                     :key="index"
                 >
                     <!--TENTO DIV JE CELA KOMUNITA-->
                     <div class="communitie" @click="redirectToComm(index)">
-                        <p class="com-count">{{ communitie.user_count }}</p>
-                        <p class="com-name">{{ communitie.name }}</p>
-                        <p class="com-owner">{{ communitie.owner }}</p>
-                        <p class="com-desc">{{ communitie.description }}</p>
-                        <p class="com-create">{{ communitie.created_at }}</p>
+                        <p class="com-count">{{ community.user_count }}</p>
+                        <p class="com-name">{{ community.name }}</p>
+                        <p class="com-owner">{{ community.owner }}</p>
+                        <p class="com-desc">{{ community.description }}</p>
+                        <p class="com-create">{{ community.created_at }}</p>
                         <p class="com-moderators">IN DEVELOPMENT</p>
                     </div>
                 </div>

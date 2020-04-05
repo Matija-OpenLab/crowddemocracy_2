@@ -7,22 +7,22 @@
         <b-button>Populárne</b-button>
         <b-button>Nehlasoval som</b-button>
 
-        <div class="posts" v-for="post in community_posts" :key="post.id">
+        <div class="posts" v-for="post in communityPosts" :key="post.id">
             <h2 class="question">{{ post.content }}</h2>
 
             <div
                 class="vote_buttons"
                 v-if="!voted.some(item => item.id === post.id)"
             >
-                <button class="vote_yes" @click="addVote(post.id, 'yes')">
+                <button class="vote-yes" @click="addVote(post.id, 'yes')">
                     YES
                 </button>
-                <p class="yes_count">{{ post.vote_yes }}</p>
+                <p class="yes-count">{{ post.vote_yes }}</p>
 
                 <button class="vote_no" @click="addVote(post.id, 'no')">
                     NO
                 </button>
-                <p class="yes_count">{{ post.vote_no }}</p>
+                <p class="yes-count">{{ post.vote_no }}</p>
             </div>
             <div v-else>
                 <button @click="changeVote(post.id)">Change Vote</button>
@@ -42,7 +42,7 @@ export default {
     data() {
         return {
             community: {},
-            community_posts: {},
+            communityPosts: {},
             voted: []
         };
     },
@@ -55,10 +55,10 @@ export default {
         this.getPosts();
     },
     methods: {
-        addVote(post_id, vote) {
-            this.voted.push({ id: post_id, vote: vote });
+        addVote(postId, vote) {
+            this.voted.push({ id: postId, vote: vote });
             axios.get(
-                `http://crowddemocracy.test/api/v1/posts/${post_id}/vote_${vote}`
+                `http://crowddemocracy.test/api/v1/posts/${postId}/vote_${vote}`
             );
             var vm = this;
             vm.getPosts();
@@ -69,21 +69,21 @@ export default {
                     `http://crowddemocracy.test/api/v1/posts/community_id/${this.$props.id}`
                 )
                 .then(res => {
-                    this.community_posts = res.data;
+                    this.communityPosts = res.data;
                 });
         },
-        changeVote(post_id) {
-            let vote = this.voted.filter(item => item.id === post_id)[0];
+        changeVote(postId) {
+            const vote = this.voted.filter(item => item.id === postId)[0];
             axios.get(
-                `http://crowddemocracy.test/api/v1/posts/${post_id}/unvote_${vote.vote}`
+                `http://crowddemocracy.test/api/v1/posts/${postId}/unvote_${vote.vote}`
             );
-            this.voted = this.voted.filter(item => item.id !== post_id);
+            this.voted = this.voted.filter(item => item.id !== postId);
         }
     }
 };
 </script>
 <style lang="css" scoped>
-.yes_count {
+.yes-count {
     display: inline;
     margin-right: 2em;
 }
