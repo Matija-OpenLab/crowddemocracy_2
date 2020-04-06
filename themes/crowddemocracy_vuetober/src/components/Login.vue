@@ -1,18 +1,28 @@
 <template>
   <div class="wrap">
     <b-row class="navbar">
-      <b-col class="logo">logo</b-col>
+      <b-col>
+        <img class="logo" src="../assets-dominika/logo.png" />
+      </b-col>
       <b-col class="question">Ešte nemáš účet?</b-col>
       <b-col class="button">
         <b-button class="registration" to="/registration">Registruj sa</b-button>
       </b-col>
     </b-row>
-    <h1>Prihlásenie</h1>
-    <form class="login" @submit.prevent="login">
+    <h1 class="title">Prihlásenie</h1>
+    <form class="form" @submit.prevent="login">
       <input type="text" placeholder="Prezývka / Email" v-model="email" />
       <input type="password" placeholder="Heslo" v-model="password" />
-      <b-button type="submit">Prihlásiť</b-button>
+      <b-button class="login" type="submit">Prihlásiť</b-button>
     </form>
+    <b-row class="footer">
+      <b-col class="footer-col1">
+        &reg; 2020 všetky práva vyhradené
+        <span class="footer-logo">CROWD</span>DEMOCRACY
+      </b-col>
+      <b-col class="footer-col2">Sledujte nás na sociálnych sieťach</b-col>
+      <b-col class="footer-col3">social media</b-col>
+    </b-row>
   </div>
 </template>
 <script>
@@ -46,9 +56,9 @@ export default {
   display: inline;
 }
 
-.login {
-  border-color: #330066;
-  color: #330066;
+.registration {
+  border-color: #48486e;
+  color: #48486e;
   background-color: white;
   width: 140px;
   font-weight: bold;
@@ -61,8 +71,8 @@ export default {
   margin-left: 0px;
 }
 .logo {
-  width: 500px;
-  color: white;
+  width: 120px;
+  margin-left: 2em;
 }
 .check {
   display: flex;
@@ -72,16 +82,16 @@ export default {
   margin: 0px;
 }
 .question {
-  width: 500px;
-  margin-left: 700px;
+  width: 100vw;
+  margin-left: 600px;
   padding: 0px;
   font-size: 14px;
   text-align: right;
   margin-top: 4px;
-  color: #330066;
+  color: #48486e;
 }
 .title {
-  margin-top: 150px;
+  margin-top: 300px;
   margin-left: 130px;
   font-size: 55px;
   font-weight: 50;
@@ -102,13 +112,9 @@ export default {
 .form input:focus {
   outline: none;
 }
-.form .checkbox {
-  width: auto;
-  margin: 0;
-  height: auto;
-}
-.registration {
-  background-color: #330066;
+
+.login {
+  background-color: #24154b;
   color: white;
   width: 215px;
   height: 60px;
@@ -120,13 +126,13 @@ export default {
 }
 .footer-col1 {
   font-size: 14px;
-  color: #330066;
+  color: #48486e;
   margin-left: 40px;
   white-space: nowrap;
 }
 .footer-col2 {
   font-size: 14px;
-  color: #330066;
+  color: #48486e;
   margin-left: 115px;
   text-align: right;
 }

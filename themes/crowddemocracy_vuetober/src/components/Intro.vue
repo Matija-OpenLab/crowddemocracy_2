@@ -49,8 +49,8 @@ export default {
   margin: 0px;
 }
 .registration {
-  border-color: #330066;
-  color: #330066;
+  border-color: #48486e;
+  color: #48486e;
   background-color: white;
   width: 140px;
   font-weight: bold;
@@ -74,44 +74,45 @@ export default {
   font-size: 14px;
   text-align: right;
   margin-top: 4px;
-  color: #330066;
+  color: #48486e;
 }
 .header {
   margin-top: 280px;
   font-size: 50px;
   font-weight: 50;
-  color: #9900cc;
+  color: #48486e;
   margin-left: 115px;
 }
 .intro {
   width: 500px;
   font-weight: 50;
-  color: #9900cc;
+  color: #48486e;
   margin-left: 115px;
   margin-top: 50px;
   text-align: center;
 }
 .login {
-  background-color: #330066;
+  background-color: #24154b;
   color: white;
   width: 215px;
   height: 60px;
   margin-top: 40px;
   margin-left: 115px;
   line-height: 43px;
+  font-weight: bold;
 }
 .footer {
   margin-top: 400px;
 }
 .footer-col1 {
   font-size: 14px;
-  color: #330066;
+  color: #48486e;
   margin-left: 40px;
   white-space: nowrap;
 }
 .footer-col2 {
   font-size: 14px;
-  color: #330066;
+  color: #48486e;
   margin-left: 115px;
   text-align: right;
 }

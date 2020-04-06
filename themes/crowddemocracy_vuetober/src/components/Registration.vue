@@ -1,8 +1,8 @@
 <template>
   <div class="wrap">
     <b-row class="navbar">
-      <b-col class="logo">
-        <!--  <img src="url(logo.png/assets-dominka/menoAssetu.png)" alt /> -->
+      <b-col>
+        <img class="logo" src="../assets-dominika/logo.png" />
       </b-col>
       <b-col class="question">Už máš účet?</b-col>
       <b-col class="button">
@@ -74,8 +74,8 @@ export default {
 }
 
 .login {
-  border-color: #330066;
-  color: #330066;
+  border-color: #48486e;
+  color: #48486e;
   background-color: white;
   width: 140px;
   font-weight: bold;
@@ -88,8 +88,8 @@ export default {
   margin-left: 0px;
 }
 .logo {
-  width: 500px;
-  color: white;
+  width: 120px;
+  margin-left: 2em;
 }
 .check {
   display: flex;
@@ -105,7 +105,7 @@ export default {
   font-size: 14px;
   text-align: right;
   margin-top: 4px;
-  color: #330066;
+  color: #48486e;
 }
 .title {
   margin-top: 150px;
@@ -135,7 +135,7 @@ export default {
   height: auto;
 }
 .registration {
-  background-color: #330066;
+  background-color: #24154b;
   color: white;
   width: 215px;
   height: 60px;
@@ -147,13 +147,13 @@ export default {
 }
 .footer-col1 {
   font-size: 14px;
-  color: #330066;
+  color: #48486e;
   margin-left: 40px;
   white-space: nowrap;
 }
 .footer-col2 {
   font-size: 14px;
-  color: #330066;
+  color: #48486e;
   margin-left: 115px;
   text-align: right;
 }
