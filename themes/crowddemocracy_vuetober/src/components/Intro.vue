@@ -31,7 +31,11 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  created() {
+    if (this.$store.getters.isLoggedIn) this.$router.push("/home");
+  }
+};
 </script>
 <style scoped>
 .wrap {
