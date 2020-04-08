@@ -1,5 +1,6 @@
 <template>
   <div class="wrap">
+    <h1 class="username">Vítaj {{user.name}}</h1>
     <b-row>
       <b-col cols="3">
         <div class="tops">
@@ -34,10 +35,11 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      communities: null
+      communities: {}
     };
   },
   created() {
@@ -62,18 +64,18 @@ export default {
         this.$router.push("/");
       });
     }
-  } /*,
+  },
   computed: {
-    isLoggedIn: function() {
-      if (!this.$store.getters.isLoggedIn) {
-        this.$router.push("/secure");
-      }
-      return this.$store.getters.isLoggedIn;
-    }
-  }*/
+    ...mapGetters({
+      user: "getUserData"
+    })
+  }
 };
 </script>
 <style scoped>
+.username {
+  margin-bottom: 2em;
+}
 .wrap {
   background-color: #d6dbe0;
   height: 100vh;

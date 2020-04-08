@@ -13,6 +13,7 @@
     <form class="form" @submit.prevent="login">
       <input type="text" placeholder="Prezývka / Email" v-model="email" />
       <input type="password" placeholder="Heslo" v-model="password" />
+      <span class="error">{{error}}</span>
       <b-button class="login" type="submit">Prihlásiť</b-button>
     </form>
     <b-row class="footer">
@@ -30,7 +31,8 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      error: ""
     };
   },
   created() {
@@ -43,12 +45,20 @@ export default {
       this.$store
         .dispatch("login", { email, password })
         .then(() => this.$router.push("/home"))
-        .catch(err => console.log(err));
+        .catch(() => {
+          this.error = "Invalid credencials";
+        });
     }
   }
 };
 </script>
 <style scoped>
+.error {
+  display: block;
+  color: red;
+  font-size: 20px;
+  margin-top: 1em;
+}
 .form input {
   display: block;
 }

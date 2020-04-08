@@ -22,7 +22,7 @@
         v-model="password_confirmation"
       />
 
-      <span class="error"></span>
+      <span class="error">{{error}}</span>
       <b-button class="registration" type="submit">Registrácia</b-button>
     </form>
     <b-row class="footer">
@@ -42,7 +42,8 @@ export default {
       email: "",
       username: "",
       password: "",
-      password_confirmation: ""
+      password_confirmation: "",
+      error: ""
     };
   },
   created() {
@@ -51,21 +52,28 @@ export default {
   methods: {
     register() {
       let data = {
-        name: this.name,
         email: this.email,
         password: this.password,
-        password_confirmation: this.password_confirmation
+        password_confirmation: this.password_confirmation,
+        name: this.username
       };
       this.$store
         .dispatch("register", data)
         .then(() => this.$router.push("/home"))
-        .catch(err => console.log(err));
+        .catch(() => (this.error = "Invalid credencials"));
     }
-  }
+  },
+  watch: {}
 };
 </script>
 
 <style lang="css" scoped>
+.error {
+  display: block;
+  color: red;
+  font-size: 20px;
+  margin-top: 1em;
+}
 .form input {
   display: block;
 }
