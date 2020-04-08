@@ -5,8 +5,7 @@
     "type": "project",
     "keywords": ["october", "cms", "octobercms", "laravel"],
     "license": "MIT",
-    "authors": [
-        {
+    "authors": [{
             "name": "Alexey Bobkov",
             "email": "aleksey.bobkov@gmail.com",
             "role": "Co-founder"
@@ -71,7 +70,7 @@
     "config": {
         "preferred-install": "dist",
         "platform": {
-            "php": "7.0.8"
+            "php": "7.2.0"
         }
     },
     "minimum-stability": "dev",
