@@ -1,0 +1,9 @@
+fields:
+    user_id:
+        label: UID
+        span: auto
+        type: number
+    likeable_id:
+        label: 'LIKEABLE ID'
+        span: auto
+        type: number

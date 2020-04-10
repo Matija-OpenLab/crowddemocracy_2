@@ -1,0 +1,10 @@
+name: Likes
+form: $/sebastianhalas/likes/models/likes/fields.yaml
+modelClass: SebastianHalas\Likes\Models\Likes
+defaultRedirect: sebastianhalas/likes/likes
+create:
+    redirect: 'sebastianhalas/likes/likes/update/:id'
+    redirectClose: sebastianhalas/likes/likes
+update:
+    redirect: sebastianhalas/likes/likes
+    redirectClose: sebastianhalas/likes/likes

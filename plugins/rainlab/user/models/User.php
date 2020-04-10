@@ -34,7 +34,9 @@ class User extends UserBase
     public $belongsToMany = [
         'groups' => [UserGroup::class, 'table' => 'users_groups']
     ];
-
+    public $hasMany = [
+        'likes' => 'SebastianHalas\Likes\Models\Likes'
+    ];
     public $attachOne = [
         'avatar' => \System\Models\File::class
     ];
@@ -51,7 +53,7 @@ class User extends UserBase
         'password',
         'password_confirmation'
     ];
-
+    
     /**
      * Purge attributes from data set.
      */
