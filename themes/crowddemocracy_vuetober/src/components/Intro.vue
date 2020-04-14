@@ -1,8 +1,11 @@
 <template>
   <div class="wrap">
     <b-container class="content">
+      <img class="background" src="../assets-dominika/bg.png" />
       <b-row class="navbar">
-        <b-col class="logo">logo</b-col>
+        <b-col class="logo">
+          <img class="logo" src="../assets-dominika/logo.png" />
+        </b-col>
         <b-col class="question">Ešte nemáš účet?</b-col>
         <b-col class="button">
           <b-button class="registration" to="/registration">Registruj sa</b-button>
@@ -41,9 +44,10 @@ export default {
 .wrap {
   height: 100vh;
   margin: 0px;
+  position: relative;
 }
 .navbar {
-  width: 95vw;
+  width: 97vw;
 }
 .content {
   margin: 0px;
@@ -60,7 +64,6 @@ export default {
 
 .button {
   width: 500px;
-  margin-left: 0px;
 }
 .logo {
   width: 500px;
@@ -75,6 +78,10 @@ export default {
   text-align: right;
   margin-top: 4px;
   color: #48486e;
+}
+.logo {
+  width: 120px;
+  margin-left: 2em;
 }
 .header {
   margin-top: 280px;
@@ -102,7 +109,7 @@ export default {
   font-weight: bold;
 }
 .footer {
-  margin-top: 400px;
+  margin-top: 490px;
 }
 .footer-col1 {
   font-size: 14px;
@@ -121,5 +128,14 @@ export default {
 }
 .footer-logo {
   font-weight: 900;
+}
+.background {
+  max-width: 50%;
+  height: auto;
+  position: absolute;
+  align-items: right;
+  background-repeat: no-repeat;
+  right: 5px;
+  margin-top: 90px;
 }
 </style>

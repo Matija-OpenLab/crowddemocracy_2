@@ -1,28 +1,44 @@
 <template>
   <div class="wrap">
-    <h1 class="username">Vítaj {{user.name}}</h1>
     <b-row>
       <b-col cols="3">
-        <div class="tops">
-          <h2>Top Komunity</h2>
+        <img class="logo" src="../assets-dominika/logo.png" />
+        <div class="your-com">
+          <p class="com-list">Zoznam komunít,kde si členom:</p>
           <div class="names" v-for="(communitie, index) in communities" :key="index">
-            <h4>{{ communitie.name }}</h4>
+            <b-row>
+              <b-col cols="1">
+                <img class="com-logo-list" src="../assets-dominika/comlog.png" />
+              </b-col>
+              <b-col class="com-info">
+                <p class="com-count-info">{{communitie.user_count}} užívateľov online</p>
+                <p class="com-name-list">{{ communitie.name }}</p>
+              </b-col>
+            </b-row>
           </div>
         </div>
       </b-col>
-      <b-col cols="8">
+      <b-col class="col" cols="8">
         <b-button class="logout" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
         <b-row class="navbar">
-          <b-col cols="1">Logo</b-col>
+          <b-col cols="1">
+            <img class="homepage-pic" src="../assets-dominika/homepage.png" />
+          </b-col>
           <b-col>
-            <p class="com-list">Zoznam tvojich komunít</p>
             <h1 class="welcome">Vitajte v CrowdDemocracy</h1>
+            <p class="username">Vitaj {{user.name}}!</p>
           </b-col>
         </b-row>
-        <div class="communities" v-for="(community, index) in communities" :key="index">
+        <div class="communities">
           <!--TENTO DIV JE CELA KOMUNITA-->
-          <div class="communitie" @click="redirectToComm(index)">
-            <p class="com-count">{{ community.user_count }}</p>
+          <div
+            class="communitie"
+            @click="redirectToComm(index)"
+            v-for="(community, index) in communities"
+            :key="community.id"
+          >
+            <img class="com-logo" src="../assets-dominika/comlog.png" />
+            <p class="com-count">{{ community.user_count }} užívateľov online</p>
             <p class="com-name">{{ community.name }}</p>
             <p class="com-owner">{{ community.owner }}</p>
             <p class="com-desc">{{ community.description }}</p>
@@ -73,40 +89,90 @@ export default {
 };
 </script>
 <style scoped>
-.username {
-  margin-bottom: 2em;
-}
 .wrap {
-  background-color: #d6dbe0;
+  background-color: #f3f5f8;
   height: 100vh;
 }
-.list {
-  width: 150px;
+.logo {
+  width: 120px;
+  margin-left: 2em;
+  margin-top: 10px;
+}
+.names {
+  margin-bottom: 2em;
+}
+.com-name-list {
+  font-weight: bold;
+}
+.com-info {
+  margin-left: 2em;
+}
+
+.communities {
+  display: flex;
+  flex-wrap: wrap;
+  /*width: 350px;*/
+  margin: 0px;
 }
 .communitie {
-  height: 250px;
-  width: 250px;
-  justify-content: space-evenly;
+  height: 290px;
+  width: 290px;
   background-color: white;
   border-radius: 15px;
   cursor: pointer;
   margin-bottom: 2em;
+  margin: 0.5em;
+  transition: 1s;
+}
+.communitie:hover {
+  -webkit-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+  -moz-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+  box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+}
+.com-list {
+  font-size: 15px;
+  margin: 0px;
+  margin-top: 40px;
+  color: #9a9eaa;
+}
+.com-logo-list {
+  width: 50px;
+  height: auto;
+}
+.com-logo-list {
+  left: 0px;
+}
+.com-logo {
+  width: 50px;
+  height: auto;
+  margin-top: -20px;
+  margin-left: 125px;
+}
+
+.com-count-info {
+  text-align: left;
+  font-size: 13px;
+  margin-bottom: 0px;
+  color: #9a9eaa;
+}
+
+.com-count {
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 0px;
+  margin-top: 20px;
+  color: #9a9eaa;
 }
 .com-name {
   text-align: center;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
-  margin: 0px;
-}
-.com-count {
-  text-align: center;
-  font-size: 11px;
-  margin-bottom: 0px;
-  margin-top: 25px;
+  margin-top: 3px;
+  border-bottom: 1px solid #d7d7c1;
 }
 .logout {
-  background-color: #d6dbe0;
-  border-color: #d6dbe0;
+  background-color: #f3f5f8;
+  border-color: #f3f5f8;
   color: #330066;
   margin-left: 780px;
   margin-top: 25px;
@@ -115,13 +181,20 @@ export default {
 .navbar {
   margin-top: 30px;
 }
-.com-list {
-  font-size: 15px;
-  margin: 0px;
+
+.your-com {
+  margin-left: 2em;
+  margin-top: 40px;
 }
 .welcome {
   margin-top: 10px;
   font-size: 32px;
+  margin-left: 50px;
+}
+.username {
+  margin-bottom: 2em;
+  margin-left: 53px;
+  font-size: 22px;
 }
 .com-owner {
   text-align: center;
@@ -134,5 +207,9 @@ export default {
 }
 .com-moderators {
   text-align: center;
+}
+.homepage-pic {
+  width: 120px;
+  height: auto;
 }
 </style>

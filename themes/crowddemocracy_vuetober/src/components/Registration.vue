@@ -1,5 +1,6 @@
 <template>
   <div class="wrap">
+    <img class="background" src="../assets-dominika/bg.png" />
     <b-row class="navbar">
       <b-col>
         <img class="logo" src="../assets-dominika/logo.png" />
@@ -151,7 +152,7 @@ export default {
   line-height: 43px;
 }
 .footer {
-  margin-top: 180px;
+  margin-top: 440px;
 }
 .footer-col1 {
   font-size: 14px;
@@ -170,5 +171,14 @@ export default {
 }
 .footer-logo {
   font-weight: 900;
+}
+.background {
+  max-width: 50%;
+  height: auto;
+  position: absolute;
+  align-items: right;
+  background-repeat: no-repeat;
+  right: 5px;
+  margin-top: 90px;
 }
 </style>
