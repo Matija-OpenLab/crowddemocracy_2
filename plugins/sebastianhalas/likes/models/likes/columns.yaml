@@ -10,3 +10,6 @@ columns:
     likeable_id:
         label: LIKEID
         type: number
+    like_value:
+        label: LIKE_VALUE
+        type: number
