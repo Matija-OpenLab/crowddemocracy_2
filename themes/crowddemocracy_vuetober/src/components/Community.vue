@@ -79,12 +79,12 @@ export default {
   },
   created() {
     if (this.$store.getters.isLoggedIn) {
-      fetch(`http://crowddemocracy.test/api/v1/communities/${this.$props.id}`)
+      fetch(`/api/v1/communities/${this.$props.id}`)
         .then(res => res.json())
         .then(json => {
           this.community = json[0];
         });
-      fetch("http://crowddemocracy.test/api/v1/communities")
+      fetch("/api/v1/communities")
         .then(res => res.json())
         .then(json => {
           this.communities = json;

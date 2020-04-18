@@ -39,7 +39,7 @@ export default new Vuex.Store({
             return new Promise((resolve, reject) => {
                 commit('auth_request')
                 axios({
-                        url: 'http://crowddemocracy.test/api/login',
+                        url: '/api/login',
                         data: user,
                         method: 'POST'
                     })
@@ -67,7 +67,7 @@ export default new Vuex.Store({
             return new Promise((resolve, reject) => {
                 commit('auth_request')
                 axios({
-                        url: 'http://crowddemocracy.test/api/signup',
+                        url: '/api/signup',
                         data: user,
                         method: 'POST'
                     })
