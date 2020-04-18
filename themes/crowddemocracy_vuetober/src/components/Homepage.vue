@@ -5,28 +5,39 @@
         <img class="logo" src="../assets-dominika/logo.png" />
         <div class="your-com">
           <p class="com-list">Zoznam komunít,kde si členom:</p>
-          <div class="names" v-for="(communitie, index) in communities" :key="index">
-            <b-row>
+          <div
+            class="names"
+            v-for="(community, index) in communities"
+            :key="community.id"
+          >
+            <b-row @click="redirectToComm(index)" class="com-side">
               <b-col cols="1">
-                <img class="com-logo-list" src="../assets-dominika/comlog.png" />
+                <img
+                  class="com-logo-list"
+                  src="../assets-dominika/comlog.png"
+                />
               </b-col>
               <b-col class="com-info">
-                <p class="com-count-info">{{communitie.user_count}} užívateľov online</p>
-                <p class="com-name-list">{{ communitie.name }}</p>
+                <p class="com-count-info">
+                  {{ community.user_count }} užívateľov
+                </p>
+                <p class="com-name-list">{{ community.name }}</p>
               </b-col>
             </b-row>
           </div>
         </div>
       </b-col>
       <b-col class="col" cols="8">
-        <b-button class="logout" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
+        <b-button class="logout" @click="logout" variant="danger"
+          >Odhlásenie z aplikácie</b-button
+        >
         <b-row class="navbar">
           <b-col cols="1">
             <img class="homepage-pic" src="../assets-dominika/homepage.png" />
           </b-col>
           <b-col>
             <h1 class="welcome">Vitajte v CrowdDemocracy</h1>
-            <p class="username">Vitaj {{user.name}}!</p>
+            <p class="username">Vitaj {{ user.name }}!</p>
           </b-col>
         </b-row>
         <div class="communities">
@@ -38,12 +49,12 @@
             :key="community.id"
           >
             <img class="com-logo" src="../assets-dominika/comlog.png" />
-            <p class="com-count">{{ community.user_count }} užívateľov online</p>
+            <p class="com-count">{{ community.user_count }} užívateľov</p>
             <p class="com-name">{{ community.name }}</p>
             <p class="com-owner">{{ community.owner }}</p>
             <p class="com-desc">{{ community.description }}</p>
             <p class="com-create">{{ community.created_at }}</p>
-            <p class="com-moderators">IN DEVELOPMENT</p>
+            <!-- <p class="com-moderators">IN DEVELOPMENT</p> -->
           </div>
         </div>
       </b-col>
@@ -55,14 +66,14 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      communities: {}
+      communities: {},
     };
   },
   created() {
     if (this.$store.getters.isLoggedIn) {
       fetch("http://crowddemocracy.test/api/v1/communities")
-        .then(res => res.json())
-        .then(json => {
+        .then((res) => res.json())
+        .then((json) => {
           this.communities = json;
         });
     } else {
@@ -72,32 +83,36 @@ export default {
   methods: {
     redirectToComm(index) {
       this.$router.push({
-        path: `/community/${index + 1}` //Datebase table starts at 1
+        path: `/community/${index + 1}`, //Datebase table starts at 1
       });
     },
     logout() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
       });
-    }
+    },
   },
   computed: {
     ...mapGetters({
-      user: "getUserData"
-    })
-  }
+      user: "getUserData",
+    }),
+  },
 };
 </script>
 <style scoped>
 .wrap {
   background-color: #f3f5f8;
   height: 100vh;
+  width: 99vw;
 }
 .logo {
   width: 120px;
   margin-left: 2em;
   margin-top: 10px;
 }
+
+/*STYLE ZOZNAMU KOMUNIT*/
+
 .names {
   margin-bottom: 2em;
 }
@@ -106,6 +121,9 @@ export default {
 }
 .com-info {
   margin-left: 2em;
+}
+.com-side {
+  cursor: pointer;
 }
 
 .communities {

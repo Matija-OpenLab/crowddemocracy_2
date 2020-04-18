@@ -1,0 +1,11 @@
+plugin:
+    name: 'sebastianhalas.likes::lang.plugin.name'
+    description: 'sebastianhalas.likes::lang.plugin.description'
+    author: 'Sebastian Halas'
+    icon: oc-icon-thumbs-up
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Likes
+        url: /
+        icon: icon-thumbs-o-up

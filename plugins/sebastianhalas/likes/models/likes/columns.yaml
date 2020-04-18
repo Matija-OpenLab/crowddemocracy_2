@@ -1,0 +1,15 @@
+columns:
+    id:
+        label: ID
+        type: number
+        sortable: true
+    user_id:
+        label: UID
+        type: number
+        searchable: true
+    likeable_id:
+        label: LIKEID
+        type: number
+    like_value:
+        label: LIKE_VALUE
+        type: number
