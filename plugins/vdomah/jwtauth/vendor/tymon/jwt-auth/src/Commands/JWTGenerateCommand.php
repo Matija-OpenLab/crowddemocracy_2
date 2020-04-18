@@ -30,7 +30,11 @@ class JWTGenerateCommand extends Command
      * @var string
      */
     protected $description = 'Set the JWTAuth secret key used to sign the tokens';
+    public function handle()
+    {
 
+        $this->fire();
+    }
     /**
      * Execute the console command.
      *

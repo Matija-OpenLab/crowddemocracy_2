@@ -1,8 +1,9 @@
 <template>
   <div class="wrap">
+    <img class="background" src="../assets-dominika/bg.png" />
     <b-row class="navbar">
-      <b-col class="logo">
-        <!--  <img src="url(logo.png/assets-dominka/menoAssetu.png)" alt /> -->
+      <b-col>
+        <img class="logo" src="../assets-dominika/logo.png" />
       </b-col>
       <b-col class="question">Už máš účet?</b-col>
       <b-col class="button">
@@ -11,17 +12,18 @@
     </b-row>
 
     <h1 class="title">Registrácia</h1>
-    <form class="form">
-      <input class="placeholder" type="email" placeholder="Email" />
-      <input class="placeholder" type="text" placeholder="Používateľské meno" />
-      <input class="placeholder" type="password" placeholder="Heslo" />
-      <input class="placeholder" type="password" placeholder="Potvrdenie hesla" />
-      <div class="check">
-        <input class="checkbox" type="checkbox" />
-        <p class="check-text">Súhlasím so spracovaním údajov</p>
-      </div>
+    <form class="form" @submit.prevent="register">
+      <input class="placeholder" type="email" placeholder="Email" v-model="email" />
+      <input class="placeholder" type="text" placeholder="Používateľské meno" v-model="username" />
+      <input class="placeholder" type="password" placeholder="Heslo" v-model="password" />
+      <input
+        class="placeholder"
+        type="password"
+        placeholder="Potvrdenie hesla"
+        v-model="password_confirmation"
+      />
 
-      <span class="error"></span>
+      <span class="error">{{error}}</span>
       <b-button class="registration" type="submit">Registrácia</b-button>
     </form>
     <b-row class="footer">
@@ -35,10 +37,44 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      email: "",
+      username: "",
+      password: "",
+      password_confirmation: "",
+      error: ""
+    };
+  },
+  created() {
+    if (this.$store.getters.isLoggedIn) this.$router.push("/home");
+  },
+  methods: {
+    register() {
+      let data = {
+        email: this.email,
+        password: this.password,
+        password_confirmation: this.password_confirmation,
+        name: this.username
+      };
+      this.$store
+        .dispatch("register", data)
+        .then(() => this.$router.push("/home"))
+        .catch(() => (this.error = "Invalid credencials"));
+    }
+  },
+  watch: {}
+};
 </script>
 
 <style lang="css" scoped>
+.error {
+  display: block;
+  color: red;
+  font-size: 20px;
+  margin-top: 1em;
+}
 .form input {
   display: block;
 }
@@ -46,11 +82,9 @@ export default {};
   display: inline;
 }
 
-/*Dominikin code skopirovany z Intor.vue*/
-
 .login {
-  border-color: #330066;
-  color: #330066;
+  border-color: #48486e;
+  color: #48486e;
   background-color: white;
   width: 140px;
   font-weight: bold;
@@ -63,8 +97,8 @@ export default {};
   margin-left: 0px;
 }
 .logo {
-  width: 500px;
-  color: white;
+  width: 120px;
+  margin-left: 2em;
 }
 .check {
   display: flex;
@@ -80,7 +114,7 @@ export default {};
   font-size: 14px;
   text-align: right;
   margin-top: 4px;
-  color: #330066;
+  color: #48486e;
 }
 .title {
   margin-top: 150px;
@@ -93,16 +127,24 @@ export default {};
   margin-top: 25px;
   color: black;
 }
-.placeholder {
+.form input {
   width: 500px;
   margin-top: 15px;
   height: 50px;
-  border: white;
+  border: none;
   color: black;
   border-bottom: 1px solid #d7d7c1;
 }
+.form input:focus {
+  outline: none;
+}
+.form .checkbox {
+  width: auto;
+  margin: 0;
+  height: auto;
+}
 .registration {
-  background-color: #330066;
+  background-color: #24154b;
   color: white;
   width: 215px;
   height: 60px;
@@ -110,17 +152,17 @@ export default {};
   line-height: 43px;
 }
 .footer {
-  margin-top: 180px;
+  margin-top: 440px;
 }
 .footer-col1 {
   font-size: 14px;
-  color: #330066;
+  color: #48486e;
   margin-left: 40px;
   white-space: nowrap;
 }
 .footer-col2 {
   font-size: 14px;
-  color: #330066;
+  color: #48486e;
   margin-left: 115px;
   text-align: right;
 }
@@ -129,5 +171,14 @@ export default {};
 }
 .footer-logo {
   font-weight: 900;
+}
+.background {
+  max-width: 50%;
+  height: auto;
+  position: absolute;
+  align-items: right;
+  background-repeat: no-repeat;
+  right: 5px;
+  margin-top: 90px;
 }
 </style>

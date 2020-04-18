@@ -2,8 +2,7 @@
 
 use RainLab\User\Models\User as UserModel;
 
-if (false && 'DO NOT USE DEFAULT VDOMAH APIS')
-    Route::group(['prefix' => 'api'], function() {
+Route::group(['prefix' => 'api'], function() {
 
     Route::post('login', function (Request $request) {
         $credentials = [
@@ -72,7 +71,7 @@ if (false && 'DO NOT USE DEFAULT VDOMAH APIS')
     });
 
     Route::post('/signup', function () {
-        $credentials = Input::only('email', 'password', 'password_confirmation');
+        $credentials = Input::only('name','email', 'password', 'password_confirmation');
 
         try {
             $userModel = UserModel::create($credentials);
