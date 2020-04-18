@@ -1,25 +1,25 @@
 <template>
   <div class="wrap">
-    {{user}}
     <b-row>
       <b-col cols="3" class="list">
         <img class="logo" src="../assets-dominika/logo.png" />
         <div class="your-com">
           <p class="com-list">Zoznam komunít,kde si členom:</p>
-          <div class="names" v-for="(communitie, index) in communities" :key="index">
-            <b-row>
-              <b-col col="1">
+          <div class="names" v-for="(community, index) in communities" :key="community.id">
+            <b-row @click="redirectToComm(index)" class="com-side">
+              <b-col cols="1">
                 <img class="com-logo-list" src="../assets-dominika/comlog.png" />
               </b-col>
-              <b-col class="com-name-list">
-                <p>{{ communitie.name }}</p>
+              <b-col class="com-info">
+                <p class="com-count-info">{{ community.user_count }} užívateľov</p>
+                <p class="com-name-list">{{ community.name }}</p>
               </b-col>
             </b-row>
           </div>
         </div>
       </b-col>
       <b-col cols="8">
-        <b-button class="logout" to="/" variant="danger">Odhlásiť sa</b-button>
+        <b-button class="logout" @click="logout" variant="danger">Odhlásiť sa</b-button>
         <b-row class="navbar">
           <b-col cols="1">
             <img class="com-pic" src="../assets-dominika/comlog.png" />
@@ -46,10 +46,10 @@
           <h2 class="question">{{ post.content }}</h2>
 
           <div class="vote_buttons" v-if="!user.likes.some(item => item.id === post.id)">
-            <button class="vote-yes" @click="addVote(post.id, 'yes')">YES</button>
+            <button class="vote-yes" @click="addVote(post.id, 'like')">YES</button>
             <p class="yes-count">{{ post.vote_yes }}</p>
 
-            <button class="vote_no" @click="addVote(post.id, 'no')">NO</button>
+            <button class="vote_no" @click="addVote(post.id, 'something')">NO</button>
             <p class="yes-count">{{ post.vote_no }}</p>
           </div>
           <div v-else>
@@ -73,7 +73,8 @@ export default {
   data() {
     return {
       community: {},
-      communityPosts: {}
+      communityPosts: {},
+      communities: {}
     };
   },
   created() {
@@ -83,6 +84,11 @@ export default {
         .then(json => {
           this.community = json[0];
         });
+      fetch("http://crowddemocracy.test/api/v1/communities")
+        .then(res => res.json())
+        .then(json => {
+          this.communities = json;
+        });
       this.getPosts();
     } else {
       this.$router.push("/secure");
@@ -90,9 +96,8 @@ export default {
   },
   methods: {
     addVote(postId, vote) {
-      this.voted.push({ id: postId, vote: vote });
       axios.get(
-        `http://crowddemocracy.test/api/v1/posts/${postId}/vote_${vote}`
+        `http://crowddemocracy.test/api/v1/likes/${vote}/${this.user.id}/${postId}`
       );
       var vm = this;
       vm.getPosts();
@@ -104,15 +109,18 @@ export default {
         )
         .then(res => {
           this.communityPosts = res.data;
-        });
+        })
+        .catch(err => console.error(err));
     },
-    changeVote(postId) {
-      const vote = this.voted.filter(item => item.id === postId)[0];
-      axios.get(
-        `http://crowddemocracy.test/api/v1/posts/${postId}/unvote_${vote.vote}`
-      );
-      this.voted = this.voted.filter(item => item.id !== postId);
+
+    changeVote(/*postId*/) {
+      //   const vote = this.voted.filter(item => item.id === postId)[0];
+      console.log(this.user);
+      //   axios.get(
+      //     `http://crowddemocracy.test/api/v1/posts/${postId}/unvote_${vote.vote}`
+      //   );
     },
+
     logout() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
@@ -133,8 +141,45 @@ export default {
 }
 .wrap {
   background-color: #f3f5f8;
-  height: 1000px;
+  height: 100vh;
 }
+
+/*STYLE ZOZNAMU KOMUNIT*/
+
+.names {
+  margin-bottom: 2em;
+}
+.com-name-list {
+  font-weight: bold;
+}
+.com-info {
+  margin-left: 2em;
+}
+.com-side {
+  cursor: pointer;
+}
+.your-com {
+  margin-left: 2em;
+  margin-top: 40px;
+}
+.com-logo-list {
+  width: 50px;
+  height: auto;
+}
+.com-list {
+  font-size: 15px;
+  margin: 0px;
+  margin-top: 40px;
+  color: #9a9eaa;
+  margin-left: 2em;
+}
+.com-count-info {
+  text-align: left;
+  font-size: 13px;
+  margin-bottom: 0px;
+  color: #9a9eaa;
+}
+
 .list {
   border-right: 1px solid #d7d7c1;
 }
@@ -146,13 +191,7 @@ export default {
 .navbar {
   margin-top: 40px;
 }
-.com-list {
-  font-size: 15px;
-  margin: 0px;
-  margin-top: 40px;
-  color: #9a9eaa;
-  margin-left: 2em;
-}
+
 .com-pic {
   width: 60px;
   height: auto;

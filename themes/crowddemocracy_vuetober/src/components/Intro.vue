@@ -13,7 +13,8 @@
       </b-row>
       <h4 class="header">Ako využijete svoj hlas?</h4>
       <h5 class="intro">
-        Na crowd democracy môžete dať svoj hlas novým návrhom alebo ho odovzdať
+        Na
+        <span class="intro-text">CROWD</span>DEMOCRACY môžete dať svoj hlas novým návrhom alebo ho odovzdať
         ľudom ktorým dôverujete.
       </h5>
 
@@ -60,6 +61,9 @@ export default {
   font-weight: bold;
   font-size: 14px;
   margin-top: 5px;
+}
+.intro-text {
+  font-weight: bold;
 }
 
 .button {
