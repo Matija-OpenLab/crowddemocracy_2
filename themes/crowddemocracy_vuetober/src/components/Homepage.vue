@@ -18,7 +18,7 @@
           </div>
         </div>
       </b-col>
-      <b-col class="col" cols="8">
+      <b-col class="col">
         <b-button class="logout" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
         <b-row class="navbar">
           <b-col cols="1">
@@ -91,8 +91,9 @@ export default {
 <style scoped>
 .wrap {
   background-color: #f3f5f8;
-  height: 100vh;
+  height: 100%;
   width: 99vw;
+  overflow-x: hidden;
 }
 .logo {
   width: 120px;
@@ -118,7 +119,6 @@ export default {
 .communities {
   display: flex;
   flex-wrap: wrap;
-  /*width: 350px;*/
   margin: 0px;
 }
 .communitie {
@@ -127,8 +127,8 @@ export default {
   background-color: white;
   border-radius: 15px;
   cursor: pointer;
+  margin-right: 5em;
   margin-bottom: 2em;
-  margin: 0.5em;
   transition: 1s;
 }
 .communitie:hover {
@@ -138,8 +138,8 @@ export default {
 }
 .com-list {
   font-size: 15px;
-  margin: 0px;
   margin-top: 40px;
+  margin-bottom: 20px;
   color: #9a9eaa;
 }
 .com-logo-list {
