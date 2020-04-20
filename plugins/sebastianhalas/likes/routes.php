@@ -23,6 +23,11 @@ Route::group(['prefix' => 'api/v1/likes'], function() {
                         ->take(1);
         $like->delete();
     });
-    
+    Route::post('test', function (\Request $request) {
+        echo('a');
+        
+        return response()->json(('The test was successful'));
+        var_dump($request);
+     })->middleware('\Tymon\JWTAuth\Middleware\GetUserFromToken');
 
 });

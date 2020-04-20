@@ -4,8 +4,3 @@ plugin:
     author: 'Sebastian Halas'
     icon: oc-icon-thumbs-up
     homepage: ''
-navigation:
-    main-menu-item:
-        label: Likes
-        url: /
-        icon: icon-thumbs-o-up
