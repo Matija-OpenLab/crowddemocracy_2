@@ -138,9 +138,7 @@ export default {
     },
     getPosts() {
       axios
-        .get(
-          `http://crowddemocracy.test/api/v1/posts/community_id/${this.$props.id}`
-        )
+        .get(`/api/v1/posts/community_id/${this.$props.id}`)
         .then(res => {
           this.communityPosts = res.data;
         })
