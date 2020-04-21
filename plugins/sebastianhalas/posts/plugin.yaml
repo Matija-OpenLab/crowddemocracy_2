@@ -9,3 +9,4 @@ navigation:
         label: Posts
         url: sebastianhalas/posts/postss
         icon: icon-align-justify
+        order: '9'

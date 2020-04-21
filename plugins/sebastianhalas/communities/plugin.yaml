@@ -9,3 +9,4 @@ navigation:
         label: Communities
         url: sebastianhalas/communities/communities
         icon: icon-area-chart
+        order: '8'

@@ -23,6 +23,4 @@ Route::group(['prefix' => 'api/v1/likes'], function() {
                         ->take(1);
         $like->delete();
     });
-    
-
 });
