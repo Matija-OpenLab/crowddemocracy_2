@@ -18,43 +18,6 @@
           </div>
         </div>
       </b-col>
-      <!--<b-col cols="8">
-        <b-button class="logout" @click="logout" variant="danger">Odhlásiť sa</b-button>
-        <b-row class="navbar">
-          <b-col cols="1">
-            <img class="com-pic" src="../assets-dominika/comlog.png" />
-          </b-col>
-          <b-col>
-            <a class="back-to-com" href="/home">Späť do zoznamu komunít</a>
-            <h1 class="com-name" v-bind="community">{{ community.name }}</h1>
-          </b-col>
-        </b-row>
-
-        <b-row class="nav-row">
-          <b-col>
-            <b-button class="nav-button">Nehlasoval som</b-button>
-          </b-col>
-          <b-col>
-            <b-button class="nav-button">Najnovšie</b-button>
-          </b-col>
-          <b-col>
-            <b-button class="nav-button">Populárne</b-button>
-          </b-col>
-        </b-row>
-        <b-col class="posts col">
-          <div class="post" v-for="post in communityPosts" :key="post.id">
-            <h2 class="question">{{ post.content }}</h2>
-
-            <div class="vote_buttons" v-if="!user.likes.some(item => item.id === post.id)">
-              <button class="vote-yes" @click="addVote(post.id, 'like')">YES</button>
-              <button class="vote_no" @click="addVote(post.id, 'something')">NO</button>
-            </div>
-            <div v-else>
-              <button @click="changeVote(post.id)">Change Vote</button>
-            </div>
-          </div>
-        </b-col>
-      </b-col>-->
       <b-col class="col">
         <b-button class="logout" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
         <b-row class="navbar">
