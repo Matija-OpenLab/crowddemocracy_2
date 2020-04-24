@@ -5,8 +5,9 @@
         <img class="logo" src="../assets-dominika/logo.png" />
         <div class="your-com">
           <p class="com-list">Zoznam komunít,kde si členom:</p>
-          <div class="names" v-for="(community, index) in communities" :key="community.id">
-            <b-row @click="redirectToComm(index)" class="com-side">
+          <div class="names" v-for="community in communities" :key="community.id">
+            <b-row @click="redirectToComm(community.id)" class="com-side">
+              {{community.id}}
               <b-col cols="1">
                 <img class="com-logo-list" src="../assets-dominika/comlog.png" />
               </b-col>
@@ -26,7 +27,7 @@
           </b-col>
           <b-col>
             <a class="back-to-com" href="/home">Späť do zoznamu komunít</a>
-            <h1 class="com-name" v-bind="community">{{ community.name }}</h1>
+            <h1 class="com-name">{{ community.name }}</h1>
           </b-col>
         </b-row>
         <b-row class="nav-row">
@@ -76,28 +77,30 @@ export default {
   },
   created() {
     if (this.$store.getters.isLoggedIn) {
-      fetch(`/api/v1/communities/${this.$props.id}`)
-        .then(res => res.json())
-        .then(json => {
-          this.community = json[0];
-        });
-      fetch("/api/v1/communities")
-        .then(res => res.json())
-        .then(json => {
-          this.communities = json;
-        });
-      this.getPosts();
+      this.getCommunities();
     } else {
       this.$router.push("/secure");
     }
   },
   methods: {
-    addVote(postId, vote) {
-      axios.get(
-        `http://crowddemocracy.test/api/v1/likes/${vote}/${this.user.id}/${postId}`
-      );
-      var vm = this;
-      vm.getPosts();
+    //Voting
+
+    addVote() {},
+    changeVote() {},
+
+    //Getters
+
+    getCommunities() {
+      axios.get("/api/v1/communities").then(res => {
+        this.communities = res.data;
+        this.getPosts();
+        this.getCommunity();
+      });
+    },
+    getCommunity() {
+      axios.get(`/api/v1/communities/${this.$props.id}`).then(res => {
+        this.community = res.data[0];
+      });
     },
     getPosts() {
       axios
@@ -108,29 +111,26 @@ export default {
         .catch(err => console.error(err));
     },
 
-    changeVote(/*postId*/) {
-      //   const vote = this.voted.filter(item => item.id === postId)[0];
-      console.log(this.user);
-      //   axios.get(
-      //     `http://crowddemocracy.test/api/v1/posts/${postId}/unvote_${vote.vote}`
-      //   );
-    },
+    //User redirects
 
     logout() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
       });
     },
-    redirectToComm(index) {
-      this.$router.push({
-        path: `/community/${index + 1}` //Datebase table starts at 1
-      });
+    redirectToComm(community_id) {
+      const path = `/community/${community_id}`;
+      if (this.$route.path !== path) this.$router.push({ path: path });
     }
   },
   computed: {
     ...mapGetters({
       user: "getUserData"
     })
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.getCommunities();
+    next();
   }
 };
 </script>

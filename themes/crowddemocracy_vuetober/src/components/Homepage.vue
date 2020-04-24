@@ -5,8 +5,8 @@
         <img class="logo" src="../assets-dominika/logo.png" />
         <div class="your-com">
           <p class="com-list">Zoznam komunít,kde si členom:</p>
-          <div class="names" v-for="(community, index) in communities" :key="community.id">
-            <b-row @click="redirectToComm(index)" class="com-side">
+          <div class="names" v-for="community in communities" :key="community.id">
+            <b-row @click="redirectToComm(community.id)" class="com-side">
               <b-col cols="1">
                 <img class="com-logo-list" src="../assets-dominika/comlog.png" />
               </b-col>
@@ -33,8 +33,8 @@
           <!--TENTO DIV JE CELA KOMUNITA-->
           <div
             class="communitie"
-            @click="redirectToComm(index)"
-            v-for="(community, index) in communities"
+            @click="redirectToComm(community.id)"
+            v-for="community in communities"
             :key="community.id"
           >
             <img class="com-logo" src="../assets-dominika/comlog.png" />
@@ -51,6 +51,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
   data() {
@@ -60,19 +61,19 @@ export default {
   },
   created() {
     if (this.$store.getters.isLoggedIn) {
-      fetch("/api/v1/communities")
-        .then(res => res.json())
-        .then(json => {
-          this.communities = json;
-        });
+      axios.get("/api/v1/communities").then(res => {
+        this.communities = res.data;
+      });
     } else {
       this.$router.push("/secure");
     }
   },
   methods: {
-    redirectToComm(index) {
+    //User redirects
+
+    redirectToComm(community_id) {
       this.$router.push({
-        path: `/community/${index + 1}` //Datebase table starts at 1
+        path: `/community/${community_id}`
       });
     },
     logout() {
