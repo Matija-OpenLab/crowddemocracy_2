@@ -5,45 +5,31 @@
         <img class="logo" src="../assets-dominika/logo.png" />
         <div class="your-com">
           <p class="com-list">Zoznam komunít,kde si členom:</p>
-<<<<<<< HEAD
-          <div class="names" v-for="(communitie, index) in communities" :key="index">
-            <b-row>
-              <b-col col="1">
-                <img class="com-logo-list" src="../assets-dominika/comlog.png" />
-              </b-col>
-              <b-col class="com-name-list">
-                <p>{{ communitie.name }}</p>
-=======
-          <div class="names" v-for="(community, index) in communities" :key="community.id">
-            <b-row @click="redirectToComm(index)" class="com-side">
+          <div class="names" v-for="community in communities" :key="community.id">
+            <b-row @click="redirectToComm(community.id)" class="com-side">
+              {{community.id}}
               <b-col cols="1">
                 <img class="com-logo-list" src="../assets-dominika/comlog.png" />
               </b-col>
               <b-col class="com-info">
                 <p class="com-count-info">{{ community.user_count }} užívateľov</p>
                 <p class="com-name-list">{{ community.name }}</p>
->>>>>>> ca813b8dfc01ee95cae7c111c2c1dc4dc4c57c4c
               </b-col>
             </b-row>
           </div>
         </div>
       </b-col>
-      <b-col cols="8">
-<<<<<<< HEAD
-        <b-button class="logout" to="/" variant="danger">Odhlásiť sa</b-button>
-=======
-        <b-button class="logout" @click="logout" variant="danger">Odhlásiť sa</b-button>
->>>>>>> ca813b8dfc01ee95cae7c111c2c1dc4dc4c57c4c
+      <b-col class="col">
+        <b-button class="logout" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
         <b-row class="navbar">
           <b-col cols="1">
             <img class="com-pic" src="../assets-dominika/comlog.png" />
           </b-col>
           <b-col>
             <a class="back-to-com" href="/home">Späť do zoznamu komunít</a>
-            <h1 class="com-name" v-bind="community">{{ community.name }}</h1>
+            <h1 class="com-name">{{ community.name }}</h1>
           </b-col>
         </b-row>
-
         <b-row class="nav-row">
           <b-col>
             <b-button class="nav-button">Nehlasoval som</b-button>
@@ -55,27 +41,17 @@
             <b-button class="nav-button">Populárne</b-button>
           </b-col>
         </b-row>
+        <div class="posts">
+          <div class="post" v-for="post in communityPosts" :key="post.id">
+            <h2 class="question">{{ post.content }}</h2>
 
-        <div class="posts" v-for="post in communityPosts" :key="post.id">
-          <h2 class="question">{{ post.content }}</h2>
-
-<<<<<<< HEAD
-          <div class="vote_buttons" v-if="!voted.some(item => item.id === post.id)">
-            <button class="vote-yes" @click="addVote(post.id, 'yes')">YES</button>
-            <p class="yes-count">{{ post.vote_yes }}</p>
-
-            <button class="vote_no" @click="addVote(post.id, 'no')">NO</button>
-=======
-          <div class="vote_buttons" v-if="!user.likes.some(item => item.id === post.id)">
-            <button class="vote-yes" @click="addVote(post.id, 'like')">YES</button>
-            <p class="yes-count">{{ post.vote_yes }}</p>
-
-            <button class="vote_no" @click="addVote(post.id, 'something')">NO</button>
->>>>>>> ca813b8dfc01ee95cae7c111c2c1dc4dc4c57c4c
-            <p class="yes-count">{{ post.vote_no }}</p>
-          </div>
-          <div v-else>
-            <button @click="changeVote(post.id)">Change Vote</button>
+            <div class="vote_buttons" v-if="!user.likes.some(item => item.id === post.id)">
+              <button class="vote-yes" @click="addVote(post.id, 'like')">YES</button>
+              <button class="vote_no" @click="addVote(post.id, 'something')">NO</button>
+            </div>
+            <div class="change_vote" v-else>
+              <button @click="changeVote(post.id)">Change Vote</button>
+            </div>
           </div>
         </div>
       </b-col>
@@ -101,58 +77,60 @@ export default {
   },
   created() {
     if (this.$store.getters.isLoggedIn) {
-      fetch(`/api/v1/communities/${this.$props.id}`)
-        .then(res => res.json())
-        .then(json => {
-          this.community = json[0];
-        });
-      fetch("/api/v1/communities")
-        .then(res => res.json())
-        .then(json => {
-          this.communities = json;
-        });
-      this.getPosts();
+      this.getCommunities();
     } else {
       this.$router.push("/secure");
     }
   },
   methods: {
-    addVote(postId, vote) {
-      axios.get(
-        `http://crowddemocracy.test/api/v1/likes/${vote}/${this.user.id}/${postId}`
-      );
-      var vm = this;
-      vm.getPosts();
+    //Voting
+
+    addVote() {},
+    changeVote() {},
+
+    //Getters
+
+    getCommunities() {
+      axios.get("/api/v1/communities").then(res => {
+        this.communities = res.data;
+        this.getPosts();
+        this.getCommunityName();
+      });
+    },
+    getCommunityName() {
+      axios.get(`/api/v1/communities/${this.$props.id}`).then(res => {
+        this.community = res.data[0];
+      });
     },
     getPosts() {
       axios
-        .get(
-          `http://crowddemocracy.test/api/v1/posts/community_id/${this.$props.id}`
-        )
+        .get(`/api/v1/posts/community_id/${this.$props.id}`)
         .then(res => {
           this.communityPosts = res.data;
         })
         .catch(err => console.error(err));
     },
 
-    changeVote(/*postId*/) {
-      //   const vote = this.voted.filter(item => item.id === postId)[0];
-      console.log(this.user);
-      //   axios.get(
-      //     `http://crowddemocracy.test/api/v1/posts/${postId}/unvote_${vote.vote}`
-      //   );
-    },
+    //User redirects
 
     logout() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
       });
+    },
+    redirectToComm(community_id) {
+      const path = `/community/${community_id}`;
+      if (this.$route.path !== path) this.$router.push({ path: path });
     }
   },
   computed: {
     ...mapGetters({
       user: "getUserData"
     })
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.getCommunities();
+    next();
   }
 };
 </script>
@@ -163,22 +141,8 @@ export default {
 }
 .wrap {
   background-color: #f3f5f8;
-<<<<<<< HEAD
-  height: 1000px;
-}
-.list {
-  border-right: 1px solid #d7d7c1;
-}
-.logo {
-  width: 120px;
-  margin-left: 2em;
-  margin-top: 10px;
-}
-.navbar {
-  margin-top: 40px;
-}
-=======
   height: 100vh;
+  overflow-x: hidden;
 }
 
 /*STYLE ZOZNAMU KOMUNIT*/
@@ -203,16 +167,12 @@ export default {
   width: 50px;
   height: auto;
 }
->>>>>>> ca813b8dfc01ee95cae7c111c2c1dc4dc4c57c4c
 .com-list {
   font-size: 15px;
-  margin: 0px;
   margin-top: 40px;
+  margin-bottom: 20px;
   color: #9a9eaa;
-  margin-left: 2em;
 }
-<<<<<<< HEAD
-=======
 .com-count-info {
   text-align: left;
   font-size: 13px;
@@ -232,7 +192,6 @@ export default {
   margin-top: 40px;
 }
 
->>>>>>> ca813b8dfc01ee95cae7c111c2c1dc4dc4c57c4c
 .com-pic {
   width: 60px;
   height: auto;
@@ -254,20 +213,6 @@ export default {
 .com-name {
   margin-left: 20px;
 }
-.posts {
-  height: 300px;
-  width: 300px;
-  background-color: white;
-  border-radius: 15px;
-  cursor: pointer;
-  margin-bottom: 2em;
-  margin-top: 40px;
-  text-align: center;
-<<<<<<< HEAD
-  display: flex;
-=======
->>>>>>> ca813b8dfc01ee95cae7c111c2c1dc4dc4c57c4c
-}
 .question {
   margin: auto;
 }
@@ -278,5 +223,24 @@ export default {
 }
 .nav-row {
   border-bottom: 1px solid #d7d7c1;
+  text-align: center;
+}
+
+/*Matija style + nieco z dominikinho*/
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px;
+}
+.post {
+  height: 290px;
+  width: 290px;
+  background-color: white;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-bottom: 2em;
+  margin-top: 2em;
+  margin-right: 5em;
+  text-align: center;
 }
 </style>

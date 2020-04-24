@@ -54,6 +54,9 @@ export default {
 };
 </script>
 <style scoped>
+.wrap {
+  overflow-x: hidden;
+}
 .error {
   display: block;
   color: red;

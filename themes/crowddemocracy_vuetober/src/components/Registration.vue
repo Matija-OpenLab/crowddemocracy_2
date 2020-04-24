@@ -69,6 +69,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.wrap {
+  overflow-x: hidden;
+}
 .error {
   display: block;
   color: red;
