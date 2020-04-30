@@ -39,6 +39,24 @@ Route::group(['prefix' => 'api'], function() {
         return response()->json(compact('token', 'user'));
     });
 
+    Route::post('token_refresh', function(Request $request){
+        
+        $token = request()->input('token');
+        $userModel = JWTAuth::toUser($token);
+        
+        $user = [
+            'id' => $userModel->id,
+            'name' => $userModel->name,
+            'surname' => $userModel->surname,
+            'username' => $userModel->username,
+            'email' => $userModel->email,
+            'is_activated' => $userModel->is_activated,
+            'likes' => $userModel->likes,
+        ];
+        
+        return response()->json(compact('user'));
+    });
+
     Route::post('refresh', function (Request $request) {
         $token = Request::get('token');
 
