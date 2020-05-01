@@ -45,9 +45,9 @@
           <div class="post" v-for="post in communityPosts" :key="post.id">
             <h2 class="question">{{ post.content }}</h2>
 
-            <div class="vote_buttons" v-if="!user.likes.some(item => item.id === post.id)">
+            <div class="vote_buttons" v-if="!user.likes.some(item => item.likeable_id === post.id)">
               <button class="vote-yes" @click="addVote(post.id, 'like')">YES</button>
-              <button class="vote_no" @click="addVote(post.id, 'something')">NO</button>
+              <button class="vote_no" @click="addVote(post.id, 'unlike')">NO</button>
             </div>
             <div class="change_vote" v-else>
               <button @click="changeVote(post.id)">Change Vote</button>
@@ -85,7 +85,14 @@ export default {
   methods: {
     //Voting
 
-    addVote() {},
+    addVote(post_id, vote) {
+      axios
+        .get(`/api/v1/likes/${vote}/${this.user.id}/${post_id}`)
+        .then(() => {
+          console.log(vote);
+        })
+        .catch(err => console.error(err));
+    },
     changeVote() {},
 
     //Getters
