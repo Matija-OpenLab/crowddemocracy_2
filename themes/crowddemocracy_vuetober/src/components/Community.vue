@@ -87,43 +87,62 @@ export default {
 
     addVote(post_id, vote) {
       axios
-        .get(`/api/v1/likes/${vote}/${this.user.id}/${post_id}`)
+        .post(`/api/v1/likes/${vote}/${this.user.id}/${post_id}`)
         .then(() => {
-          console.log(vote);
+          this.refreshUser();
         })
         .catch(err => console.error(err));
     },
-    changeVote() {},
+    changeVote(post_id) {
+      const vote = this.user.likes.find(post => post.id === post_id)
+        ? "romove_unlike"
+        : "remove_like";
+
+      axios
+        .post(`/api/v1/likes/${vote}/${this.user.id}/${post_id}`)
+        .then(() => {
+          this.refreshUser();
+        })
+        .catch(err => console.error(err));
+    },
 
     //Getters
 
     getCommunities() {
-      axios.get("/api/v1/communities").then(res => {
-        this.communities = res.data;
+      axios.get("/api/v1/communities").then(resp => {
+        this.communities = resp.data;
         this.getPosts();
         this.getCommunityName();
       });
     },
     getCommunityName() {
-      axios.get(`/api/v1/communities/${this.$props.id}`).then(res => {
-        this.community = res.data[0];
+      axios.get(`/api/v1/communities/${this.$props.id}`).then(resp => {
+        this.community = resp.data[0];
       });
     },
     getPosts() {
       axios
         .get(`/api/v1/posts/community_id/${this.$props.id}`)
-        .then(res => {
-          this.communityPosts = res.data;
+        .then(resp => {
+          this.communityPosts = resp.data;
         })
         .catch(err => console.error(err));
     },
 
-    //User redirects
+    //User actions and redirects
 
     logout() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
       });
+    },
+    refreshUser() {
+      this.$store
+        .dispatch("refresh")
+        .then(() => {})
+        .catch(err => {
+          console.error(err);
+        });
     },
     redirectToComm(community_id) {
       const path = `/community/${community_id}`;

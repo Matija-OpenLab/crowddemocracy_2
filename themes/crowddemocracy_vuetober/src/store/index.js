@@ -31,6 +31,12 @@ export default new Vuex.Store({
             state.status = ''
             state.token = ''
         },
+        refresh(state, user) {
+            state.user = user
+        },
+        refresh_error(state) {
+            state.status = 'refresh error'
+        }
     },
     actions: {
         login({
@@ -97,6 +103,27 @@ export default new Vuex.Store({
                 localStorage.removeItem('token')
                 delete axios.defaults.headers.common['Authorization']
                 resolve()
+            })
+        },
+        refresh({
+            commit
+        }) {
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: '/api/token_refresh',
+                    data: {
+                        token: this.state.token
+                    },
+                    method: 'POST'
+                }).then(resp => {
+                    const user = resp.data.user
+                    commit('refresh', user)
+                    resolve(resp)
+
+                }).catch(err => {
+                    commit('refresh_error')
+                    reject(err)
+                })
             })
         }
     },
