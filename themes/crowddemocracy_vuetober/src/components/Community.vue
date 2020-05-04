@@ -94,12 +94,23 @@ export default {
         .catch(err => console.error(err));
     },
     changeVote(post_id) {
-      const vote = this.user.likes.find(post => post.id === post_id)
-        ? "romove_unlike"
-        : "remove_like";
+      const targetPost = this.user.likes.find(
+        post => post.likeable_id === post_id
+      );
+
+      console.log(targetPost.like_value);
+
+      const vote = parseInt(targetPost.like_value)
+        ? "remove_like"
+        : "remove_unlike";
+      console.log(targetPost);
+      console.log(vote);
+
+      let url = `/api/v1/likes/${vote}/${this.user.id}/${post_id}`;
+      console.log(url);
 
       axios
-        .post(`/api/v1/likes/${vote}/${this.user.id}/${post_id}`)
+        .post(url)
         .then(() => {
           this.refreshUser();
         })
