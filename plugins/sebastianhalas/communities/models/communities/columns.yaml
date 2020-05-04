@@ -12,10 +12,10 @@ columns:
         type: text
     created_at:
         label: 'Created At'
-        type: datetime
+        type: date
     updated_at:
         label: 'Updated At'
-        type: datetime
+        type: date
     owner:
         label: 'Owned By'
         type: text

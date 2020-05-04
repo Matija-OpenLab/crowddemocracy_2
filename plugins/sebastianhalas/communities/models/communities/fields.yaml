@@ -10,12 +10,12 @@ fields:
         type: textarea
     created_at:
         label: 'Created At'
-        mode: datetime
+        mode: date
         span: auto
         type: datepicker
     updated_at:
         label: 'Updated AT'
-        mode: datetime
+        mode: date
         span: left
         type: datepicker
     owner:
