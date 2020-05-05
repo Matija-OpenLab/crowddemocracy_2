@@ -5,7 +5,7 @@ Route::group(['prefix' => 'api/v1/likes'], function() {
     Route::post('like/{uid}/{lid}', function ($uid,$lid) {
         $like = new Likes;
         $like->user_id = $uid;
-        $like->likeable_id = $lid;
+        $like->posts_id = $lid;
         $like->like_value = 1;
         $like->save();
         
@@ -19,8 +19,8 @@ Route::group(['prefix' => 'api/v1/likes'], function() {
     Route::post('unlike/{uid}/{lid}', function ($uid,$lid) {
         $like = new Likes;
         $like->user_id = $uid;
-        $like->likeable_id = $lid;
-        $like->like_value = 0;
+        $like->posts_id = $lid;
+        $like->posts_id = 0;
         $like->save();
         
         $post = Posts::where('id',$lid)
@@ -32,7 +32,7 @@ Route::group(['prefix' => 'api/v1/likes'], function() {
     });
     Route::post('remove_like/{uid}/{lid}', function ($uid,$lid) {
         $like = Likes::where('user_id',$uid)
-                        ->where('likeable_id',$lid)
+                        ->where('posts_id',$lid)
                         ->take(1);
         $like->delete();
         
@@ -45,7 +45,7 @@ Route::group(['prefix' => 'api/v1/likes'], function() {
     });
     Route::post('remove_unlike/{uid}/{lid}', function ($uid,$lid) {
         $like = Likes::where('user_id',$uid)
-                        ->where('likeable_id',$lid)
+                        ->where('posts_id',$lid)
                         ->take(1);
         $like->delete();
         

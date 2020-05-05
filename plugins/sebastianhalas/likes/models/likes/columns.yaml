@@ -7,7 +7,7 @@ columns:
         label: UID
         type: number
         searchable: true
-    likeable_id:
+    posts_id:
         label: LIKEID
         type: number
     like_value:

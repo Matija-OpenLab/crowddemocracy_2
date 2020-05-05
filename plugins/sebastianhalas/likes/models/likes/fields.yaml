@@ -3,7 +3,7 @@ fields:
         label: UID
         span: auto
         type: number
-    likeable_id:
+    posts_id:
         label: 'LIKEABLE ID'
         span: auto
         type: number

@@ -20,4 +20,8 @@ class Posts extends Model
      */
     public $rules = [
     ];
+
+    public $hasMany = [
+        'likes' => ['sebastianhalas\Likes\Models\Likes', 'user_id' => 'id']
+    ];
 }
