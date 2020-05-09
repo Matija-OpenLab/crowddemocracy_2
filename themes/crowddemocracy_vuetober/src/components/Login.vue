@@ -12,9 +12,16 @@
     </b-row>
     <h1 class="title">Prihlásenie</h1>
     <form class="form" @submit.prevent="login">
-      <input type="text" placeholder="Prezývka / Email" v-model="email" />
-      <input type="password" placeholder="Heslo" v-model="password" />
-      <span class="error">{{error}}</span>
+      <ValidationProvider rules="required|email" v-slot="{ errors }">
+        <input type="text" placeholder="Email" v-model="email" />
+        <span class="error">{{ errors[0] }}</span>
+      </ValidationProvider>
+
+      <ValidationProvider rules="required|password_verification:8,16" v-slot="{ errors }">
+        <input type="password" placeholder="Heslo" v-model="password" />
+        <span class="error">{{ errors[0] }}</span>
+      </ValidationProvider>
+      <span v-if="error.length" class="error">Uživateľ nebol najdeny</span>
       <b-button class="login" type="submit">Prihlásiť</b-button>
     </form>
     <b-row class="footer">
@@ -28,7 +35,39 @@
   </div>
 </template>
 <script>
+import { ValidationProvider } from "vee-validate";
+import { extend } from "vee-validate";
+import { required, email } from "vee-validate/dist/rules";
+import { setInteractionMode } from "vee-validate";
+setInteractionMode("aggressive");
+
+extend("required", {
+  ...required,
+  message: "Pole nesmie byť prázdne!"
+});
+extend("email", {
+  ...email,
+  message: "Nesprávny formát emailu!"
+});
+
+//Custom validation rules
+
+extend("password_verification", {
+  validate(value, { min, max }) {
+    const passRegex = new RegExp(
+      `^(?=.*)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{${min},${max}}`
+    );
+    return passRegex.test(value);
+  },
+  params: ["min", "max"],
+  message:
+    "Heslo musi obsahovať medzi {min} a {max} znakov, musi obsahovat aspoň jedno velké písmeno a aspoň jedno číslo"
+});
+
 export default {
+  components: {
+    ValidationProvider
+  },
   data() {
     return {
       email: "",

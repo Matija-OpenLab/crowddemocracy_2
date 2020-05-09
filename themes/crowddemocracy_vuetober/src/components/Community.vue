@@ -98,19 +98,12 @@ export default {
         post => post.likeable_id === post_id
       );
 
-      console.log(targetPost.like_value);
-
       const vote = parseInt(targetPost.like_value)
         ? "remove_like"
         : "remove_unlike";
-      console.log(targetPost);
-      console.log(vote);
-
-      let url = `/api/v1/likes/${vote}/${this.user.id}/${post_id}`;
-      console.log(url);
 
       axios
-        .post(url)
+        .post(`/api/v1/likes/${vote}/${this.user.id}/${post_id}`)
         .then(() => {
           this.refreshUser();
         })
@@ -136,6 +129,7 @@ export default {
         .get(`/api/v1/posts/community_id/${this.$props.id}`)
         .then(resp => {
           this.communityPosts = resp.data;
+          console.log(this.communityPosts);
         })
         .catch(err => console.error(err));
     },
