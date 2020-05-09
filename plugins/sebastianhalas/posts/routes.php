@@ -18,6 +18,7 @@ Route::group(['prefix' => 'api/v1/posts'], function() {
     
     Route::get('', function () {
         db_update();
+        
         $posts = Posts::all();
 
         return $posts;
@@ -25,13 +26,15 @@ Route::group(['prefix' => 'api/v1/posts'], function() {
 
     Route::get('/{id}', function ($id) {    
         db_update();
+        
         $post = Posts::where('id',$id)->take(1)->get();      
        
         return response()->json(compact('likes','dislikes','total_votes','post'));
     });
     Route::get('/community_id/{id}', function ($id) {
         db_update();
-        $posts = Posts::all();
+     
+        $posts = Posts::where('community_id',$id)->get();
         
         return response()->json(compact('posts'));
         
