@@ -7,3 +7,7 @@ fields:
         label: 'LIKEABLE ID'
         span: auto
         type: number
+    like_value:
+        label: Number
+        span: auto
+        type: number

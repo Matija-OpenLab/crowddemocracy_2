@@ -13,3 +13,4 @@ columns:
     like_value:
         label: LIKE_VALUE
         type: number
+        relation: like_value
