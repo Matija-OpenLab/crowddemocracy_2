@@ -43,7 +43,7 @@
         </b-row>
         <div class="posts">
           <div class="post" v-for="post in communityPosts" :key="post.id">
-            <h2 class="question">{{ post.content }}</h2>
+            <p class="question">{{ post.content }}</p>
 
             <div class="vote_buttons" v-if="!user.likes.some(item => item.likeable_id === post.id)">
               <button class="vote-yes" @click="addVote(post.id, 'like')">YES</button>
@@ -245,7 +245,10 @@ export default {
   margin-left: 20px;
 }
 .question {
-  margin: auto;
+  color: skyblue;
+  font-size: 17px;
+  padding: 20px 0 px;
+  margin-top: 120px;
 }
 .nav-button {
   background-color: #f3f5f8;
