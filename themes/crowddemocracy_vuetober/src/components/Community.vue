@@ -45,7 +45,7 @@
           <div class="post" v-for="post in communityPosts" :key="post.id">
             <p class="question">{{ post.content }}</p>
 
-            <div class="vote_buttons" v-if="!user.likes.some(item => item.likeable_id === post.id)">
+            <div class="vote_buttons" v-if="!user.likes.some(item => item.posts_id === post.id)">
               <button class="vote-yes" @click="addVote(post.id, 'like')">YES</button>
               <button class="vote_no" @click="addVote(post.id, 'unlike')">NO</button>
             </div>
@@ -90,6 +90,7 @@ export default {
         .post(`/api/v1/likes/${vote}/${this.user.id}/${post_id}`)
         .then(() => {
           this.refreshUser();
+          console.log(this.user);
         })
         .catch(err => console.error(err));
     },
@@ -128,8 +129,7 @@ export default {
       axios
         .get(`/api/v1/posts/community_id/${this.$props.id}`)
         .then(resp => {
-          this.communityPosts = resp.data;
-          console.log(this.communityPosts);
+          this.communityPosts = resp.data.posts;
         })
         .catch(err => console.error(err));
     },

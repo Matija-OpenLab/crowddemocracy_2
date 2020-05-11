@@ -11,5 +11,5 @@ columns:
         label: LIKEID
         type: number
     like_value:
-        label: LIKE_VALUE
+        label: like/dislike
         type: number

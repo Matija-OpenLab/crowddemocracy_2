@@ -95,9 +95,9 @@ Route::group(['prefix' => 'api'], function() {
         try {
             $userModel = UserModel::create($credentials);
 
-            if ($userModel->methodExists('getAuthApiSignupAttributes')) {
+            /*if ($userModel->methodExists('getAuthApiSignupAttributes')) {
                 $user = $userModel->getAuthApiSignupAttributes();
-            } else {
+            } else {*/
                 $user = [
                     'id' => $userModel->id,
                     'name' => $userModel->name,
@@ -105,8 +105,9 @@ Route::group(['prefix' => 'api'], function() {
                     'username' => $userModel->username,
                     'email' => $userModel->email,
                     'is_activated' => $userModel->is_activated,
+                    'likes' => $userModel->likes,
                 ];
-            }
+            //}
         } catch (Exception $e) {
             return Response::json(['error' => $e->getMessage()], 401);
         }
