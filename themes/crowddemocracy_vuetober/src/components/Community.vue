@@ -2,14 +2,14 @@
   <div class="wrap">
     <b-row>
       <b-col cols="3" class="list">
-        <img class="logo" src="../assets-dominika/logo.png" />
+        <img class="logo" src="../assets/logo.png" />
         <div class="your-com">
           <p class="com-list">Zoznam komunít,kde si členom:</p>
           <div class="names" v-for="community in communities" :key="community.id">
-            <b-row @click="redirectToComm(community.id)" class="com-side">
+            <b-row @click="navigateToComm(community.id)" class="com-side">
               {{community.id}}
               <b-col cols="1">
-                <img class="com-logo-list" src="../assets-dominika/comlog.png" />
+                <img class="com-logo-list" src="../assets/comlog.png" />
               </b-col>
               <b-col class="com-info">
                 <p class="com-count-info">{{ community.user_count }} užívateľov</p>
@@ -23,7 +23,7 @@
         <b-button class="logout" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
         <b-row class="navbar">
           <b-col cols="1">
-            <img class="com-pic" src="../assets-dominika/comlog.png" />
+            <img class="com-pic" src="../assets/comlog.png" />
           </b-col>
           <b-col>
             <a class="back-to-com" href="/home">Späť do zoznamu komunít</a>
@@ -149,7 +149,7 @@ export default {
           console.error(err);
         });
     },
-    redirectToComm(community_id) {
+    navigateToComm(community_id) {
       const path = `/community/${community_id}`;
       if (this.$route.path !== path) this.$router.push({ path: path });
     }
