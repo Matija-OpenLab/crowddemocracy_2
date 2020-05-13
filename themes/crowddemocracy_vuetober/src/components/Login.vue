@@ -17,7 +17,7 @@
         <span class="error">{{ errors[0] }}</span>
       </ValidationProvider>
 
-      <ValidationProvider rules="required|password_verification:8,16" v-slot="{ errors }">
+      <ValidationProvider rules="required|password_verification:8" v-slot="{ errors }">
         <input type="password" placeholder="Heslo" v-model="password" />
         <span class="error">{{ errors[0] }}</span>
       </ValidationProvider>
@@ -53,13 +53,13 @@ extend("email", {
 //Custom validation rules
 
 extend("password_verification", {
-  validate(value, { min, max }) {
+  validate(value, { min }) {
     const passRegex = new RegExp(
-      `^(?=.*)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{${min},${max}}`
+      `^(?=.*)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{${min}}`
     );
     return passRegex.test(value);
   },
-  params: ["min", "max"],
+  params: ["min"],
   message:
     "Heslo musí obsahovať minimálne {min} znakov, obsahovať aspoň jedno veľké písmeno a jedno číslo."
 });

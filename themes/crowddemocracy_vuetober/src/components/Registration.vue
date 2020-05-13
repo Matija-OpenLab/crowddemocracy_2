@@ -12,20 +12,49 @@
     </b-row>
 
     <h1 class="title">Registrácia</h1>
-    <form class="form" @submit.prevent="register">
-      <input class="placeholder" type="email" placeholder="Email" v-model="email" />
-      <input class="placeholder" type="text" placeholder="Používateľské meno" v-model="username" />
-      <input class="placeholder" type="password" placeholder="Heslo" v-model="password" />
-      <input
-        class="placeholder"
-        type="password"
-        placeholder="Potvrdenie hesla"
-        v-model="password_confirmation"
-      />
+    <ValidationObserver v-slot="{ passes }">
+      <form class="form" @submit.prevent="passes(regirster)">
+        <ValidationProvider rules="required|email" v-slot="{ errors }">
+          <input class="placeholder" type="email" placeholder="Email" v-model="email" />
+          <span class="error">{{ errors[0] }}</span>
+        </ValidationProvider>
 
-      <span class="error">{{ error }}</span>
-      <b-button class="registration" type="submit">Registrácia</b-button>
-    </form>
+        <ValidationProvider rules="required|max:16" v-slot="{ errors }">
+          <input
+            class="placeholder"
+            type="text"
+            placeholder="Používateľské meno"
+            v-model="username"
+          />
+          <span class="error">{{ errors[0] }}</span>
+        </ValidationProvider>
+
+        <ValidationProvider
+          vid="password"
+          rules="required|password_verification:8"
+          v-slot="{ errors }"
+        >
+          <input class="placeholder" type="password" placeholder="Heslo" v-model="password" />
+          <span class="error">{{ errors[0] }}</span>
+        </ValidationProvider>
+
+        <ValidationProvider
+          rules="required|password_verification:8|confirmed:password"
+          v-slot="{ errors }"
+        >
+          <input
+            class="password"
+            type="password"
+            placeholder="Potvrdenie hesla"
+            v-model="password_confirmation"
+          />
+          <span class="error">{{ errors[0] }}</span>
+        </ValidationProvider>
+
+        <span class="error">{{ error }}</span>
+        <b-button class="registration" type="submit">Registrácia</b-button>
+      </form>
+    </ValidationObserver>
     <b-row class="footer">
       <b-col class="footer-col1">
         &reg; 2020 všetky práva vyhradené
@@ -37,7 +66,49 @@
   </div>
 </template>
 <script>
+import { ValidationProvider } from "vee-validate";
+import { ValidationObserver } from "vee-validate";
+import { extend } from "vee-validate";
+import { required, email, max, confirmed } from "vee-validate/dist/rules";
+import { setInteractionMode } from "vee-validate";
+setInteractionMode("eager");
+
+extend("required", {
+  ...required,
+  message: "Pole nesmie byť prázdne!"
+});
+extend("email", {
+  ...email,
+  message: "Nesprávny formát emailu!"
+});
+extend("max", {
+  ...max,
+  message: "Užívateľské meno nesmie byť dlhšie ako 16 znakov"
+});
+extend("confirmed", {
+  ...confirmed,
+  message: "Heslo sa musí zhodovať"
+});
+
+//Custom validation rules
+
+extend("password_verification", {
+  validate(value, { min }) {
+    const passRegex = new RegExp(
+      `^(?=.*)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{${min}}`
+    );
+    return passRegex.test(value);
+  },
+  params: ["min"],
+  message:
+    "Heslo musí obsahovať minimálne {min} znakov, obsahovať aspoň jedno veľké písmeno a jedno číslo."
+});
+
 export default {
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
   data() {
     return {
       email: "",

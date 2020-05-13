@@ -118,6 +118,7 @@ export default {
         this.communities = resp.data;
         this.getPosts();
         this.getCommunityName();
+        console.log(typeof this.user.id);
       });
     },
     getCommunityName() {
