@@ -33,6 +33,7 @@ Route::group(['prefix' => 'api'], function() {
                 'email' => $userModel->email,
                 'is_activated' => $userModel->is_activated,
                 'likes' => $userModel->likes,
+                'communities' => $userModel->community,
             ];
         }
         // if no errors are encountered we can return a JWT
@@ -52,6 +53,7 @@ Route::group(['prefix' => 'api'], function() {
             'email' => $userModel->email,
             'is_activated' => $userModel->is_activated,
             'likes' => $userModel->likes,
+            'communities' => $userModel->community,
         ];
         
         return response()->json(compact('user'));
@@ -106,6 +108,7 @@ Route::group(['prefix' => 'api'], function() {
                     'email' => $userModel->email,
                     'is_activated' => $userModel->is_activated,
                     'likes' => $userModel->likes,
+                    'communities' => $userModel->community,
                 ];
             //}
         } catch (Exception $e) {

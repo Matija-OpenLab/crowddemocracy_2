@@ -22,5 +22,6 @@ class Posts extends Model
     ];
     public $hasMany = [
         'likes' => ['sebastianhalas\Likes\Models\Likes'],
+        'communities' => ['sebastianhalas\Communities\Models\Communities']
     ];
 }

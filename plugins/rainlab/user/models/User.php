@@ -32,7 +32,8 @@ class User extends UserBase
      * @var array Relations
      */
     public $belongsToMany = [
-        'groups' => [UserGroup::class, 'table' => 'users_groups']
+        'groups' => [UserGroup::class, 'table' => 'users_groups'],
+        'community' => ['SebastianHalas\Communities\Models\Communities', 'table' => 'sebastianhalas_communities_join']
     ];
     public $hasMany = [
         'likes' => 'SebastianHalas\Likes\Models\Likes'

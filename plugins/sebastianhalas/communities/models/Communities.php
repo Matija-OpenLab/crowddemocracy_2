@@ -18,6 +18,10 @@ class Communities extends Model
     /**
      * @var array Validation rules
      */
+    public $belongsToMany = [
+        'users' => ['RainLab\User\Models\User', 'table' => 'sebastianhalas_communities_join']
+    ];
+
     public $rules = [
     ];
 }
