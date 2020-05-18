@@ -125,6 +125,36 @@ export default new Vuex.Store({
                     reject(err)
                 })
             })
+        },
+        vote({
+                commit
+            },
+            data
+        ) {
+            const url = `/api/v1/likes/${data.vote}/${data.postId}`;
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: url,
+                    data: {
+                        token: this.state.token
+                    },
+                    method: 'POST'
+                }).then(resp => resolve(resp)).catch(err => reject(err))
+            })
+        },
+        removeVote({
+            commit
+        }, postId) {
+            const url = `/api/v1/likes/remove_vote/${postId}`;
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: url,
+                    data: {
+                        token: this.state.token
+                    },
+                    method: 'POST'
+                }).then(resp => resolve(resp)).catch(err => reject(err))
+            })
         }
     },
     modules: {},
