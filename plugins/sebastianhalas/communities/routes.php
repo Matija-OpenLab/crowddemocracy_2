@@ -28,7 +28,7 @@ Route::group(['prefix' => 'api/v1/communities'], function() {
         return $communities;
     });
 
-    Route::get('/join/{id}',function($id){
+    Route::post('/join/{id}',function($id){
 
         $token = request()->input('token');
         $userModel = JWTAuth::toUser($token);
@@ -37,7 +37,7 @@ Route::group(['prefix' => 'api/v1/communities'], function() {
 
     });
 
-    Route::get('/leave/{id}',function($id){
+    Route::post('/leave/{id}',function($id){
         
         $token = request()->input('token');
         $userModel = JWTAuth::toUser($token);
