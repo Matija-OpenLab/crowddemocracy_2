@@ -61,7 +61,7 @@ extend("password_verification", {
   },
   params: ["min", "max"],
   message:
-    "Heslo musí obsahovať minimálne {min} znakov, obsahovať aspoň jedno veľké písmeno a jedno číslo."
+    "Heslo musí obsahovať minimálne {min} znakov, najviac {max} znakov, obsahovať aspoň jedno veľké písmeno a jedno číslo."
 });
 
 export default {
@@ -108,7 +108,7 @@ export default {
 .error {
   display: block;
   color: #ff3333;
-  font-size: 15px;
+  font-size: 14px;
   margin-top: 1em;
 }
 .form input {

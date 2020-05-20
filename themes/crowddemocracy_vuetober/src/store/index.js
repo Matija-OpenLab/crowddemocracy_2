@@ -1,136 +1,122 @@
 /* eslint-disable */
-import Vue from 'vue'
-import Vuex from 'vuex'
-import axios from 'axios'
-import createPersistedState from "vuex-persistedstate"
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
+import createPersistedState from "vuex-persistedstate";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        token: localStorage.getItem('token') || '',
-        status: '',
+        token: localStorage.getItem("token") || "",
+        status: "",
         user: {}
     },
     mutations: {
         auth_request(state) {
-            state.status = 'loading'
+            state.status = "loading";
         },
-        auth_success(state, {
-            token,
-            user
-        }) {
-            state.status = 'success'
-            state.token = token
-            state.user = user
+        auth_success(state, { token, user }) {
+            state.status = "success";
+            state.token = token;
+            state.user = user;
         },
         auth_error(state) {
-            state.status = 'error'
+            state.status = "error";
         },
         logout(state) {
-            state.status = ''
-            state.token = ''
+            state.status = "";
+            state.token = "";
         },
         refresh(state, user) {
-            state.user = user
+            state.user = user;
         },
         refresh_error(state) {
-            state.status = 'refresh error'
+            state.status = "refresh error";
         }
     },
     actions: {
-        login({
-            commit
-        }, user) {
+        login({ commit }, user) {
             return new Promise((resolve, reject) => {
-                commit('auth_request')
+                commit("auth_request");
                 axios({
-                        url: '/api/login',
-                        data: user,
-                        method: 'POST'
-                    })
+                    url: "/api/login",
+                    data: user,
+                    method: "POST"
+                })
                     .then(resp => {
-                        const token = resp.data.token
-                        const user = resp.data.user
-                        localStorage.setItem('token', token)
-                        axios.defaults.headers.common['Authorization'] = token
-                        commit('auth_success', {
+                        const token = resp.data.token;
+                        const user = resp.data.user;
+                        localStorage.setItem("token", token);
+                        axios.defaults.headers.common["Authorization"] = token;
+                        commit("auth_success", {
                             token,
                             user
-                        })
-                        resolve(resp)
+                        });
+                        resolve(resp);
                     })
                     .catch(err => {
-                        commit('auth_error')
-                        localStorage.removeItem('token')
-                        reject(err)
-                    })
-            })
+                        commit("auth_error");
+                        localStorage.removeItem("token");
+                        reject(err);
+                    });
+            });
         },
-        register({
-            commit
-        }, user) {
+        register({ commit }, user) {
             return new Promise((resolve, reject) => {
-                commit('auth_request')
+                commit("auth_request");
                 axios({
-                        url: '/api/signup',
-                        data: user,
-                        method: 'POST'
-                    })
+                    url: "/api/signup",
+                    data: user,
+                    method: "POST"
+                })
                     .then(resp => {
-                        const token = resp.data.token
-                        const user = resp.data.user
-                        localStorage.setItem('token', token)
-                        axios.defaults.headers.common['Authorization'] = token
-                        commit('auth_success', {
+                        const token = resp.data.token;
+                        const user = resp.data.user;
+                        localStorage.setItem("token", token);
+                        axios.defaults.headers.common["Authorization"] = token;
+                        commit("auth_success", {
                             token,
                             user
-                        })
-                        resolve(resp)
+                        });
+                        resolve(resp);
                     })
                     .catch(err => {
-                        commit('auth_error', err)
-                        localStorage.removeItem('token')
-                        reject(err)
-                    })
-            })
+                        commit("auth_error", err);
+                        localStorage.removeItem("token");
+                        reject(err);
+                    });
+            });
         },
-        logout({
-            commit
-        }) {
+        logout({ commit }) {
             return new Promise((resolve, reject) => {
-                commit('logout')
-                localStorage.removeItem('token')
-                delete axios.defaults.headers.common['Authorization']
-                resolve()
-            })
+                commit("logout");
+                localStorage.removeItem("token");
+                delete axios.defaults.headers.common["Authorization"];
+                resolve();
+            });
         },
-        refresh({
-            commit
-        }) {
+        refresh({ commit }) {
             return new Promise((resolve, reject) => {
                 axios({
-                    url: '/api/token_refresh',
+                    url: "/api/token_refresh",
                     data: {
                         token: this.state.token
                     },
-                    method: 'POST'
-                }).then(resp => {
-                    const user = resp.data.user
-                    commit('refresh', user)
-                    resolve(resp)
-
-                }).catch(err => {
-                    commit('refresh_error')
-                    reject(err)
+                    method: "POST"
                 })
-            })
+                    .then(resp => {
+                        const user = resp.data.user;
+                        commit("refresh", user);
+                        resolve(resp);
+                    })
+                    .catch(err => {
+                        commit("refresh_error");
+                        reject(err);
+                    });
+            });
         },
-        vote({
-                commit
-            },
-            data
-        ) {
+        vote({ commit }, data) {
             const url = `/api/v1/likes/${data.vote}/${data.postId}`;
             return new Promise((resolve, reject) => {
                 axios({
@@ -138,13 +124,13 @@ export default new Vuex.Store({
                     data: {
                         token: this.state.token
                     },
-                    method: 'POST'
-                }).then(resp => resolve(resp)).catch(err => reject(err))
-            })
+                    method: "POST"
+                })
+                    .then(resp => resolve(resp))
+                    .catch(err => reject(err));
+            });
         },
-        removeVote({
-            commit
-        }, postId) {
+        removeVote({ commit }, postId) {
             const url = `/api/v1/likes/remove_vote/${postId}`;
             return new Promise((resolve, reject) => {
                 axios({
@@ -152,9 +138,41 @@ export default new Vuex.Store({
                     data: {
                         token: this.state.token
                     },
-                    method: 'POST'
-                }).then(resp => resolve(resp)).catch(err => reject(err))
-            })
+                    method: "POST"
+                })
+                    .then(resp => resolve(resp))
+                    .catch(err => reject(err));
+            });
+        },
+        joinCommunity({ commit }, communityId) {
+            const url = `/api/v1/communities/join/${communityId}`;
+            console.log(url);
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: url,
+                    data: {
+                        token: this.state.token
+                    },
+                    method: "POST"
+                })
+                    .then(resp => resolve(resp))
+                    .catch(err => reject(err));
+            });
+        },
+        leaveCommunity({ commit }, communityId) {
+            const url = `/api/v1/communities/leave/${communityId}`;
+            console.log(url);
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: url,
+                    data: {
+                        token: this.state.token
+                    },
+                    method: "POST"
+                })
+                    .then(resp => resolve(resp))
+                    .catch(err => reject(err));
+            });
         }
     },
     modules: {},
@@ -164,4 +182,4 @@ export default new Vuex.Store({
         authStatus: state => state.status,
         getUserData: state => state.user
     }
-})
+});

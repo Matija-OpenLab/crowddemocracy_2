@@ -6,15 +6,17 @@
         <div class="your-com">
           <p class="com-list">Zoznam komunít,kde si členom:</p>
           <div class="names" v-for="community in communities" :key="community.id">
-            <b-row @click="navigateToComm(community.id)" class="com-side">
-              <b-col cols="1">
-                <img class="com-logo-list" src="../assets/comlog.png" />
-              </b-col>
-              <b-col class="com-info">
-                <p class="com-count-info">{{ community.user_count }} užívateľov</p>
-                <p class="com-name-list">{{ community.name }}</p>
-              </b-col>
-            </b-row>
+            <div v-if="user.communities.some(comm => comm.id === community.id )">
+              <b-row @click="navigateToComm(community.id)" class="com-side">
+                <b-col cols="1">
+                  <img class="com-logo-list" src="../assets/comlog.png" />
+                </b-col>
+                <b-col class="com-info">
+                  <p class="com-count-info">{{ community.user_count }} užívateľov</p>
+                  <p class="com-name-list">{{ community.name }}</p>
+                </b-col>
+              </b-row>
+            </div>
           </div>
         </div>
       </b-col>
@@ -31,19 +33,20 @@
         </b-row>
         <div class="communities">
           <!--TENTO DIV JE CELA KOMUNITA-->
-          <div
-            class="community"
-            @click="navigateToComm(community.id)"
-            v-for="community in communities"
-            :key="community.id"
-          >
-            <img class="com-logo" src="../assets/comlog.png" />
-            <p class="com-count">{{ community.user_count }} užívateľov</p>
-            <p class="com-name">{{ community.name }}</p>
-            <p class="com-owner">{{ community.owner }}</p>
-            <p class="com-desc">{{ community.description }}</p>
-            <p class="com-create">{{ community.created_at }}</p>
-            <!-- <p class="com-moderators">IN DEVELOPMENT</p> -->
+          <div class="community" v-for="community in communities" :key="community.id">
+            <div @click="navigateToComm(community.id)">
+              <img class="com-logo" src="../assets/comlog.png" />
+              <p class="com-count">{{ community.user_count }} užívateľov</p>
+              <p class="com-name">{{ community.name }}</p>
+              <p class="com-owner">{{ community.owner }}</p>
+              <p class="com-desc">{{ community.description }}</p>
+              <p class="com-create">{{ community.created_at }}</p>
+              <!-- <p class="com-moderators">IN DEVELOPMENT</p> -->
+            </div>
+            <b-button
+              v-if="!user.communities.some(comm => comm.id === community.id )"
+              @click="joinCommunity(community.id)"
+            >Pridaj sa</b-button>
           </div>
         </div>
       </b-col>
@@ -61,9 +64,7 @@ export default {
   },
   created() {
     if (this.$store.getters.isLoggedIn) {
-      axios.get("/api/v1/communities").then(res => {
-        this.communities = res.data;
-      });
+      this.getCommunity();
     } else {
       this.$router.push("/secure");
     }
@@ -76,10 +77,50 @@ export default {
         path: `/community/${community_id}`
       });
     },
+
     logout() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
       });
+    },
+    refreshUser() {
+      this.$store
+        .dispatch("refresh")
+        .then(() => {})
+        .catch(err => {
+          console.error(err);
+        });
+    },
+
+    //Getters
+    getCommunity() {
+      axios.get("/api/v1/communities").then(res => {
+        this.communities = res.data;
+      });
+    },
+
+    //Comm joining
+
+    joinCommunity(communityId) {
+      this.$store
+        .dispatch("joinCommunity", communityId)
+        .then(() => {
+          this.refreshUser();
+          this.$router.push({
+            path: `/community/${communityId}`
+          });
+        })
+        .catch(err => console.error(err));
+    },
+    leaveCommunity(communityId) {
+      this.$store
+        .dispatch("leaveCommunity", communityId)
+        .then(() => {
+          this.refreshUser();
+          this.getCommunity();
+          console.log(this.user);
+        })
+        .catch(err => console.error(err));
     }
   },
   computed: {
