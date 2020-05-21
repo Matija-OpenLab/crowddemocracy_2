@@ -6,6 +6,9 @@ import Login from '../components/Login';
 import Homepage from '../components/Homepage';
 import Secure from '../components/Secure'
 import Community from '../components/Community';
+import CommunityCreator from '../components/CommunityCreator';
+import CommunityManager from '../components/CommunityManager';
+
 
 Vue.use(VueRouter);
 
@@ -43,6 +46,16 @@ const routes = [{
             requiresAuth: true
         }
     },
+    {
+        path: '/create',
+        name: 'Create',
+        component: CommunityCreator
+    },
+    {
+        path: '/manage',
+        name: 'Manage',
+        component: CommunityManager
+    }
 ];
 
 const router = new VueRouter({

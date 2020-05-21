@@ -51,6 +51,7 @@
         </div>
       </b-col>
     </b-row>
+    <b-button to="/create">fasdfsad</b-button>
   </div>
 </template>
 <script>
@@ -65,6 +66,7 @@ export default {
   created() {
     if (this.$store.getters.isLoggedIn) {
       this.getCommunity();
+      console.log(this.user);
     } else {
       this.$router.push("/secure");
     }
