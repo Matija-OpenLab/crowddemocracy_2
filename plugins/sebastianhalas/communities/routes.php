@@ -1,6 +1,7 @@
 <?php
 use SebastianHalas\Communities\Models\Communities;
 use RainLab\User\Models\User;
+use RainLab\User\Models\UserGroup;
 function db_update_communities()
 {
     $communities = Communities::all();
@@ -44,6 +45,32 @@ Route::group(['prefix' => 'api/v1/communities'], function() {
 
         $userModel->community()->detach($id);
 
+    });
+
+    Route::post('/create', function () {
+        
+        $token = request()->input('token');
+        $userModel = JWTAuth::toUser($token);
+        
+        $name =  request()->input('name');
+        $description =  request()->input('description');
+
+        if(!$userModel->is_activated == true){
+            return "Unauthorized.";
+        }
+        if(isset($name) && isset($description)){
+            $community = new Communities;
+            $community->name = $name;
+            $community->description = $description;
+            $community->owner = $userModel->name;
+            $community->user_count = 0;
+            $community->save();
+            return "Creation successful.";
+        }
+        else {
+            return "Error.";
+        }
+        
     });
 
 });

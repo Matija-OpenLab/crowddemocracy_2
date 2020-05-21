@@ -31,12 +31,39 @@ Route::group(['prefix' => 'api/v1/posts'], function() {
        
         return response()->json(compact('likes','dislikes','total_votes','post'));
     });
+    
     Route::get('/community_id/{id}', function ($id) {
         db_update();
      
         $posts = Posts::where('community_id',$id)->get();
         
         return response()->json(compact('posts'));
+        
+    });
+
+    Route::post('/create', function () {
+       
+        $token = request()->input('token');
+        $userModel = JWTAuth::toUser($token);
+        
+        $content =  request()->input('content');
+        $communityid = request()->input('community_id');
+        
+        if(!$userModel->is_activated == true){
+            return "Unauthorized.";
+        }
+        
+        if(isset($content) && isset($communityid)){
+            $post = new Posts;
+            $post->content = $content;
+            $post->community_id = $communityid;
+            $post->save();
+            return "Creation successful.";
+        }
+        
+        else {
+            return "Error.";
+        }
         
     });
 });
