@@ -44,9 +44,10 @@
               <!-- <p class="com-moderators">IN DEVELOPMENT</p> -->
             </div>
             <b-button
+              class="add-to-com"
               v-if="!user.communities.some(comm => comm.id === community.id )"
               @click="joinCommunity(community.id)"
-            >Pridaj sa</b-button>
+            >Pridať sa</b-button>
           </div>
         </div>
       </b-col>
@@ -265,5 +266,14 @@ export default {
 .homepage-pic {
   width: 120px;
   height: auto;
+}
+.add-to-com {
+  border-color: black;
+  color: #48486e;
+  background-color: white;
+  width: 180px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 60px;
 }
 </style>

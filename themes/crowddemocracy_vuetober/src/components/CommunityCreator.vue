@@ -1,11 +1,11 @@
 <template>
   <div class="wrap">
-    <b-row class="text-center">
-      <b-col cols="1">
-        <b-button to="/home" variant="danger" class="back-button">Späť</b-button>
-      </b-col>
+    <b-row>
       <b-col cols="11">
-        <h1 class="title">Vytvor si komunitu</h1>
+        <p class="title">Vytvor si komunitu</p>
+      </b-col>
+      <b-col cols="1">
+        <b-button to="/home" class="back-button">Späť</b-button>
       </b-col>
     </b-row>
 
@@ -14,14 +14,14 @@
         <div class="inputs">
           <ValidationObserver v-slot="{ passes }">
             <form @submit.prevent="passes(createCommunity)">
-              <label for="meno">Meno komunity</label>
+              <p class="new-community-name" for="meno">Meno komunity</p>
 
               <ValidationProvider rules="required" v-slot="{ errors }">
                 <input type="text" name="meno" autocomplete="off" v-model="name" />
                 <span class="error">{{errors[0]}}</span>
               </ValidationProvider>
 
-              <label for="opis">Opis komunity (max 100 znakov)</label>
+              <p class="new-community-info" for="opis">Opis komunity (max 100 znakov)</p>
 
               <ValidationProvider rules="required|max:100" v-slot="{ errors }">
                 <textarea type="text" name="opis" v-model="desc" />
@@ -80,14 +80,22 @@ export default {
 }
 .back-button {
   width: 100%;
-  margin: 1em;
+  margin-top: 30px;
+  margin-left: -80px;
+  border-color: #48486e;
+  color: #48486e;
+  background-color: white;
 }
 .title {
   margin: 0.3em;
+  margin-left: 110px;
+  font-size: 50px;
+  font-weight: 50;
+  color: #48486e;
 }
 .inputs {
   margin-left: 15%;
-  margin-top: 20%;
+  margin-top: 14%;
 }
 .inputs form label,
 button {
@@ -100,10 +108,11 @@ button {
   resize: none;
   width: 500px;
   height: 200px;
-  background-color: rgba(225, 228, 225, 0.801);
+  border-radius: 8px;
 }
 .inputs form input {
   width: 500px;
+  border-radius: 8px;
 }
 .inputs form input:hover,
 textarea:hover {
@@ -117,7 +126,18 @@ textarea:hover {
 }
 .error {
   display: block;
-  color: red;
-  font-weight: 500;
+  color: #ff3333;
+  font-size: 14px;
+}
+.new-community-name {
+  font-weight: 50;
+  font-size: 20px;
+  color: #9a9eaa;
+}
+.new-community-info {
+  font-weight: 50;
+  font-size: 20px;
+  color: #9a9eaa;
+  margin-top: 15px;
 }
 </style>

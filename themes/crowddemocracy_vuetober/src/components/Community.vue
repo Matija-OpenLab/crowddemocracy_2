@@ -31,10 +31,12 @@
             <a class="back-to-com" href="/home">Späť do zoznamu komunít</a>
             <h1 class="com-name">{{ community.name }}</h1>
             <b-button
+              variant="outline-secondary"
+              class="leave-com"
               v-if="user.communities.some(comm => comm.id === community.id )"
               @click="leaveCommunity(community.id)"
             >Opustiť komunitu</b-button>
-            <b-button v-else @click="joinCommunity(community.id)">Pridaj sa</b-button>
+            <b-button class="add-to-com" v-else @click="joinCommunity(community.id)">Pridaj sa</b-button>
           </b-col>
         </b-row>
         <b-row class="nav-row">
@@ -52,10 +54,10 @@
           <div class="posts">
             <div class="post" v-for="post in communityPosts" :key="post.id">
               <p class="question">{{ post.content }}</p>
-              <span>Zahlasovalo {{post.total_votes}}</span>
+              <span class="voted-num">Zahlasovalo {{post.total_votes}}</span>
               <div class="vote_buttons" v-if="!user.likes.some(item => item.posts_id === post.id )">
-                <b-button class="vote-yes" @click="addVote(post.id, 'vote_yes')">ÁNO</b-button>
-                <b-button class="vote-no" @click="addVote(post.id, 'vote_no')">NIE</b-button>
+                <b-button class="vote-yes" variant="outline-success">Áno</b-button>
+                <b-button class="vote-no" variant="outline-danger">Nie</b-button>
               </div>
               <div v-else>
                 <b-button class="change-vote" @click="changeVote(post.id)">ZMENIŤ HLAS</b-button>
@@ -285,7 +287,6 @@ export default {
   margin-bottom: 0px;
   color: #9a9eaa;
 }
-
 .list {
   border-right: 1px solid #d7d7c1;
 }
@@ -362,22 +363,27 @@ export default {
   font-size: 14px;
   margin-top: 50px;
 }
-.vote-yes {
+.add-to-com {
   border-color: black;
-  color: white;
-  background-color: #00cc00;
-  width: 145px;
+  color: #48486e;
+  background-color: white;
+  width: 180px;
   font-weight: bold;
   font-size: 14px;
-  margin-top: 120px;
+  margin-top: 50px;
+}
+.vote-yes {
+  margin-top: 60px;
+  width: 120px;
 }
 .vote-no {
-  border-color: black;
-  color: white;
-  background-color: #ff4d4d;
-  width: 145px;
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: 120px;
+  width: 120px;
+  margin-top: 60px;
+}
+.voted-num {
+  color: skyblue;
+}
+.leave-com {
+  margin-left: 20px;
 }
 </style>
