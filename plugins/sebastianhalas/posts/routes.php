@@ -66,4 +66,24 @@ Route::group(['prefix' => 'api/v1/posts'], function() {
         }
         
     });
+
+    Route::post('/remove', function () {
+        $token = request()->input('token');
+        $userModel = JWTAuth::toUser($token);
+        
+        $id =  request()->input('id');
+
+        if(!$userModel->is_activated == true){
+            return "Unauthorized.";
+        }
+        if(isset($id)){
+            $post = Posts::where('id',$id)->first();
+            $post->delete();
+            return "Deleted successfully.";
+        }
+        else {
+            return "Error.";
+        }
+    });
+
 });

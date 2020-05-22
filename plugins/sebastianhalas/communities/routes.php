@@ -73,4 +73,22 @@ Route::group(['prefix' => 'api/v1/communities'], function() {
         
     });
 
+    Route::post('/remove', function () {
+        $token = request()->input('token');
+        $userModel = JWTAuth::toUser($token);
+        
+        $id =  request()->input('id');
+
+        if(!$userModel->is_activated == true){
+            return "Unauthorized.";
+        }
+        if(isset($id)){
+            $community = Communities::where('id',$id)->first();
+            $community->delete();
+            return "Deleted successfully.";
+        }
+        else {
+            return "Error.";
+        }
+    });
 });
