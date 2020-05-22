@@ -8,6 +8,8 @@ import Secure from '../components/Secure'
 import Community from '../components/Community';
 import CommunityCreator from '../components/CommunityCreator';
 import CommunityManager from '../components/CommunityManager';
+import PostManager from '../components/PostManager';
+
 
 
 Vue.use(VueRouter);
@@ -55,6 +57,12 @@ const routes = [{
         path: '/manage',
         name: 'Manage',
         component: CommunityManager
+    },
+    {
+        path: '/manage_posts/:id',
+        name: 'Manage_post',
+        component: PostManager,
+        props: true
     }
 ];
 

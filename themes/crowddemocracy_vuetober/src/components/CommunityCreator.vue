@@ -118,6 +118,13 @@ button {
 textarea:hover {
   border: black 2px solid;
 }
+.inputs form input:focus {
+  background-color: rgb(235, 235, 235);
+  outline: none;
+}
+.inputs form textarea:focus {
+  outline: none;
+}
 .background {
   max-width: 100%;
   height: auto;

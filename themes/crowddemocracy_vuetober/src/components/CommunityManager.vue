@@ -10,7 +10,12 @@
     </b-row>
     <b-row>
       <b-col class="communities">
-        <div class="community" v-for="community in communities" :key="community.id">
+        <div
+          class="community"
+          v-for="community in communities"
+          :key="community.id"
+          @click="navigateToComm(community.id)"
+        >
           <h4>{{community.name}}</h4>
         </div>
       </b-col>
@@ -31,7 +36,6 @@ export default {
   created() {
     if (this.$store.getters.isLoggedIn) {
       this.getCommunity();
-      console.log(this.user);
     } else {
       this.$router.push("/secure");
     }
@@ -41,6 +45,13 @@ export default {
     getCommunity() {
       axios.get("/api/v1/communities").then(res => {
         this.communities = res.data;
+      });
+    },
+
+    //User navigation
+    navigateToComm(community_id) {
+      this.$router.push({
+        path: `/manage_posts/${community_id}`
       });
     }
   }

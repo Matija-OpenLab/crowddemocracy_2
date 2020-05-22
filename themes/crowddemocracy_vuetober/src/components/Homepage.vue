@@ -73,7 +73,7 @@ export default {
     }
   },
   methods: {
-    //User redirects
+    //User navigation
 
     navigateToComm(community_id) {
       this.$router.push({

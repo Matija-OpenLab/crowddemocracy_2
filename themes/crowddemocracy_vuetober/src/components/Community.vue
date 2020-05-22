@@ -8,7 +8,6 @@
           <div class="names" v-for="community in communities" :key="community.id">
             <div v-if="user.communities.some(comm => comm.id === community.id )">
               <b-row @click="navigateToComm(community.id)" class="com-side">
-                {{ community.id }}
                 <b-col cols="1">
                   <img class="com-logo-list" src="../assets/comlog.png" />
                 </b-col>
@@ -36,7 +35,12 @@
               v-if="user.communities.some(comm => comm.id === community.id )"
               @click="leaveCommunity(community.id)"
             >Opustiť komunitu</b-button>
-            <b-button class="add-to-com" v-else @click="joinCommunity(community.id)">Pridaj sa</b-button>
+            <b-button
+              class="leave-com"
+              variant="outline-secondary"
+              v-else
+              @click="joinCommunity(community.id)"
+            >Pridaj sa</b-button>
           </b-col>
         </b-row>
         <b-row class="nav-row">
@@ -152,7 +156,7 @@ export default {
         .catch(err => console.error(err));
     },
 
-    //User actions and redirects
+    //User actions and navigation
 
     logout() {
       this.$store.dispatch("logout").then(() => {
@@ -179,7 +183,6 @@ export default {
         .dispatch("joinCommunity", communityId)
         .then(() => {
           this.refreshUser();
-          console.log(this.user);
         })
         .catch(err => console.error(err));
     },
