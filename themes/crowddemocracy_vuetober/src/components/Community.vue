@@ -289,6 +289,7 @@ export default {
 }
 .list {
   border-right: 1px solid #d7d7c1;
+  height: 100vh;
 }
 .logo {
   width: 120px;

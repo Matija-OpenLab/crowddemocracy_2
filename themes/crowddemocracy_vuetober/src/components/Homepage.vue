@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <b-row>
-      <b-col cols="3">
+      <b-col class="col3" cols="3">
         <img class="logo" src="../assets/logo.png" />
         <div class="your-com">
           <p class="com-list">Zoznam komunít,kde si členom:</p>
@@ -18,6 +18,7 @@
               </b-row>
             </div>
           </div>
+          <b-button class="new-community-button" to="/create">Nová komunita</b-button>
         </div>
       </b-col>
       <b-col class="col">
@@ -52,7 +53,6 @@
         </div>
       </b-col>
     </b-row>
-    <b-button to="/create">fasdfsad</b-button>
   </div>
 </template>
 <script>
@@ -188,6 +188,9 @@ export default {
   margin-bottom: 20px;
   color: #9a9eaa;
 }
+.list {
+  border-right: 1px solid #d7d7c1;
+}
 .com-logo-list {
   width: 50px;
   height: auto;
@@ -227,7 +230,7 @@ export default {
   background-color: #f3f5f8;
   border-color: #f3f5f8;
   color: #330066;
-  margin-left: 780px;
+  margin-left: 77%;
   margin-top: 25px;
   font-size: 15px;
 }
@@ -239,7 +242,6 @@ export default {
 .your-com {
   margin-left: 2em;
   margin-top: 40px;
-  border-right: 1px solid #d7d7c1;
 }
 .welcome {
   margin-top: 10px;
@@ -275,5 +277,16 @@ export default {
   font-weight: bold;
   font-size: 14px;
   margin-left: 60px;
+}
+.col3 {
+  padding: 0px;
+  border-right: 1px solid #d7d7c1;
+}
+.new-community-button {
+  background-color: #24154b;
+  color: white;
+  width: 170px;
+  line-height: 43px;
+  margin-left: 23%;
 }
 </style>
