@@ -1,20 +1,24 @@
 <template>
   <div class="wrap">
-    <b-row class="text-center">
-      <b-col cols="1">
-        <b-button to="/manage" variant="danger" class="back-button">Späť</b-button>
-      </b-col>
+    <b-row>
       <b-col cols="11">
         <h1 class="title" v-bind="community">Príspevky v {{community.name}}</h1>
+      </b-col>
+      <b-col cols="1">
+        <b-button to="/manage" variant="danger" class="back-button">Späť</b-button>
       </b-col>
     </b-row>
     <b-row>
       <b-col class="posts">
-        <b-button variant="success" class="new-post" v-b-modal.modal-prevent-closing>Nový prispevok</b-button>
+        <b-button
+          variant="outline-success"
+          class="new-post"
+          v-b-modal.modal-prevent-closing
+        >Nový príspevok</b-button>
         <div class="post" v-for="post in communityPosts" :key="post.id">
-          <h5>{{post.content}}</h5>
-          <p class="yes">ANO: {{post.vote_yes}}</p>
-          <p class="no">NIE: {{post.vote_no}}</p>
+          <h5 class="post-content">{{post.content}}</h5>
+          <p class="yes">Áno: {{post.vote_yes}}</p>
+          <p class="no">Nie: {{post.vote_no}}</p>
           <b-button variant="danger" class="delete-button">Vymazať</b-button>
         </div>
       </b-col>
@@ -124,17 +128,26 @@ export default {
 }
 .back-button {
   width: 100%;
-  margin: 1em;
+  margin-top: 30px;
+  margin-left: -80px;
+  border-color: #48486e;
+  color: #48486e;
+  background-color: white;
 }
 .delete-button {
   margin-left: 1em;
 }
 .new-post {
   width: 50%;
-  margin-left: 25%;
+  margin-top: 30px;
+  margin-left: 30px;
 }
 .title {
   margin: 0.3em;
+  margin-left: 30px;
+  font-size: 50px;
+  font-weight: 50;
+  color: #48486e;
 }
 .background {
   max-width: 100%;
@@ -163,7 +176,8 @@ export default {
 }
 .post {
   border: 1px solid black;
-  margin: 1em 2em;
+  border-radius: 8px;
+  margin: 2em 2em;
   text-align: center;
   font-size: 1em;
   transition-duration: 250ms;
@@ -182,5 +196,8 @@ export default {
 .no,
 .error {
   color: red;
+}
+.post-content {
+  font-weight: 50;
 }
 </style>

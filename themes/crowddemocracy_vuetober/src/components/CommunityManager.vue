@@ -1,11 +1,11 @@
 <template>
   <div class="wrap">
-    <b-row class="text-center">
+    <b-row>
+      <b-col cols="11">
+        <p class="title">Tvoje komunity</p>
+      </b-col>
       <b-col cols="1">
         <b-button to="/create" variant="danger" class="back-button">Späť</b-button>
-      </b-col>
-      <b-col cols="11">
-        <h1 class="title">Tvoje komunity</h1>
       </b-col>
     </b-row>
     <b-row>
@@ -63,10 +63,18 @@ export default {
 }
 .back-button {
   width: 100%;
-  margin: 1em;
+  margin-top: 30px;
+  margin-left: -80px;
+  border-color: #48486e;
+  color: #48486e;
+  background-color: white;
 }
 .title {
   margin: 0.3em;
+  margin-left: 110px;
+  font-size: 50px;
+  font-weight: 50;
+  color: #48486e;
 }
 .background {
   max-width: 100%;
@@ -79,12 +87,12 @@ export default {
   text-align: center;
   width: 50%;
   margin-top: 1em;
-  margin-left: 30%;
+  margin-left: 15%;
   padding: 1em;
   transition-duration: 250ms;
 }
 .communities {
-  margin-top: 10%;
+  margin-top: 8%;
 }
 .community:hover {
   background-color: rgb(189, 255, 199);
