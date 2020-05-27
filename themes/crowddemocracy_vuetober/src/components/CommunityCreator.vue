@@ -1,10 +1,10 @@
 <template>
   <div class="wrap">
     <b-row>
-      <b-col cols="11">
+      <b-col cols="10">
         <p class="title">Vytvor si komunitu</p>
       </b-col>
-      <b-col cols="1">
+      <b-col cols="2">
         <b-button to="/home" class="back-button">Späť</b-button>
       </b-col>
     </b-row>
@@ -157,5 +157,25 @@ textarea:hover {
   font-size: 20px;
   color: #9a9eaa;
   margin-top: 15px;
+}
+@media only screen and (max-width: 990px) {
+  .back-button {
+    width: 5em;
+    margin-top: 4em;
+  }
+  .background {
+    display: none;
+  }
+  .title {
+    font-size: 3em;
+    margin-left: 0.5em;
+  }
+  .inputs {
+    margin-left: 5%;
+    margin-top: 14%;
+  }
+  .inputs form input {
+    width: 95%;
+  }
 }
 </style>

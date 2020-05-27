@@ -1,17 +1,16 @@
 <template>
   <div class="wrap">
-    <img class="background" src="../assets/bg.png" />
     <b-row class="navbar">
-      <b-col class="logo">
+      <b-col>
         <img class="logo" src="../assets/logo.png" />
       </b-col>
-      <b-col class="question">Ešte nemáš účet?</b-col>
-      <b-col class="button">
+      <b-col>
         <b-button class="login" to="/login">Prihlás sa</b-button>
+        <p class="question">Už máš účet?</p>
       </b-col>
     </b-row>
-
-    <h1 class="title">Registrácia</h1>
+    <img class="background" src="../assets/bg.png" />
+    <h1 class="header">Registrácia</h1>
     <ValidationObserver v-slot="{ passes }">
       <form class="form" @submit.prevent="passes(register)">
         <ValidationProvider rules="required|email" v-slot="{ errors }">
@@ -56,12 +55,8 @@
       </form>
     </ValidationObserver>
     <b-row class="footer">
-      <b-col class="footer-col1">
-        &reg; 2020 všetky práva vyhradené
-        <span class="footer-logo">CROWD</span>DEMOCRACY
-      </b-col>
-      <b-col class="footer-col2">Sledujte nás na sociálnych sieťach</b-col>
-      <b-col class="footer-col3">social media</b-col>
+      &reg; 2020 všetky práva vyhradené
+      <span class="footer-logo">CROWD</span>DEMOCRACY
     </b-row>
   </div>
 </template>
@@ -164,13 +159,12 @@ export default {
   margin-left: 2em;
 }
 .question {
-  width: 500px;
-  margin-left: 700px;
   padding: 0px;
   font-size: 14px;
-  text-align: right;
-  margin-top: 4px;
+  float: right;
+  margin-top: 0.73em;
   color: #48486e;
+  margin-right: 1em;
 }
 .login {
   border-color: #48486e;
@@ -180,8 +174,9 @@ export default {
   font-weight: bold;
   font-size: 14px;
   margin-top: 5px;
+  float: right;
 }
-.title {
+.header {
   margin-top: 150px;
   margin-left: 130px;
   font-size: 55px;
@@ -199,15 +194,9 @@ export default {
   border: none;
   color: black;
   border-bottom: 1px solid #d7d7c1;
-  display: block;
 }
 .form input:focus {
   outline: none;
-}
-.form .checkbox {
-  width: auto;
-  margin: 0;
-  height: auto;
 }
 .registration {
   background-color: #24154b;
@@ -218,24 +207,72 @@ export default {
   line-height: 43px;
 }
 .footer {
-  margin-top: 440px;
-}
-.footer-col1 {
-  font-size: 14px;
-  color: #48486e;
-  margin-left: 40px;
-  white-space: nowrap;
-}
-.footer-col2 {
-  font-size: 14px;
-  color: #48486e;
-  margin-left: 115px;
-  text-align: right;
-}
-.footer-col3 {
-  color: white;
+  position: absolute;
+  bottom: 0;
+  left: 10%;
 }
 .footer-logo {
   font-weight: 900;
+}
+@media only screen and (max-width: 990px) {
+  /*Navigation*/
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  .question {
+    display: none;
+  }
+  .login {
+    border-color: #48486e;
+    color: #48486e;
+    background-color: white;
+    width: 10em;
+    padding: 1em;
+    font-weight: bold;
+  }
+  .logo {
+    width: 7em;
+    margin-left: 0px;
+  }
+  .background {
+    display: none;
+  }
+  .header {
+    margin-top: 2em;
+    font-size: 2em;
+    margin-left: 0px;
+    text-align: center;
+  }
+  .registration {
+    margin: 0px;
+    margin-top: 3em;
+  }
+  .footer {
+    font-size: 0.9em;
+  }
+  /*Form */
+  .form {
+    margin: 0px;
+    color: black;
+    text-align: center;
+  }
+  .form input {
+    width: 95%;
+    margin-top: 2em;
+    height: 3em;
+    border: none;
+    color: black;
+    border-bottom: 1px solid #a0a09f;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .footer {
+    bottom: -100%;
+  }
+  .login {
+    font-size: 0.7em;
+    width: 8em;
+  }
 }
 </style>
