@@ -16,7 +16,10 @@ export default new Vuex.Store({
         auth_request(state) {
             state.status = "loading";
         },
-        auth_success(state, { token, user }) {
+        auth_success(state, {
+            token,
+            user
+        }) {
             state.status = "success";
             state.token = token;
             state.user = user;
@@ -36,14 +39,16 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        login({ commit }, user) {
+        login({
+            commit
+        }, user) {
             return new Promise((resolve, reject) => {
                 commit("auth_request");
                 axios({
-                    url: "/api/login",
-                    data: user,
-                    method: "POST"
-                })
+                        url: "/api/login",
+                        data: user,
+                        method: "POST"
+                    })
                     .then(resp => {
                         const token = resp.data.token;
                         const user = resp.data.user;
@@ -62,14 +67,16 @@ export default new Vuex.Store({
                     });
             });
         },
-        register({ commit }, user) {
+        register({
+            commit
+        }, user) {
             return new Promise((resolve, reject) => {
                 commit("auth_request");
                 axios({
-                    url: "/api/signup",
-                    data: user,
-                    method: "POST"
-                })
+                        url: "/api/signup",
+                        data: user,
+                        method: "POST"
+                    })
                     .then(resp => {
                         const token = resp.data.token;
                         const user = resp.data.user;
@@ -88,7 +95,9 @@ export default new Vuex.Store({
                     });
             });
         },
-        logout({ commit }) {
+        logout({
+            commit
+        }) {
             return new Promise((resolve, reject) => {
                 commit("logout");
                 localStorage.removeItem("token");
@@ -96,15 +105,17 @@ export default new Vuex.Store({
                 resolve();
             });
         },
-        refresh({ commit }) {
+        refresh({
+            commit
+        }) {
             return new Promise((resolve, reject) => {
                 axios({
-                    url: "/api/token_refresh",
-                    data: {
-                        token: this.state.token
-                    },
-                    method: "POST"
-                })
+                        url: "/api/token_refresh",
+                        data: {
+                            token: this.state.token
+                        },
+                        method: "POST"
+                    })
                     .then(resp => {
                         const user = resp.data.user;
                         commit("refresh", user);
@@ -116,63 +127,105 @@ export default new Vuex.Store({
                     });
             });
         },
-        vote({ commit }, data) {
+        vote({
+            commit
+        }, data) {
+            console.log(data)
             const url = `/api/v1/likes/${data.vote}/${data.postId}`;
             return new Promise((resolve, reject) => {
                 axios({
-                    url: url,
-                    data: {
-                        token: this.state.token
-                    },
-                    method: "POST"
-                })
+                        url: url,
+                        data: {
+                            token: this.state.token
+                        },
+                        method: "POST"
+                    })
                     .then(resp => resolve(resp))
                     .catch(err => reject(err));
             });
         },
-        removeVote({ commit }, postId) {
+        removeVote({
+            commit
+        }, postId) {
             const url = `/api/v1/likes/remove_vote/${postId}`;
             return new Promise((resolve, reject) => {
                 axios({
-                    url: url,
-                    data: {
-                        token: this.state.token
-                    },
-                    method: "POST"
-                })
+                        url: url,
+                        data: {
+                            token: this.state.token
+                        },
+                        method: "POST"
+                    })
                     .then(resp => resolve(resp))
                     .catch(err => reject(err));
             });
         },
-        joinCommunity({ commit }, communityId) {
+        joinCommunity({
+            commit
+        }, communityId) {
             const url = `/api/v1/communities/join/${communityId}`;
             console.log(url);
             return new Promise((resolve, reject) => {
                 axios({
-                    url: url,
-                    data: {
-                        token: this.state.token
-                    },
-                    method: "POST"
-                })
+                        url: url,
+                        data: {
+                            token: this.state.token
+                        },
+                        method: "POST"
+                    })
                     .then(resp => resolve(resp))
                     .catch(err => reject(err));
             });
         },
-        leaveCommunity({ commit }, communityId) {
+        leaveCommunity({
+            commit
+        }, communityId) {
             const url = `/api/v1/communities/leave/${communityId}`;
-            console.log(url);
             return new Promise((resolve, reject) => {
                 axios({
-                    url: url,
-                    data: {
-                        token: this.state.token
-                    },
-                    method: "POST"
-                })
+                        url: url,
+                        data: {
+                            token: this.state.token
+                        },
+                        method: "POST"
+                    })
                     .then(resp => resolve(resp))
                     .catch(err => reject(err));
             });
+        },
+        createCommunity({
+            commit
+        }, data) {
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: "/api/v1/communities/create",
+                    data: {
+                        token: this.state.token,
+                        name: data.name,
+                        description: data.desc
+                    },
+                    method: "POST"
+                }).then(resp => {
+                    resolve(resp);
+                }).catch(err => reject(err));
+            })
+        },
+        createPost({
+            commit
+        }, data) {
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: "/api/v1/posts/create",
+                    data: {
+                        token: this.state.token,
+                        content: data.content,
+                        community_id: data.communityId
+                    },
+                    method: "POST"
+                }).then(resp => {
+                    resolve(resp);
+                }).catch(err => reject(err));
+            })
         }
     },
     modules: {},

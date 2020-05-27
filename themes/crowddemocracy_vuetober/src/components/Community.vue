@@ -60,8 +60,16 @@
               <p class="question">{{ post.content }}</p>
               <span class="voted-num">Zahlasovalo {{post.total_votes}}</span>
               <div class="vote_buttons" v-if="!user.likes.some(item => item.posts_id === post.id )">
-                <b-button class="vote-yes" variant="outline-success">Áno</b-button>
-                <b-button class="vote-no" variant="outline-danger">Nie</b-button>
+                <b-button
+                  class="vote-yes"
+                  variant="outline-success"
+                  @click="addVote(post.id, 'vote_yes')"
+                >Áno</b-button>
+                <b-button
+                  class="vote-no"
+                  variant="outline-danger"
+                  @click="addVote(post.id, 'vote_no')"
+                >Nie</b-button>
               </div>
               <div v-else>
                 <b-button class="change-vote" @click="changeVote(post.id)">ZMENIŤ HLAS</b-button>
@@ -144,7 +152,7 @@ export default {
           this.communityPosts = resp.data.posts;
 
           //Keep posts sorted after refresh
-          console.log(this.lastSort);
+
           if (this.lastSort === "latest") {
             this.latest();
           } else if (this.lastSort === "notVoted") {

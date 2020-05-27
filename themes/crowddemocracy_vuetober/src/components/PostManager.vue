@@ -87,9 +87,23 @@ export default {
       axios
         .get(`/api/v1/posts/community_id/${this.$props.id}`)
         .then(resp => {
-          this.communityPosts = resp.data.posts;
+          this.communityPosts = resp.data.posts.reverse();
         })
         .catch(err => console.error(err));
+    },
+
+    //Creator
+    createPost() {
+      let data = {
+        content: this.content,
+        communityId: this.$props.id
+      };
+      this.$store
+        .dispatch("createPost", data)
+        .then(() => {
+          this.getPosts();
+        })
+        .catch(() => (this.error = "Nepodarilo sa vytvoriť príspevok"));
     },
     //Modal handeling
     checkFormValidity() {
@@ -112,9 +126,7 @@ export default {
       if (!this.checkFormValidity()) {
         return;
       }
-      // Push the name to submitted names
-      this.submittedNames.push(this.name);
-      // Hide the modal manually
+      this.createPost();
       this.$nextTick(() => {
         this.$bvModal.hide("modal-prevent-closing");
       });
@@ -138,7 +150,7 @@ export default {
   margin-left: 1em;
 }
 .new-post {
-  width: 50%;
+  width: 91.5%;
   margin-top: 30px;
   margin-left: 30px;
 }

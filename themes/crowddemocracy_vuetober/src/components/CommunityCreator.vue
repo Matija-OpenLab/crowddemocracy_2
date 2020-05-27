@@ -27,8 +27,9 @@
                 <textarea type="text" name="opis" v-model="desc" />
                 <span class="error">{{errors[0]}}</span>
               </ValidationProvider>
-
+              <span class="error" v-bind="error">{{error}}</span>
               <b-button variant="success" type="submit">Vytvoriť</b-button>
+
               <b-button to="/manage">Pozrieť moje komunity</b-button>
             </form>
           </ValidationObserver>
@@ -66,11 +67,21 @@ export default {
   data() {
     return {
       name: "",
-      desc: ""
+      desc: "",
+      error: ""
     };
   },
   methods: {
-    createCommunity() {}
+    createCommunity() {
+      let data = {
+        name: this.name,
+        desc: this.desc
+      };
+      this.$store
+        .dispatch("createCommunity", data)
+        .then(() => this.$router.push("/manage"))
+        .catch(() => (this.error = "Nepodarilo sa vytvorit komunitu"));
+    }
   }
 };
 </script>
