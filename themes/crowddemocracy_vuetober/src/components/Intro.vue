@@ -1,33 +1,39 @@
 <template>
   <div class="wrap">
-    <b-container class="content">
-      <img class="background" src="../assets/bg.png" />
-      <b-row class="navbar">
-        <b-col class="logo">
-          <img class="logo" src="../assets/logo.png" />
-        </b-col>
-        <b-col class="question">Ešte nemáš účet?</b-col>
-        <b-col class="button">
-          <b-button class="registration" to="/registration">Registruj sa</b-button>
-        </b-col>
-      </b-row>
-      <h4 class="header">Ako využijete svoj hlas?</h4>
-      <h5 class="intro">
-        Na
-        <span class="intro-text">CROWD</span>DEMOCRACY môžete dať svoj
-        hlas novým návrhom alebo ho odovzdať ľudom ktorým dôverujete.
-      </h5>
+    <b-row class="navbar">
+      <b-col>
+        <img class="logo" src="../assets/logo.png" />
+      </b-col>
+      <b-col>
+        <b-button class="registration" to="/registration">Registruj sa</b-button>
+        <p class="question">Ešte nemáš účet?</p>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col lg="6">
+        <b-row>
+          <b-col lg="11">
+            <h4 class="header">Ako využijete svoj hlas?</h4>
+          </b-col>
+          <b-col class="content">
+            <h5 class="intro">
+              Na
+              <span class="intro-text">CROWD</span>DEMOCRACY môžete dať svoj
+              hlas novým návrhom alebo ho odovzdať ľudom, ktorým dôverujete.
+            </h5>
 
-      <b-button class="login" to="/login">Prihlásiť sa</b-button>
-      <b-row class="footer">
-        <b-col class="footer-col1">
-          &reg; 2020 všetky práva vyhradené
-          <span class="footer-logo">CROWD</span>DEMOCRACY
-        </b-col>
-        <b-col class="footer-col2">Sledujte nás na sociálnych sieťach</b-col>
-        <b-col class="footer-col3"></b-col>
-      </b-row>
-    </b-container>
+            <b-button class="login" to="/login">Prihlásiť sa</b-button>
+          </b-col>
+        </b-row>
+      </b-col>
+      <b-col>
+        <img class="background" src="../assets/bg.png" />
+      </b-col>
+    </b-row>
+    <b-row class="footer">
+      &reg; 2020 všetky práva vyhradené
+      <span class="footer-logo">CROWD</span>DEMOCRACY
+    </b-row>
     <!-- sekcia na zobrazovanie aktualnych hlasovani -->
     <section>
       <p></p>
@@ -45,35 +51,24 @@ export default {
 .wrap {
   height: 100vh;
   margin: 0px;
-  position: relative;
+  overflow-x: hidden;
 }
 .background {
-  max-width: 50%;
+  max-width: 100%;
   height: auto;
   position: absolute;
   align-items: right;
   background-repeat: no-repeat;
   right: 5px;
-  margin-top: 90px;
 }
-.navbar {
-  width: 97vw;
-}
-.content {
-  margin: 0px;
-}
-.logo {
-  width: 120px;
-  margin-left: 2em;
-}
+
 .question {
-  width: 500px;
-  margin-left: 700px;
   padding: 0px;
   font-size: 14px;
-  text-align: right;
-  margin-top: 4px;
+  float: right;
+  margin-top: 0.73em;
   color: #48486e;
+  margin-right: 1em;
 }
 .registration {
   border-color: #48486e;
@@ -83,9 +78,10 @@ export default {
   font-weight: bold;
   font-size: 14px;
   margin-top: 5px;
+  float: right;
 }
 .header {
-  margin-top: 280px;
+  margin-top: 3em;
   font-size: 50px;
   font-weight: 50;
   color: #48486e;
@@ -95,7 +91,7 @@ export default {
   width: 500px;
   font-weight: 50;
   color: #48486e;
-  margin-left: 115px;
+  margin-left: 100px;
   margin-top: 50px;
   text-align: center;
 }
@@ -115,26 +111,80 @@ export default {
   line-height: 43px;
   font-weight: bold;
 }
-
-.footer {
-  margin-top: 490px;
+.logo {
+  width: 140px;
+  margin-left: 2em;
 }
-.footer-col1 {
+/* .footer {
+  margin-top: 490px;
   font-size: 14px;
   color: #48486e;
   margin-left: 40px;
   white-space: nowrap;
-}
-.footer-col2 {
-  font-size: 14px;
-  color: #48486e;
-  margin-left: 115px;
-  text-align: right;
-}
-.footer-col3 {
-  color: white;
+} */
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
 }
 .footer-logo {
   font-weight: 900;
+}
+@media only screen and (max-width: 990px) {
+  /*Navigation*/
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  .question {
+    display: none;
+  }
+  .registration {
+    border-color: #48486e;
+    color: #48486e;
+    background-color: white;
+    width: 10em;
+    padding: 1em;
+    font-weight: bold;
+  }
+  .logo {
+    width: 7em;
+    margin-left: 0px;
+  }
+  .background {
+    display: none;
+  }
+
+  /*Content*/
+  .content {
+    margin: 0px;
+    text-align: center;
+  }
+  .header {
+    margin-top: 2em;
+    font-size: 2em;
+    margin-left: 0px;
+    text-align: center;
+  }
+  .login {
+    margin: 0px;
+    margin-top: 3em;
+  }
+  .intro {
+    margin: 0px;
+    width: 100%;
+    margin-top: 4em;
+  }
+  .footer {
+    font-size: 0.9em;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .footer {
+    bottom: -10%;
+  }
+  .registration {
+    font-size: 0.7em;
+  }
 }
 </style>
