@@ -18,7 +18,8 @@
               </b-row>
             </div>
           </div>
-          <b-button class="new-community-button" to="/create">Nová komunita</b-button>
+          <b-button v-if="user.is_activated" class="new-community-button" to="/create">Nová komunita</b-button>
+          <b-button v-else class="new-community-button" to="/support">Staň sa testerom</b-button>
         </div>
       </b-col>
       <b-col class="col">
@@ -67,7 +68,7 @@ export default {
   created() {
     if (this.$store.getters.isLoggedIn) {
       this.getCommunity();
-      console.log(this.user);
+      this.refreshUser();
     } else {
       this.$router.push("/secure");
     }

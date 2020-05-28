@@ -19,7 +19,7 @@
           <h5 class="post-content">{{post.content}}</h5>
           <p class="yes">Áno: {{post.vote_yes}}</p>
           <p class="no">Nie: {{post.vote_no}}</p>
-          <b-button variant="danger" class="delete-button">Vymazať</b-button>
+          <b-button variant="danger" class="delete-button" @click="deletePost(post.id)">Vymazať</b-button>
         </div>
       </b-col>
       <b-col>
@@ -44,7 +44,13 @@
             label-for="name-input"
             invalid-feedback="Pole nesmie byť prázdne"
           >
-            <b-form-input id="name-input" v-model="content" required :state="nameState"></b-form-input>
+            <b-form-input
+              id="name-input"
+              v-model="content"
+              required
+              :state="nameState"
+              autocomplete="off"
+            ></b-form-input>
           </b-form-group>
         </form>
       </b-modal>
@@ -53,6 +59,7 @@
 </template>
 <script>
 import axios from "axios";
+import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -69,11 +76,11 @@ export default {
     };
   },
   created() {
-    if (this.$store.getters.isLoggedIn) {
+    if (this.$store.getters.isLoggedIn && this.user.is_activated) {
       this.getCommunity();
       this.getPosts();
     } else {
-      this.$router.push("/secure");
+      this.$router.push("/support");
     }
   },
   methods: {
@@ -92,7 +99,7 @@ export default {
         .catch(err => console.error(err));
     },
 
-    //Creator
+    //Post manipulation
     createPost() {
       let data = {
         content: this.content,
@@ -104,6 +111,12 @@ export default {
           this.getPosts();
         })
         .catch(() => (this.error = "Nepodarilo sa vytvoriť príspevok"));
+    },
+    deletePost(postId) {
+      this.$store
+        .dispatch("deletePost", postId)
+        .then(() => this.getPosts())
+        .catch(err => console.error(err));
     },
     //Modal handeling
     checkFormValidity() {
@@ -131,6 +144,11 @@ export default {
         this.$bvModal.hide("modal-prevent-closing");
       });
     }
+  },
+  computed: {
+    ...mapGetters({
+      user: "getUserData"
+    })
   }
 };
 </script>

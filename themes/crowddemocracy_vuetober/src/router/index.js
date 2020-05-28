@@ -9,6 +9,7 @@ import Community from '../components/Community';
 import CommunityCreator from '../components/CommunityCreator';
 import CommunityManager from '../components/CommunityManager';
 import PostManager from '../components/PostManager';
+import Support from '../components/Support';
 
 
 
@@ -63,7 +64,12 @@ const routes = [{
         name: 'Manage_post',
         component: PostManager,
         props: true
-    }
+    },
+    {
+        path: '/support',
+        name: 'Support',
+        component: Support
+    },
 ];
 
 const router = new VueRouter({

@@ -21,9 +21,9 @@
                 <span class="error">{{errors[0]}}</span>
               </ValidationProvider>
 
-              <p class="new-community-info" for="opis">Opis komunity (max 100 znakov)</p>
+              <p class="new-community-info" for="opis">Opis komunity (max 60 znakov) {{desc.length}}</p>
 
-              <ValidationProvider rules="required|max:100" v-slot="{ errors }">
+              <ValidationProvider rules="required|max:60" v-slot="{ errors }">
                 <textarea type="text" name="opis" v-model="desc" />
                 <span class="error">{{errors[0]}}</span>
               </ValidationProvider>
@@ -42,6 +42,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import { ValidationProvider } from "vee-validate";
 import { ValidationObserver } from "vee-validate";
 import { extend } from "vee-validate";
@@ -57,7 +58,7 @@ extend("required", {
 
 extend("max", {
   ...max,
-  message: "Užívateľské meno nesmie byť dlhšie ako 100 znakov"
+  message: "Užívateľské meno nesmie byť dlhšie ako 60 znakov"
 });
 export default {
   components: {
@@ -71,6 +72,11 @@ export default {
       error: ""
     };
   },
+  created() {
+    if (!this.$store.getters.isLoggedIn || !this.user.is_activated) {
+      this.$router.push("/support");
+    }
+  },
   methods: {
     createCommunity() {
       let data = {
@@ -82,6 +88,11 @@ export default {
         .then(() => this.$router.push("/manage"))
         .catch(() => (this.error = "Nepodarilo sa vytvorit komunitu"));
     }
+  },
+  computed: {
+    ...mapGetters({
+      user: "getUserData"
+    })
   }
 };
 </script>

@@ -9,35 +9,33 @@
         <p class="question">Ešte nemáš účet?</p>
       </b-col>
     </b-row>
-    <b-row>
-      <b-col lg="6">
-        <b-row>
-          <b-col lg="11">
-            <h4 class="header">Ako využijete svoj hlas?</h4>
-          </b-col>
-          <b-col class="content">
-            <h5 class="intro">
-              Na
-              <span class="intro-text">CROWD</span>DEMOCRACY môžete dať svoj
-              hlas novým návrhom alebo ho odovzdať ľudom, ktorým dôverujete.
-            </h5>
+    <div class="content-wrap">
+      <b-row>
+        <b-col lg="6">
+          <b-row>
+            <b-col lg="12">
+              <h4 class="header">Ako využijete svoj hlas?</h4>
+            </b-col>
+            <b-col class="content">
+              <h5 class="intro">
+                Na
+                <span class="intro-text">CROWD</span>DEMOCRACY môžete dať svoj
+                hlas novým návrhom alebo ho odovzdať ľudom, ktorým dôverujete.
+              </h5>
 
-            <b-button class="login" to="/login">Prihlásiť sa</b-button>
-          </b-col>
-        </b-row>
-      </b-col>
-      <b-col>
-        <img class="background" src="../assets/bg.png" />
-      </b-col>
-    </b-row>
-    <b-row class="footer">
+              <b-button class="login" to="/login">Prihlásiť sa</b-button>
+            </b-col>
+          </b-row>
+        </b-col>
+        <b-col>
+          <img class="background" src="../assets/bg.png" />
+        </b-col>
+      </b-row>
+    </div>
+    <div class="footer">
       &reg; 2020 všetky práva vyhradené
       <span class="footer-logo">CROWD</span>DEMOCRACY
-    </b-row>
-    <!-- sekcia na zobrazovanie aktualnych hlasovani -->
-    <section>
-      <p></p>
-    </section>
+    </div>
   </div>
 </template>
 <script>
@@ -55,11 +53,9 @@ export default {
 }
 .background {
   max-width: 100%;
-  height: auto;
-  position: absolute;
+  min-height: 100vh;
   align-items: right;
   background-repeat: no-repeat;
-  right: 5px;
 }
 
 .question {
@@ -115,17 +111,14 @@ export default {
   width: 140px;
   margin-left: 2em;
 }
-/* .footer {
-  margin-top: 490px;
-  font-size: 14px;
-  color: #48486e;
-  margin-left: 40px;
-  white-space: nowrap;
-} */
+.content-wrap {
+  position: relative;
+  min-height: 100%;
+}
 .footer {
   position: absolute;
   bottom: 0;
-  left: 10%;
+  width: 100%;
 }
 .footer-logo {
   font-weight: 900;

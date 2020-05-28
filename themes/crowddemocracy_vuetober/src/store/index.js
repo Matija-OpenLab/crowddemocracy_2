@@ -226,7 +226,40 @@ export default new Vuex.Store({
                     resolve(resp);
                 }).catch(err => reject(err));
             })
-        }
+        },
+        deleteCommunity({
+            commit
+        }, communityId) {
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: "/api/v1/communities/remove",
+                    data: {
+                        token: this.state.token,
+                        id: communityId
+                    },
+                    method: "POST"
+                }).then(resp => {
+                    resolve(resp);
+                }).catch(err => reject(err));
+            })
+        },
+        deletePost({
+            commit
+        }, postId) {
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: "/api/v1/posts/remove",
+                    data: {
+                        token: this.state.token,
+                        id: postId
+                    },
+                    method: "POST"
+                }).then(resp => {
+                    resolve(resp);
+                }).catch(err => reject(err));
+            })
+        },
+
     },
     modules: {},
     plugins: [createPersistedState()],
