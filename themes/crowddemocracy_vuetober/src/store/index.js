@@ -164,7 +164,6 @@ export default new Vuex.Store({
             commit
         }, communityId) {
             const url = `/api/v1/communities/join/${communityId}`;
-            console.log(url);
             return new Promise((resolve, reject) => {
                 axios({
                         url: url,

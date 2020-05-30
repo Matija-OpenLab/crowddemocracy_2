@@ -2,32 +2,40 @@
   <div class="wrap">
     <b-row class="navbar">
       <b-col>
-        <img class="logo" src="../assets/logo.png" />
+        <img class="logo" @click="toIntro()" src="../assets/logo.png" />
       </b-col>
       <b-col>
         <b-button class="registration" to="/registration">Registruj sa</b-button>
         <p class="question">Ešte nemáš účet?</p>
       </b-col>
     </b-row>
-    <img class="background" src="../assets/bg.png" />
-    <h1 class="header">Prihlásenie</h1>
-    <form class="form" @submit.prevent="login">
-      <ValidationProvider rules="required|email" v-slot="{ errors }">
-        <input type="text" placeholder="Email" v-model="email" />
-        <span class="error">{{ errors[0] }}</span>
-      </ValidationProvider>
+    <div class="content-wrap">
+      <b-row>
+        <b-col>
+          <h1 class="header">Prihlásenie</h1>
+          <form class="form" @submit.prevent="login">
+            <ValidationProvider rules="required|email" v-slot="{ errors }">
+              <input type="text" placeholder="Email" v-model="email" />
+              <span class="error">{{ errors[0] }}</span>
+            </ValidationProvider>
 
-      <ValidationProvider rules="required|password_verification:8,16" v-slot="{ errors }">
-        <input type="password" placeholder="Heslo" v-model="password" />
-        <span class="error">{{ errors[0] }}</span>
-      </ValidationProvider>
-      <span v-if="error.length" class="error">Uživateľ nebol najdeny</span>
-      <b-button class="login" type="submit">Prihlásiť</b-button>
-    </form>
-    <b-row class="footer">
+            <ValidationProvider rules="required|password_verification:8,16" v-slot="{ errors }">
+              <input type="password" placeholder="Heslo" v-model="password" />
+              <span class="error">{{ errors[0] }}</span>
+            </ValidationProvider>
+            <span v-if="error.length" class="error">Uživateľ nebol najdeny</span>
+            <b-button class="login" type="submit">Prihlásiť</b-button>
+          </form>
+        </b-col>
+        <b-col>
+          <img class="background" src="../assets/bg.png" />
+        </b-col>
+      </b-row>
+    </div>
+    <div class="footer">
       &reg; 2020 všetky práva vyhradené
       <span class="footer-logo">CROWD</span>DEMOCRACY
-    </b-row>
+    </div>
   </div>
 </template>
 <script>
@@ -84,6 +92,9 @@ export default {
         .catch(() => {
           this.error = "Invalid credencials";
         });
+    },
+    toIntro() {
+      this.$router.push("/");
     }
   }
 };
@@ -93,14 +104,12 @@ export default {
   overflow-x: hidden;
 }
 .background {
-  max-width: 50%;
+  max-width: 100%;
   height: auto;
-  position: absolute;
-  align-items: right;
   background-repeat: no-repeat;
-  right: 5px;
-  margin-top: 90px;
+  right: 0;
 }
+
 .error {
   display: block;
   color: #ff3333;
@@ -111,8 +120,9 @@ export default {
   width: 97vw;
 }
 .logo {
-  width: 120px;
+  width: 140px;
   margin-left: 2em;
+  cursor: pointer;
 }
 .question {
   padding: 0px;
@@ -170,10 +180,14 @@ export default {
   margin-top: 20px;
   line-height: 43px;
 }
+.content-wrap {
+  position: relative;
+  min-height: 100%;
+}
 .footer {
   position: absolute;
   bottom: 0;
-  left: 10%;
+  width: 100%;
 }
 .footer-logo {
   font-weight: 900;

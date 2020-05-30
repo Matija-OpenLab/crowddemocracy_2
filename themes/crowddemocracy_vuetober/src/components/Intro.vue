@@ -2,7 +2,7 @@
   <div class="wrap">
     <b-row class="navbar">
       <b-col>
-        <img class="logo" src="../assets/logo.png" />
+        <img class="logo" to="/" src="../assets/logo.png" />
       </b-col>
       <b-col>
         <b-button class="registration" to="/registration">Registruj sa</b-button>
