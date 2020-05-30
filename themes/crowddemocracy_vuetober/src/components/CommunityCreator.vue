@@ -168,16 +168,16 @@ export default {
 
 @media only screen and (max-width: 990px) {
   .inputs form textarea {
-    width: 95vw;
+    width: 95%;
   }
   .inputs form input {
-    width: 95vw;
+    width: 95%;
   }
   .inputs form p {
     width: 95vw;
   }
   .community-buttons {
-    width: 95vw;
+    width: 95%;
   }
   .back-button {
     width: 5em;

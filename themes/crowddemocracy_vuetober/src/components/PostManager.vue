@@ -1,13 +1,14 @@
 <template>
   <div class="wrap">
     <b-row>
-      <b-col cols="11">
+      <b-col cols="10">
         <h1 class="title" v-bind="community">Príspevky v {{community.name}}</h1>
       </b-col>
-      <b-col cols="1">
+      <b-col cols="2">
         <b-button to="/manage" variant="danger" class="back-button">Späť</b-button>
       </b-col>
     </b-row>
+
     <b-row>
       <b-col class="posts">
         <b-button
@@ -22,7 +23,7 @@
           <b-button variant="danger" class="delete-button" @click="deletePost(post.id)">Vymazať</b-button>
         </div>
       </b-col>
-      <b-col>
+      <b-col class="background">
         <img class="background" src="../assets/bg.png" />
       </b-col>
     </b-row>
@@ -186,7 +187,8 @@ export default {
   right: 0;
 }
 .community {
-  border: 1px solid black;
+  border: 1px solid #9a9eaa;
+  border-radius: 8px;
   text-align: center;
   width: 50%;
   margin-top: 1em;
@@ -229,5 +231,36 @@ export default {
 }
 .post-content {
   font-weight: 50;
+}
+@media only screen and (max-width: 990px) {
+  .back-button {
+    width: 5em;
+  }
+  .title {
+    font-size: 3em;
+    margin-left: 3%;
+  }
+  .post {
+    width: 95%;
+    margin: auto;
+    margin-top: 2em;
+  }
+  .background {
+    display: none;
+  }
+  .new-post {
+    width: 95%;
+    margin-left: 3%;
+  }
+  @media only screen and (max-width: 591px) {
+    .back-button {
+      margin-top: 4em;
+    }
+  }
+  @media only screen and (max-width: 310px) {
+    .title {
+      font-size: 2em;
+    }
+  }
 }
 </style>

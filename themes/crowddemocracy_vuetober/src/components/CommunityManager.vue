@@ -1,10 +1,10 @@
 <template>
   <div class="wrap">
     <b-row>
-      <b-col cols="11">
+      <b-col cols="10">
         <p class="title">Tvoje komunity</p>
       </b-col>
-      <b-col cols="1">
+      <b-col cols="2">
         <b-button to="/create" variant="danger" class="back-button">Späť</b-button>
       </b-col>
     </b-row>
@@ -15,17 +15,17 @@
             <h4>{{community.name}}</h4>
 
             <div class="buttons">
-              <b-button variant="danger" @click="deleteComm(community.id)">Vymazať</b-button>
-              <b-button variant="dark">Upraviť</b-button>
-              <b-button variant="success" @click="navigateToComm(community.id)">Príspevky</b-button>
+              <b-button variant="outline-danger" @click="deleteComm(community.id)">Vymazať</b-button>
+              <b-button variant="outline-secondary">Upraviť</b-button>
+              <b-button variant="outline-success" @click="navigateToComm(community.id)">Príspevky</b-button>
             </div>
           </div>
         </div>
       </b-col>
       <b-col v-else>
-        <h4 class="text-center">Nemas ziande komunity</h4>
+        <h4 class="no-community">Ešte si si nevytvoril komunitu.</h4>
       </b-col>
-      <b-col>
+      <b-col class="background">
         <img class="background" src="../assets/bg.png" />
       </b-col>
     </b-row>
@@ -102,7 +102,7 @@ export default {
 }
 .title {
   margin: 0.3em;
-  margin-left: 110px;
+  margin-left: 3em;
   font-size: 50px;
   font-weight: 50;
   color: #48486e;
@@ -115,11 +115,12 @@ export default {
 }
 
 .community-wrap {
-  border: 1px solid black;
+  border: 1px solid #9a9eaa;
+  border-radius: 8px;
   width: 50%;
   padding: 1em;
   text-align: center;
-  margin-top: 1em;
+  margin-top: 0.5em;
   margin-left: 15%;
   transition-duration: 250ms;
 }
@@ -134,7 +135,44 @@ export default {
 }
 
 .buttons {
-  margin: 2em;
+  /* margin: 2em; */
   margin-bottom: auto;
+  padding: 0.5em;
+}
+.no-community {
+  font-size: 1em;
+  color: #9a9eaa;
+  font-weight: 50;
+  margin-left: 3em;
+}
+@media only screen and (max-width: 990px) {
+  .back-button {
+    width: 5em;
+    margin-top: 4em;
+  }
+  .background {
+    display: none;
+  }
+  .title {
+    font-size: 3em;
+    margin-left: 0.5em;
+  }
+  .no-community {
+    margin-left: 0.5em;
+  }
+  .community-wrap {
+    width: 95%;
+    margin: auto;
+  }
+  @media only screen and (max-width: 591px) {
+    .back-button {
+      margin-top: 4em;
+    }
+  }
+  @media only screen and (max-width: 310px) {
+    .title {
+      font-size: 2em;
+    }
+  }
 }
 </style>
