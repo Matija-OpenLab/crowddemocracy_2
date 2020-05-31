@@ -1,5 +1,30 @@
 <template>
   <div class="wrap">
+    <b-navbar class="navbar-phones" toggleable type variant>
+      <b-navbar-brand href="#">
+        <img class="logo-navbar" src="../assets/logo.png" />
+      </b-navbar-brand>
+
+      <b-navbar-toggle target="navbar-toggle-collapse">
+        <template v-slot:default="{ expanded }">
+          <span v-if="expanded">&#9650;</span>
+          <span v-else>&#9660;</span>
+        </template>
+      </b-navbar-toggle>
+
+      <b-collapse id="navbar-toggle-collapse" is-nav>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item-dropdown text="Komunity, kde si členom" right>
+            <b-dropdown-item href="#">EN</b-dropdown-item>
+            <b-dropdown-item href="#">ES</b-dropdown-item>
+            <b-dropdown-item href="#">RU</b-dropdown-item>
+            <b-dropdown-item href="#">FA</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <b-nav-item href="#" to="/create">Nová komunita</b-nav-item>
+          <b-nav-item href="#" @click="logout">Odhásiť sa</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
     <b-row>
       <b-col class="col3" cols="3">
         <img class="logo" src="../assets/logo.png" />
@@ -289,5 +314,49 @@ export default {
   width: 170px;
   line-height: 43px;
   margin-left: 23%;
+}
+@media only screen and (min-width: 990px) {
+  .navbar-phones {
+    display: none;
+  }
+}
+@media only screen and (max-width: 990px) {
+  .navbar-phones {
+    margin-top: 0px;
+    background-color: #b3b3e6;
+  }
+  .logo-navbar {
+    height: 2em;
+  }
+  .logo {
+    display: none;
+  }
+  .col3 {
+    display: none;
+  }
+  .logout {
+    display: none;
+  }
+  .homepage-pic {
+    display: none;
+  }
+  .community {
+    margin: auto;
+    margin-bottom: 2em;
+  }
+  .communities {
+    margin-left: 0px;
+  }
+  .navbar-toggler {
+    width: 2em;
+    height: 2em;
+    background-color: cornsilk;
+  }
+  .welcome {
+    margin-left: 0px;
+  }
+  .username {
+    margin-left: 0px;
+  }
 }
 </style>
