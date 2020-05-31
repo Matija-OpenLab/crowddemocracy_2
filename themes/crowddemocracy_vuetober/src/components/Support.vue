@@ -16,6 +16,23 @@
     </b-row>
   </div>
 </template>
+<script>
+export default {
+  created() {
+    this.refreshUser();
+  },
+  methods: {
+    refreshUser() {
+      this.$store
+        .dispatch("refresh")
+        .then(() => {})
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }
+};
+</script>
 <style lang="css" scoped>
 .wrap {
   overflow-x: hidden;

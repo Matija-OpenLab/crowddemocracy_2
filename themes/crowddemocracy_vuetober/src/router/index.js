@@ -11,6 +11,7 @@ import CommunityManager from '../components/CommunityManager';
 import PostManager from '../components/PostManager';
 import Support from '../components/Support';
 
+import VueGtag from "vue-gtag";
 
 
 Vue.use(VueRouter);
@@ -76,5 +77,11 @@ const router = new VueRouter({
     mode: 'history',
     routes
 });
+
+Vue.use(VueGtag, {
+    config: {
+        id: 'UA-167911991-1'
+    },
+}, router);
 
 export default router;

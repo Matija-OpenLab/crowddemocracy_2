@@ -104,6 +104,7 @@ export default {
   },
   created() {
     if (this.$store.getters.isLoggedIn) {
+      this.refreshUser();
       this.getCommunities();
     } else {
       this.$router.push("/secure");

@@ -75,6 +75,8 @@ export default {
   created() {
     if (!this.$store.getters.isLoggedIn || !this.user.is_activated) {
       this.$router.push("/support");
+    } else {
+      this.refreshUser();
     }
   },
   methods: {
@@ -87,6 +89,14 @@ export default {
         .dispatch("createCommunity", data)
         .then(() => this.$router.push("/manage"))
         .catch(() => (this.error = "Nepodarilo sa vytvorit komunitu"));
+    },
+    refreshUser() {
+      this.$store
+        .dispatch("refresh")
+        .then(() => {})
+        .catch(err => {
+          console.error(err);
+        });
     }
   },
   computed: {
@@ -168,16 +178,16 @@ export default {
 
 @media only screen and (max-width: 990px) {
   .inputs form textarea {
-    width: 95%;
+    width: 95vw;
   }
   .inputs form input {
-    width: 95%;
+    width: 95vw;
   }
   .inputs form p {
     width: 95vw;
   }
   .community-buttons {
-    width: 95%;
+    width: 95vw;
   }
   .back-button {
     width: 5em;

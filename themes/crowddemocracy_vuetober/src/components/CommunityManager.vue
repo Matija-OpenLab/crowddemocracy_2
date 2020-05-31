@@ -1,11 +1,11 @@
 <template>
   <div class="wrap">
-    <b-row>
-      <b-col cols="10">
+    <b-row class="nav">
+      <b-col cols="8">
         <p class="title">Tvoje komunity</p>
       </b-col>
-      <b-col cols="2">
-        <b-button to="/create" variant="danger" class="back-button">Späť</b-button>
+      <b-col cols="4">
+        <b-button to="/create" class="back-button">Späť</b-button>
       </b-col>
     </b-row>
     <b-row>
@@ -43,6 +43,7 @@ export default {
   created() {
     if (this.$store.getters.isLoggedIn && this.user.is_activated) {
       this.getCommunity();
+      this.refreshUser();
     } else {
       this.$router.push("/support");
     }
@@ -71,6 +72,14 @@ export default {
       });
       this.communities = owned;
     },
+    refreshUser() {
+      this.$store
+        .dispatch("refresh")
+        .then(() => {})
+        .catch(err => {
+          console.error(err);
+        });
+    },
 
     //Community manipulation
 
@@ -92,18 +101,18 @@ export default {
 .wrap {
   overflow-x: hidden;
 }
+.nav {
+  line-height: 5em;
+}
 .back-button {
-  width: 100%;
-  margin-top: 30px;
-  margin-left: -80px;
+  width: 50%;
   border-color: #48486e;
   color: #48486e;
   background-color: white;
 }
 .title {
-  margin: 0.3em;
-  margin-left: 3em;
-  font-size: 50px;
+  font-size: 4em;
+  margin-left: 10%;
   font-weight: 50;
   color: #48486e;
 }
@@ -120,14 +129,12 @@ export default {
   width: 50%;
   padding: 1em;
   text-align: center;
-  margin-top: 0.5em;
+  margin-top: 2em;
   margin-left: 15%;
   transition-duration: 250ms;
 }
 .community-wrap:hover {
-  background-color: rgb(199, 199, 199);
   border: 1.5px solid black;
-  padding: 1.3em;
   cursor: pointer;
 }
 .communities {
@@ -135,7 +142,6 @@ export default {
 }
 
 .buttons {
-  /* margin: 2em; */
   margin-bottom: auto;
   padding: 0.5em;
 }
@@ -148,14 +154,13 @@ export default {
 @media only screen and (max-width: 990px) {
   .back-button {
     width: 5em;
-    margin-top: 4em;
   }
   .background {
     display: none;
   }
   .title {
     font-size: 3em;
-    margin-left: 0.5em;
+    margin-left: 3%;
   }
   .no-community {
     margin-left: 0.5em;
@@ -163,16 +168,20 @@ export default {
   .community-wrap {
     width: 95%;
     margin: auto;
+    margin-top: 2em;
   }
-  @media only screen and (max-width: 591px) {
-    .back-button {
-      margin-top: 4em;
-    }
+  .buttons button {
+    margin-top: 1em;
   }
-  @media only screen and (max-width: 310px) {
-    .title {
-      font-size: 2em;
-    }
+}
+@media only screen and (max-width: 591px) {
+  .back-button {
+    margin-top: 4em;
+  }
+}
+@media only screen and (max-width: 310px) {
+  .title {
+    font-size: 2em;
   }
 }
 </style>

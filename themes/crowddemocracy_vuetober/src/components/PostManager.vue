@@ -1,11 +1,11 @@
 <template>
   <div class="wrap">
-    <b-row>
-      <b-col cols="10">
-        <h1 class="title" v-bind="community">Príspevky v {{community.name}}</h1>
+    <b-row class="nav">
+      <b-col cols="8">
+        <p class="title">Príspevky v {{community.name}}</p>
       </b-col>
-      <b-col cols="2">
-        <b-button to="/manage" variant="danger" class="back-button">Späť</b-button>
+      <b-col cols="4">
+        <b-button to="/home" class="back-button">Späť</b-button>
       </b-col>
     </b-row>
 
@@ -80,6 +80,7 @@ export default {
     if (this.$store.getters.isLoggedIn && this.user.is_activated) {
       this.getCommunity();
       this.getPosts();
+      this.refreshUser();
     } else {
       this.$router.push("/support");
     }
@@ -144,6 +145,15 @@ export default {
       this.$nextTick(() => {
         this.$bvModal.hide("modal-prevent-closing");
       });
+    },
+    //User actions
+    refreshUser() {
+      this.$store
+        .dispatch("refresh")
+        .then(() => {})
+        .catch(err => {
+          console.error(err);
+        });
     }
   },
   computed: {
@@ -157,13 +167,20 @@ export default {
 .wrap {
   overflow-x: hidden;
 }
+.nav {
+  line-height: 5em;
+}
 .back-button {
-  width: 100%;
-  margin-top: 30px;
-  margin-left: -80px;
+  width: 50%;
   border-color: #48486e;
   color: #48486e;
   background-color: white;
+}
+.title {
+  font-size: 4em;
+  margin-left: 10%;
+  font-weight: 50;
+  color: #48486e;
 }
 .delete-button {
   margin-left: 1em;
@@ -172,13 +189,6 @@ export default {
   width: 91.5%;
   margin-top: 30px;
   margin-left: 30px;
-}
-.title {
-  margin: 0.3em;
-  margin-left: 30px;
-  font-size: 50px;
-  font-weight: 50;
-  color: #48486e;
 }
 .background {
   max-width: 100%;
@@ -252,15 +262,15 @@ export default {
     width: 95%;
     margin-left: 3%;
   }
-  @media only screen and (max-width: 591px) {
-    .back-button {
-      margin-top: 4em;
-    }
+}
+@media only screen and (max-width: 591px) {
+  .back-button {
+    margin-top: 4em;
   }
-  @media only screen and (max-width: 310px) {
-    .title {
-      font-size: 2em;
-    }
+}
+@media only screen and (max-width: 310px) {
+  .title {
+    font-size: 2em;
   }
 }
 </style>
