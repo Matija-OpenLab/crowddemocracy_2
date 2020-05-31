@@ -91,4 +91,32 @@ Route::group(['prefix' => 'api/v1/communities'], function() {
             return "Error.";
         }
     });
+
+    Route::post('/edit', function () {
+        $token = request()->input('token');
+        $userModel = JWTAuth::toUser($token);
+        
+        $id = request()->input('id');
+        $name =  request()->input('name');
+        $description =  request()->input('description');
+
+        if(!$userModel->is_activated == true){
+            return "Unauthorized.";
+        }
+        if(isset($name) && isset($description) && isset($id)){
+            $community = Communities::where('id',$id)->first();
+            if(is_null($community)){
+                return "Community doesn't exist.";
+            }
+            else {
+                $community->name = $name;
+                $community->description = $description;
+                $community->save();
+                return "Edited successfully.";
+            }
+        }
+        else {
+            return "Error.";
+        }
+    });
 });
