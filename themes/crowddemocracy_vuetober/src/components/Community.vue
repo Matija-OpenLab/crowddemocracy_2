@@ -1,5 +1,30 @@
 <template>
   <div class="wrap">
+    <b-navbar class="navbar-phones" toggleable type variant>
+      <b-navbar-brand href="#">
+        <img class="logo-navbar" src="../assets/logo.png" />
+      </b-navbar-brand>
+
+      <b-navbar-toggle target="navbar-toggle-collapse">
+        <template v-slot:default="{ expanded }">
+          <span v-if="expanded">&#9650;</span>
+          <span v-else>&#9660;</span>
+        </template>
+      </b-navbar-toggle>
+
+      <b-collapse id="navbar-toggle-collapse" is-nav>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item-dropdown text="Komunity, kde si členom" right>
+            <b-dropdown-item href="#">EN</b-dropdown-item>
+            <b-dropdown-item href="#">ES</b-dropdown-item>
+            <b-dropdown-item href="#">RU</b-dropdown-item>
+            <b-dropdown-item href="#">FA</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <b-nav-item href="#" to="/create">Nová komunita</b-nav-item>
+          <b-nav-item href="#" @click="logout">Odhásiť sa</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
     <b-row>
       <b-col cols="3" class="list">
         <img class="logo" src="../assets/logo.png" />
@@ -23,7 +48,7 @@
       <b-col class="col">
         <b-button class="logout" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
         <b-row class="navbar">
-          <b-col cols="1">
+          <b-col class="com-pic" cols="1">
             <img class="com-pic" src="../assets/comlog.png" />
           </b-col>
           <b-col>
@@ -60,16 +85,8 @@
               <p class="question">{{ post.content }}</p>
               <span class="voted-num">Zahlasovalo {{post.total_votes}}</span>
               <div class="vote_buttons" v-if="!user.likes.some(item => item.posts_id === post.id )">
-                <b-button
-                  class="vote-yes"
-                  variant="outline-success"
-                  @click="addVote(post.id, 'vote_yes')"
-                >Áno</b-button>
-                <b-button
-                  class="vote-no"
-                  variant="outline-danger"
-                  @click="addVote(post.id, 'vote_no')"
-                >Nie</b-button>
+                <b-button class="vote-yes" variant="outline-success">Áno</b-button>
+                <b-button class="vote-no" variant="outline-danger">Nie</b-button>
               </div>
               <div v-else>
                 <b-button class="change-vote" @click="changeVote(post.id)">ZMENIŤ HLAS</b-button>
@@ -78,7 +95,7 @@
           </div>
         </div>
         <div v-else>
-          <h4 class="text-center mt-5">Pridaj sa do komunity aby si videl hlasovania</h4>
+          <h4 class="text-center mt-5">Pridaj sa do komunity, aby si videl hlasovania</h4>
         </div>
       </b-col>
     </b-row>
@@ -104,7 +121,6 @@ export default {
   },
   created() {
     if (this.$store.getters.isLoggedIn) {
-      this.refreshUser();
       this.getCommunities();
     } else {
       this.$router.push("/secure");
@@ -153,7 +169,7 @@ export default {
           this.communityPosts = resp.data.posts;
 
           //Keep posts sorted after refresh
-
+          console.log(this.lastSort);
           if (this.lastSort === "latest") {
             this.latest();
           } else if (this.lastSort === "notVoted") {
@@ -398,5 +414,63 @@ export default {
 }
 .leave-com {
   margin-left: 20px;
+}
+@media only screen and (min-width: 990px) {
+  .navbar-phones {
+    display: none;
+  }
+}
+@media only screen and (max-width: 990px) {
+  .navbar-phones {
+    margin-top: 0px;
+    background-color: #b3b3e6;
+  }
+  .logo-navbar {
+    height: 2em;
+  }
+  .navbar {
+    margin-top: 0px;
+  }
+  .logo {
+    display: none;
+  }
+  .list {
+    display: none;
+  }
+  .com-pic {
+    display: none;
+  }
+  .post {
+    margin: auto;
+    margin-bottom: 2em;
+    margin-top: 2em;
+  }
+  .navbar-toggler {
+    width: 2em;
+    height: 2em;
+    background-color: cornsilk;
+  }
+  .welcome {
+    margin-left: 0px;
+  }
+  .username {
+    margin-left: 0px;
+  }
+  .nav-button {
+    width: 2em;
+  }
+  @media only screen and (max-width: 591px) {
+    .nav-button {
+      width: 1em;
+    }
+    .nav-row {
+      text-align: left;
+    }
+  }
+  @media only screen and (max-width: 310px) {
+    .title {
+      font-size: 2em;
+    }
+  }
 }
 </style>
