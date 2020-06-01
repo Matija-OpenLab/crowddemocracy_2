@@ -1,64 +1,80 @@
 <template>
-  <div class="wrap">
-    <b-button to="/home" class="back-button">Späť</b-button>
-    <b-row>
-      <b-col>
-        <p class="letter">
-          Ďakujeme, že podporujete našu stránku. Bohužiaľ, je stále vo fáze vývoja a nie je plne funkčná. Keby ste nám chceli pomôcť tým, že si vytvoríte komunitu na našej stránke a budete do nej pridávať hlasovania, alebo nájdete na nej nejakú chybu, prosím, kontaktujte nás na mail
-          <span
-            class="email"
-          >crowddemoracy.help@gmail.com</span>
-        </p>
-      </b-col>
-      <b-col>
-        <img class="background" src="../assets/bg.png" />
-      </b-col>
-    </b-row>
-  </div>
+    <div class="wrap">
+        <b-button to="/home" class="back-button">Späť</b-button>
+        <b-row>
+            <b-col lg="5" sm="12">
+                <p class="letter">
+                    Ďakujeme, že podporujete našu stránku. Bohužiaľ, je stále vo
+                    fáze vývoja a nie je plne funkčná. Keby ste nám chceli
+                    pomôcť tým, že si vytvoríte komunitu na našej stránke a
+                    budete do nej pridávať hlasovania, alebo nájdete na nej
+                    nejakú chybu, prosím, kontaktujte nás na mail
+                    <span class="email">crowddemoracy.help@gmail.com</span>
+                </p>
+            </b-col>
+            <b-col>
+                <img class="background" src="../assets/bg.png" />
+            </b-col>
+        </b-row>
+    </div>
 </template>
 <script>
 export default {
-  created() {
-    this.refreshUser();
-  },
-  methods: {
-    refreshUser() {
-      this.$store
-        .dispatch("refresh")
-        .then(() => {})
-        .catch(err => {
-          console.error(err);
-        });
+    created() {
+        this.refreshUser();
+    },
+    methods: {
+        refreshUser() {
+            this.$store
+                .dispatch("refresh")
+                .then(() => {})
+                .catch(err => {
+                    console.error(err);
+                });
+        }
     }
-  }
 };
 </script>
 <style lang="css" scoped>
 .wrap {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 .letter {
-  font-size: 1.5em;
-  font-weight: bold;
-  letter-spacing: 1.5px;
-  margin-top: 10em;
-  margin-left: 1em;
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-top: 10em;
+    margin-left: 1em;
 }
 .email {
-  color: #482997;
+    color: #482997;
 }
 .background {
-  max-width: 100%;
-  height: auto;
-  background-repeat: no-repeat;
-  right: 0;
+    max-width: 100%;
+    height: auto;
+    background-repeat: no-repeat;
+    right: 0;
 }
 .back-button {
-  width: 10%;
-  margin-top: 10px;
-  margin-left: 10px;
-  border-color: #48486e;
-  color: #48486e;
-  background-color: white;
+    width: 10%;
+    border-color: #48486e;
+    color: #48486e;
+    margin: 2em;
+    background-color: white;
+}
+@media only screen and (max-width: 990px) {
+    .background {
+        display: none;
+    }
+    .letter {
+        margin-top: 8em;
+        font-size: 1em;
+        font-weight: 400;
+        letter-spacing: 1px;
+        width: 95%;
+    }
+    .back-button {
+        width: 50%;
+    }
 }
 </style>

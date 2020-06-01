@@ -5,7 +5,7 @@
         <p class="title">Príspevky v {{community.name}}</p>
       </b-col>
       <b-col cols="4">
-        <b-button to="/home" class="back-button">Späť</b-button>
+        <b-button to="/manage" class="back-button">Späť</b-button>
       </b-col>
     </b-row>
 

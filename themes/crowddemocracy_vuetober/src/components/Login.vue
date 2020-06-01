@@ -2,7 +2,7 @@
     <div class="wrap">
         <b-row class="navbar">
             <b-col>
-                <img class="logo" @click="toIntro()" src="../assets/logo.png" />
+                <img class="logo" src="../assets/logo.png" @click="toIntro()" />
             </b-col>
             <b-col>
                 <b-button class="registration" to="/registration"
@@ -13,39 +13,41 @@
         </b-row>
         <div class="content-wrap">
             <b-row>
-                <b-col sm="12">
+                <b-col lg="6">
                     <h1 class="header">Prihlásenie</h1>
-                    <form class="form" @submit.prevent="login">
-                        <ValidationProvider
-                            rules="required|email"
-                            v-slot="{ errors }"
-                        >
-                            <input
-                                type="text"
-                                placeholder="Email"
-                                v-model="email"
-                            />
-                            <span class="error">{{ errors[0] }}</span>
-                        </ValidationProvider>
+                    <ValidationObserver v-slot="{ passes }">
+                        <form class="form" @submit.prevent="passes(login)">
+                            <ValidationProvider
+                                rules="required|email"
+                                v-slot="{ errors }"
+                            >
+                                <input
+                                    type="text"
+                                    placeholder="Email"
+                                    v-model="email"
+                                />
+                                <span class="error">{{ errors[0] }}</span>
+                            </ValidationProvider>
 
-                        <ValidationProvider
-                            rules="required|password_verification:8,16"
-                            v-slot="{ errors }"
-                        >
-                            <input
-                                type="password"
-                                placeholder="Heslo"
-                                v-model="password"
-                            />
-                            <span class="error">{{ errors[0] }}</span>
-                        </ValidationProvider>
-                        <span v-if="error.length" class="error"
-                            >Uživateľ nebol najdeny</span
-                        >
-                        <b-button class="login" type="submit"
-                            >Prihlásiť</b-button
-                        >
-                    </form>
+                            <ValidationProvider
+                                rules="required|password_verification:8,16"
+                                v-slot="{ errors }"
+                            >
+                                <input
+                                    type="password"
+                                    placeholder="Heslo"
+                                    v-model="password"
+                                />
+                                <span class="error">{{ errors[0] }}</span>
+                            </ValidationProvider>
+                            <span v-if="error.length" class="error"
+                                >Uživateľ nebol najdeny</span
+                            >
+                            <b-button class="login" type="submit"
+                                >Prihlásiť</b-button
+                            >
+                        </form>
+                    </ValidationObserver>
                 </b-col>
                 <b-col>
                     <img class="background" src="../assets/bg.png" />
@@ -60,6 +62,7 @@
 </template>
 <script>
 import { ValidationProvider } from "vee-validate";
+import { ValidationObserver } from "vee-validate";
 import { extend } from "vee-validate";
 import { required, email } from "vee-validate/dist/rules";
 import { setInteractionMode } from "vee-validate";
@@ -90,7 +93,8 @@ extend("password_verification", {
 
 export default {
     components: {
-        ValidationProvider
+        ValidationProvider,
+        ValidationObserver
     },
     data() {
         return {
@@ -121,24 +125,17 @@ export default {
 </script>
 <style scoped>
 .wrap {
+    height: 100vh;
+    margin: 0px;
     overflow-x: hidden;
 }
 .background {
     max-width: 100%;
-    height: auto;
+    min-height: 100vh;
+    align-items: right;
     background-repeat: no-repeat;
-    right: 0;
 }
 
-.error {
-    display: block;
-    color: #ff3333;
-    font-size: 14px;
-    margin-top: 1em;
-}
-.navbar {
-    width: 97vw;
-}
 .logo {
     width: 140px;
     margin-left: 2em;
@@ -163,10 +160,11 @@ export default {
     float: right;
 }
 .header {
-    margin-top: 150px;
-    margin-left: 130px;
-    font-size: 55px;
+    margin-top: 3em;
+    font-size: 50px;
     font-weight: 50;
+    color: #48486e;
+    margin-left: 130px;
 }
 .form {
     margin-left: 130px;
@@ -174,7 +172,7 @@ export default {
     color: black;
 }
 .form input {
-    width: 500px;
+    width: 100%;
     margin-top: 15px;
     height: 50px;
     border: none;
@@ -184,13 +182,13 @@ export default {
 .form input:focus {
     outline: none;
 }
-.placeholder {
-    width: 500px;
-    margin-top: 15px;
-    height: 50px;
-    border: white;
-    color: black;
-    border-bottom: 1px solid #d7d7c1;
+.error {
+    display: block;
+    width: 100%;
+    color: #ff3333;
+    font-size: 14px;
+    margin-top: 1em;
+    overflow-wrap: break-word;
 }
 .login {
     background-color: #24154b;
@@ -200,13 +198,9 @@ export default {
     margin-top: 20px;
     line-height: 43px;
 }
-.content-wrap {
-    position: relative;
-    min-height: 100%;
-}
 .footer {
-    position: absolute;
-    bottom: 0;
+    position: relative;
+    padding: 1rem;
     width: 100%;
 }
 .footer-logo {
@@ -218,9 +212,7 @@ export default {
         margin: 0;
         padding: 0;
     }
-    .question {
-        display: none;
-    }
+    .question,
     .background {
         display: none;
     }
@@ -249,6 +241,7 @@ export default {
     }
     .footer {
         font-size: 0.9em;
+        margin-top: 5%;
     }
     /*Form */
     .form {
@@ -266,9 +259,6 @@ export default {
     }
 }
 @media only screen and (max-width: 400px) {
-    .footer {
-        bottom: -15%;
-    }
     .registration {
         font-size: 0.7em;
         width: 8em;

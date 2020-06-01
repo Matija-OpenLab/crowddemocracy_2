@@ -129,9 +129,8 @@ export default new Vuex.Store({
         },
         vote({
             commit
-        }, data) {
-            console.log(data)
-            const url = `/api/v1/likes/${data.vote}/${data.postId}`;
+        }, postData) {
+            const url = `/api/v1/likes/${postData.vote}/${postData.postId}`;
             return new Promise((resolve, reject) => {
                 axios({
                         url: url,
@@ -194,14 +193,14 @@ export default new Vuex.Store({
         },
         createCommunity({
             commit
-        }, data) {
+        }, communityData) {
             return new Promise((resolve, reject) => {
                 axios({
                     url: "/api/v1/communities/create",
                     data: {
                         token: this.state.token,
-                        name: data.name,
-                        description: data.desc
+                        name: communityData.name,
+                        description: communityData.desc
                     },
                     method: "POST"
                 }).then(resp => {
@@ -211,14 +210,14 @@ export default new Vuex.Store({
         },
         createPost({
             commit
-        }, data) {
+        }, postData) {
             return new Promise((resolve, reject) => {
                 axios({
                     url: "/api/v1/posts/create",
                     data: {
                         token: this.state.token,
-                        content: data.content,
-                        community_id: data.communityId
+                        content: postData.content,
+                        community_id: postData.communityId
                     },
                     method: "POST"
                 }).then(resp => {
@@ -240,6 +239,26 @@ export default new Vuex.Store({
                 }).then(resp => {
                     resolve(resp);
                 }).catch(err => reject(err));
+            })
+        },
+        editCommunity({
+            commit
+        }, communityData) {
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: "/api/v1/communities/edit",
+                    data: {
+                        token: this.state.token,
+                        id: communityData.id,
+                        name: communityData.name,
+                        description: communityData.desc
+                    },
+                    method: "POST"
+                }).then(resp => {
+                    resolve(resp);
+                }).catch(err => {
+                    reject(err)
+                })
             })
         },
         deletePost({
