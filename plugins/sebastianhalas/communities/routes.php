@@ -55,7 +55,7 @@ Route::group(['prefix' => 'api/v1/communities'], function() {
         $name =  request()->input('name');
         $description =  request()->input('description');
 
-        if(!$userModel->is_activated == true){
+        if($userModel->is_activated == false){
             return "Unauthorized.";
         }
         if(isset($name) && isset($description)){
@@ -64,6 +64,7 @@ Route::group(['prefix' => 'api/v1/communities'], function() {
             $community->description = $description;
             $community->owner = $userModel->name;
             $community->user_count = 0;
+            $community->icon_id = rand(0,3);
             $community->save();
             return "Creation successful.";
         }
@@ -79,7 +80,7 @@ Route::group(['prefix' => 'api/v1/communities'], function() {
         
         $id =  request()->input('id');
 
-        if(!$userModel->is_activated == true){
+        if($userModel->is_activated == false){
             return "Unauthorized.";
         }
         if(isset($id)){
@@ -100,7 +101,7 @@ Route::group(['prefix' => 'api/v1/communities'], function() {
         $name =  request()->input('name');
         $description =  request()->input('description');
 
-        if(!$userModel->is_activated == true){
+        if($userModel->is_activated == false){
             return "Unauthorized.";
         }
         if(isset($name) && isset($description) && isset($id)){
@@ -119,4 +120,5 @@ Route::group(['prefix' => 'api/v1/communities'], function() {
             return "Error.";
         }
     });
+   
 });

@@ -22,3 +22,6 @@ columns:
     created_at:
         label: 'Created at'
         type: datetime
+    finished_at:
+        label: 'Finished AT'
+        type: date

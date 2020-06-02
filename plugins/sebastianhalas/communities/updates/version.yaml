@@ -36,3 +36,6 @@
 1.0.13:
     - 'Created table sebastianhalas_communities_join'
     - builder_table_create_sebastianhalas_communities_join.php
+1.0.14:
+    - 'Updated table sebastianhalas_communities_main'
+    - builder_table_update_sebastianhalas_communities_main_9.php

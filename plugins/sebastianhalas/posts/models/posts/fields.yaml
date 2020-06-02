@@ -25,3 +25,8 @@ fields:
         mode: datetime
         span: auto
         type: datepicker
+    finished_at:
+        label: 'Date picker'
+        mode: date
+        span: auto
+        type: datepicker

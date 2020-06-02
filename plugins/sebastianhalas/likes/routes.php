@@ -8,6 +8,12 @@ Route::group(['prefix' => 'api/v1/likes'], function() {
         $userModel = JWTAuth::toUser($token);
         $userID = $userModel->id;
         
+        $post = Posts::where('id',$post_id)->first();
+
+        if($post->is_finished == true){
+            return "Couldn't vote, because voting is already finished.";
+        }
+        
         $like = new Likes;
         $like->user_id = $userID;
         $like->posts_id = $post_id;
@@ -22,6 +28,12 @@ Route::group(['prefix' => 'api/v1/likes'], function() {
         $userModel = JWTAuth::toUser($token);
         $userID = $userModel->id;
         
+        $post = Posts::where('id',$post_id)->first();
+        
+        if($post->is_finished == true){
+            return "Couldn't vote, because voting is already finished.";
+        }
+
         $like = new Likes;
         $like->user_id = $userID;
         $like->posts_id = $post_id;
@@ -35,6 +47,12 @@ Route::group(['prefix' => 'api/v1/likes'], function() {
         $token = request()->input('token');
         $userModel = JWTAuth::toUser($token);
         $userID = $userModel->id;
+
+        $post = Posts::where('id',$post_id)->first();
+        
+        if($post->is_finished == true){
+            return "Couldn't change vote, because voting is already finished.";
+        }
 
         $like = Likes::where('user_id',$userID)
                         ->where('posts_id',$post_id)

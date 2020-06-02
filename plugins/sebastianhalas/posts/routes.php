@@ -49,7 +49,7 @@ Route::group(['prefix' => 'api/v1/posts'], function() {
         $content =  request()->input('content');
         $communityid = request()->input('community_id');
         
-        if(!$userModel->is_activated == true){
+        if($userModel->is_activated == false){
             return "Unauthorized.";
         }
         
@@ -73,7 +73,7 @@ Route::group(['prefix' => 'api/v1/posts'], function() {
         
         $id =  request()->input('id');
 
-        if(!$userModel->is_activated == true){
+        if($userModel->is_activated == false){
             return "Unauthorized.";
         }
         if(isset($id)){
@@ -86,4 +86,24 @@ Route::group(['prefix' => 'api/v1/posts'], function() {
         }
     });
 
+    Route::post('/finish', function () {
+        $token = request()->input('token');
+        $userModel = JWTAuth::toUser($token);
+        
+        $id = request()->input('id');
+
+        if($userModel->is_activated == false){
+            return "Unauthorized.";
+        }
+        if(isset($id)){
+            $post = Posts::where('id',$id)->first();
+            $post->is_finished = true;
+            $post->finished_at = date("Y-m-d");
+            $post->save();
+            return "Finished successfully.";
+        }
+        else {
+            return "Error.";
+        }
+    });
 });
