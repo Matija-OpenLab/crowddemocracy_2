@@ -21,6 +21,12 @@
           <p class="yes">Áno: {{post.vote_yes}}</p>
           <p class="no">Nie: {{post.vote_no}}</p>
           <b-button variant="danger" class="delete-button" @click="deletePost(post.id)">Vymazať</b-button>
+          <div v-if="post.is_finished === '0'" class="mb-2 finish">
+            <b-button variant="success" class="delete-button" @click="finishPost(post.id)">Ukončiť</b-button>
+          </div>
+          <div v-else>
+            <p>Hlasovanie bolo ukončené.</p>
+          </div>
         </div>
       </b-col>
       <b-col class="background">
@@ -97,6 +103,7 @@ export default {
         .get(`/api/v1/posts/community_id/${this.$props.id}`)
         .then(resp => {
           this.communityPosts = resp.data.posts.reverse();
+          console.log(this.communityPosts);
         })
         .catch(err => console.error(err));
     },
@@ -115,10 +122,25 @@ export default {
         .catch(() => (this.error = "Nepodarilo sa vytvoriť príspevok"));
     },
     deletePost(postId) {
-      this.$store
-        .dispatch("deletePost", postId)
-        .then(() => this.getPosts())
-        .catch(err => console.error(err));
+      this.$confirm(
+        `Určite chceš vymazať hlasovanie? Keď ho raz vymažeš už ho nemôžeš obnoviť!`
+      ).then(() => {
+        this.$store
+          .dispatch("deletePost", postId)
+          .then(() => this.getPosts())
+          .catch(err => console.error(err));
+      });
+    },
+    finishPost(postId) {
+      this.$confirm(
+        `Určite chceš ukončiť hlasovanie? Keď ho raz ukončíš už ho nemôžeš obnoviť!`
+      ).then(() => {
+        console.log(postId);
+        this.$store
+          .dispatch("finishPost", postId)
+          .then(() => this.getPosts())
+          .catch(err => console.error(err));
+      });
     },
     //Modal handeling
     checkFormValidity() {
@@ -184,6 +206,9 @@ export default {
 }
 .delete-button {
   margin-left: 1em;
+}
+.finish {
+  display: inline;
 }
 .new-post {
   width: 91.5%;

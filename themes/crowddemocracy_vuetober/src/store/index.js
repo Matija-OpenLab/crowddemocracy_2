@@ -277,6 +277,22 @@ export default new Vuex.Store({
                 }).catch(err => reject(err));
             })
         },
+        finishPost({
+            commit
+        }, postId) {
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: "/api/v1/posts/finish",
+                    data: {
+                        token: this.state.token,
+                        id: postId
+                    },
+                    method: "POST"
+                }).then(resp => {
+                    resolve(resp);
+                }).catch(err => reject(err));
+            })
+        }
 
     },
     modules: {},

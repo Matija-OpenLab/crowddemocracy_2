@@ -1,420 +1,436 @@
 <template>
-    <div class="wrap">
-        <b-navbar class="navbar-phones" toggleable type variant>
-            <b-navbar-brand href="#">
-                <img class="logo-navbar" src="../assets/logo.png" />
-            </b-navbar-brand>
+  <div class="wrap">
+    <b-navbar class="navbar-phones" toggleable type variant>
+      <b-navbar-brand href="#">
+        <img class="logo-navbar" src="../assets/logo.png" />
+      </b-navbar-brand>
 
-            <b-navbar-toggle target="navbar-toggle-collapse">
-                <template v-slot:default="{ expanded }">
-                    <span v-if="expanded">&#9650;</span>
-                    <span v-else>&#9660;</span>
-                </template>
-            </b-navbar-toggle>
+      <b-navbar-toggle target="navbar-toggle-collapse">
+        <template v-slot:default="{ expanded }">
+          <span v-if="expanded">&#9650;</span>
+          <span v-else>&#9660;</span>
+        </template>
+      </b-navbar-toggle>
 
-            <b-collapse id="navbar-toggle-collapse" is-nav>
-                <b-navbar-nav class="ml-auto">
-                    <b-nav-item-dropdown text="Komunity, kde si členom" right>
-                        <div
-                            v-for="community in communities"
-                            :key="community.id"
-                        >
-                            <b-dropdown-item
-                                href="#"
-                                v-if="
+      <b-collapse id="navbar-toggle-collapse" is-nav>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item-dropdown text="Komunity, kde si členom" right>
+            <div v-for="community in communities" :key="community.id">
+              <b-dropdown-item
+                href="#"
+                v-if="
                                     user.communities.some(
                                         comm => comm.id === community.id
                                     )
                                 "
-                                @click="navigateToComm(community.id)"
-                                >{{ community.name }}</b-dropdown-item
-                            >
-                        </div>
-                    </b-nav-item-dropdown>
-                    <b-nav-item href="#" to="/create">Nová komunita</b-nav-item>
-                    <b-nav-item href="#" @click="logout">Odhásiť sa</b-nav-item>
-                </b-navbar-nav>
-            </b-collapse>
-        </b-navbar>
-        <b-row>
-            <b-col class="col3" cols="3">
-                <img class="logo" src="../assets/logo.png" />
-                <div class="your-com">
-                    <p class="com-list">Zoznam komunít,kde si členom:</p>
-                    <div
-                        class="names"
-                        v-for="community in communities"
-                        :key="community.id"
-                    >
-                        <div
-                            v-if="
+                @click="navigateToComm(community.id)"
+              >{{ community.name }}</b-dropdown-item>
+            </div>
+          </b-nav-item-dropdown>
+          <b-nav-item href="#" to="/create">Nová komunita</b-nav-item>
+          <b-nav-item href="#" @click="logout">Odhásiť sa</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+    <b-row>
+      <b-col class="col3" cols="3">
+        <img class="logo" src="../assets/logo.png" />
+        <div class="your-com">
+          <p class="com-list">Zoznam komunít,kde si členom:</p>
+          <div class="names" v-for="community in communities" :key="community.id">
+            <div
+              v-if="
                                 user.communities.some(
                                     comm => comm.id === community.id
                                 )
                             "
-                        >
-                            <b-row
-                                @click="navigateToComm(community.id)"
-                                class="com-side"
-                            >
-                                <b-col cols="1">
-                                    <img
-                                        class="com-logo-list"
-                                        src="../assets/comlog.png"
-                                    />
-                                </b-col>
-                                <b-col class="com-info">
-                                    <p class="com-count-info">
-                                        {{ community.user_count }} užívateľov
-                                    </p>
-                                    <p class="com-name-list">
-                                        {{ community.name }}
-                                    </p>
-                                </b-col>
-                            </b-row>
-                        </div>
-                    </div>
-                    <b-button
-                        v-if="user.is_activated"
-                        class="new-community-button"
-                        to="/create"
-                        >Nová komunita</b-button
-                    >
-                    <b-button v-else class="new-community-button" to="/support"
-                        >Staň sa testerom</b-button
-                    >
-                </div>
-            </b-col>
-            <b-col class="col">
-                <b-button class="logout" @click="logout" variant="danger"
-                    >Odhlásenie z aplikácie</b-button
-                >
-                <b-row class="navbar">
-                    <b-col cols="1">
-                        <img
-                            class="homepage-pic"
-                            src="../assets/homepage.png"
-                        />
-                    </b-col>
-                    <b-col>
-                        <h1 class="welcome">Vitajte v CrowdDemocracy</h1>
-                        <p class="username">Vitaj {{ user.name }}!</p>
-                    </b-col>
-                </b-row>
-                <div class="communities">
-                    <!--TENTO DIV JE CELA KOMUNITA-->
-                    <div
-                        class="community"
-                        v-for="community in communities"
-                        :key="community.id"
-                    >
-                        <div @click="navigateToComm(community.id)">
-                            <img class="com-logo" src="../assets/comlog.png" />
-                            <p class="com-count">
-                                {{ community.user_count }} užívateľov
-                            </p>
-                            <p class="com-name">{{ community.name }}</p>
-                            <p class="com-owner">{{ community.owner }}</p>
-                            <p class="com-desc">{{ community.description }}</p>
-                            <p class="com-create">{{ community.created_at }}</p>
-                            <!-- <p class="com-moderators">IN DEVELOPMENT</p> -->
-                        </div>
-                        <b-button
-                            class="add-to-com"
-                            v-if="
-                                !user.communities.some(
-                                    comm => comm.id === community.id
-                                )
-                            "
-                            @click="joinCommunity(community.id)"
-                            >Pridať sa</b-button
-                        >
-                    </div>
-                </div>
-            </b-col>
+            >
+              <b-row @click="navigateToComm(community.id)" class="com-side">
+                <b-col cols="1">
+                  <img
+                    v-if="community.icon_id === '0'"
+                    class="com-logo-list"
+                    src="../assets/com-log1.png"
+                  />
+                  <img
+                    v-if="community.icon_id === '1'"
+                    class="com-logo-list"
+                    src="../assets/com-log2.png"
+                  />
+                  <img
+                    v-if="community.icon_id === '2'"
+                    class="com-logo-list"
+                    src="../assets/com-log3.png"
+                  />
+                </b-col>
+                <b-col class="com-info">
+                  <p class="com-count-info">{{ community.user_count }} užívateľov</p>
+                  <p class="com-name-list">{{ community.name }}</p>
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+          <b-button v-if="user.is_activated" class="new-community-button" to="/create">Nová komunita</b-button>
+          <b-button v-else class="new-community-button" to="/support">Staň sa testerom</b-button>
+        </div>
+      </b-col>
+      <b-col class="col">
+        <b-button class="logout" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
+        <b-row class="navbar">
+          <b-col cols="1">
+            <img class="homepage-pic" src="../assets/homepage.png" />
+          </b-col>
+          <b-col>
+            <h1 class="welcome">Vitajte v CrowdDemocracy</h1>
+            <p class="username">Vitaj {{ user.name }}!</p>
+          </b-col>
         </b-row>
-    </div>
+        <div class="communities">
+          <!--TENTO DIV JE CELA KOMUNITA-->
+          <div class="community" v-for="community in communities" :key="community.id">
+            <div @click="navigateToComm(community.id)">
+              <!-- napicu ale cenim ze to musim robit ja -Matija <3 -->
+              <img v-if="community.icon_id === '0'" class="com-logo" src="../assets/com-log1.png" />
+              <img v-if="community.icon_id === '1'" class="com-logo" src="../assets/com-log2.png" />
+              <img v-if="community.icon_id === '2'" class="com-logo" src="../assets/com-log3.png" />
+              <p class="com-count">{{ community.user_count }} užívateľov</p>
+              <p class="com-name">{{ community.name }}</p>
+              <div v-if="community.icon_id === '0'" class="com-desc color1">
+                <p class="small-desc">Popis komunity</p>
+                <p>{{ community.description }}</p>
+              </div>
+              <div v-if="community.icon_id === '1'" class="com-desc color2">
+                <p class="small-desc">Popis komunity</p>
+                <p>{{ community.description }}</p>
+              </div>
+              <div v-if="community.icon_id === '2'" class="com-desc color3">
+                <p class="small-desc">Popis komunity</p>
+                <p>{{ community.description }}</p>
+              </div>
+              <!-- <p class="com-create">{{ community.created_at.split(" ")[0] }}</p> -->
+
+              <b-row class="com-footer">
+                <b-col cols="8">
+                  <p
+                    class="add-to-com"
+                    v-if="
+                                    !user.communities.some(
+                                        comm => comm.id === community.id
+                                    )
+                                "
+                    @click="joinCommunity(community.id)"
+                  >+ pridaj sa do tejto komunity</p>
+                </b-col>
+                <b-col>
+                  <p class="com-owner">{{ community.owner }}</p>
+                </b-col>
+              </b-row>
+            </div>
+          </div>
+        </div>
+      </b-col>
+    </b-row>
+  </div>
 </template>
 <script>
 import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
-    data() {
-        return {
-            communities: []
-        };
-    },
-    created() {
-        if (this.$store.getters.isLoggedIn) {
-            this.getCommunity();
-            this.refreshUser();
-        } else {
-            this.$router.push("/secure");
-        }
-    },
-    methods: {
-        //User navigation
-
-        navigateToComm(community_id) {
-            this.$router.push({
-                path: `/community/${community_id}`
-            });
-        },
-
-        logout() {
-            this.$store.dispatch("logout").then(() => {
-                this.$router.push("/");
-            });
-        },
-        refreshUser() {
-            this.$store
-                .dispatch("refresh")
-                .then(() => {})
-                .catch(err => {
-                    console.error(err);
-                });
-        },
-
-        //Getters
-        getCommunity() {
-            axios.get("/api/v1/communities").then(res => {
-                this.communities = res.data;
-            });
-        },
-
-        //Comm joining
-
-        joinCommunity(communityId) {
-            this.$store
-                .dispatch("joinCommunity", communityId)
-                .then(() => {
-                    this.refreshUser();
-                    this.$router.push({
-                        path: `/community/${communityId}`
-                    });
-                })
-                .catch(err => console.error(err));
-        },
-        leaveCommunity(communityId) {
-            this.$store
-                .dispatch("leaveCommunity", communityId)
-                .then(() => {
-                    this.refreshUser();
-                    this.getCommunity();
-                    console.log(this.user);
-                })
-                .catch(err => console.error(err));
-        }
-    },
-    computed: {
-        ...mapGetters({
-            user: "getUserData"
-        })
+  data() {
+    return {
+      communities: []
+    };
+  },
+  created() {
+    if (this.$store.getters.isLoggedIn) {
+      this.getCommunity();
+      this.refreshUser();
+    } else {
+      this.$router.push("/secure");
     }
+  },
+  methods: {
+    //User navigation
+
+    navigateToComm(community_id) {
+      this.$router.push({
+        path: `/community/${community_id}`
+      });
+    },
+
+    logout() {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/");
+      });
+    },
+    refreshUser() {
+      this.$store
+        .dispatch("refresh")
+        .then(() => {})
+        .catch(err => {
+          console.error(err);
+        });
+    },
+
+    //Getters
+    getCommunity() {
+      axios.get("/api/v1/communities").then(res => {
+        this.communities = res.data;
+      });
+    },
+
+    //Comm joining
+
+    joinCommunity(communityId) {
+      this.$store
+        .dispatch("joinCommunity", communityId)
+        .then(() => {
+          this.refreshUser();
+          this.$router.push({
+            path: `/community/${communityId}`
+          });
+        })
+        .catch(err => console.error(err));
+    },
+    leaveCommunity(communityId) {
+      this.$store
+        .dispatch("leaveCommunity", communityId)
+        .then(() => {
+          this.refreshUser();
+          this.getCommunity();
+          console.log(this.user);
+        })
+        .catch(err => console.error(err));
+    }
+  },
+  computed: {
+    ...mapGetters({
+      user: "getUserData"
+    })
+  }
 };
 </script>
 <style scoped>
+.small-desc {
+  color: silver;
+  font-size: 0.8em;
+}
 .wrap {
-    background-color: #f3f5f8;
-    height: 100%;
-    width: 100vw;
-    overflow-x: hidden;
+  background-color: #f3f5f8;
+  height: 100%;
+  width: 100vw;
+  overflow-x: hidden;
 }
 .logo {
-    width: 120px;
-    margin-left: 2em;
-    margin-top: 10px;
+  width: 120px;
+  margin-left: 2em;
+  margin-top: 10px;
+}
+.color1 {
+  color: #c74079;
+}
+.color2 {
+  color: #80ae29;
+}
+.color3 {
+  color: #4890a9;
 }
 
 /*STYLE ZOZNAMU KOMUNIT*/
 
 .names {
-    margin-bottom: 2em;
+  margin-bottom: 2em;
 }
 .com-name-list {
-    font-weight: bold;
+  font-weight: bold;
 }
 .com-info {
-    margin-left: 2em;
+  margin-left: 2em;
 }
 .com-side {
-    cursor: pointer;
+  cursor: pointer;
 }
 .communities {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0px;
-    margin-top: 40px;
-    margin-left: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px;
+  margin-top: 40px;
+  margin-left: 20px;
 }
 .community {
-    height: 290px;
-    width: 290px;
-    background-color: white;
-    border-radius: 15px;
-    cursor: pointer;
-    margin-right: 5em;
-    margin-bottom: 2em;
-    transition: 1s;
+  height: 19em;
+  width: 290px;
+  background-color: white;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-right: 5em;
+  margin-bottom: 2em;
+  transition: 1s;
 }
-.communitie:hover {
-    -webkit-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
-    -moz-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
-    box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+.community:hover {
+  -webkit-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+  -moz-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+  box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
 }
 .com-list {
-    font-size: 15px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    color: #9a9eaa;
+  font-size: 15px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: #9a9eaa;
 }
 .list {
-    border-right: 1px solid #d7d7c1;
+  border-right: 1px solid #d7d7c1;
 }
 .com-logo-list {
-    width: 50px;
-    height: auto;
+  width: 50px;
+  height: auto;
 }
 .com-logo-list {
-    left: 0px;
+  left: 0px;
 }
 .com-logo {
-    width: 50px;
-    height: auto;
-    margin-top: -20px;
-    margin-left: 125px;
+  width: 50px;
+  height: auto;
+  margin-top: -20px;
+  margin-left: 125px;
 }
 
 .com-count-info {
-    text-align: left;
-    font-size: 13px;
-    margin-bottom: 0px;
-    color: #9a9eaa;
+  text-align: left;
+  font-size: 13px;
+  margin-bottom: 0px;
+  color: #9a9eaa;
 }
 
 .com-count {
-    text-align: center;
-    font-size: 13px;
-    margin-bottom: 0px;
-    margin-top: 20px;
-    color: #9a9eaa;
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 0px;
+  margin-top: 20px;
+  color: #9a9eaa;
 }
 .com-name {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 3px;
-    border-bottom: 1px solid #d7d7c1;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 3px;
+  border-bottom: 1px solid #d7d7c1;
 }
 .logout {
-    background-color: #f3f5f8;
-    border-color: #f3f5f8;
-    color: #330066;
-    margin-left: 77%;
-    margin-top: 25px;
-    font-size: 15px;
+  background-color: #f3f5f8;
+  border-color: #f3f5f8;
+  color: #330066;
+  margin-left: 77%;
+  margin-top: 25px;
+  font-size: 15px;
 }
 .navbar {
-    margin-top: 30px;
-    border-bottom: 1px solid #d7d7c1;
+  margin-top: 30px;
+  border-bottom: 1px solid #d7d7c1;
 }
 
 .your-com {
-    margin-left: 2em;
-    margin-top: 40px;
+  margin-left: 2em;
+  margin-top: 40px;
 }
 .welcome {
-    margin-top: 10px;
-    font-size: 32px;
-    margin-left: 50px;
+  margin-top: 10px;
+  font-size: 32px;
+  margin-left: 50px;
 }
 .username {
-    margin-bottom: 2em;
-    margin-left: 53px;
-    font-size: 22px;
+  margin-bottom: 2em;
+  margin-left: 53px;
+  font-size: 22px;
 }
 .com-owner {
-    text-align: center;
+  text-align: center;
+  /* margin-top: 1em; */
 }
 .com-desc {
-    text-align: center;
+  display: grid;
+  text-align: center;
+  height: 7em;
+  border-bottom: 1px solid #d7d7c1;
 }
 .com-create {
-    text-align: center;
+  text-align: center;
 }
 .com-moderators {
-    text-align: center;
+  text-align: center;
 }
 .homepage-pic {
-    width: 120px;
-    height: auto;
+  width: 120px;
+  height: auto;
 }
 .add-to-com {
-    border-color: black;
-    color: #48486e;
-    background-color: white;
-    width: 180px;
-    font-weight: bold;
-    font-size: 14px;
-    margin-left: 60px;
+  color: #c0c2ca;
+  font-size: 0.8em;
+  transition: 300ms;
+  margin-top: 2em;
 }
+.add-to-com:hover {
+  cursor: pointer;
+  color: black;
+}
+
 .col3 {
-    padding: 0px;
-    border-right: 1px solid #d7d7c1;
+  padding: 0px;
+  border-right: 1px solid #d7d7c1;
 }
 .new-community-button {
-    background-color: #24154b;
-    color: white;
-    width: 170px;
-    line-height: 43px;
-    margin-left: 23%;
+  background-color: #24154b;
+  color: white;
+  width: 170px;
+  line-height: 43px;
+  margin-left: 23%;
 }
 @media only screen and (min-width: 1020px) {
-    .navbar-phones {
-        display: none;
-    }
+  .navbar-phones {
+    display: none;
+  }
 }
 @media only screen and (max-width: 1020px) {
-    .navbar-phones {
-        margin-top: 0px;
-        background-color: #b3b3e6;
-    }
-    .logo-navbar {
-        height: 2em;
-    }
-    .logo {
-        display: none;
-    }
-    .col3 {
-        display: none;
-    }
-    .logout {
-        display: none;
-    }
-    .homepage-pic {
-        display: none;
-    }
-    .community {
-        margin: auto;
-        margin-bottom: 2em;
-    }
-    .communities {
-        margin-left: 0px;
-    }
-    .navbar-toggler {
-        background-color: #7a5cc7;
-    }
-    .navbar-toggler:focus {
-        outline: none;
-    }
-    .welcome {
-        margin-left: 0px;
-    }
-    .username {
-        margin-left: 0px;
-    }
-    .nav-link {
-        color: black;
-    }
+  .navbar-phones {
+    margin-top: 0px;
+    background-color: #b3b3e6;
+  }
+  .logo-navbar {
+    height: 2em;
+  }
+  .logo {
+    display: none;
+  }
+  .col3 {
+    display: none;
+  }
+  .logout {
+    display: none;
+  }
+  .homepage-pic {
+    display: none;
+  }
+  .community {
+    margin: auto;
+    margin-bottom: 2em;
+  }
+  .communities {
+    margin-left: 0px;
+  }
+  .navbar-toggler {
+    background-color: #7a5cc7;
+  }
+  .navbar-toggler:focus {
+    outline: none;
+  }
+  .welcome {
+    margin-left: 0px;
+  }
+  .username {
+    margin-left: 0px;
+  }
+  .nav-link {
+    color: black;
+  }
 }
 </style>
