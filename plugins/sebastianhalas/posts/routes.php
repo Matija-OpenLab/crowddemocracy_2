@@ -1,5 +1,6 @@
 <?php 
 use SebastianHalas\Posts\Models\Posts;
+use SebastianHalas\Likes\Models\Likes;
 function db_update()
 {
     $posts = Posts::all();
@@ -77,6 +78,7 @@ Route::group(['prefix' => 'api/v1/posts'], function() {
             return "Unauthorized.";
         }
         if(isset($id)){
+            Likes::where('posts_id',$id)->delete();
             $post = Posts::where('id',$id)->first();
             $post->delete();
             return "Deleted successfully.";
