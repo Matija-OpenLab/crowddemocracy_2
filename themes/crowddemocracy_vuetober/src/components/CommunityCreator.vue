@@ -23,7 +23,11 @@
 
               <p for="opis">Opis komunity (max 60 znakov) {{ desc.length }}</p>
 
-              <ValidationProvider rules="required|max:60" v-slot="{ errors }">
+              <ValidationProvider
+                :customMessages="messages"
+                rules="required|max:60"
+                v-slot="{ errors }"
+              >
                 <textarea type="text" name="opis" v-model="desc" />
                 <span class="error">{{ errors[0] }}</span>
               </ValidationProvider>
@@ -50,7 +54,7 @@ import { mapGetters } from "vuex";
 import { ValidationProvider } from "vee-validate";
 import { ValidationObserver } from "vee-validate";
 import { extend } from "vee-validate";
-import { required, max } from "vee-validate/dist/rules";
+import { required } from "vee-validate/dist/rules";
 import { setInteractionMode } from "vee-validate";
 
 setInteractionMode("eager");
@@ -60,10 +64,10 @@ extend("required", {
   message: "Pole nesmie byť prázdne!"
 });
 
-extend("max", {
-  ...max,
-  message: "Opis komunity nesmie byť dlhší ako 60 znakov"
-});
+// extend("max", {
+//   ...max,
+//   message: "Opis komunity nesmie byť dlhší ako 60 znakov"
+// });
 export default {
   components: {
     ValidationProvider,
@@ -73,7 +77,8 @@ export default {
     return {
       name: "",
       desc: "",
-      error: ""
+      error: "",
+      messages: { max: "Opis komunity nesmie byť dlhší ako 60 znakov" }
     };
   },
   created() {
