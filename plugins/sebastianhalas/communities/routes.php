@@ -1,5 +1,6 @@
 <?php
 use SebastianHalas\Communities\Models\Communities;
+use SebastianHalas\Posts\Models\Posts;
 use RainLab\User\Models\User;
 use RainLab\User\Models\UserGroup;
 function db_update_communities()
@@ -84,6 +85,7 @@ Route::group(['prefix' => 'api/v1/communities'], function() {
             return "Unauthorized.";
         }
         if(isset($id)){
+            Posts::where('community_id',$id)->delete();
             $community = Communities::where('id',$id)->first();
             $community->delete();
             return "Deleted successfully.";
