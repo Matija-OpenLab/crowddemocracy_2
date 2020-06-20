@@ -62,7 +62,6 @@ export default {
     align-items: right;
     background-repeat: no-repeat;
 }
-
 .question {
     padding: 0px;
     font-size: 14px;
@@ -152,7 +151,6 @@ export default {
     .background {
         display: none;
     }
-
     /*Content*/
     .content {
         margin: 0px;

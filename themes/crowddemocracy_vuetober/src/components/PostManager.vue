@@ -260,7 +260,6 @@ export default {
 .yes {
   color: green;
 }
-.no,
 .error {
   color: red;
 }
