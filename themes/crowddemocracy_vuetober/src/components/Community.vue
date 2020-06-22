@@ -1,5 +1,6 @@
 <template>
     <div class="wrap">
+        <!-- navbar phones -->
         <b-navbar class="navbar-phones" toggleable type variant>
             <b-navbar-brand href="#">
                 <img class="logo-navbar" src="../assets/logo.png" />
@@ -36,8 +37,9 @@
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
+        <!-- navbar phones koniec, rovnaky ako na homepage -->
         <b-row>
-            <b-col cols="3" class="list">
+            <b-col cols="3" class="left-navbar">
                 <img class="logo" src="../assets/logo.png" />
                 <div class="your-com">
                     <p class="com-list">Zoznam komunít,kde si členom:</p>
@@ -422,7 +424,7 @@ export default {
     margin-bottom: 0px;
     color: #9a9eaa;
 }
-.list {
+.left-navbar {
     border-right: 1px solid #d7d7c1;
     height: 100vh;
 }
@@ -431,6 +433,7 @@ export default {
     margin-left: 2em;
     margin-top: 10px;
 }
+/* horna cast kontentu - nazov, td */
 .navbar {
     margin-top: 40px;
 }
@@ -455,27 +458,34 @@ export default {
 .com-name {
     margin-left: 20px;
 }
-.question {
-    color: skyblue;
-    font-size: 17px;
-    padding: 20px 0 px;
-    margin-top: 80px;
-}
 .nav-button {
     background-color: #f3f5f8;
     border: none;
     color: #330066;
 }
-
 .nav-row {
     border-bottom: 1px solid #d7d7c1;
     text-align: center;
 }
+.add-to-com {
+    border-color: black;
+    color: #48486e;
+    background-color: white;
+    width: 180px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 50px;
+}
+.leave-com {
+    margin-left: 20px;
+}
+/* posts celok */
 .posts {
     display: flex;
     flex-wrap: wrap;
     margin: 0px;
 }
+/* post */
 .post {
     height: 290px;
     width: 290px;
@@ -487,16 +497,13 @@ export default {
     margin-right: 5em;
     text-align: center;
 }
-.change-vote {
-    border-color: black;
-    color: #48486e;
-    background-color: white;
-    width: 180px;
-    font-weight: bold;
-    font-size: 14px;
-    margin-top: 50px;
+.question {
+    color: skyblue;
+    font-size: 17px;
+    padding: 20px 0 px;
+    margin-top: 80px;
 }
-.add-to-com {
+.change-vote {
     border-color: black;
     color: #48486e;
     background-color: white;
@@ -516,9 +523,7 @@ export default {
 .voted-num {
     color: skyblue;
 }
-.leave-com {
-    margin-left: 20px;
-}
+
 @media only screen and (min-width: 990px) {
     .navbar-phones {
         display: none;

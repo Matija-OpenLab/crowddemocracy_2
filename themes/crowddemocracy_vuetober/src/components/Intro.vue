@@ -1,5 +1,6 @@
 <template>
     <div class="wrap">
+        <!-- navbar začiatok -->
         <b-row class="navbar">
             <b-col>
                 <img class="logo" src="../assets/logo.png" />
@@ -11,6 +12,7 @@
                 <p class="question">Ešte nemáš účet?</p>
             </b-col>
         </b-row>
+        <!-- navbar koniec -->
         <div class="content-wrap">
             <b-row>
                 <b-col lg="6">
@@ -37,10 +39,12 @@
                 </b-col>
             </b-row>
         </div>
+        <!-- footer začiatok -->
         <div class="footer">
             &reg; 2020 všetky práva vyhradené
             <span class="footer-logo">CROWD</span>DEMOCRACY
         </div>
+        <!-- footer koniec -->
     </div>
 </template>
 <script>
@@ -62,12 +66,21 @@ export default {
     align-items: right;
     background-repeat: no-repeat;
 }
+.p,
+h1,
+h4 {
+    color: #48486e;
+}
+/* navbar item */
+.logo {
+    width: 140px;
+    margin-left: 2em;
+}
 .question {
     padding: 0px;
     font-size: 14px;
     float: right;
     margin-top: 0.73em;
-    color: #48486e;
     margin-right: 1em;
 }
 .registration {
@@ -84,13 +97,11 @@ export default {
     margin-top: 3em;
     font-size: 50px;
     font-weight: 50;
-    color: #48486e;
     margin-left: 115px;
 }
 .intro {
     width: 500px;
     font-weight: 50;
-    color: #48486e;
     margin-left: 100px;
     margin-top: 50px;
     text-align: center;
@@ -111,10 +122,7 @@ export default {
     line-height: 43px;
     font-weight: bold;
 }
-.logo {
-    width: 140px;
-    margin-left: 2em;
-}
+
 .content-wrap {
     position: relative;
     min-height: 100%;
