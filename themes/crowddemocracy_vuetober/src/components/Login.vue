@@ -1,5 +1,6 @@
 <template>
     <div class="wrap">
+        <!-- navbar začiatok -->
         <b-row class="navbar">
             <b-col>
                 <img class="logo" src="../assets/logo.png" @click="toIntro()" />
@@ -11,6 +12,7 @@
                 <p class="question">Ešte nemáš účet?</p>
             </b-col>
         </b-row>
+        <!-- navbar koniec, rovnaky ako intro -->
         <div class="content-wrap">
             <b-row>
                 <b-col lg="6">
@@ -54,10 +56,12 @@
                 </b-col>
             </b-row>
         </div>
+        <!-- footer začiatok -->
         <div class="footer">
             &reg; 2020 všetky práva vyhradené
             <span class="footer-logo">CROWD</span>DEMOCRACY
         </div>
+        <!-- footer koniec, rovnaky ako intro -->
     </div>
 </template>
 <script>
@@ -135,7 +139,7 @@ export default {
     align-items: right;
     background-repeat: no-repeat;
 }
-
+/* navbar items */
 .logo {
     width: 140px;
     margin-left: 2em;
@@ -159,6 +163,7 @@ export default {
     margin-top: 5px;
     float: right;
 }
+
 .header {
     margin-top: 3em;
     font-size: 50px;
