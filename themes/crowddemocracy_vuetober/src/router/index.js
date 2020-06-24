@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Intro from '../components/Intro';
-import Registration from '../components/Registration';
-import Login from '../components/Login';
-import Homepage from '../components/Homepage';
-import Secure from '../components/Secure'
-import Community from '../components/Community';
-import CommunityCreator from '../components/CommunityCreator';
-import CommunityManager from '../components/CommunityManager';
-import PostManager from '../components/PostManager';
-import Support from '../components/Support';
+import Intro from '../views/Intro';
+import Registration from '../views/Registration';
+import Login from '../views/Login';
+import Home from '../views/Home';
+import Secure from '../views/Secure'
+import Community from '../views/Community';
+import CommunityCreate from '../views/CommunityCreate';
+import CommunityManager from '../views/CommunityManager';
+import PostManager from '../views/PostManager';
+import Support from '../views/Support';
 
 import VueGtag from "vue-gtag";
 
@@ -34,7 +34,7 @@ const routes = [{
     {
         path: '/home',
         name: 'Home',
-        component: Homepage
+        component: Home
     },
     {
         path: '/community/:id',
@@ -53,7 +53,7 @@ const routes = [{
     {
         path: '/create',
         name: 'Create',
-        component: CommunityCreator
+        component: CommunityCreate
     },
     {
         path: '/manage',

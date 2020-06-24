@@ -65,11 +65,8 @@
     </div>
 </template>
 <script>
-import { ValidationProvider } from "vee-validate";
-import { ValidationObserver } from "vee-validate";
-import { extend } from "vee-validate";
+import { ValidationProvider, ValidationObserver, setInteractionMode, extend } from "vee-validate";
 import { required, email } from "vee-validate/dist/rules";
-import { setInteractionMode } from "vee-validate";
 setInteractionMode("eager");
 
 extend("required", {

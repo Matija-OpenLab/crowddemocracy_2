@@ -72,11 +72,8 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { ValidationProvider } from "vee-validate";
-import { ValidationObserver } from "vee-validate";
-import { extend } from "vee-validate";
+import { ValidationProvider, ValidationObserver, setInteractionMode, extend} from "vee-validate";
 import { required } from "vee-validate/dist/rules";
-import { setInteractionMode } from "vee-validate";
 
 setInteractionMode("eager");
 

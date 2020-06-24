@@ -4,7 +4,7 @@
     <span class="footer-logo">CROWD</span>DEMOCRACY
   </div>
 </template>
-<style lang="scss" >
+<style lang="css" >
 .footer {
   position: relative;
   padding: 1rem;

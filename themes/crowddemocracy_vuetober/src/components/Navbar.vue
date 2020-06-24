@@ -8,15 +8,11 @@
       <p class="question">Ešte nemáš účet?</p>
     </b-col>
   </b-row>
-  <div class="footer">
-    &reg; 2020 všetky práva vyhradené
-    <span class="footer-logo">CROWD</span>DEMOCRACY
-  </div>
 </template>
 <script>
 export default {};
 </script>
-<style lang="scss">
+<style lang="css">
 .logo {
   width: 140px;
   margin-left: 2em;
@@ -38,4 +34,5 @@ export default {};
   margin-top: 5px;
   float: right;
 }
+
 </style>
