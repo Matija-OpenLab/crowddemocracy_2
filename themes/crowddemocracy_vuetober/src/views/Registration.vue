@@ -1,12 +1,20 @@
 <template>
   <div class="registration">
+    <!-- <Registration></Registration> -->
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
+// import Registration from "../components/Registration.vue";
+import Footer from "../components/Footer.vue";
 export default {
-  name: "Registration"
+  name: "Registration",
+  components: {
+    Footer
+    // Registration
+  }
 };
 </script>

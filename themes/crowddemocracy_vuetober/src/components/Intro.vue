@@ -1,16 +1,5 @@
 <template>
   <div class="wrap">
-    <!-- navbar začiatok -->
-    <b-row class="navbar">
-      <b-col>
-        <img class="logo" src="../assets/logo.png" />
-      </b-col>
-      <b-col>
-        <b-button class="registration" to="/registration">Registruj sa</b-button>
-        <p class="question">Ešte nemáš účet?</p>
-      </b-col>
-    </b-row>
-    <!-- navbar koniec -->
     <div class="content-wrap">
       <b-row>
         <b-col lg="6">
@@ -35,12 +24,6 @@
         </b-col>
       </b-row>
     </div>
-    <!-- footer začiatok -->
-    <div class="footer">
-      &reg; 2020 všetky práva vyhradené
-      <span class="footer-logo">CROWD</span>DEMOCRACY
-    </div>
-    <!-- footer koniec -->
   </div>
 </template>
 <script>

@@ -35,7 +35,7 @@
 <script>
 export default {};
 </script>
-<style lang="scss">
+<style lang="css">
 @media only screen and (min-width: 1020px) {
   .navbar-phones {
     display: none;
