@@ -8,7 +8,7 @@
 import CommunityManager from "../components/CommunityManager";
 
 export default {
-  name: "CommunityManager",
+  name: "CommunityManagerpage",
   components: {
     CommunityManager
   }

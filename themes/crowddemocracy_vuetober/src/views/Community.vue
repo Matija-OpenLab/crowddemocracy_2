@@ -1,7 +1,8 @@
 <template>
   <div class="community">
+     
     <NavbarPhones></NavbarPhones>
-    <Community></Community>
+    <Community :id="id"></Community>
   </div>
 </template>
 
@@ -10,10 +11,20 @@ import NavbarPhones from "../components/NavbarPhones.vue";
 import Community from "../components/Community.vue";
 
 export default {
-  name: "Community",
+  props:{
+    id:{
+      type: String
+    }
+  },
+  name: "Communitypage",
   components: {
     NavbarPhones,
     Community
+  },
+  methods:{
+    getId(){
+      return this.$props.id;
+    }
   }
 };
 </script>

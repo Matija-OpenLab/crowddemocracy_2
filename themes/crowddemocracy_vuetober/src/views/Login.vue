@@ -13,11 +13,12 @@ import Navbar from "../components/Navbar.vue";
 import Login from "../components/Login.vue";
 
 export default {
+  name: "Loginpage",
   components: {
     Footer,
     Login,
     Navbar
   },
-  name: "Login"
+ 
 };
 </script>

@@ -23,17 +23,18 @@
           <img class="background" src="../assets/bg.png" />
         </b-col>
       </b-row>
-    </div>
-  </div>
+    </div> 
+    <h5>Hello</h5>
+  </div> 
 </template>
 <script>
 export default {
   created() {
     if (this.$store.getters.isLoggedIn) this.$router.push("/home");
-  }
+}
 };
 </script>
-<style scoped>
+<style lang="css" scoped>
 .wrap {
   height: 100vh;
   margin: 0px;

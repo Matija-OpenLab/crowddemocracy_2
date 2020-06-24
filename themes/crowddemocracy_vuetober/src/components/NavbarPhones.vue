@@ -33,7 +33,39 @@
   </b-navbar>
 </template>
 <script>
-export default {};
+import axios from "axios"
+import { mapGetters } from "vuex";
+export default {
+  data(){
+      return{
+        communities: []
+      }
+    },
+  created() {
+      this.getCommunity();
+  },
+  methods: {
+    
+    logout() {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/");
+      });
+      
+    },
+    //Getters
+    getCommunity() {
+      axios.get("/api/v1/communities").then(res => {
+        this.communities = res.data;
+      });
+    },
+    
+  },
+  computed: {
+    ...mapGetters({
+      user: "getUserData"
+    })
+  }
+};
 </script>
 <style lang="css">
 @media only screen and (min-width: 1020px) {

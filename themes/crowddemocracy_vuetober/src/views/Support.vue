@@ -6,6 +6,6 @@
 <script>
 
 export default {
-  name: "Support"
+  name: "Supportpage"
 };
 </script>

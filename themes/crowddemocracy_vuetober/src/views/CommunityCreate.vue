@@ -8,7 +8,7 @@
 import CommunityCreate from "../components/CommunityCreator";
 
 export default {
-  name: "CommunityCreate",
+  name: "CommunityCreatepage",
   components: {
     CommunityCreate
   }

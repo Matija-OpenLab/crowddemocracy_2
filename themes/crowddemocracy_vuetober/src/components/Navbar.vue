@@ -11,7 +11,15 @@
   </b-row>
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    logout() {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/");
+      });
+    }
+  }
+};
 </script>
 <style lang="css" scoped>
 .logo {
