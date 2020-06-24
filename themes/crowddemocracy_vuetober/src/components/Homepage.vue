@@ -188,7 +188,6 @@ export default {
   background-color: #f3f5f8;
   height: 100%;
   width: 100vw;
-  overflow-x: hidden;
 }
 .logo {
   width: 120px;
@@ -345,28 +344,16 @@ export default {
 
 .left-navbar {
   padding: 0px;
-  border-right: 1px solid #d7d7c1;
 }
 .new-community-button {
   background-color: #24154b;
   color: white;
   width: 170px;
   line-height: 43px;
-  margin-left: 23%;
-}
-@media only screen and (min-width: 1020px) {
-  .navbar-phones {
-    display: none;
-  }
+  /* margin-left: 23%; */
+  margin: auto;
 }
 @media only screen and (max-width: 1020px) {
-  .navbar-phones {
-    margin-top: 0px;
-    background-color: #b3b3e6;
-  }
-  .logo-navbar {
-    height: 2em;
-  }
   .logo {
     display: none;
   }

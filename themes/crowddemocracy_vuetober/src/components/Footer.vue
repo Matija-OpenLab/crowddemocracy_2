@@ -4,18 +4,3 @@
     <span class="footer-logo">CROWD</span>DEMOCRACY
   </div>
 </template>
-<style lang="css" >
-.footer {
-  position: relative;
-  padding: 1rem;
-  width: 100%;
-}
-.footer-logo {
-  font-weight: 900;
-}
-@media only screen and (max-width: 990px) {
-  .footer {
-    font-size: 0.9em;
-  }
-}
-</style>

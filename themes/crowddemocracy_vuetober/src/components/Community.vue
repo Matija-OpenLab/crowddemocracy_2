@@ -297,7 +297,6 @@ export default {
 .wrap {
   background-color: #f3f5f8;
   height: 100vh;
-  overflow-x: hidden;
 }
 
 /*STYLE ZOZNAMU KOMUNIT*/
@@ -334,7 +333,6 @@ export default {
   color: #9a9eaa;
 }
 .left-navbar {
-  border-right: 1px solid #d7d7c1;
   height: 100vh;
 }
 .logo {
@@ -432,20 +430,7 @@ export default {
 .voted-num {
   color: skyblue;
 }
-
-@media only screen and (min-width: 990px) {
-  .navbar-phones {
-    display: none;
-  }
-}
 @media only screen and (max-width: 990px) {
-  .navbar-phones {
-    margin-top: 0px;
-    background-color: #b3b3e6;
-  }
-  .logo-navbar {
-    height: 2em;
-  }
   .logout {
     display: none;
   }

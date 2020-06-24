@@ -96,13 +96,6 @@ export default {
 .wrap {
   height: 100vh;
   margin: 0px;
-  overflow-x: hidden;
-}
-.background {
-  max-width: 100%;
-  min-height: 100vh;
-  align-items: right;
-  background-repeat: no-repeat;
 }
 /* navbar items */
 .logo {
@@ -168,24 +161,9 @@ export default {
   margin-top: 20px;
   line-height: 43px;
 }
-.footer {
-  position: relative;
-  padding: 1rem;
-  width: 100%;
-}
-.footer-logo {
-  font-weight: 900;
-}
+
 @media only screen and (max-width: 990px) {
   /*Navigation*/
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  .question,
-  .background {
-    display: none;
-  }
   .registration {
     border-color: #48486e;
     color: #48486e;
@@ -198,19 +176,11 @@ export default {
     width: 7em;
     margin-left: 0px;
   }
-
-  .header {
-    margin-top: 2em;
-    font-size: 2em;
-    margin-left: 0px;
-    text-align: center;
-  }
   .login {
     margin: 0px;
     margin-top: 3em;
   }
   .footer {
-    font-size: 0.9em;
     margin-top: 5%;
   }
   /*Form */

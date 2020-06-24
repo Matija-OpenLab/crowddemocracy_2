@@ -151,13 +151,6 @@ export default {
 .wrap {
   height: 100vh;
   margin: 0px;
-  overflow-x: hidden;
-}
-.background {
-  max-width: 100%;
-  min-height: 100vh;
-  align-items: right;
-  background-repeat: no-repeat;
 }
 /* navbar items */
 .logo {
@@ -184,13 +177,6 @@ export default {
   float: right;
 }
 
-.header {
-  margin-top: 3em;
-  font-size: 50px;
-  font-weight: 50;
-  color: #48486e;
-  margin-left: 130px;
-}
 .form {
   margin-left: 130px;
   margin-top: 25px;
@@ -223,25 +209,8 @@ export default {
   margin-top: 20px;
   line-height: 43px;
 }
-.footer {
-  position: relative;
-  padding: 1rem;
-  width: 100%;
-}
-.footer-logo {
-  font-weight: 900;
-}
-
 @media only screen and (max-width: 990px) {
   /*Navigation*/
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  .question,
-  .background {
-    display: none;
-  }
   .login {
     border-color: #48486e;
     color: #48486e;
@@ -253,12 +222,6 @@ export default {
   .logo {
     width: 7em;
     margin-left: 0px;
-  }
-  .header {
-    margin-top: 2em;
-    font-size: 2em;
-    margin-left: 0px;
-    text-align: center;
   }
   .registration {
     margin: 0px;
@@ -279,7 +242,6 @@ export default {
     border-bottom: 1px solid #a0a09f;
   }
   .footer {
-    font-size: 0.9em;
     margin-top: 5%;
   }
 }

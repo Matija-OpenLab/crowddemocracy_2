@@ -37,30 +37,10 @@ export default {
 .wrap {
   height: 100vh;
   margin: 0px;
-  overflow-x: hidden;
-}
-.background {
-  max-width: 100%;
-  min-height: 100vh;
-  align-items: right;
-  background-repeat: no-repeat;
 }
 .p,
-h1,
 h4 {
   color: #48486e;
-}
-/* navbar item */
-.logo {
-  width: 140px;
-  margin-left: 2em;
-}
-.question {
-  padding: 0px;
-  font-size: 14px;
-  float: right;
-  margin-top: 0.73em;
-  margin-right: 1em;
 }
 .registration {
   border-color: #48486e;
@@ -71,13 +51,6 @@ h4 {
   font-size: 14px;
   margin-top: 5px;
   float: right;
-}
-
-.header {
-  margin-top: 3em;
-  font-size: 50px;
-  font-weight: 50;
-  margin-left: 115px;
 }
 .intro {
   width: 500px;
@@ -107,23 +80,8 @@ h4 {
   position: relative;
   min-height: 100%;
 }
-.footer {
-  position: relative;
-  padding: 1rem;
-  width: 100%;
-}
-.footer-logo {
-  font-weight: 900;
-}
 @media only screen and (max-width: 990px) {
   /*Navigation*/
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  .question {
-    display: none;
-  }
   .registration {
     border-color: #48486e;
     color: #48486e;
@@ -136,18 +94,9 @@ h4 {
     width: 7em;
     margin-left: 0px;
   }
-  .background {
-    display: none;
-  }
   /*Content*/
   .content {
     margin: 0px;
-    text-align: center;
-  }
-  .header {
-    margin-top: 2em;
-    font-size: 2em;
-    margin-left: 0px;
     text-align: center;
   }
   .login {
@@ -158,9 +107,6 @@ h4 {
     margin: 0px;
     width: 100%;
     margin-top: 4em;
-  }
-  .footer {
-    font-size: 0.9em;
   }
 }
 @media only screen and (max-width: 400px) {
