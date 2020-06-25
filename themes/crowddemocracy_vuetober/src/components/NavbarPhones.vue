@@ -33,32 +33,29 @@
   </b-navbar>
 </template>
 <script>
-import axios from "axios"
+import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
-  data(){
-      return{
-        communities: []
-      }
-    },
+  data() {
+    return {
+      communities: []
+    };
+  },
   created() {
-      this.getCommunity();
+    this.getCommunity();
   },
   methods: {
-    
     logout() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
       });
-      
     },
     //Getters
     getCommunity() {
       axios.get("/api/v1/communities").then(res => {
         this.communities = res.data;
       });
-    },
-    
+    }
   },
   computed: {
     ...mapGetters({
@@ -68,11 +65,6 @@ export default {
 };
 </script>
 <style lang="css">
-@media only screen and (min-width: 1020px) {
-  .navbar-phones {
-    display: none;
-  }
-}
 @media only screen and (max-width: 1020px) {
   .navbar-phones {
     margin-top: 0px;

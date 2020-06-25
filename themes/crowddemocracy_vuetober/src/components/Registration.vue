@@ -1,74 +1,76 @@
 <template>
   <div class="wrap">
-    <!-- navbar začiatok, zmena v buttone -->
-    <b-row class="navbar">
-      <b-col>
-        <img class="logo" src="../assets/logo.png" @click="toIntro()" />
-      </b-col>
-      <b-col>
-        <b-button class="login" to="/login">Prihlás sa</b-button>
-        <p class="question">Už máš účet?</p>
-      </b-col>
-    </b-row>
-    <!-- navbar koniec -->
-    <div class="content-wrap">
-      <b-row>
-        <b-col lg="6">
-          <h1 class="header">Registrácia</h1>
-          <ValidationObserver v-slot="{ passes }">
-            <form class="form" @submit.prevent="passes(register)">
-              <ValidationProvider rules="required|email" v-slot="{ errors }">
-                <input class="placeholder" type="email" placeholder="Email" v-model="email" />
-                <span class="error">{{ errors[0] }}</span>
-              </ValidationProvider>
-
-              <ValidationProvider rules="required|max:16" v-slot="{ errors }">
-                <input
-                  class="placeholder"
-                  type="text"
-                  placeholder="Používateľské meno"
-                  v-model="username"
-                />
-                <span class="error">{{ errors[0] }}</span>
-              </ValidationProvider>
-
-              <ValidationProvider
-                vid="password"
-                rules="required|password_verification:8,16"
-                v-slot="{ errors }"
-              >
-                <input class="placeholder" type="password" placeholder="Heslo" v-model="password" />
-                <span class="error">{{ errors[0] }}</span>
-              </ValidationProvider>
-
-              <ValidationProvider
-                rules="required|password_verification:8,16|confirmed:password"
-                v-slot="{ errors }"
-              >
-                <input
-                  class="password"
-                  type="password"
-                  placeholder="Potvrdenie hesla"
-                  v-model="password_confirmation"
-                />
-                <span class="error">{{ errors[0] }}</span>
-              </ValidationProvider>
-
-              <span class="error">{{ error }}</span>
-              <b-button class="registration" type="submit">Registrácia</b-button>
-            </form>
-          </ValidationObserver>
+    <b-container fluid class="wrap-content">
+      <b-row class="navbar">
+        <b-col>
+          <img class="logo" src="../assets/logo.png" @click="toIntro()" />
         </b-col>
         <b-col>
-          <img class="background" src="../assets/bg.png" />
+          <b-button class="login" to="/login">Prihlás sa</b-button>
+          <p class="question">Už máš účet?</p>
         </b-col>
       </b-row>
-    </div>
+      <!-- navbar koniec -->
+      <div class="content-wrap">
+        <b-row>
+          <b-col lg="6">
+            <h1 class="header">Registrácia</h1>
+            <ValidationObserver v-slot="{ passes }">
+              <form class="form" @submit.prevent="passes(register)">
+                <ValidationProvider rules="required|email" v-slot="{ errors }">
+                  <input class="placeholder" type="email" placeholder="Email" v-model="email" />
+                  <span class="error">{{ errors[0] }}</span>
+                </ValidationProvider>
+
+                <ValidationProvider rules="required|max:16" v-slot="{ errors }">
+                  <input
+                    class="placeholder"
+                    type="text"
+                    placeholder="Používateľské meno"
+                    v-model="username"
+                  />
+                  <span class="error">{{ errors[0] }}</span>
+                </ValidationProvider>
+
+                <ValidationProvider
+                  vid="password"
+                  rules="required|password_verification:8,16"
+                  v-slot="{ errors }"
+                >
+                  <input class="placeholder" type="password" placeholder="Heslo" v-model="password" />
+                  <span class="error">{{ errors[0] }}</span>
+                </ValidationProvider>
+
+                <ValidationProvider
+                  rules="required|password_verification:8,16|confirmed:password"
+                  v-slot="{ errors }"
+                >
+                  <input
+                    class="password"
+                    type="password"
+                    placeholder="Potvrdenie hesla"
+                    v-model="password_confirmation"
+                  />
+                  <span class="error">{{ errors[0] }}</span>
+                </ValidationProvider>
+
+                <span class="error">{{ error }}</span>
+                <b-button class="registration" type="submit">Registrácia</b-button>
+              </form>
+            </ValidationObserver>
+            <Footer></Footer>
+          </b-col>
+          <b-col>
+            <img class="background" src="../assets/bg.png" />
+          </b-col>
+        </b-row>
+      </div>
+    </b-container>
   </div>
 </template>
 <script>
 /*eslint-disable*/
-
+import Footer from "../components/Footer.vue";
 import {
   ValidationProvider,
   ValidationObserver,
@@ -112,7 +114,8 @@ extend("password_verification", {
 export default {
   components: {
     ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
+    Footer
   },
   data() {
     return {
@@ -151,6 +154,8 @@ export default {
 .wrap {
   height: 100vh;
   margin: 0px;
+  position: absolute;
+  width: 100%;
 }
 /* navbar items */
 .logo {
@@ -192,14 +197,6 @@ export default {
 }
 .form input:focus {
   outline: none;
-}
-.error {
-  display: block;
-  width: 100%;
-  color: #ff3333;
-  font-size: 14px;
-  margin-top: 1em;
-  overflow-wrap: break-word;
 }
 .registration {
   background-color: #24154b;

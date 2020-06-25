@@ -21,12 +21,12 @@ export default {
   overflow-wrap: break-word;
 }
 .wrap {
-  overflow: hidden;
+  /* height: calc(100vh - 63px); */
 }
 .background {
   max-width: 100%;
-  min-height: 100vh;
-  align-items: right;
+  min-height: 100%;
+  /* align-items: right; */
   background-repeat: no-repeat;
 }
 .logo {
@@ -50,19 +50,7 @@ export default {
 .left-navbar {
   border-right: 1px solid #d7d7c1;
 }
-.footer {
-  position: relative;
-  padding: 1rem;
-  width: 100%;
-}
-.footer-logo {
-  font-weight: 900;
-}
-@media only screen and (min-width: 990px) {
-  .navbar-phones {
-    display: none;
-  }
-}
+
 @media only screen and (max-width: 990px) {
   body {
     margin: 0;

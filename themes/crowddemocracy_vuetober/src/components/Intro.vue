@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="content-wrap">
+    <b-container fluid class="content-wrap">
       <b-row>
         <b-col lg="6">
           <b-row>
@@ -23,21 +23,27 @@
           <img class="background" src="../assets/bg.png" />
         </b-col>
       </b-row>
-    </div> 
-    <h5>Hello</h5>
-  </div> 
+      <Footer></Footer>
+    </b-container>
+  </div>
 </template>
 <script>
+import Footer from "../components/Footer";
+
 export default {
   created() {
     if (this.$store.getters.isLoggedIn) this.$router.push("/home");
-}
+  },
+  components: {
+    Footer
+  }
 };
 </script>
 <style lang="css" scoped>
 .wrap {
-  height: 100vh;
+  height: calc(100vh - 63px);
   margin: 0px;
+  /* position: absolute; */
 }
 .p,
 h4 {

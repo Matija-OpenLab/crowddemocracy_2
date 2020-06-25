@@ -43,6 +43,9 @@ export default {
   margin-top: 5px;
   float: right;
 }
+.navbar {
+  margin: 0;
+}
 @media only screen and (max-width: 990px) {
   /*Navigation*/
   .question {

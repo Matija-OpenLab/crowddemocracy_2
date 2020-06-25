@@ -1,6 +1,7 @@
 <template>
   <div class="wrap">
-    <div class="content-wrap">
+    <b-container fluid class="content-wrap">
+      <Navbar></Navbar>
       <b-row>
         <b-col lg="6">
           <h1 class="header">Prihlásenie</h1>
@@ -24,7 +25,8 @@
           <img class="background" src="../assets/bg.png" />
         </b-col>
       </b-row>
-    </div>
+      <Footer></Footer>
+    </b-container>
   </div>
 </template>
 <script>
@@ -36,6 +38,8 @@ import {
 } from "vee-validate";
 import { required, email } from "vee-validate/dist/rules";
 setInteractionMode("eager");
+import Footer from "../components/Footer.vue";
+import Navbar from "../components/Navbar.vue";
 
 extend("required", {
   ...required,
@@ -63,7 +67,9 @@ extend("password_verification", {
 export default {
   components: {
     ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
+    Footer,
+    Navbar
   },
   data() {
     return {
@@ -94,10 +100,13 @@ export default {
 </script>
 <style scoped>
 .wrap {
-  height: 100vh;
   margin: 0px;
+  overflow-x: hidden;
 }
 /* navbar items */
+.content-wrap {
+  position: relative;
+}
 .logo {
   width: 140px;
   margin-left: 2em;
@@ -122,13 +131,6 @@ export default {
   float: right;
 }
 
-.header {
-  margin-top: 3em;
-  font-size: 50px;
-  font-weight: 50;
-  color: #48486e;
-  margin-left: 130px;
-}
 .form {
   margin-left: 130px;
   margin-top: 25px;
@@ -144,14 +146,6 @@ export default {
 }
 .form input:focus {
   outline: none;
-}
-.error {
-  display: block;
-  width: 100%;
-  color: #ff3333;
-  font-size: 14px;
-  margin-top: 1em;
-  overflow-wrap: break-word;
 }
 .login {
   background-color: #24154b;
@@ -179,9 +173,6 @@ export default {
   .login {
     margin: 0px;
     margin-top: 3em;
-  }
-  .footer {
-    margin-top: 5%;
   }
   /*Form */
   .form {
