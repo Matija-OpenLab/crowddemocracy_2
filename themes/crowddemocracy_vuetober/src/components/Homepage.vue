@@ -1,109 +1,123 @@
 <template>
   <div class="wrap">
-    <b-row>
-      <b-col class="left-navbar" cols="3">
-        <img class="logo" src="../assets/logo.png" />
-        <div class="your-com">
-          <p class="com-list">Zoznam komunít,kde si členom:</p>
-          <div class="names" v-for="community in communities" :key="community.id">
-            <div
-              v-if="
+    <NavbarPhones class="navbar-phones"></NavbarPhones>
+    <b-container fluid class="content-wrap">
+      <b-row>
+        <b-col class="left-navbar vh-100 p-0" cols="3">
+          <img class="logo ml-2 mt-3 d-none d-lg-block" src="../assets/logo.png" />
+          <div class="ml-4 mt-5">
+            <p class="com-list my-4">Zoznam komunít,kde si členom:</p>
+            <div class="mt-3" v-for="community in communities" :key="community.id">
+              <div
+                v-if="
                                 user.communities.some(
                                     comm => comm.id === community.id
                                 )
                             "
-            >
-              <b-row @click="navigateToComm(community.id)" class="com-side">
-                <b-col cols="1">
-                  <img
-                    v-if="community.icon_id === '0'"
-                    class="com-logo-list"
-                    src="../assets/com-log1.png"
-                  />
-                  <img
-                    v-if="community.icon_id === '1'"
-                    class="com-logo-list"
-                    src="../assets/com-log2.png"
-                  />
-                  <img
-                    v-if="community.icon_id === '2'"
-                    class="com-logo-list"
-                    src="../assets/com-log3.png"
-                  />
-                </b-col>
-                <b-col class="com-info">
-                  <p class="com-count-info">{{ community.user_count }} užívateľov</p>
-                  <p class="com-name-list">{{ community.name }}</p>
-                </b-col>
-              </b-row>
+              >
+                <b-row @click="navigateToComm(community.id)" class="com-side">
+                  <b-col cols="1">
+                    <img
+                      v-if="community.icon_id === '0'"
+                      class="com-logo-list"
+                      src="../assets/com-log1.png"
+                    />
+                    <img
+                      v-if="community.icon_id === '1'"
+                      class="com-logo-list"
+                      src="../assets/com-log2.png"
+                    />
+                    <img
+                      v-if="community.icon_id === '2'"
+                      class="com-logo-list"
+                      src="../assets/com-log3.png"
+                    />
+                  </b-col>
+                  <b-col class="ml-4">
+                    <p class="com-count-info mb-0">{{ community.user_count }} užívateľov</p>
+                    <p class="com-name-list">{{ community.name }}</p>
+                  </b-col>
+                </b-row>
+              </div>
+            </div>
+            <div class="d-flex">
+              <b-button
+                v-if="user.is_activated"
+                class="new-community-button mx-auto text-center"
+                to="/create"
+              >Nová komunita</b-button>
+              <b-button
+                v-else
+                class="new-community-button mx-auto text-center"
+                to="/support"
+              >Staň sa testerom</b-button>
             </div>
           </div>
-          <b-button v-if="user.is_activated" class="new-community-button" to="/create">Nová komunita</b-button>
-          <b-button v-else class="new-community-button" to="/support">Staň sa testerom</b-button>
-        </div>
-      </b-col>
-      <b-col class="col">
-        <b-button class="logout" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
-        <b-row class="navbar">
-          <b-col cols="1">
-            <img class="homepage-pic" src="../assets/homepage.png" />
-          </b-col>
-          <b-col>
-            <h1 class="welcome">Vitajte v CrowdDemocracy</h1>
-            <p class="username">Vitaj {{ user.name }}!</p>
-          </b-col>
-        </b-row>
-        <div class="communities">
-          <!--komunita div začiatok-->
-          <div class="community" v-for="community in communities" :key="community.id">
-            <div @click="navigateToComm(community.id)">
-              <!-- napicu ale cenim ze to musim robit ja -Matija <3 -->
-              <img v-if="community.icon_id === '0'" class="com-logo" src="../assets/com-log1.png" />
-              <img v-if="community.icon_id === '1'" class="com-logo" src="../assets/com-log2.png" />
-              <img v-if="community.icon_id === '2'" class="com-logo" src="../assets/com-log3.png" />
-              <p class="com-count">{{ community.user_count }} užívateľov</p>
-              <p class="com-name">{{ community.name }}</p>
-              <div v-if="community.icon_id === '0'" class="com-desc color1">
-                <p class="small-desc">Popis komunity</p>
-                <p>{{ community.description }}</p>
-              </div>
-              <div v-if="community.icon_id === '1'" class="com-desc color2">
-                <p class="small-desc">Popis komunity</p>
-                <p>{{ community.description }}</p>
-              </div>
-              <div v-if="community.icon_id === '2'" class="com-desc color3">
-                <p class="small-desc">Popis komunity</p>
-                <p>{{ community.description }}</p>
-              </div>
-              <!-- <p class="com-create">{{ community.created_at.split(" ")[0] }}</p> -->
+        </b-col>
+        <b-col class="col">
+          <b-button class="logout mt-0" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
+          <b-row class="navbar mt-4">
+            <b-col cols="1">
+              <img class="homepage-pic" src="../assets/homepage.png" />
+            </b-col>
+            <b-col>
+              <h1 class="welcome mt-1 ml-5">Vitajte v CrowdDemocracy</h1>
+              <p class="username mb-2 ml-5">Vitaj {{ user.name }}!</p>
+            </b-col>
+          </b-row>
+          <div class="communities mt-3 ml-1">
+            <!--komunita div začiatok-->
+            <div class="community mt-2 mb-3" v-for="community in communities" :key="community.id">
+              <div @click="navigateToComm(community.id)">
+                <!-- napicu ale cenim ze to musim robit ja -Matija <3 -->
+                <img v-if="community.icon_id === '0'" class="com-logo" src="../assets/com-log1.png" />
+                <img v-if="community.icon_id === '1'" class="com-logo" src="../assets/com-log2.png" />
+                <img v-if="community.icon_id === '2'" class="com-logo" src="../assets/com-log3.png" />
+                <p class="com-count mb-0 mt-3">{{ community.user_count }} užívateľov</p>
+                <p class="com-name">{{ community.name }}</p>
+                <div v-if="community.icon_id === '0'" class="com-desc color1">
+                  <p class="small-desc">Popis komunity</p>
+                  <p>{{ community.description }}</p>
+                </div>
+                <div v-if="community.icon_id === '1'" class="com-desc color2">
+                  <p class="small-desc">Popis komunity</p>
+                  <p>{{ community.description }}</p>
+                </div>
+                <div v-if="community.icon_id === '2'" class="com-desc color3">
+                  <p class="small-desc">Popis komunity</p>
+                  <p>{{ community.description }}</p>
+                </div>
+                <!-- <p class="com-create">{{ community.created_at.split(" ")[0] }}</p> -->
 
-              <b-row class="com-footer">
-                <b-col cols="8">
-                  <p
-                    class="add-to-com"
-                    v-if="
+                <b-row class="com-footer">
+                  <b-col cols="8">
+                    <p
+                      class="add-to-com"
+                      v-if="
                                             !user.communities.some(
                                                 comm => comm.id === community.id
                                             )
                                         "
-                    @click="joinCommunity(community.id)"
-                  >+ pridaj sa do tejto komunity</p>
-                </b-col>
-                <b-col>
-                  <p class="com-owner">{{ community.owner }}</p>
-                </b-col>
-              </b-row>
+                      @click="joinCommunity(community.id)"
+                    >+ pridaj sa do tejto komunity</p>
+                  </b-col>
+                  <b-col>
+                    <p class="com-owner">{{ community.owner }}</p>
+                  </b-col>
+                </b-row>
+              </div>
             </div>
+            <!-- komunita koniec -->
           </div>
-          <!-- komunita koniec -->
-        </div>
-      </b-col>
-    </b-row>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 <script>
 import axios from "axios";
 import { mapGetters } from "vuex";
+import NavbarPhones from "../components/NavbarPhones";
 export default {
   data() {
     return {
@@ -176,6 +190,9 @@ export default {
     ...mapGetters({
       user: "getUserData"
     })
+  },
+  components: {
+    NavbarPhones
   }
 };
 </script>
@@ -186,13 +203,11 @@ export default {
 }
 .wrap {
   background-color: #f3f5f8;
-  height: 100%;
   width: 100vw;
+  height: 100vh;
 }
 .logo {
   width: 120px;
-  margin-left: 2em;
-  margin-top: 10px;
 }
 .color1 {
   color: #c74079;
@@ -206,15 +221,10 @@ export default {
 
 /*STYLE ZOZNAMU KOMUNIT*/
 
-.names {
-  margin-bottom: 2em;
-}
 .com-name-list {
   font-weight: bold;
 }
-.com-info {
-  margin-left: 2em;
-}
+
 .com-side {
   cursor: pointer;
 }
@@ -223,8 +233,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   margin: 0px;
-  margin-top: 40px;
-  margin-left: 20px;
 }
 /* styl jednej komunity */
 .community {
@@ -233,8 +241,7 @@ export default {
   background-color: white;
   border-radius: 15px;
   cursor: pointer;
-  margin-right: 5em;
-  margin-bottom: 2em;
+  margin: auto;
   transition: 1s;
 }
 .community:hover {
@@ -244,17 +251,11 @@ export default {
 }
 .com-list {
   font-size: 15px;
-  margin-top: 40px;
-  margin-bottom: 20px;
   color: #9a9eaa;
 }
-
 .com-logo-list {
   width: 50px;
   height: auto;
-}
-.com-logo-list {
-  left: 0px;
 }
 .com-logo {
   width: 50px;
@@ -266,22 +267,18 @@ export default {
 .com-count-info {
   text-align: left;
   font-size: 13px;
-  margin-bottom: 0px;
   color: #9a9eaa;
 }
 
 .com-count {
   text-align: center;
   font-size: 13px;
-  margin-bottom: 0px;
-  margin-top: 20px;
   color: #9a9eaa;
 }
 .com-name {
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  margin-top: 3px;
   border-bottom: 1px solid #d7d7c1;
 }
 .logout {
@@ -289,31 +286,19 @@ export default {
   border-color: #f3f5f8;
   color: #330066;
   margin-left: 77%;
-  margin-top: 25px;
   font-size: 15px;
 }
 .navbar {
-  margin-top: 30px;
   border-bottom: 1px solid #d7d7c1;
 }
-
-.your-com {
-  margin-left: 2em;
-  margin-top: 40px;
-}
 .welcome {
-  margin-top: 10px;
   font-size: 32px;
-  margin-left: 50px;
 }
 .username {
-  margin-bottom: 2em;
-  margin-left: 53px;
   font-size: 22px;
 }
 .com-owner {
   text-align: center;
-  /* margin-top: 1em; */
 }
 .com-desc {
   display: grid;
@@ -341,21 +326,16 @@ export default {
   cursor: pointer;
   color: black;
 }
-
-.left-navbar {
-  padding: 0px;
-}
 .new-community-button {
   background-color: #24154b;
   color: white;
   width: 170px;
   line-height: 43px;
   /* margin-left: 23%; */
-  margin: auto;
 }
 @media only screen and (max-width: 1020px) {
-  .logo {
-    display: none;
+  .wrap {
+    height: 100%;
   }
   .left-navbar {
     display: none;

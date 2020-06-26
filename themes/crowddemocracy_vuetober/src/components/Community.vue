@@ -1,129 +1,133 @@
 <template>
   <div class="wrap">
-    <b-row>
-      <b-col cols="3" class="left-navbar">
-        <img class="logo" src="../assets/logo.png" />
-        <div class="your-com">
-          <p class="com-list">Zoznam komunít,kde si členom:</p>
-          <div class="names" v-for="community in communities" :key="community.id">
-            <div
-              v-if="
+    <NavbarPhones class="navbar-phones"></NavbarPhones>
+    <b-container fluid class="content-wrap">
+      <b-row>
+        <b-col cols="3" class="left-navbar">
+          <img class="logo ml-2 mt-3" src="../assets/logo.png" />
+          <div class="your-com">
+            <p class="com-list">Zoznam komunít,kde si členom:</p>
+            <div class="names" v-for="community in communities" :key="community.id">
+              <div
+                v-if="
                                 user.communities.some(
                                     comm => comm.id === community.id
                                 )
                             "
-            >
-              <b-row @click="navigateToComm(community.id)" class="com-side">
-                <b-col cols="1">
-                  <img
-                    v-if="community.icon_id === '0'"
-                    class="com-logo-list"
-                    src="../assets/com-log1.png"
-                  />
-                  <img
-                    v-if="community.icon_id === '1'"
-                    class="com-logo-list"
-                    src="../assets/com-log2.png"
-                  />
-                  <img
-                    v-if="community.icon_id === '2'"
-                    class="com-logo-list"
-                    src="../assets/com-log3.png"
-                  />
-                </b-col>
-                <b-col class="com-info">
-                  <p class="com-count-info">{{ community.user_count }} užívateľov</p>
-                  <p class="com-name-list">{{ community.name }}</p>
-                </b-col>
-              </b-row>
+              >
+                <b-row @click="navigateToComm(community.id)" class="com-side">
+                  <b-col cols="1">
+                    <img
+                      v-if="community.icon_id === '0'"
+                      class="com-logo-list"
+                      src="../assets/com-log1.png"
+                    />
+                    <img
+                      v-if="community.icon_id === '1'"
+                      class="com-logo-list"
+                      src="../assets/com-log2.png"
+                    />
+                    <img
+                      v-if="community.icon_id === '2'"
+                      class="com-logo-list"
+                      src="../assets/com-log3.png"
+                    />
+                  </b-col>
+                  <b-col class="com-info">
+                    <p class="com-count-info">{{ community.user_count }} užívateľov</p>
+                    <p class="com-name-list">{{ community.name }}</p>
+                  </b-col>
+                </b-row>
+              </div>
             </div>
           </div>
-        </div>
-      </b-col>
-      <b-col class="col">
-        <b-button class="logout" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
-        <b-row class="navbar">
-          <b-col class="com-pic" cols="1">
-            <img v-if="community.icon_id === '0'" class="com-pic" src="../assets/com-log1.png" />
-            <img v-if="community.icon_id === '1'" class="com-pic" src="../assets/com-log2.png" />
-            <img v-if="community.icon_id === '2'" class="com-pic" src="../assets/com-log3.png" />
-          </b-col>
-          <b-col>
-            <a class="back-to-com" href="/home">Späť do zoznamu komunít</a>
-            <h1 class="com-name">{{ community.name }}</h1>
-            <b-button
-              variant="outline-secondary"
-              class="leave-com"
-              v-if="
+        </b-col>
+        <b-col class="col">
+          <b-button class="logout" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
+          <b-row class="navbar">
+            <b-col class="com-pic" cols="1">
+              <img v-if="community.icon_id === '0'" class="com-pic" src="../assets/com-log1.png" />
+              <img v-if="community.icon_id === '1'" class="com-pic" src="../assets/com-log2.png" />
+              <img v-if="community.icon_id === '2'" class="com-pic" src="../assets/com-log3.png" />
+            </b-col>
+            <b-col>
+              <a class="back-to-com" href="/home">Späť do zoznamu komunít</a>
+              <h1 class="com-name">{{ community.name }}</h1>
+              <b-button
+                variant="outline-secondary"
+                class="leave-com"
+                v-if="
                                 user.communities.some(
                                     comm => comm.id === community.id
                                 )
                             "
-              @click="leaveCommunity(community.id)"
-            >Opustiť komunitu</b-button>
-            <b-button
-              class="leave-com"
-              variant="outline-secondary"
-              v-else
-              @click="joinCommunity(community.id)"
-            >Pridaj sa</b-button>
-          </b-col>
-        </b-row>
-        <b-row class="nav-row">
-          <b-col>
-            <b-button class="nav-button" @click="notVoted">Nehlasoval som</b-button>
-          </b-col>
-          <b-col>
-            <b-button class="nav-button" @click="latest">Najnovšie</b-button>
-          </b-col>
-          <b-col>
-            <b-button class="nav-button" @click="popular">Populárne</b-button>
-          </b-col>
-        </b-row>
-        <div
-          v-if="
+                @click="leaveCommunity(community.id)"
+              >Opustiť komunitu</b-button>
+              <b-button
+                class="leave-com"
+                variant="outline-secondary"
+                v-else
+                @click="joinCommunity(community.id)"
+              >Pridaj sa</b-button>
+            </b-col>
+          </b-row>
+          <b-row class="nav-row">
+            <b-col>
+              <b-button class="nav-button" @click="notVoted">Nehlasoval som</b-button>
+            </b-col>
+            <b-col>
+              <b-button class="nav-button" @click="latest">Najnovšie</b-button>
+            </b-col>
+            <b-col>
+              <b-button class="nav-button" @click="popular">Populárne</b-button>
+            </b-col>
+          </b-row>
+          <div
+            v-if="
                         user.communities.some(comm => comm.id === community.id)
                     "
-        >
-          <div class="posts">
-            <div class="post" v-for="post in communityPosts" :key="post.id">
-              <p class="question">{{ post.content }}</p>
-              <span class="voted-num">Zahlasovalo {{ post.total_votes }}</span>
-              <div
-                class="vote_buttons"
-                v-if="
+          >
+            <div class="posts">
+              <div class="post" v-for="post in communityPosts" :key="post.id">
+                <p class="question">{{ post.content }}</p>
+                <span class="voted-num">Zahlasovalo {{ post.total_votes }}</span>
+                <div
+                  class="vote_buttons"
+                  v-if="
                                     !user.likes.some(
                                         item => item.posts_id === post.id
                                     )
                                 "
-              >
-                <b-button
-                  class="vote-yes"
-                  variant="outline-success"
-                  @click="addVote(post.id, 'vote_yes')"
-                >Áno</b-button>
-                <b-button
-                  class="vote-no"
-                  variant="outline-danger"
-                  @click="addVote(post.id, 'vote_yes')"
-                >Nie</b-button>
-              </div>
-              <div v-else>
-                <b-button class="change-vote" @click="changeVote(post.id)">ZMENIŤ HLAS</b-button>
+                >
+                  <b-button
+                    class="vote-yes"
+                    variant="outline-success"
+                    @click="addVote(post.id, 'vote_yes')"
+                  >Áno</b-button>
+                  <b-button
+                    class="vote-no"
+                    variant="outline-danger"
+                    @click="addVote(post.id, 'vote_yes')"
+                  >Nie</b-button>
+                </div>
+                <div v-else>
+                  <b-button class="change-vote" @click="changeVote(post.id)">ZMENIŤ HLAS</b-button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div v-else>
-          <h4 class="text-center mt-5">Pridaj sa do komunity, aby si videl hlasovania</h4>
-        </div>
-      </b-col>
-    </b-row>
+          <div v-else>
+            <h4 class="text-center mt-5">Pridaj sa do komunity, aby si videl hlasovania</h4>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 <script>
 import axios from "axios";
 import { mapGetters } from "vuex";
+import NavbarPhones from "../components/NavbarPhones.vue";
 
 export default {
   props: {
@@ -286,6 +290,9 @@ export default {
   beforeRouteUpdate(to, from, next) {
     this.getCommunities();
     next();
+  },
+  components: {
+    NavbarPhones
   }
 };
 </script>
@@ -337,8 +344,6 @@ export default {
 }
 .logo {
   width: 120px;
-  margin-left: 2em;
-  margin-top: 10px;
 }
 /* horna cast kontentu - nazov, td */
 .navbar {
@@ -438,6 +443,9 @@ export default {
     margin-top: 0px;
   }
   .logo {
+    display: none;
+  }
+  .left-navbar {
     display: none;
   }
   .list {
