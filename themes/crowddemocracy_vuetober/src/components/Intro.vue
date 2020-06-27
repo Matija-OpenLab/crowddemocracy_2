@@ -8,14 +8,14 @@
               <h4 class="header">Ako využijete svoj hlas?</h4>
             </b-col>
             <b-col class="content">
-              <h5 class="intro">
+              <h5 class="intro mt-5">
                 Na
                 <span class="intro-text">CROWD</span>DEMOCRACY
                 môžete dať svoj hlas novým návrhom alebo ho
                 odovzdať ľudom, ktorým dôverujete.
               </h5>
 
-              <b-button class="login" to="/login">Prihlásiť sa</b-button>
+              <b-button class="login mt-5" to="/login">Prihlásiť sa</b-button>
             </b-col>
           </b-row>
         </b-col>
@@ -63,7 +63,6 @@ h4 {
   width: 500px;
   font-weight: 50;
   margin-left: 100px;
-  margin-top: 50px;
   text-align: center;
 }
 .intro-text {
@@ -77,7 +76,6 @@ h4 {
   color: white;
   width: 215px;
   height: 60px;
-  margin-top: 40px;
   margin-left: 115px;
   line-height: 43px;
   font-weight: bold;

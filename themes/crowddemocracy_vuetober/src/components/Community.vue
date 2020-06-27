@@ -34,7 +34,7 @@
                     />
                   </b-col>
                   <b-col class="com-info">
-                    <p class="com-count-info">{{ community.user_count }} užívateľov</p>
+                    <p class="com-count-info mb-0">{{ community.user_count }} užívateľov</p>
                     <p class="com-name-list">{{ community.name }}</p>
                   </b-col>
                 </b-row>
@@ -87,7 +87,7 @@
                         user.communities.some(comm => comm.id === community.id)
                     "
           >
-            <div class="posts">
+            <div class="posts my-4 mr-4">
               <div class="post" v-for="post in communityPosts" :key="post.id">
                 <p class="question">{{ post.content }}</p>
                 <span class="voted-num">Zahlasovalo {{ post.total_votes }}</span>
@@ -336,7 +336,6 @@ export default {
 .com-count-info {
   text-align: left;
   font-size: 13px;
-  margin-bottom: 0px;
   color: #9a9eaa;
 }
 .left-navbar {
@@ -404,8 +403,6 @@ export default {
   background-color: white;
   border-radius: 15px;
   cursor: pointer;
-  margin-bottom: 2em;
-  margin-top: 2em;
   margin-right: 5em;
   text-align: center;
 }

@@ -1,12 +1,12 @@
 <template>
-  <div class="wrap">
+  <div class="wrap m-0">
     <b-container fluid class="wrap-content">
       <b-row class="navbar">
         <b-col>
           <img class="logo" src="../assets/logo.png" @click="toIntro()" />
         </b-col>
         <b-col>
-          <b-button class="login" to="/login">Prihlás sa</b-button>
+          <b-button class="login mt-1" to="/login">Prihlás sa</b-button>
           <p class="question">Už máš účet?</p>
         </b-col>
       </b-row>
@@ -16,7 +16,7 @@
           <b-col lg="6">
             <h1 class="header">Registrácia</h1>
             <ValidationObserver v-slot="{ passes }">
-              <form class="form" @submit.prevent="passes(register)">
+              <form class="form mt-3" @submit.prevent="passes(register)">
                 <ValidationProvider rules="required|email" v-slot="{ errors }">
                   <input class="placeholder" type="email" placeholder="Email" v-model="email" />
                   <span class="error">{{ errors[0] }}</span>
@@ -153,24 +153,10 @@ export default {
 <style lang="css" scoped>
 .wrap {
   height: 100vh;
-  margin: 0px;
   position: absolute;
   width: 100%;
 }
 /* navbar items */
-.logo {
-  width: 140px;
-  margin-left: 2em;
-  cursor: pointer;
-}
-.question {
-  padding: 0px;
-  font-size: 14px;
-  float: right;
-  margin-top: 0.73em;
-  color: #48486e;
-  margin-right: 1em;
-}
 .login {
   border-color: #48486e;
   color: #48486e;
@@ -178,13 +164,11 @@ export default {
   width: 140px;
   font-weight: bold;
   font-size: 14px;
-  margin-top: 5px;
   float: right;
 }
 
 .form {
   margin-left: 130px;
-  margin-top: 25px;
   color: black;
 }
 .form input {

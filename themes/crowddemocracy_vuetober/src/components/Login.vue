@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="wrap m-0">
     <b-container fluid class="content-wrap">
       <Navbar></Navbar>
       <b-row>
@@ -17,7 +17,7 @@
                 <span class="error">{{ errors[0] }}</span>
               </ValidationProvider>
               <span v-if="error.length" class="error">Uživateľ nebol najdeny</span>
-              <b-button class="login" type="submit">Prihlásiť</b-button>
+              <b-button class="login mt-2" type="submit">Prihlásiť</b-button>
             </form>
           </ValidationObserver>
         </b-col>
@@ -100,40 +100,14 @@ export default {
 </script>
 <style scoped>
 .wrap {
-  margin: 0px;
   overflow-x: hidden;
 }
 /* navbar items */
 .content-wrap {
   position: relative;
 }
-.logo {
-  width: 140px;
-  margin-left: 2em;
-  cursor: pointer;
-}
-.question {
-  padding: 0px;
-  font-size: 14px;
-  float: right;
-  margin-top: 0.73em;
-  color: #48486e;
-  margin-right: 1em;
-}
-.registration {
-  border-color: #48486e;
-  color: #48486e;
-  background-color: white;
-  width: 140px;
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: 5px;
-  float: right;
-}
-
 .form {
   margin-left: 130px;
-  margin-top: 25px;
   color: black;
 }
 .form input {
@@ -152,7 +126,6 @@ export default {
   color: white;
   width: 215px;
   height: 60px;
-  margin-top: 20px;
   line-height: 43px;
 }
 
@@ -166,19 +139,11 @@ export default {
     padding: 1em;
     font-weight: bold;
   }
-  .logo {
-    width: 7em;
-    margin-left: 0px;
-  }
-  .login {
-    margin: 0px;
-    margin-top: 3em;
-  }
   /*Form */
   .form {
-    margin: 0px;
     color: black;
     text-align: center;
+    margin: 0px;
   }
   .form input {
     width: 95%;
@@ -187,6 +152,9 @@ export default {
     border: none;
     color: black;
     border-bottom: 1px solid #a0a09f;
+  }
+  .footer {
+    display: none;
   }
 }
 @media only screen and (max-width: 400px) {
