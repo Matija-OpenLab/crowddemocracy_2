@@ -1,6 +1,6 @@
 <template>
   <b-container fluid class="mx-0 px-0">
-    <b-navbar class="navbar-phones" toggleable="md" type="dark">
+    <b-navbar class="navbar-phones m-0" toggleable="md" type="dark">
       <b-navbar-brand href="#">
         <img class="logo-navbar" src="../assets/logo.png" />
       </b-navbar-brand>
@@ -63,12 +63,18 @@ export default {
 };
 </script>
 <style lang="scss">
-@media only screen and (min-width: 991px) {
+@media only screen and (min-width: 1230px) {
   .navbar-phones {
     display: none;
   }
+  .navbar-phones {
+    background-color: #b3b3e6;
+  }
+  .logo-navbar {
+    height: 0.5em;
+  }
 }
-@media only screen and (max-width: 990px) {
+@media only screen and (max-width: 1230px) {
   .navbar-phones {
     background-color: #b3b3e6;
   }

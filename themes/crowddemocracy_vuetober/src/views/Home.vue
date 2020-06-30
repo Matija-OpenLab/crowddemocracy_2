@@ -3,57 +3,7 @@
     <NavbarPhones class="navbar-phones"></NavbarPhones>
     <b-container fluid class="content-wrap">
       <b-row>
-        <b-col class="vh-100 p-0 .d-none .d-lg-block .d-xl-none" cols="3">
-          <img class="logo ml-2 mt-3 d-none d-lg-block" src="../assets/logo.png" />
-          <div class="ml-4 mt-5">
-            <p class="com-list my-4">Zoznam komunít,kde si členom:</p>
-            <div class="mt-3" v-for="community in communities" :key="community.id">
-              <div
-                v-if="
-                                user.communities.some(
-                                    comm => comm.id === community.id
-                                )
-                            "
-              >
-                <b-row @click="navigateToComm(community.id)" class="com-side">
-                  <b-col cols="1">
-                    <img
-                      v-if="community.icon_id === '0'"
-                      class="com-logo-list"
-                      src="../assets/com-log1.png"
-                    />
-                    <img
-                      v-if="community.icon_id === '1'"
-                      class="com-logo-list"
-                      src="../assets/com-log2.png"
-                    />
-                    <img
-                      v-if="community.icon_id === '2'"
-                      class="com-logo-list"
-                      src="../assets/com-log3.png"
-                    />
-                  </b-col>
-                  <b-col class="ml-4">
-                    <p class="com-count-info mb-0">{{ community.user_count }} užívateľov</p>
-                    <p class="com-name-list">{{ community.name }}</p>
-                  </b-col>
-                </b-row>
-              </div>
-            </div>
-            <div class="d-flex">
-              <b-button
-                v-if="user.is_activated"
-                class="new-community-button mx-auto text-center"
-                to="/create"
-              >Nová komunita</b-button>
-              <b-button
-                v-else
-                class="new-community-button mx-auto text-center"
-                to="/support"
-              >Staň sa testerom</b-button>
-            </div>
-          </div>
-        </b-col>
+        <CommunityList></CommunityList>
         <b-col class="col">
           <b-button class="logout mt-0" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
           <b-row class="navbar mt-4">
@@ -69,30 +19,41 @@
             <!--komunita div začiatok-->
             <div class="community mt-2 mb-3" v-for="community in communities" :key="community.id">
               <div @click="navigateToComm(community.id)">
-                <!-- napicu ale cenim ze to musim robit ja -Matija <3 -->
-                <img v-if="community.icon_id === '0'" class="com-logo" src="../assets/com-log1.png" />
-                <img v-if="community.icon_id === '1'" class="com-logo" src="../assets/com-log2.png" />
-                <img v-if="community.icon_id === '2'" class="com-logo" src="../assets/com-log3.png" />
-                <p class="com-count mb-0 mt-3">{{ community.user_count }} užívateľov</p>
-                <p class="com-name">{{ community.name }}</p>
-                <div v-if="community.icon_id === '0'" class="com-desc color1">
+                <img
+                  v-if="community.icon_id === '0'"
+                  class="community-logo"
+                  src="../assets/com-log1.png"
+                />
+                <img
+                  v-if="community.icon_id === '1'"
+                  class="community-logo"
+                  src="../assets/com-log2.png"
+                />
+                <img
+                  v-if="community.icon_id === '2'"
+                  class="community-logo"
+                  src="../assets/com-log3.png"
+                />
+                <p class="community-count mb-0 mt-3">{{ community.user_count }} užívateľov</p>
+                <p class="community-name">{{ community.name }}</p>
+                <div v-if="community.icon_id === '0'" class="community-desc color1">
                   <p class="small-desc">Popis komunity</p>
                   <p>{{ community.description }}</p>
                 </div>
-                <div v-if="community.icon_id === '1'" class="com-desc color2">
+                <div v-if="community.icon_id === '1'" class="community-desc color2">
                   <p class="small-desc">Popis komunity</p>
                   <p>{{ community.description }}</p>
                 </div>
-                <div v-if="community.icon_id === '2'" class="com-desc color3">
+                <div v-if="community.icon_id === '2'" class="community-desc color3">
                   <p class="small-desc">Popis komunity</p>
                   <p>{{ community.description }}</p>
                 </div>
                 <!-- <p class="com-create">{{ community.created_at.split(" ")[0] }}</p> -->
 
-                <b-row class="com-footer">
+                <b-row class="community-footer">
                   <b-col cols="8">
                     <p
-                      class="add-to-com"
+                      class="add-to-community"
                       v-if="
                                             !user.communities.some(
                                                 comm => comm.id === community.id
@@ -102,7 +63,7 @@
                     >+ pridaj sa do tejto komunity</p>
                   </b-col>
                   <b-col>
-                    <p class="com-owner">{{ community.owner }}</p>
+                    <p class="community-owner">{{ community.owner }}</p>
                   </b-col>
                 </b-row>
               </div>
@@ -118,6 +79,7 @@
 import axios from "axios";
 import { mapGetters } from "vuex";
 import NavbarPhones from "../components/NavbarPhones";
+import CommunityList from "../components/CommunityList.vue";
 export default {
   data() {
     return {
@@ -192,7 +154,8 @@ export default {
     })
   },
   components: {
-    NavbarPhones
+    NavbarPhones,
+    CommunityList
   }
 };
 </script>
@@ -217,14 +180,6 @@ export default {
 .color3 {
   color: #4890a9;
 }
-
-/*STYLE ZOZNAMU KOMUNIT*/
-.com-name-list {
-  font-weight: bold;
-}
-.com-side {
-  cursor: pointer;
-}
 /* komunity-celkovo */
 .communities {
   display: flex;
@@ -246,31 +201,18 @@ export default {
   -moz-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
   box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
 }
-.com-list {
-  font-size: 15px;
-  color: #9a9eaa;
-}
-.com-logo-list {
-  width: 50px;
-  height: auto;
-}
-.com-logo {
+.community-logo {
   width: 50px;
   height: auto;
   margin-top: -20px;
   margin-left: 125px;
 }
-.com-count-info {
-  text-align: left;
-  font-size: 13px;
-  color: #9a9eaa;
-}
-.com-count {
+.community-count {
   text-align: center;
   font-size: 13px;
   color: #9a9eaa;
 }
-.com-name {
+.community-name {
   text-align: center;
   font-size: 18px;
   font-weight: bold;
@@ -292,43 +234,46 @@ export default {
 .username {
   font-size: 22px;
 }
-.com-owner {
+.community-owner {
   text-align: center;
 }
-.com-desc {
+.community-desc {
   display: grid;
   text-align: center;
   height: 7em;
   border-bottom: 1px solid #d7d7c1;
 }
-.com-create {
+.community-create {
   text-align: center;
 }
-.com-moderators {
+.community-moderators {
   text-align: center;
 }
 .homepage-pic {
   width: 120px;
   height: auto;
 }
-.add-to-com {
+.add-to-community {
   color: #c0c2ca;
   font-size: 0.8em;
   transition: 300ms;
   margin-top: 2em;
 }
-.add-to-com:hover {
+.add-to-community:hover {
   cursor: pointer;
   color: black;
 }
-.new-community-button {
-  background-color: #24154b;
-  color: white;
-  width: 170px;
-  line-height: 43px;
-  /* margin-left: 23%; */
-}
+
 @media only screen and (max-width: 1020px) {
+  .left-navbar {
+    display: none;
+  }
+  .homepage-pic {
+    display: none;
+  }
+  .logout {
+    display: none;
+  }
   .wrap {
     height: 100%;
   }

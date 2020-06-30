@@ -3,64 +3,33 @@
     <NavbarPhones class="navbar-phones"></NavbarPhones>
     <b-container fluid class="content-wrap">
       <b-row class>
-        <b-col cols="3" class="left-navbar .d-none .d-lg-block .d-xl-none">
-          <img class="logo ml-2 mt-3" src="../assets/logo.png" />
-          <div class="ml-3">
-            <p class="com-list mt-5">Zoznam komunít,kde si členom:</p>
-            <div class="mb-3" v-for="community in communities" :key="community.id">
-              <div
-                v-if="
-                                    user.communities.some(
-                                        comm => comm.id === community.id
-                                    )
-                                "
-              >
-                <b-row @click="navigateToComm(community.id)" class="com-side">
-                  <b-col cols="1">
-                    <img
-                      v-if="community.icon_id === '0'"
-                      class="com-logo-list"
-                      src="../assets/com-log1.png"
-                    />
-                    <img
-                      v-if="community.icon_id === '1'"
-                      class="com-logo-list"
-                      src="../assets/com-log2.png"
-                    />
-                    <img
-                      v-if="community.icon_id === '2'"
-                      class="com-logo-list"
-                      src="../assets/com-log3.png"
-                    />
-                  </b-col>
-                  <b-col class="ml-4">
-                    <p class="com-count-info mb-0">
-                      {{
-                      community.user_count
-                      }}
-                      užívateľov
-                    </p>
-                    <p class="com-name-list">{{ community.name }}</p>
-                  </b-col>
-                </b-row>
-              </div>
-            </div>
-          </div>
-        </b-col>
-        <b-col class="col">
+        <CommunityList></CommunityList>
+        <b-col class="col .d-flex">
           <b-button class="logout mt-3" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
           <b-row class="mt-5">
-            <b-col class="com-pic mt-3 ml-2" cols="1">
-              <img v-if="community.icon_id === '0'" class="com-pic" src="../assets/com-log1.png" />
-              <img v-if="community.icon_id === '1'" class="com-pic" src="../assets/com-log2.png" />
-              <img v-if="community.icon_id === '2'" class="com-pic" src="../assets/com-log3.png" />
+            <b-col class="community-pic mt-3 ml-2" cols="1">
+              <img
+                v-if="community.icon_id === '0'"
+                class="community-pic"
+                src="../assets/com-log1.png"
+              />
+              <img
+                v-if="community.icon_id === '1'"
+                class="community-pic"
+                src="../assets/com-log2.png"
+              />
+              <img
+                v-if="community.icon_id === '2'"
+                class="community-pic"
+                src="../assets/com-log3.png"
+              />
             </b-col>
             <b-col>
-              <a class="back-to-com" href="/home">Späť do zoznamu komunít</a>
+              <a class="back-to-community" href="/home">Späť do zoznamu komunít</a>
               <h1 class="ml-4">{{ community.name }}</h1>
               <b-button
                 variant="outline-secondary"
-                class="leave-com"
+                class="leave-community"
                 v-if="
                                     user.communities.some(
                                         comm => comm.id === community.id
@@ -69,7 +38,7 @@
                 @click="leaveCommunity(community.id)"
               >Opustiť komunitu</b-button>
               <b-button
-                class="leave-com"
+                class="leave-community"
                 variant="outline-secondary"
                 v-else
                 @click="joinCommunity(community.id)"
@@ -135,6 +104,7 @@
 import axios from "axios";
 import { mapGetters } from "vuex";
 import NavbarPhones from "../components/NavbarPhones.vue";
+import CommunityList from "../components/CommunityList.vue";
 
 export default {
   props: {
@@ -299,7 +269,8 @@ export default {
     next();
   },
   components: {
-    NavbarPhones
+    NavbarPhones,
+    CommunityList
   }
 };
 </script>
@@ -311,40 +282,12 @@ export default {
 .wrap {
   background-color: #f3f5f8;
 }
-
-/*STYLE ZOZNAMU KOMUNIT*/
-.com-name-list {
-  font-weight: bold;
-}
-.com-side {
-  cursor: pointer;
-}
-.com-logo-list {
-  width: 50px;
-  height: auto;
-}
-.com-list {
-  font-size: 15px;
-  color: #9a9eaa;
-}
-.com-count-info {
-  text-align: left;
-  font-size: 13px;
-  color: #9a9eaa;
-}
-.left-navbar {
-  height: 100vh;
-  border-right: 1px solid #d7d7c1;
-}
-.logo {
-  width: 120px;
-}
 /* horna cast kontentu - nazov, td */
-.com-pic {
+.community-pic {
   width: 80px;
   height: auto;
 }
-.back-to-com {
+.back-to-community {
   color: #9a9eaa;
   margin-top: 25px;
   margin-left: 25px;
@@ -365,7 +308,7 @@ export default {
   border-bottom: 1px solid #d7d7c1;
   text-align: center;
 }
-.add-to-com {
+.add-to-community {
   border-color: black;
   color: #48486e;
   background-color: white;
@@ -374,7 +317,7 @@ export default {
   font-size: 14px;
   margin-top: 50px;
 }
-.leave-com {
+.leave-community {
   margin-left: 20px;
 }
 /* posts celok */
@@ -425,6 +368,9 @@ export default {
   color: skyblue;
 }
 @media only screen and (max-width: 990px) {
+  .left-navbar {
+    display: none;
+  }
   .logout {
     display: none;
   }
@@ -434,9 +380,6 @@ export default {
   .logo {
     display: none;
   }
-  /* .left-navbar {
-    display: none;
-  } */
   .list {
     display: none;
   }

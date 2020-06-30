@@ -1,8 +1,7 @@
 <template>
-  <!-- navbar pouzity na intre, login, pri registracii je zmena buttonu na prihlasovaci  -->
   <b-row class="navbar">
     <b-col>
-      <img class="logo" src="../assets/logo.png" />
+      <img class="logo ml-3" src="../assets/logo.png" />
     </b-col>
     <b-col>
       <b-button class="registration" to="/registration">Registruj sa</b-button>
@@ -24,7 +23,6 @@ export default {
 <style lang="css" scoped>
 .logo {
   width: 140px;
-  margin-left: 2em;
 }
 .question {
   padding: 0px;

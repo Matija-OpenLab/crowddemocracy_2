@@ -89,19 +89,6 @@ h4 {
   min-height: 100%;
 }
 @media only screen and (max-width: 990px) {
-  /*Navigation*/
-  .registration {
-    border-color: #48486e;
-    color: #48486e;
-    background-color: white;
-    width: 10em;
-    padding: 1em;
-    font-weight: bold;
-  }
-  .logo {
-    width: 7em;
-    margin-left: 0px;
-  }
   /*Content*/
   .content {
     margin: 0px;
