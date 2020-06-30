@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="a-community-create">
     <!-- navbar - nazov, back button -->
     <b-row class="nav">
       <b-col cols="8">
@@ -42,7 +42,7 @@
         </div>
       </b-col>
       <b-col lg="6" sm="0">
-        <img class="background" src="../assets/bg.png" />
+        <img class="z-background" src="../assets/bg.png" />
       </b-col>
     </b-row>
   </div>
@@ -116,23 +116,29 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.wrap {
+.a-community-create {
   overflow-x: hidden;
-}
-.nav {
-  line-height: 5em;
-}
-.back-button {
-  width: 50%;
-  border-color: #48486e;
-  color: #48486e;
-  background-color: white;
-}
-.title {
-  font-size: 4em;
-  margin-left: 10%;
-  font-weight: 50;
-  color: #48486e;
+
+  .community-buttons {
+    display: block;
+    width: 100%;
+    margin-top: 1em;
+  }
+  .nav {
+    line-height: 5em;
+  }
+  .back-button {
+    width: 50%;
+    border-color: #48486e;
+    color: #48486e;
+    background-color: white;
+  }
+  .title {
+    font-size: 4em;
+    margin-left: 10%;
+    font-weight: 50;
+    color: #48486e;
+  }
 }
 .inputs {
   margin-left: 15%;
@@ -166,11 +172,6 @@ export default {
       outline: none;
     }
   }
-}
-.community-buttons {
-  display: block;
-  width: 100%;
-  margin-top: 1em;
 }
 
 @media only screen and (max-width: 990px) {

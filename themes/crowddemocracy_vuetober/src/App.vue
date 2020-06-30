@@ -20,7 +20,7 @@ export default {
   margin-top: 1em;
   overflow-wrap: break-word;
 }
-.background {
+.z-background {
   max-width: 100%;
   min-height: 100%;
   background-repeat: no-repeat;
@@ -32,9 +32,19 @@ export default {
   color: #48486e;
   margin-left: 130px;
 }
-/* .left-navbar {
-  border-right: 1px solid #d7d7c1;
-} */
+.z-bold {
+  font-weight: bold;
+}
+.z-bg-white {
+  background-color: #f3f5f8;
+}
+.z-logout {
+  background-color: #f3f5f8;
+  border-color: #f3f5f8;
+  color: #330066;
+  margin-left: 77%;
+  font-size: 15px;
+}
 @media only screen and (max-width: 990px) {
   body {
     margin: 0;

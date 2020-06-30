@@ -1,5 +1,5 @@
 <template>
-  <div class="left-navbar vh-100 p-0">
+  <div class="a-left-navbar vh-100 p-0 z-bg-white">
     <img class="logo ml-2 mt-3" src="../assets/logo.png" />
     <div class="ml-4 mt-5">
       <p class="community-list my-4">Zoznam komunít,kde si členom:</p>
@@ -16,7 +16,7 @@
               <img
                 v-if="community.icon_id === '0'"
                 class="community-logo-list"
-                src="../assets/com-log1.png"
+                src="../assets/com-log2.png"
               />
               <img
                 v-if="community.icon_id === '1'"
@@ -26,12 +26,12 @@
               <img
                 v-if="community.icon_id === '2'"
                 class="community-logo-list"
-                src="../assets/com-log3.png"
+                src="../assets/com-log2.png"
               />
             </b-col>
             <b-col class="ml-4">
               <p class="community-count-info mb-0">{{ community.user_count }} užívateľov</p>
-              <p class="community-name-list">{{ community.name }}</p>
+              <p class="z-bold">{{ community.name }}</p>
             </b-col>
           </b-row>
         </div>
@@ -83,15 +83,12 @@ export default {
   }
 };
 </script>
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .new-community-button {
   background-color: #24154b;
   color: white;
   width: 170px;
   line-height: 43px;
-}
-.community-name-list {
-  font-weight: bold;
 }
 .community-side {
   cursor: pointer;
@@ -109,7 +106,7 @@ export default {
   font-size: 13px;
   color: #9a9eaa;
 }
-.left-navbar {
+.a-left-navbar {
   height: 100vh;
   border-right: 1px solid #d7d7c1;
   width: 20em;

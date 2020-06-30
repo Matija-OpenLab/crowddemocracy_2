@@ -3,7 +3,7 @@
     <b-button to="/home" class="back-button">Späť</b-button>
     <b-row>
       <b-col lg="5" sm="12">
-        <p class="letter">
+        <p class="letter z-bold">
           Ďakujeme, že podporujete našu stránku. Bohužiaľ, je stále vo
           fáze vývoja a nie je plne funkčná. Keby ste nám chceli
           pomôcť tým, že si vytvoríte komunitu na našej stránke a
@@ -40,7 +40,6 @@ export default {
 <style lang="css" scoped>
 .letter {
   font-size: 1.5em;
-  font-weight: bold;
   letter-spacing: 1.5px;
   margin-top: 10em;
   margin-left: 1em;

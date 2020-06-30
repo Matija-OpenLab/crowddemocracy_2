@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap m-0">
+  <div class="a-login m-0">
     <b-container fluid class="content-wrap">
       <Navbar></Navbar>
       <b-row>
@@ -22,7 +22,7 @@
           </ValidationObserver>
         </b-col>
         <b-col>
-          <img class="background" src="../assets/bg.png" />
+          <img class="z-background" src="../assets/bg.png" />
         </b-col>
       </b-row>
       <Footer></Footer>
@@ -38,8 +38,8 @@ import {
 } from "vee-validate";
 import { required, email } from "vee-validate/dist/rules";
 setInteractionMode("eager");
-import Footer from "../components/Footer.vue";
-import Navbar from "../components/Navbar.vue";
+import Footer from "../components/a-footer.vue";
+import Navbar from "../components/a-navbar.vue";
 
 extend("required", {
   ...required,
@@ -99,61 +99,55 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.wrap {
+.a-login {
   overflow-x: hidden;
-}
-/* navbar items */
-.content-wrap {
-  position: relative;
-}
-.login {
-  background-color: #24154b;
-  color: white;
-  width: 215px;
-  height: 60px;
-  line-height: 43px;
-}
-.form {
-  margin-left: 130px;
-  color: black;
 
-  input {
-    width: 100%;
-    margin-top: 15px;
-    height: 50px;
-    border: none;
+  .content-wrap {
+    position: relative;
+  }
+  .form {
+    margin-left: 130px;
     color: black;
-    border-bottom: 1px solid #d7d7c1;
-  }
-  input:focus {
-    outline: none;
-  }
-}
-@media only screen and (max-width: 990px) {
-  /*Navigation*/
-  .registration {
-    border-color: #48486e;
-    color: #48486e;
-    background-color: white;
-    width: 10em;
-    padding: 1em;
-    font-weight: bold;
-  }
-  form {
-    color: black;
-    text-align: center;
-    margin: 0px;
+
     input {
-      width: 95%;
-      margin-top: 2em;
-      height: 3em;
+      width: 100%;
+      margin-top: 15px;
+      height: 50px;
       border: none;
       color: black;
-      border-bottom: 1px solid #a0a09f;
+      border-bottom: 1px solid #d7d7c1;
+    }
+    input:focus {
+      outline: none;
     }
   }
-  .footer {
-    display: none;
+  .login {
+    background-color: #24154b;
+    color: white;
+    width: 215px;
+    height: 60px;
+    line-height: 43px;
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  .a-login {
+    .form {
+      color: black;
+      text-align: center;
+      margin: 0px;
+      input {
+        width: 95%;
+        margin-top: 2em;
+        height: 3em;
+        border: none;
+        color: black;
+        border-bottom: 1px solid #a0a09f;
+      }
+    }
+    .a-footer {
+      display: none;
+    }
   }
 }
 @media only screen and (max-width: 400px) {

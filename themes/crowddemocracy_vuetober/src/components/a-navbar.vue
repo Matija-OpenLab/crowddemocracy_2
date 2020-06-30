@@ -1,7 +1,7 @@
 <template>
-  <b-row class="navbar">
+  <b-row class="a-navbar">
     <b-col>
-      <img class="logo ml-3" src="../assets/logo.png" />
+      <img class="logo ml-3 mt-2" src="../assets/logo.png" />
     </b-col>
     <b-col>
       <b-button class="registration" to="/registration">Registruj sa</b-button>
@@ -20,29 +20,30 @@ export default {
   }
 };
 </script>
-<style lang="css" scoped>
-.logo {
-  width: 140px;
-}
-.question {
-  padding: 0px;
-  font-size: 14px;
-  float: right;
-  margin-top: 0.73em;
-  margin-right: 1em;
-}
-.registration {
-  border-color: #48486e;
-  color: #48486e;
-  background-color: white;
-  width: 140px;
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: 5px;
-  float: right;
-}
-.navbar {
+<style lang="scss" scoped>
+.a-navbar {
   margin: 0;
+
+  .logo {
+    width: 140px;
+  }
+  .registration {
+    border-color: #48486e;
+    color: #48486e;
+    background-color: white;
+    width: 140px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 5px;
+    float: right;
+  }
+  .question {
+    padding: 0px;
+    font-size: 14px;
+    float: right;
+    margin-top: 0.73em;
+    margin-right: 1em;
+  }
 }
 @media only screen and (max-width: 990px) {
   /*Navigation*/

@@ -1,12 +1,12 @@
 <template>
-  <div class="wrap m-0">
+  <div class="a-registration m-0">
     <b-container fluid class="wrap-content">
       <b-row class="navbar">
         <b-col>
           <img class="logo" src="../assets/logo.png" @click="toIntro()" />
         </b-col>
         <b-col>
-          <b-button class="login mt-1" to="/login">Prihlás sa</b-button>
+          <b-button class="login mt-1 z-bold" to="/login">Prihlás sa</b-button>
           <p class="question">Už máš účet?</p>
         </b-col>
       </b-row>
@@ -61,7 +61,7 @@
             <Footer></Footer>
           </b-col>
           <b-col>
-            <img class="background" src="../assets/bg.png" />
+            <img class="z-background" src="../assets/bg.png" />
           </b-col>
         </b-row>
       </div>
@@ -70,7 +70,7 @@
 </template>
 <script>
 /*eslint-disable*/
-import Footer from "../components/Footer.vue";
+import Footer from "../components/a-footer.vue";
 import {
   ValidationProvider,
   ValidationObserver,
@@ -151,77 +151,81 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrap {
+.a-registration {
   height: 100vh;
   position: absolute;
   width: 100%;
-}
-/* navbar items */
-.login {
-  border-color: #48486e;
-  color: #48486e;
-  background-color: white;
-  width: 140px;
-  font-weight: bold;
-  font-size: 14px;
-  float: right;
-}
-.form {
-  margin-left: 130px;
-  color: black;
-  input {
-    width: 100%;
-    margin-top: 15px;
-    height: 50px;
-    border: none;
-    color: black;
-    border-bottom: 1px solid #d7d7c1;
-  }
-  input:focus {
-    outline: none;
-  }
-}
-.registration {
-  background-color: #24154b;
-  color: white;
-  width: 215px;
-  height: 60px;
-  margin-top: 20px;
-  line-height: 43px;
-}
-@media only screen and (max-width: 990px) {
-  /*Navigation*/
+
   .login {
     border-color: #48486e;
     color: #48486e;
     background-color: white;
-    width: 10em;
-    padding: 1em;
-    font-weight: bold;
+    width: 140px;
+    font-size: 14px;
+    float: right;
   }
-  .logo {
-    width: 7em;
-    margin-left: 0px;
-  }
-  .registration {
-    margin: 0px;
-    margin-top: 3em;
-  }
+
   .form {
-    margin: 0px;
+    margin-left: 130px;
     color: black;
-    text-align: center;
     input {
-      width: 95%;
-      margin-top: 2em;
-      height: 3em;
+      width: 100%;
+      margin-top: 15px;
+      height: 50px;
       border: none;
       color: black;
-      border-bottom: 1px solid #a0a09f;
+      border-bottom: 1px solid #d7d7c1;
+    }
+    input:focus {
+      outline: none;
     }
   }
-  .footer {
-    margin-top: 5%;
+  .registration {
+    background-color: #24154b;
+    color: white;
+    width: 215px;
+    height: 60px;
+    margin-top: 20px;
+    line-height: 43px;
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  .a-registration {
+    .logo {
+      width: 7em;
+      margin-left: 0px;
+    }
+    .login {
+      border-color: #48486e;
+      color: #48486e;
+      background-color: white;
+      width: 10em;
+      padding: 1em;
+    }
+    .question {
+      display: none;
+    }
+    .form {
+      margin: 0px;
+      color: black;
+      text-align: center;
+      input {
+        width: 95%;
+        margin-top: 2em;
+        height: 3em;
+        border: none;
+        color: black;
+        border-bottom: 1px solid #a0a09f;
+      }
+    }
+    .registration {
+      margin: 0px;
+      margin-top: 3em;
+    }
+    .a-footer {
+      display: none;
+    }
   }
 }
 @media only screen and (max-width: 400px) {

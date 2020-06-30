@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="a-post-manager">
     <!-- navbar -->
     <b-row class="nav">
       <b-col cols="8">
@@ -17,7 +17,7 @@
           class="new-post"
           v-b-modal.modal-prevent-closing
         >Nový príspevok</b-button>
-        <div class="post" v-for="post in communityPosts" :key="post.id">
+        <div class="a-post" v-for="post in communityPosts" :key="post.id">
           <h5 class="post-content">{{ post.content }}</h5>
           <p class="yes">Áno: {{ post.vote_yes }}</p>
           <p class="no">Nie: {{ post.vote_no }}</p>
@@ -31,7 +31,7 @@
         </div>
       </b-col>
       <b-col class="background">
-        <img class="background" src="../assets/bg.png" />
+        <img class="z-background" src="../assets/bg.png" />
       </b-col>
     </b-row>
     <div>
@@ -187,36 +187,29 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-/* navbar */
-.nav {
-  line-height: 5em;
+.a-post-manager {
+  .nav {
+    line-height: 5em;
+  }
+  .back-button {
+    width: 50%;
+    border-color: #48486e;
+    color: #48486e;
+    background-color: white;
+  }
+  .title {
+    font-size: 4em;
+    margin-left: 10%;
+    font-weight: 50;
+    color: #48486e;
+  }
+  .new-post {
+    width: 91.5%;
+    margin-top: 30px;
+    margin-left: 30px;
+  }
 }
-.back-button {
-  width: 50%;
-  border-color: #48486e;
-  color: #48486e;
-  background-color: white;
-}
-.title {
-  font-size: 4em;
-  margin-left: 10%;
-  font-weight: 50;
-  color: #48486e;
-}
-/* post manager */
-.delete-button {
-  margin-left: 1em;
-}
-.finish {
-  display: inline;
-}
-.new-post {
-  width: 91.5%;
-  margin-top: 30px;
-  margin-left: 30px;
-}
-/* post */
-.post {
+.a-post {
   border: 1px solid black;
   border-radius: 8px;
   margin: 2em 2em;
@@ -228,16 +221,21 @@ export default {
     margin: 1em;
     font-weight: 500;
   }
+  .yes {
+    color: green;
+  }
+  .post-content {
+    font-weight: 50;
+  }
+  .delete-button {
+    margin-left: 1em;
+  }
+  .finish {
+    display: inline;
+  }
   &:hover {
     background-color: rgb(221, 221, 221);
   }
-}
-
-.yes {
-  color: green;
-}
-.post-content {
-  font-weight: 50;
 }
 @media only screen and (max-width: 990px) {
   .post {

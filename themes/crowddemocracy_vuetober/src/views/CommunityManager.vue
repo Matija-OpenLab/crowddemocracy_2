@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="a-community-manager">
     <!-- navbar -->
     <b-row class="nav">
       <b-col cols="8">
@@ -13,7 +13,7 @@
     <b-row>
       <b-col class="communities" v-if="communities.length">
         <div v-for="community in communities" :key="community.id">
-          <div class="community-wrap">
+          <div class="a-community-wrap">
             <h4>{{ community.name }}</h4>
 
             <div class="buttons">
@@ -37,7 +37,7 @@
         <h4 class="no-community">Ešte si si nevytvoril komunitu.</h4>
       </b-col>
       <b-col class="background">
-        <img class="background" src="../assets/bg.png" />
+        <img class="z-background" src="../assets/bg.png" />
       </b-col>
     </b-row>
     <div>
@@ -205,31 +205,44 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.wrap {
+.a-community-manager {
   overflow-x: hidden;
+
+  .communities {
+    margin-top: 8%;
+  }
+  .buttons {
+    margin-bottom: auto;
+    padding: 0.5em;
+  }
+  .no-community {
+    font-size: 1em;
+    color: #9a9eaa;
+    font-weight: 50;
+    margin-left: 3em;
+  }
+  .nav {
+    line-height: 5em;
+  }
+  .back-button {
+    width: 50%;
+    border-color: #48486e;
+    color: #48486e;
+    background-color: white;
+  }
+  .title {
+    font-size: 4em;
+    margin-left: 10%;
+    font-weight: 50;
+    color: #48486e;
+  }
 }
 textarea {
   resize: none;
   width: 100%;
 }
-/* navbar */
-.nav {
-  line-height: 5em;
-}
-.back-button {
-  width: 50%;
-  border-color: #48486e;
-  color: #48486e;
-  background-color: white;
-}
-.title {
-  font-size: 4em;
-  margin-left: 10%;
-  font-weight: 50;
-  color: #48486e;
-}
 
-.community-wrap {
+.a-community-wrap {
   border: 1px solid #9a9eaa;
   border-radius: 8px;
   width: 50%;
@@ -243,19 +256,7 @@ textarea {
     cursor: pointer;
   }
 }
-.communities {
-  margin-top: 8%;
-}
-.buttons {
-  margin-bottom: auto;
-  padding: 0.5em;
-}
-.no-community {
-  font-size: 1em;
-  color: #9a9eaa;
-  font-weight: 50;
-  margin-left: 3em;
-}
+
 @media only screen and (max-width: 990px) {
   .no-community {
     margin-left: 0.5em;
