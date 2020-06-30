@@ -274,7 +274,7 @@ export default {
   }
 };
 </script>
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .yes-count {
   display: inline;
   margin-right: 2em;
@@ -336,11 +336,11 @@ export default {
   text-align: center;
   margin: auto;
   transition: 1s;
-}
-.post:hover {
-  -webkit-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
-  -moz-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
-  box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+  &:hover {
+    -webkit-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+    -moz-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+    box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+  }
 }
 .question-community {
   color: skyblue;
@@ -402,9 +402,9 @@ export default {
   }
   .navbar-toggler {
     background-color: #7a5cc7;
-  }
-  .navbar-toggler:focus {
-    outline: none;
+    &:focus {
+      outline: none;
+    }
   }
   .nav-link {
     color: black;

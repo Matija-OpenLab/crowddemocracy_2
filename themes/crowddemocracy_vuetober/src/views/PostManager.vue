@@ -186,7 +186,7 @@ export default {
   }
 };
 </script>
-<style lang="css" scoped>
+<style lang="scss" scoped>
 /* navbar */
 .nav {
   line-height: 5em;
@@ -223,15 +223,16 @@ export default {
   text-align: center;
   font-size: 1em;
   transition-duration: 250ms;
+  p {
+    display: inline-block;
+    margin: 1em;
+    font-weight: 500;
+  }
+  &:hover {
+    background-color: rgb(221, 221, 221);
+  }
 }
-.post:hover {
-  background-color: rgb(221, 221, 221);
-}
-.post p {
-  display: inline-block;
-  margin: 1em;
-  font-weight: 500;
-}
+
 .yes {
   color: green;
 }

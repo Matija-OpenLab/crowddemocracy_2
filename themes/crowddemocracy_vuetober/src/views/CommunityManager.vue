@@ -204,7 +204,10 @@ export default {
   }
 };
 </script>
-<style lang="css" scoped>
+<style lang="scss" scoped>
+.wrap {
+  overflow-x: hidden;
+}
 textarea {
   resize: none;
   width: 100%;
@@ -235,15 +238,14 @@ textarea {
   margin-top: 2em;
   margin-left: 15%;
   transition-duration: 250ms;
-}
-.community-wrap:hover {
-  border: 1.5px solid black;
-  cursor: pointer;
+  &:hover {
+    border: 1.5px solid black;
+    cursor: pointer;
+  }
 }
 .communities {
   margin-top: 8%;
 }
-
 .buttons {
   margin-bottom: auto;
   padding: 0.5em;

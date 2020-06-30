@@ -115,8 +115,10 @@ export default {
   }
 };
 </script>
-<style lang="css" scoped>
-/* navbar */
+<style lang="scss" scoped>
+.wrap {
+  overflow-x: hidden;
+}
 .nav {
   line-height: 5em;
 }
@@ -126,7 +128,6 @@ export default {
   color: #48486e;
   background-color: white;
 }
-/* kontent */
 .title {
   font-size: 4em;
   margin-left: 10%;
@@ -136,36 +137,35 @@ export default {
 .inputs {
   margin-left: 15%;
   margin-top: 14%;
-}
-.inputs form p {
-  display: block;
-  font-size: 1.5em;
-  margin: 1em 0em;
-  width: 100%;
-  font-weight: 50;
-}
-.inputs form {
-  display: block;
-  margin: 1em 0em;
-}
-.inputs form textarea {
-  resize: none;
-  width: 100%;
-  height: 10em;
-  border-radius: 8px;
-  border: 1px solid black;
-}
-.inputs form input {
-  width: 100%;
-  border-radius: 8px;
-  border: 1px solid black;
-}
-
-.inputs form input:focus {
-  outline: none;
-}
-.inputs form textarea:focus {
-  outline: none;
+  form p {
+    display: block;
+    font-size: 1.5em;
+    margin: 1em 0em;
+    width: 100%;
+    font-weight: 50;
+  }
+  form {
+    display: block;
+    margin: 1em 0em;
+  }
+  form input {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid black;
+    &:focus {
+      outline: none;
+    }
+  }
+  form textarea {
+    resize: none;
+    width: 100%;
+    height: 10em;
+    border-radius: 8px;
+    border: 1px solid black;
+    &:focus {
+      outline: none;
+    }
+  }
 }
 .community-buttons {
   display: block;
@@ -174,22 +174,21 @@ export default {
 }
 
 @media only screen and (max-width: 990px) {
-  .inputs form textarea {
-    width: 95%;
-  }
-  .inputs form input {
-    width: 95%;
-  }
-  .inputs form p {
-    width: 95%;
-  }
   .community-buttons {
     width: 95%;
   }
-
   .inputs {
     margin-left: 5%;
     margin-top: 14%;
+    form textarea {
+      width: 95%;
+    }
+    form input {
+      width: 95%;
+    }
+    form p {
+      width: 95%;
+    }
   }
 }
 </style>

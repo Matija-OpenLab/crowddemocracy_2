@@ -150,7 +150,7 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .wrap {
   height: 100vh;
   position: absolute;
@@ -166,21 +166,20 @@ export default {
   font-size: 14px;
   float: right;
 }
-
 .form {
   margin-left: 130px;
   color: black;
-}
-.form input {
-  width: 100%;
-  margin-top: 15px;
-  height: 50px;
-  border: none;
-  color: black;
-  border-bottom: 1px solid #d7d7c1;
-}
-.form input:focus {
-  outline: none;
+  input {
+    width: 100%;
+    margin-top: 15px;
+    height: 50px;
+    border: none;
+    color: black;
+    border-bottom: 1px solid #d7d7c1;
+  }
+  input:focus {
+    outline: none;
+  }
 }
 .registration {
   background-color: #24154b;
@@ -208,19 +207,18 @@ export default {
     margin: 0px;
     margin-top: 3em;
   }
-  /*Form */
   .form {
     margin: 0px;
     color: black;
     text-align: center;
-  }
-  .form input {
-    width: 95%;
-    margin-top: 2em;
-    height: 3em;
-    border: none;
-    color: black;
-    border-bottom: 1px solid #a0a09f;
+    input {
+      width: 95%;
+      margin-top: 2em;
+      height: 3em;
+      border: none;
+      color: black;
+      border-bottom: 1px solid #a0a09f;
+    }
   }
   .footer {
     margin-top: 5%;

@@ -98,28 +98,13 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .wrap {
   overflow-x: hidden;
 }
 /* navbar items */
 .content-wrap {
   position: relative;
-}
-.form {
-  margin-left: 130px;
-  color: black;
-}
-.form input {
-  width: 100%;
-  margin-top: 15px;
-  height: 50px;
-  border: none;
-  color: black;
-  border-bottom: 1px solid #d7d7c1;
-}
-.form input:focus {
-  outline: none;
 }
 .login {
   background-color: #24154b;
@@ -128,7 +113,22 @@ export default {
   height: 60px;
   line-height: 43px;
 }
+.form {
+  margin-left: 130px;
+  color: black;
 
+  input {
+    width: 100%;
+    margin-top: 15px;
+    height: 50px;
+    border: none;
+    color: black;
+    border-bottom: 1px solid #d7d7c1;
+  }
+  input:focus {
+    outline: none;
+  }
+}
 @media only screen and (max-width: 990px) {
   /*Navigation*/
   .registration {
@@ -139,19 +139,18 @@ export default {
     padding: 1em;
     font-weight: bold;
   }
-  /*Form */
-  .form {
+  form {
     color: black;
     text-align: center;
     margin: 0px;
-  }
-  .form input {
-    width: 95%;
-    margin-top: 2em;
-    height: 3em;
-    border: none;
-    color: black;
-    border-bottom: 1px solid #a0a09f;
+    input {
+      width: 95%;
+      margin-top: 2em;
+      height: 3em;
+      border: none;
+      color: black;
+      border-bottom: 1px solid #a0a09f;
+    }
   }
   .footer {
     display: none;

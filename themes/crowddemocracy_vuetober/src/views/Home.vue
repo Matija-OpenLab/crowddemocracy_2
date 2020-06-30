@@ -159,7 +159,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .small-desc {
   color: silver;
   font-size: 0.8em;
@@ -195,11 +195,11 @@ export default {
   cursor: pointer;
   margin: auto;
   transition: 1s;
-}
-.community:hover {
-  -webkit-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
-  -moz-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
-  box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+  &:hover {
+    -webkit-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+    -moz-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+    box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
+  }
 }
 .community-logo {
   width: 50px;
@@ -258,10 +258,10 @@ export default {
   font-size: 0.8em;
   transition: 300ms;
   margin-top: 2em;
-}
-.add-to-community:hover {
-  cursor: pointer;
-  color: black;
+  &:hover {
+    cursor: pointer;
+    color: black;
+  }
 }
 
 @media only screen and (max-width: 1020px) {
@@ -286,9 +286,9 @@ export default {
   }
   .navbar-toggler {
     background-color: #7a5cc7;
-  }
-  .navbar-toggler:focus {
-    outline: none;
+    &:focus {
+      outline: none;
+    }
   }
   .welcome {
     margin-left: 0px;
