@@ -5,17 +5,17 @@ import App from "./App.vue";
 import router from "./router";
 import store from './store'
 
-import {
-    created
-} from "./custom";
 
 
+import custom from "./custom";
+
+custom.setup();
 
 new Vue({
     router,
     store,
     render: h => h(App),
     created() {
-        created(router, store);
+        custom.created(router, store);
     },
 }).$mount("#app");

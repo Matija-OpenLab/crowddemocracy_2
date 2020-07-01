@@ -64,10 +64,6 @@ extend("required", {
   message: "Pole nesmie byť prázdne!"
 });
 
-// extend("max", {
-//   ...max,
-//   message: "Opis komunity nesmie byť dlhší ako 60 znakov"
-// });
 export default {
   components: {
     ValidationProvider,
@@ -82,11 +78,7 @@ export default {
     };
   },
   created() {
-    if (!this.$store.getters.isLoggedIn || !this.user.is_activated) {
-      this.$router.push("/support");
-    } else {
-      this.refreshUser();
-    }
+    //maybe refresh user
   },
   methods: {
     createCommunity() {

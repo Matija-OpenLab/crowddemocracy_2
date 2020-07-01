@@ -13,34 +13,57 @@ import Support from '../views/Support';
 
 import VueGtag from "vue-gtag";
 
+import store from "../store/index.js"
+
 
 Vue.use(VueRouter);
 
 const routes = [{
         path: '/',
         name: 'Intro',
-        component: Intro
+        component: Intro,
+        beforeEnter: (to, from, next) => {
+            if (store.getters.isLoggedIn) { next({ name: 'Home' }); } else next();
+          },
     },
     {
         path: '/registration',
         name: 'Registration',
-        component: Registration
+        component: Registration,
+        beforeEnter: (to, from, next) => {
+            if (store.getters.isLoggedIn) { next({ name: 'Home' }); } else next();
+          },
     },
     {
         path: '/login',
         name: 'Login',
-        component: Login
+        component: Login,
+        beforeEnter: (to, from, next) => {
+            if (store.getters.isLoggedIn) { next({ name: 'Home' }); } else next();
+          },
     },
     {
         path: '/home',
         name: 'Home',
-        component: Home
+        component: Home,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
+          },
     },
     {
         path: '/community/:id',
         name: 'Community',
         component: Community,
-        props: true
+        props: true,
+        beforeRouteUpdate(to, from, next) {
+            this.$store.dispatch("selectCommunity", this.$props.id);
+            this.$store.dispatch("fetchPosts", this.$props.id);
+            next();
+          },
+        beforeEnter: (to, from, next) => {
+            if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
+          },
+        
     },
     {
         path: '/secure',
@@ -51,23 +74,35 @@ const routes = [{
     {
         path: '/create',
         name: 'Create',
-        component: CommunityCreate
+        component: CommunityCreate,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
+          },
     },
     {
         path: '/manage',
         name: 'Manage',
-        component: CommunityManager
+        component: CommunityManager,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
+          },
     },
     {
         path: '/manage_posts/:id',
         name: 'Manage_post',
         component: PostManager,
-        props: true
+        props: true,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
+          },
     },
     {
         path: '/support',
         name: 'Support',
-        component: Support
+        component: Support,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
+          },
     },
 ];
 

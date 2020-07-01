@@ -52,35 +52,25 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import { mapGetters } from "vuex";
 
 export default {
-  data() {
-    return {
-      communities: []
-    };
-  },
   created() {
-    this.getCommunities();
+    this.$store.dispatch("fetchCommunities")
   },
   methods: {
-    getCommunities() {
-      axios.get("/api/v1/communities").then(resp => {
-        this.communities = resp.data;
-      });
-    }
+     navigateToComm(community_id) {
+      const path = `/community/${community_id}`;
+      if (this.$route.path !== path) this.$router.push({ path: path });
+    },
   },
 
   computed: {
     ...mapGetters({
+      communities: "getCommunities",
       user: "getUserData"
     })
   },
-  beforeRouteUpdate(to, from, next) {
-    this.getCommunities();
-    next();
-  }
 };
 </script>
 <style lang="scss" scoped>

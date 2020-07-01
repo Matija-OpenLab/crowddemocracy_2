@@ -12,7 +12,7 @@ function db_update_communities()
             $community->save();
         }
 }
-Route::group(['prefix' => 'api/v1/communities'], function() {
+Route::group(['prefix' => 'api/v1/communities', 'middleware' => '\Tymon\JWTAuth\Middleware\GetUserFromToken'], function() {
     
     Route::get('', function () {
         

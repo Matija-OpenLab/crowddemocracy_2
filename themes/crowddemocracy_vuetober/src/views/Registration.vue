@@ -126,9 +126,6 @@ export default {
       error: ""
     };
   },
-  created() {
-    if (this.$store.getters.isLoggedIn) this.$router.push("/home");
-  },
   methods: {
     register() {
       let data = {

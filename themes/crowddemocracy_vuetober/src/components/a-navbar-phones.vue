@@ -31,32 +31,21 @@
   </b-container>
 </template>
 <script>
-import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
-  data() {
-    return {
-      communities: []
-    };
-  },
   created() {
-    this.getCommunity();
-  },
+    this.$store.dispatch("fetchCommunities")
+},
   methods: {
     logout() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
       });
     },
-    //Getters
-    getCommunity() {
-      axios.get("/api/v1/communities").then(res => {
-        this.communities = res.data;
-      });
-    }
   },
   computed: {
     ...mapGetters({
+      communities: "getCommunities",
       user: "getUserData"
     })
   }

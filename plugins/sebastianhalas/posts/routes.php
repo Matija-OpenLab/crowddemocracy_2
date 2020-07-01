@@ -15,7 +15,7 @@ function db_update()
             $post->save();
         }
 }
-Route::group(['prefix' => 'api/v1/posts'], function() {
+Route::group(['prefix' => 'api/v1/posts', 'middleware' => '\Tymon\JWTAuth\Middleware\GetUserFromToken'], function() {
     
     Route::get('', function () {
         db_update();

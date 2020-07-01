@@ -1,7 +1,7 @@
 <?php
 use SebastianHalas\Likes\Models\Likes;
 use SebastianHalas\Posts\Models\Posts;
-Route::group(['prefix' => 'api/v1/likes'], function() {
+Route::group(['prefix' => 'api/v1/likes', 'middleware' => '\Tymon\JWTAuth\Middleware\GetUserFromToken'], function() {
     Route::post('vote_yes/{post_id}', function ($post_id) {
         
         $token = request()->input('token');

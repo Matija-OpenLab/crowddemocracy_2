@@ -32,9 +32,10 @@ export default {
       state.status = '';
       state.token = '';
       state.user = {};
-      state.teachers = [];
-      state.selectedTeacher = [];
     },
+    authRefreshed(state, user){
+      state.user = user;
+    }
   },
   actions: {
     register({
@@ -96,7 +97,29 @@ logout({
 .catch(err => {
   commit("authRevoked");
   throw err;
-})
+});
+
+},
+refresh({
+  commit
+}) {
+      axios({
+              url: "/api/token_refresh",
+              data: {
+                  token: this.state.token
+              },
+              method: "POST"
+          })
+          .then(resp => {
+            console.log(resp)
+              const user = resp.data.user;
+              commit("authRefreshed", user);
+              
+          })
+          .catch(err => {
+              commit("authRevoked");
+              throw err;
+          });
 },
   },
   getters: {

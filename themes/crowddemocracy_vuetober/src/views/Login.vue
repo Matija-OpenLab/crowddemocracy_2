@@ -78,9 +78,6 @@ export default {
       error: ""
     };
   },
-  created() {
-    if (this.$store.getters.isLoggedIn) this.$router.push("/home");
-  },
   methods: {
     login() {
       let email = this.email;
@@ -92,9 +89,6 @@ export default {
           this.error = "Invalid credencials";
         });
     },
-    toIntro() {
-      this.$router.push("/");
-    }
   }
 };
 </script>

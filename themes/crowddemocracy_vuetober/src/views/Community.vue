@@ -1,28 +1,28 @@
 <template>
-  <div class="a-community-page z-bg-white">
-    <NavbarPhones class="a-navbar-phones"></NavbarPhones>
+  <div class="wrap">
+    <NavbarPhones class="navbar-phones"></NavbarPhones>
     <b-container fluid class="content-wrap">
-      <b-row>
-        <CommunityList class="left-navbar"></CommunityList>
-        <b-col class="col z-bg-white">
-          <b-button class="logout mt-3 z-bg-white" @click="logout">Odhlásenie z aplikácie</b-button>
+      <b-row class>
+        <CommunityList></CommunityList>
+        <b-col class="col .d-flex">
+          <b-button class="logout mt-3" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
           <b-row class="mt-5">
             <b-col class="community-pic mt-3 ml-2" cols="1">
-              <!-- <img
+              <img
                 v-if="community.icon_id === '0'"
                 class="community-pic"
                 src="../assets/com-log1.png"
-              />-->
+              />
               <img
                 v-if="community.icon_id === '1'"
                 class="community-pic"
                 src="../assets/com-log2.png"
               />
-              <!-- <img
+              <img
                 v-if="community.icon_id === '2'"
                 class="community-pic"
                 src="../assets/com-log3.png"
-              />-->
+              />
             </b-col>
             <b-col>
               <a class="back-to-community" href="/home">Späť do zoznamu komunít</a>
@@ -47,13 +47,13 @@
           </b-row>
           <b-row class="nav-row">
             <b-col>
-              <b-button class="nav-button z-bg-white" @click="notVoted">Nehlasoval som</b-button>
+              <b-button class="nav-button" @click="notVoted">Nehlasoval som</b-button>
             </b-col>
             <b-col>
-              <b-button class="nav-button z-bg-white" @click="latest">Najnovšie</b-button>
+              <b-button class="nav-button" @click="latest">Najnovšie</b-button>
             </b-col>
             <b-col>
-              <b-button class="nav-button z-bg-white" @click="popular">Populárne</b-button>
+              <b-button class="nav-button" @click="popular">Populárne</b-button>
             </b-col>
           </b-row>
           <div
@@ -64,7 +64,7 @@
                         "
           >
             <div class="posts my-4 mr-4">
-              <div class="a-post mt-4" v-for="post in communityPosts" :key="post.id">
+              <div class="post mt-4" v-for="post in communityPosts" :key="post.id">
                 <p class="question-community mt-5">{{ post.content }}</p>
                 <span class="voted-num mt-5">Zahlasovalo {{ post.total_votes }}</span>
                 <div
@@ -87,7 +87,7 @@
                   >Nie</b-button>
                 </div>
                 <div v-else>
-                  <b-button class="change-vote z-bold" @click="changeVote(post.id)">ZMENIŤ HLAS</b-button>
+                  <b-button class="change-vote" @click="changeVote(post.id)">ZMENIŤ HLAS</b-button>
                 </div>
               </div>
             </div>
@@ -101,7 +101,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import { mapGetters } from "vuex";
 import NavbarPhones from "../components/a-navbar-phones.vue";
 import CommunityList from "../components/a-community-list.vue";
@@ -114,19 +113,15 @@ export default {
   },
   data() {
     return {
-      community: {},
-      communityPosts: [],
-      communities: [],
       lastSort: "latest"
     };
   },
   created() {
-    if (this.$store.getters.isLoggedIn) {
-      this.getCommunities();
-    } else {
-      this.$router.push("/secure");
-    }
-  },
+      this.$store.dispatch("fetchPosts", this.$props.id);    
+      this.$store.dispatch("selectCommunity", this.$props.id);  
+      this.sortPosts();  
+      
+},
   methods: {
     //Voting
 
@@ -134,8 +129,8 @@ export default {
       this.$store
         .dispatch("vote", { vote: vote, postId: postId })
         .then(() => {
-          this.refreshUser();
-          this.getPosts();
+          //this.refreshUser();
+          //getpsots
         })
         .catch(err => console.error(err));
     },
@@ -143,40 +138,8 @@ export default {
       this.$store
         .dispatch("removeVote", postId)
         .then(() => {
-          this.refreshUser();
-          this.getPosts();
-        })
-        .catch(err => console.error(err));
-    },
-
-    //Getters
-
-    getCommunities() {
-      axios.get("/api/v1/communities").then(resp => {
-        this.communities = resp.data;
-        this.getPosts();
-        this.getCommunityName();
-      });
-    },
-    getCommunityName() {
-      axios.get(`/api/v1/communities/${this.$props.id}`).then(resp => {
-        this.community = resp.data[0];
-      });
-    },
-    getPosts() {
-      axios
-        .get(`/api/v1/posts/community_id/${this.$props.id}`)
-        .then(resp => {
-          this.communityPosts = resp.data.posts;
-
-          //Keep posts sorted after refresh
-          if (this.lastSort === "latest") {
-            this.latest();
-          } else if (this.lastSort === "notVoted") {
-            this.notVoted();
-          } else {
-            this.popular();
-          }
+          //this.refreshUser();
+          //getposts
         })
         .catch(err => console.error(err));
     },
@@ -207,7 +170,7 @@ export default {
       this.$store
         .dispatch("joinCommunity", communityId)
         .then(() => {
-          this.refreshUser();
+          // this.refreshUser();
         })
         .catch(err => console.error(err));
     },
@@ -216,7 +179,7 @@ export default {
       this.$store
         .dispatch("leaveCommunity", communityId)
         .then(() => {
-          this.refreshUser();
+          // this.refreshUser();
           this.$router.push("/home");
         })
         .catch(err => console.error(err));
@@ -257,17 +220,28 @@ export default {
         return 0;
       }
       this.communityPosts.sort(compare);
-    }
+    },
+    sortPosts(){
+          if (this.lastSort === "latest") {
+            this.latest();
+          } else if (this.lastSort === "notVoted") {
+            this.notVoted();
+          } else {
+            this.popular();
+          }
   },
+  },
+  
   computed: {
     ...mapGetters({
+      communityPosts: "getPosts",
+      community: "getSelectedCommunity",
+      communities: "getCommunities",
       user: "getUserData"
     })
   },
-  beforeRouteUpdate(to, from, next) {
-    this.getCommunities();
-    next();
-  },
+
+  
   components: {
     NavbarPhones,
     CommunityList
@@ -275,44 +249,59 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.a-community-page {
-  .z-bg-white {
-    background-color: #f3f5f8;
-  }
-  .community-pic {
-    width: 80px;
-    height: auto;
-  }
-  .back-to-community {
-    color: #9a9eaa;
-    margin-top: 25px;
-    margin-left: 25px;
-  }
-  .logout {
-    background-color: #f3f5f8;
-    border-color: #f3f5f8;
-    color: #330066;
-    margin-left: 780px;
-    font-size: 15px;
-  }
-  .nav-button {
-    border: none;
-    color: #330066;
-  }
-  .nav-row {
-    border-bottom: 1px solid #d7d7c1;
-    text-align: center;
-  }
-  .leave-community {
-    margin-left: 20px;
-  }
-  .posts {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0px;
-  }
+.yes-count {
+  display: inline;
+  margin-right: 2em;
 }
-.a-post {
+.wrap {
+  background-color: #f3f5f8;
+}
+/* horna cast kontentu - nazov, td */
+.community-pic {
+  width: 80px;
+  height: auto;
+}
+.back-to-community {
+  color: #9a9eaa;
+  margin-top: 25px;
+  margin-left: 25px;
+}
+.logout {
+  background-color: #f3f5f8;
+  border-color: #f3f5f8;
+  color: #330066;
+  margin-left: 780px;
+  font-size: 15px;
+}
+.nav-button {
+  background-color: #f3f5f8;
+  border: none;
+  color: #330066;
+}
+.nav-row {
+  border-bottom: 1px solid #d7d7c1;
+  text-align: center;
+}
+.add-to-community {
+  border-color: black;
+  color: #48486e;
+  background-color: white;
+  width: 180px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 50px;
+}
+.leave-community {
+  margin-left: 20px;
+}
+/* posts celok */
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px;
+}
+/* post */
+.post {
   height: 290px;
   width: 290px;
   background-color: white;
@@ -326,32 +315,33 @@ export default {
     -moz-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
     box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
   }
-  .question-community {
-    color: skyblue;
-    font-size: 17px;
-    padding: 20px 0 px;
-  }
-  .change-vote {
-    border-color: black;
-    color: #48486e;
-    background-color: white;
-    width: 180px;
-    font-size: 14px;
-    margin-top: 50px;
-  }
-  .vote-yes {
-    margin-top: 60px;
-    width: 120px;
-  }
-  .vote-no {
-    width: 120px;
-    margin-top: 60px;
-  }
-  .voted-num {
-    color: skyblue;
-  }
 }
-@media only screen and (max-width: 1230px) {
+.question-community {
+  color: skyblue;
+  font-size: 17px;
+  padding: 20px 0 px;
+}
+.change-vote {
+  border-color: black;
+  color: #48486e;
+  background-color: white;
+  width: 180px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 50px;
+}
+.vote-yes {
+  margin-top: 60px;
+  width: 120px;
+}
+.vote-no {
+  width: 120px;
+  margin-top: 60px;
+}
+.voted-num {
+  color: skyblue;
+}
+@media only screen and (max-width: 990px) {
   .left-navbar {
     display: none;
   }

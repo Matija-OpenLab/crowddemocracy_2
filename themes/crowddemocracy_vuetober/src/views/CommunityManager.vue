@@ -25,7 +25,7 @@
               >Vymazať</b-button>
               <b-button
                 variant="outline-secondary"
-                @click="setSelectedCommunity(community)"
+                @click="$store.dispatch('selectCommunity', community.id)"
                 v-b-modal.modal-prevent-closing
               >Upraviť</b-button>
               <b-button variant="outline-success" @click="navigateToComm(community.id)">Príspevky</b-button>
@@ -87,40 +87,25 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      communities: [],
-      selectedCommunity: {},
+      //selectedCommunity: {},
       name: "",
       desc: "",
       nameState: null
     };
   },
   created() {
-    if (this.$store.getters.isLoggedIn && this.user.is_activated) {
-      this.getCommunity();
-      this.refreshUser();
-    } else {
-      this.$router.push("/support");
-    }
+      this.$store.dispatch("fetchCommunities");
+      // this.refreshUser();
+    
   },
   methods: {
     //Setters
     setSelectedCommunity(community) {
       this.selectedCommunity = community;
-    },
-    //Getters
-    getCommunity() {
-      axios
-        .get("/api/v1/communities")
-        .then(res => {
-          this.communities = res.data;
-          this.ownedCommunities();
-        })
-        .catch(err => console.error(err));
     },
 
     //User data and navigation
@@ -199,6 +184,8 @@ export default {
   },
   computed: {
     ...mapGetters({
+      selectedCommunity: "getSelectedCommunity",
+      communities: "getCommunities",
       user: "getUserData"
     })
   }
