@@ -33,18 +33,18 @@
                   v-if="community.icon_id === '2'"
                   class="community-logo"
                   src="../assets/com-log3.png"
-                />
-                <p class="community-count mb-0 mt-3">{{ community.user_count }} užívateľov</p>
-                <p class="community-name">{{ community.name }}</p>
-                <div v-if="community.icon_id === '0'" class="community-desc color1">
+                />-->
+                <p class="count mb-0 mt-3">{{ community.user_count }} užívateľov</p>
+                <p class="name z-bold z-center">{{ community.name }}</p>
+                <div v-if="community.icon_id === '0'" class="desc z-center color2">
                   <p class="small-desc">Popis komunity</p>
                   <p>{{ community.description }}</p>
                 </div>
-                <div v-if="community.icon_id === '1'" class="community-desc color2">
+                <div v-if="community.icon_id === '1'" class="desc z-center color2">
                   <p class="small-desc">Popis komunity</p>
                   <p>{{ community.description }}</p>
                 </div>
-                <div v-if="community.icon_id === '2'" class="community-desc color3">
+                <div v-if="community.icon_id === '2'" class="desc z-center color3">
                   <p class="small-desc">Popis komunity</p>
                   <p>{{ community.description }}</p>
                 </div>
@@ -63,7 +63,7 @@
                     >+ pridaj sa do tejto komunity</p>
                   </b-col>
                   <b-col>
-                    <p class="community-owner">{{ community.owner }}</p>
+                    <p class="z-center">{{ community.owner }}</p>
                   </b-col>
                 </b-row>
               </div>
@@ -141,27 +141,48 @@ export default {
 .wrap {
   background-color: #f3f5f8;
   width: 100vw;
+  .logout {
+    background-color: #f3f5f8;
+    border-color: #f3f5f8;
+    color: #330066;
+    margin-left: 77%;
+    font-size: 15px;
+  }
+  .navbar {
+    border-bottom: 1px solid #d7d7c1;
+  }
+  .welcome {
+    font-size: 32px;
+  }
+  .username {
+    font-size: 22px;
+  }
+  .desc {
+    display: grid;
+    height: 7em;
+    border-bottom: 1px solid #d7d7c1;
+  }
+  .homepage-pic {
+    width: 120px;
+    height: auto;
+  }
+  .add-to-community {
+    color: #c0c2ca;
+    font-size: 0.8em;
+    transition: 300ms;
+    margin-top: 2em;
+    &:hover {
+      cursor: pointer;
+      color: black;
+    }
+  }
+  .communities {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px;
+  }
 }
-.logo {
-  width: 120px;
-}
-.color1 {
-  color: #c74079;
-}
-.color2 {
-  color: #80ae29;
-}
-.color3 {
-  color: #4890a9;
-}
-/* komunity-celkovo */
-.communities {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0px;
-}
-/* styl jednej komunity */
-.community {
+.a-community {
   height: 19em;
   width: 290px;
   background-color: white;
@@ -169,6 +190,26 @@ export default {
   cursor: pointer;
   margin: auto;
   transition: 1s;
+
+  .logo {
+    width: 50px;
+    height: auto;
+    margin-top: -20px;
+    margin-left: 125px;
+  }
+  .count {
+    text-align: center;
+    font-size: 13px;
+    color: #9a9eaa;
+  }
+  .name {
+    font-size: 18px;
+    border-bottom: 1px solid #d7d7c1;
+  }
+  .small-desc {
+    color: silver;
+    font-size: 0.8em;
+  }
   &:hover {
     -webkit-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
     -moz-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);

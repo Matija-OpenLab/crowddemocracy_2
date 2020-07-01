@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="mx-0 px-0">
+  <b-container fluid class="mx-0 px-0 d-block d-xl-none">
     <b-navbar class="a-navbar-phones m-0" toggleable="md" type="dark">
       <b-navbar-brand href="#">
         <img class="logo-navbar" src="../assets/logo.png" />
@@ -52,30 +52,19 @@ export default {
 };
 </script>
 <style lang="scss">
-@media only screen and (min-width: 1230px) {
-  .a-navbar-phones {
-    display: none;
-    background-color: #b3b3e6;
-  }
-  .logo-navbar {
-    height: 2em;
-  }
+.a-navbar-phones {
+  background-color: #b3b3e6;
 }
-@media only screen and (max-width: 1230px) {
-  .a-navbar-phones {
-    background-color: #b3b3e6;
-  }
-  .logo-navbar {
-    height: 2em;
-  }
-  .navbar-toggler {
-    background-color: #7a5cc7;
-  }
-  .navbar-toggler:focus {
-    outline: none;
-  }
-  .nav-link {
-    color: black;
-  }
+.logo-navbar {
+  height: 2em;
+}
+.navbar-toggler {
+  background-color: #7a5cc7;
+}
+.navbar-toggler:focus {
+  outline: none;
+}
+.nav-link {
+  color: black;
 }
 </style>

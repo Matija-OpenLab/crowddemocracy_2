@@ -25,6 +25,9 @@ export default {
   min-height: 100%;
   background-repeat: no-repeat;
 }
+.z-center {
+  text-align: center;
+}
 .header {
   margin-top: 3em;
   font-size: 50px;

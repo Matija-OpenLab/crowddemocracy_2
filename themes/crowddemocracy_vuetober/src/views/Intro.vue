@@ -9,7 +9,7 @@
               <h4 class="header">Ako využijete svoj hlas?</h4>
             </b-col>
             <b-col class="content">
-              <h5 class="intro mt-5">
+              <h5 class="intro mt-5 z-center">
                 Na
                 <span class="z-bold">CROWD</span>DEMOCRACY
                 môžete dať svoj hlas novým návrhom alebo ho
@@ -59,7 +59,6 @@ export default {
     width: 500px;
     font-weight: 50;
     margin-left: 100px;
-    text-align: center;
   }
   .login {
     background-color: #24154b;
