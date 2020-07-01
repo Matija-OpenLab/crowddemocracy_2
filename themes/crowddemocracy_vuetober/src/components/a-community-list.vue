@@ -1,5 +1,5 @@
 <template>
-  <div class="a-left-navbar vh-100 p-0 z-bg-white">
+  <div class="a-left-navbar vh-100 p-0 z-bg-white d-none d-xl-block">
     <img class="logo ml-2 mt-3" src="../assets/logo.png" />
     <div class="ml-4 mt-5">
       <p class="community-list my-4">Zoznam komunít,kde si členom:</p>
@@ -113,10 +113,5 @@ export default {
 }
 .logo {
   width: 120px;
-}
-@media only screen and (max-width: 1230px) {
-  .left-navbar {
-    display: none;
-  }
 }
 </style>

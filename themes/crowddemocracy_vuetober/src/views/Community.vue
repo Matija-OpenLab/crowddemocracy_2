@@ -5,7 +5,10 @@
       <b-row>
         <CommunityList class="left-navbar"></CommunityList>
         <b-col class="col z-bg-white">
-          <b-button class="logout mt-3 z-bg-white" @click="logout">Odhlásenie z aplikácie</b-button>
+          <b-button
+            class="logout mt-3 z-bg-white d-none d-xl-block"
+            @click="logout"
+          >Odhlásenie z aplikácie</b-button>
           <b-row class="mt-5">
             <b-col class="community-pic mt-3 ml-2" cols="1">
               <!-- <img
@@ -45,7 +48,7 @@
               >Pridaj sa</b-button>
             </b-col>
           </b-row>
-          <b-row class="nav-row">
+          <b-row class="nav-row z-center">
             <b-col>
               <b-button class="nav-button z-bg-white" @click="notVoted">Nehlasoval som</b-button>
             </b-col>
@@ -64,7 +67,7 @@
                         "
           >
             <div class="posts my-4 mr-4">
-              <div class="a-post mt-4" v-for="post in communityPosts" :key="post.id">
+              <div class="a-post z-center mt-4" v-for="post in communityPosts" :key="post.id">
                 <p class="question-community mt-5">{{ post.content }}</p>
                 <span class="voted-num mt-5">Zahlasovalo {{ post.total_votes }}</span>
                 <div
@@ -301,7 +304,6 @@ export default {
   }
   .nav-row {
     border-bottom: 1px solid #d7d7c1;
-    text-align: center;
   }
   .leave-community {
     margin-left: 20px;
@@ -318,7 +320,6 @@ export default {
   background-color: white;
   border-radius: 15px;
   cursor: pointer;
-  text-align: center;
   margin: auto;
   transition: 1s;
   &:hover {
@@ -352,19 +353,13 @@ export default {
   }
 }
 @media only screen and (max-width: 1230px) {
-  .left-navbar {
-    display: none;
-  }
-  .logout {
-    display: none;
-  }
+  // .logout {
+  //   display: none;
+  // }
   .navbar {
     margin-top: 0px;
   }
   .logo {
-    display: none;
-  }
-  .list {
     display: none;
   }
   .com-pic {

@@ -31,16 +31,16 @@
                   src="../assets/com-log3.png"
                 />-->
                 <p class="count mb-0 mt-3">{{ community.user_count }} užívateľov</p>
-                <p class="name z-bold">{{ community.name }}</p>
-                <div v-if="community.icon_id === '0'" class="community-desc color2">
+                <p class="name z-bold z-center">{{ community.name }}</p>
+                <div v-if="community.icon_id === '0'" class="desc z-center color2">
                   <p class="small-desc">Popis komunity</p>
                   <p>{{ community.description }}</p>
                 </div>
-                <div v-if="community.icon_id === '1'" class="community-desc color2">
+                <div v-if="community.icon_id === '1'" class="desc z-center color2">
                   <p class="small-desc">Popis komunity</p>
                   <p>{{ community.description }}</p>
                 </div>
-                <div v-if="community.icon_id === '2'" class="community-desc color3">
+                <div v-if="community.icon_id === '2'" class="desc z-center color3">
                   <p class="small-desc">Popis komunity</p>
                   <p>{{ community.description }}</p>
                 </div>
@@ -59,7 +59,7 @@
                     >+ pridaj sa do tejto komunity</p>
                   </b-col>
                   <b-col>
-                    <p class="owner">{{ community.owner }}</p>
+                    <p class="z-center">{{ community.owner }}</p>
                   </b-col>
                 </b-row>
               </div>
@@ -174,17 +174,10 @@ export default {
   .username {
     font-size: 22px;
   }
-  .community-desc {
+  .desc {
     display: grid;
-    text-align: center;
     height: 7em;
     border-bottom: 1px solid #d7d7c1;
-  }
-  .community-create {
-    text-align: center;
-  }
-  .community-moderators {
-    text-align: center;
   }
   .homepage-pic {
     width: 120px;
@@ -200,12 +193,11 @@ export default {
       color: black;
     }
   }
-}
-/* komunity-celkovo */
-.communities {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0px;
+  .communities {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px;
+  }
 }
 .a-community {
   height: 19em;
@@ -228,16 +220,12 @@ export default {
     color: #9a9eaa;
   }
   .name {
-    text-align: center;
     font-size: 18px;
     border-bottom: 1px solid #d7d7c1;
   }
   .small-desc {
     color: silver;
     font-size: 0.8em;
-  }
-  .owner {
-    text-align: center;
   }
   &:hover {
     -webkit-box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
