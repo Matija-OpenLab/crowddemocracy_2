@@ -46,9 +46,7 @@ const routes = [{
         path: '/secure',
         name: 'secure',
         component: Secure,
-        meta: {
-            requiresAuth: true
-        }
+        
     },
     {
         path: '/create',
