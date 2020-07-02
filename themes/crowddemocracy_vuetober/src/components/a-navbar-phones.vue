@@ -5,14 +5,14 @@
         <img class="logo-navbar" src="../assets/logo.png" />
       </b-navbar-brand>
 
-      <b-navbar-toggle target="navbar-toggle-collapse">
+      <b-navbar-toggle target="toggle-collapse">
         <template v-slot:default="{ expanded }">
           <span v-if="expanded">&#9650;</span>
           <span v-else>&#9660;</span>
         </template>
       </b-navbar-toggle>
 
-      <b-collapse id="navbar-toggle-collapse" is-nav>
+      <b-collapse id="toggle-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown text="Komunity, kde si členom" right>
             <div v-for="community in communities" :key="community.id">
@@ -33,19 +33,19 @@
 <script>
 import { mapGetters, mapState } from "vuex";
 export default {
-   async mounted() {
+  async mounted() {
     await this.$store.dispatch("fetchCommunities");
-},
+  },
   methods: {
     logout() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
       });
-    },
+    }
   },
   computed: {
     ...mapState({
-      communities: "getCommunities",
+      communities: "getCommunities"
     }),
     ...mapGetters({
       user: "getUserData"
@@ -66,18 +66,16 @@ export default {
 @media only screen and (max-width: 1230px) {
   .a-navbar-phones {
     background-color: #b3b3e6;
-  }
-  .logo-navbar {
-    height: 2em;
-  }
-  .navbar-toggler {
-    background-color: #7a5cc7;
-  }
-  .navbar-toggler:focus {
-    outline: none;
-  }
-  .nav-link {
-    color: black;
+
+    .logo-navbar {
+      height: 2em;
+    }
+    .toggler {
+      background-color: #7a5cc7;
+    }
+    .toggler:focus {
+      outline: none;
+    }
   }
 }
 </style>

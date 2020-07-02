@@ -20,7 +20,7 @@ export default {
   margin-top: 1em;
   overflow-wrap: break-word;
 }
-.z-background {
+.z-background-image {
   max-width: 100%;
   min-height: 100%;
   background-repeat: no-repeat;
@@ -59,7 +59,7 @@ export default {
   .footer {
     font-size: 0.9em;
   }
-  .background {
+  .z-background-image {
     display: none;
   }
   .logo-navbar {
