@@ -1,19 +1,17 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Intro from '../views/Intro';
-import Registration from '../views/Registration';
-import Login from '../views/Login';
-import Home from '../views/Home';
 import Secure from '../views/Secure'
-import Community from '../views/Community';
-import CommunityCreate from '../views/CommunityCreate';
-import CommunityManager from '../views/CommunityManager';
-import PostManager from '../views/PostManager';
-import Support from '../views/Support';
 
 import VueGtag from "vue-gtag";
 
 import store from "../store/index.js"
+
+
+Vue.use(VueGtag, {
+    config: {
+        id: 'UA-167911991-1'
+    },
+}, router);
 
 
 Vue.use(VueRouter);
@@ -21,7 +19,7 @@ Vue.use(VueRouter);
 const routes = [{
         path: '/',
         name: 'Intro',
-        component: Intro,
+        component: () => import('../views/Intro.vue'),
         beforeEnter: (to, from, next) => {
             if (store.getters.isLoggedIn) { next({ name: 'Home' }); } else next();
           },
@@ -29,7 +27,7 @@ const routes = [{
     {
         path: '/registration',
         name: 'Registration',
-        component: Registration,
+        component: () => import('../views/Registration.vue'),
         beforeEnter: (to, from, next) => {
             if (store.getters.isLoggedIn) { next({ name: 'Home' }); } else next();
           },
@@ -37,7 +35,7 @@ const routes = [{
     {
         path: '/login',
         name: 'Login',
-        component: Login,
+        component: () => import('../views/Login.vue'),
         beforeEnter: (to, from, next) => {
             if (store.getters.isLoggedIn) { next({ name: 'Home' }); } else next();
           },
@@ -45,7 +43,7 @@ const routes = [{
     {
         path: '/home',
         name: 'Home',
-        component: Home,
+        component: () => import('../views/Home.vue'),
         beforeEnter: (to, from, next) => {
             if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
           },
@@ -53,7 +51,7 @@ const routes = [{
     {
         path: '/community/:id',
         name: 'Community',
-        component: Community,
+        component: () => import('../views/Community.vue'),
         props: true,
         beforeRouteUpdate(to, from, next) {
             this.$store.dispatch("selectCommunity", this.$props.id);
@@ -74,7 +72,7 @@ const routes = [{
     {
         path: '/create',
         name: 'Create',
-        component: CommunityCreate,
+        component: () => import('../views/CommunityCreate.vue'),
         beforeEnter: (to, from, next) => {
             if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
           },
@@ -82,7 +80,7 @@ const routes = [{
     {
         path: '/manage',
         name: 'Manage',
-        component: CommunityManager,
+        component: () => import('../views/CommunityManager.vue'),
         beforeEnter: (to, from, next) => {
             if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
           },
@@ -90,7 +88,7 @@ const routes = [{
     {
         path: '/manage_posts/:id',
         name: 'Manage_post',
-        component: PostManager,
+        component: () => import('../views/PostManager.vue'),
         props: true,
         beforeEnter: (to, from, next) => {
             if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
@@ -99,7 +97,7 @@ const routes = [{
     {
         path: '/support',
         name: 'Support',
-        component: Support,
+        component: () => import('../views/Support.vue'),
         beforeEnter: (to, from, next) => {
             if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
           },
@@ -111,10 +109,5 @@ const router = new VueRouter({
     routes
 });
 
-Vue.use(VueGtag, {
-    config: {
-        id: 'UA-167911991-1'
-    },
-}, router);
 
 export default router;

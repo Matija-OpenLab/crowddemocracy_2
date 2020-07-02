@@ -62,7 +62,7 @@ export default {
   .footer {
     font-size: 0.9em;
   }
-  .background {
+  .z-background {
     display: none;
   }
   .logo-navbar {
