@@ -1,23 +1,19 @@
-<template>
+<template functional>
   <!-- navbar pouzity na intre, login, pri registracii je zmena buttonu na prihlasovaci  -->
   <b-row class="navbar">
     <b-col>
       <img class="logo" src="../assets/logo.png" />
-    </b-col>
-    <b-col>
       <b-button class="registration" to="/registration">Registruj sa</b-button>
       <p class="question">Ešte nemáš účet?</p>
     </b-col>
   </b-row>
 </template>
 <script>
-export default {
-  
-};
+export default {};
 </script>
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .logo {
-  width: 140px;
+  width: 120px;
   margin-left: 2em;
 }
 .question {

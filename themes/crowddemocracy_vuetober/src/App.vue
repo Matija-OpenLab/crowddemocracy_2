@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style>
-.error {
+.z-error {
   display: block;
   width: 100%;
   color: #ff3333;
@@ -25,7 +25,7 @@ export default {
   min-height: 100%;
   background-repeat: no-repeat;
 }
-.header {
+.z-header {
   margin-top: 3em;
   font-size: 50px;
   font-weight: 50;
@@ -38,19 +38,12 @@ export default {
 .z-bg-white {
   background-color: #f3f5f8;
 }
-.z-logout {
-  background-color: #f3f5f8;
-  border-color: #f3f5f8;
-  color: #330066;
-  margin-left: 77%;
-  font-size: 15px;
-}
 @media only screen and (max-width: 990px) {
   body {
     margin: 0;
     padding: 0;
   }
-  .header {
+  .z-header {
     margin-top: 2em;
     font-size: 2em;
     margin-left: 0px;
