@@ -31,10 +31,10 @@
   </b-container>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 export default {
-  created() {
-    this.$store.dispatch("fetchCommunities")
+   async mounted() {
+    await this.$store.dispatch("fetchCommunities");
 },
   methods: {
     logout() {
@@ -44,8 +44,10 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({
+    ...mapState({
       communities: "getCommunities",
+    }),
+    ...mapGetters({
       user: "getUserData"
     })
   }

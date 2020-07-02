@@ -52,7 +52,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   created() {
@@ -66,8 +66,10 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      communities: "communities",
+    }),
     ...mapGetters({
-      communities: "getCommunities",
       user: "getUserData"
     })
   },
