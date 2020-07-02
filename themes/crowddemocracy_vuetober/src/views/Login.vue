@@ -78,6 +78,7 @@ export default {
       error: ""
     };
   },
+
   methods: {
     login() {
       let email = this.email;
