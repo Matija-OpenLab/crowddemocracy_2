@@ -33,9 +33,6 @@
 <script>
 import { mapGetters, mapState } from "vuex";
 export default {
-   async mounted() {
-    await this.$store.dispatch("fetchCommunities");
-},
   methods: {
     logout() {
       this.$store.dispatch("logout").then(() => {
@@ -44,9 +41,9 @@ export default {
     },
   },
   computed: {
-    ...mapState({
-      communities: "getCommunities",
-    }),
+    ...mapState([
+       "communities",
+    ]),
     ...mapGetters({
       user: "getUserData"
     })

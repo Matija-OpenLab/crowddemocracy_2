@@ -71,7 +71,7 @@
     </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import {
     ValidationProvider,
     ValidationObserver,
@@ -102,14 +102,11 @@ export default {
     },
 
     computed: {
-        ...mapGetters({
-            user: "getUserData"
-        })
+        ...mapState([
+            "user"
+        ])
     },
 
-    created() {
-        //maybe refresh user
-    },
     methods: {
         createCommunity() {
             let data = {

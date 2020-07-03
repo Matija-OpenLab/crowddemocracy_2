@@ -25,56 +25,53 @@ export default {
                 token: this.state.token
             });
         },
-        leaveCommunity({ commit }, communityId) {
+        async leaveCommunity({ commit }, communityId) {
             const url = `/api/v1/communities/leave/${communityId}`;
-            return axios
-                .post(url, {
+            try {
+                await axios.post(url, {
                     token: this.state.token
-                })
-                .then(() => {})
-                .catch(err => {
-                    throw err;
                 });
+            } catch (err) {
+                throw err;
+            }
         },
-        createCommunity({ commit }, communityData) {
-            return axios
-                .post("/api/v1/communities/create", {
+        async createCommunity({ commit }, communityData) {
+            try {
+                await axios.post("/api/v1/communities/create", {
                     token: this.state.token,
                     name: communityData.name,
                     description: communityData.desc
-                })
-                .then(() => {})
-                .catch(err => {
-                    throw err;
                 });
+            } catch (err) {
+                throw err;
+            }
         },
 
-        deleteCommunity({ commit }, communityId) {
-            return axios
-                .post("/api/v1/communities/remove", {
+        async deleteCommunity({ commit }, communityId) {
+            try {
+                await axios.post("/api/v1/communities/remove", {
                     token: this.state.token,
                     id: communityId
-                })
-                .then(() => {})
-                .catch(err => {
-                    throw err;
                 });
+            } catch (err) {
+                throw err;
+            }
         },
-        editCommunity({ commit }, communityData) {
-            return axios
-                .post("/api/v1/communities/edit", {
+        async editCommunity({ commit }, communityData) {
+            try {
+                await axios.post("/api/v1/communities/edit", {
                     token: this.state.token,
                     id: communityData.id,
                     name: communityData.name,
                     description: communityData.desc
-                })
-                .then(() => {})
-                .catch(err => {
-                    throw err;
                 });
+            } catch (err) {
+                throw err;
+            }
         },
 
-        async fetchCommunities({ commit }) {
+      async fetchCommunities({ commit }) {
+          console.log("fetching comms")
             try {
                 let resp = await axios.get("/api/v1/communities");
                 commit("communities", resp.data);
@@ -82,12 +79,15 @@ export default {
                 throw err;
             }
         },
-        selectCommunity({ commit }, communityId) {
-            return axios
-                .get(`/api/v1/communities/${communityId}`)
-                .then(resp => {
-                    commit("communitySelected", resp.data[0]);
-                });
+        async selectCommunity({ commit }, communityId) {
+            try {
+                let resp = await axios.get(
+                    `/api/v1/communities/${communityId}`
+                );
+                commit("communitySelected", resp.data[0]);
+            } catch (err) {
+                throw err;
+            }
         }
     }
 };

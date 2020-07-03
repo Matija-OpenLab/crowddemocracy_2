@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import axios from "axios";
 
 export default {
@@ -40,66 +41,56 @@ export default {
         }
     },
     actions: {
-        register({ commit }, user) {
+        async register({ commit }, userData) {
             commit("authRequested");
-            return axios.post(
-                "/api/signup",
-                user,
-            )
-                .then(resp => {
-                    const token = resp.data.token;
-                    const user = resp.data.user;
-                    commit("authSucceeded", {
-                        token,
-                        user
-                    });
-                })
-                .catch(err => {
-                    commit("authFailed");
-                    commit("authRevoked");
-                    throw err;
+            try {
+                let resp = await axios.post("/api/signup", userData);
+                const token = resp.data.token;
+                const user = resp.data.user;
+                commit("authSucceeded", {
+                    token,
+                    user
                 });
+            } catch (err) {
+                commit("authFailed");
+                commit("authRevoked");
+                throw err;
+            }
         },
-        login({ commit }, user) {
+        async login({ commit }, userData) {
             commit("authRequested");
-            return axios.post(
-                "/api/login",
-                user,
-            )
-                .then(resp => {
-                    const token = resp.data.token;
-                    const user = resp.data.user;
-                    commit("authSucceeded", {
-                        token,
-                        user
-                    });
-                })
-                .catch(err => {
-                    commit("authFailed");
-                    commit("authRevoked");
-                    throw err;
+            try {
+                let resp = await axios.post("/api/login", userData);
+                const token = resp.data.token;
+                const user = resp.data.user;
+                commit("authSucceeded", {
+                    token,
+                    user
                 });
+            } catch (err) {
+                commit("authFailed");
+                commit("authRevoked");
+                throw err;
+            }
         },
-        logout({ commit, state }) {
-            return axios.post(
-                "/api/invalidate",
-                { token: state.token },
-            )
-                .then(() => {
-                    commit("authRevoked");
-                })
-                .catch(err => {
-                    commit("authRevoked");
+      async logout({ commit, state }) {
+        try {
+            await axios
+          .post("/api/invalidate", { token: state.token })
+          commit("authRevoked")
+        } catch (err) {
+          commit("authRevoked");
                     throw err;
-                });
-        },
-        refresh({ commit }) {
-            return axios.post(
-                "/api/token_refresh",
-                 {
+          }
+          
+                
+      },
+      //fix on backend first
+        /*refresh({ commit }) {
+            return axios
+                .post("/api/token_refresh", {
                     token: this.state.token
-                },
-            )
+                })
                 .then(resp => {
                     console.log(resp);
                     const user = resp.data.user;
@@ -109,6 +100,6 @@ export default {
                     commit("authRevoked");
                     throw err;
                 });
-        }
+        }*/
     }
 };

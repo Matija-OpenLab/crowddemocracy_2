@@ -3,14 +3,15 @@ import axios from "axios";
 
 export default {
     state: {
-        posts: []
+        communityPosts: []
     },
     getters: {
-        getPosts: state => state.posts
+        getPosts: state => state.communityPosts
     },
     mutations: {
-      posts(state, posts) {
-            state.posts = posts;
+      postsAdded(state, communityPosts) {
+        console.log(postsData)
+        state.communityPosts = communityPosts;
         }
     },
     actions: {
@@ -71,12 +72,13 @@ export default {
                     throw err;
                 });
         },
-        async fetchPosts({ commit }, communityId) {
+      async fetchPosts({ commit }, communityId) {
             try {
                 let resp = await axios.get(
                     `/api/v1/posts/community_id/${communityId}`
                 );
-                commit("posts", resp.data.posts);
+              console.log(resp.data.posts)
+                commit("postsAdded", resp.data.posts);
             } catch (err) {
                 throw err;
             }

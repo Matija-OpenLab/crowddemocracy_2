@@ -51,36 +51,13 @@
 import {
     ValidationProvider,
     ValidationObserver,
-    setInteractionMode,
-    extend
+
 } from "vee-validate";
-import { required, email } from "vee-validate/dist/rules";
-setInteractionMode("eager");
+
 import Footer from "../components/a-footer.vue";
 import Navbar from "../components/a-navbar.vue";
 
-extend("required", {
-    ...required,
-    message: "Pole nesmie byť prázdne!"
-});
-extend("email", {
-    ...email,
-    message: "Nesprávny formát emailu!"
-});
 
-//Custom validation rules
-
-extend("password_verification", {
-    validate(value, { min, max }) {
-        const passRegex = new RegExp(
-            `^(?=.*)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{${min},${max}}`
-        );
-        return passRegex.test(value);
-    },
-    params: ["min", "max"],
-    message:
-        "Heslo musí obsahovať minimálne {min} znakov, najviac {max} znakov, obsahovať aspoň jedno veľké písmeno a jedno číslo."
-});
 
 export default {
     components: {
@@ -97,15 +74,15 @@ export default {
         };
     },
     methods: {
-        login() {
+        async login() {
             let email = this.email;
             let password = this.password;
-            this.$store
-                .dispatch("login", { email, password })
-                .then(() => this.$router.push("/home"))
-                .catch(() => {
-                    this.error = "Invalid credencials";
-                });
+            try {
+                await this.$store.dispatch("login", { email, password });
+                this.$router.push("/home");
+            } catch{
+                this.error = "Invalid credencials";
+            }
         }
     }
 };

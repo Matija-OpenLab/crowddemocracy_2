@@ -101,42 +101,9 @@ import Footer from "../components/a-footer.vue";
 import {
     ValidationProvider,
     ValidationObserver,
-    setInteractionMode,
-    extend
 } from "vee-validate";
-import { required, email, max, confirmed } from "vee-validate/dist/rules";
-setInteractionMode("eager");
 
-extend("required", {
-    ...required,
-    message: "Pole nesmie byť prázdne!"
-});
-extend("email", {
-    ...email,
-    message: "Nesprávny formát emailu!"
-});
-extend("max", {
-    ...max,
-    message: "Užívateľské meno nesmie byť dlhšie ako 16 znakov"
-});
-extend("confirmed", {
-    ...confirmed,
-    message: "Heslo sa musí zhodovať"
-});
 
-//Custom validation rules
-
-extend("password_verification", {
-    validate(value, { min, max }) {
-        const passRegex = new RegExp(
-            `^(?=.*)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{${min},${max}}`
-        );
-        return passRegex.test(value);
-    },
-    params: ["min", "max"],
-    message:
-        "Heslo musí obsahovať minimálne {min} znakov, najviac {max} znakov, obsahovať aspoň jedno veľké písmeno a jedno číslo."
-});
 
 export default {
     components: {
@@ -154,17 +121,19 @@ export default {
         };
     },
     methods: {
-        register() {
+        async register() {
             let data = {
                 email: this.email,
                 password: this.password,
                 password_confirmation: this.password_confirmation,
                 name: this.username
             };
-            this.$store
-                .dispatch("register", data)
-                .then(() => this.$router.push("/home"))
-                .catch(() => (this.error = "Invalid credencials"));
+            try {
+                await this.$store.dispatch("register", data);
+                this.$router.push("/home");
+            } catch {
+                this.error = "Invalid credencials";
+            }
         },
         toIntro() {
             this.$router.push("/");

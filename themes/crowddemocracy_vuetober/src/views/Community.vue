@@ -132,7 +132,7 @@
     </div>
 </template>
 <script>
-import { mapGetters, mapState } from "vuex";
+import { mapState } from "vuex";
 import NavbarPhones from "../components/a-navbar-phones.vue";
 import CommunityList from "../components/a-community-list.vue";
 
@@ -148,24 +148,23 @@ export default {
     },
     data() {
         return {
-            lastSort: "latest"
+            lastSort: "latest",
+            community: {}
         };
     },
     computed: {
-      ...mapState({
-            community: "selectedCommunity",
-            communities: "communities",
-      }),
-        ...mapGetters({
-            communityPosts: "getPosts",
-            user: "getUserData"
-        })
+        ...mapState([
+          "communities",
+          "communityPosts",
+          "user"
+        ])
     },
     async mounted() {
         await this.$store.dispatch("fetchPosts", this.$props.id);
         await this.$store.dispatch("fetchCommunities");
         this.sortPosts();
-    },
+        this.community = this.communities.find(comm => comm.id === this.$props.id);
+},
 
     methods: {
         //Voting

@@ -110,7 +110,7 @@
     </div>
 </template>
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 import CommunityList from "../components/a-community-list.vue";
 import NavbarPhones from "../components/a-navbar-phones";
 
@@ -121,12 +121,10 @@ export default {
     },
     
     computed: {
-        ...mapState({
-            communities: "communities",
-        }),
-        ...mapGetters({
-          user: "getUserData"
-        })
+        ...mapState([
+          "communities",
+          "user"
+        ])
     },
 
     async mounted() {

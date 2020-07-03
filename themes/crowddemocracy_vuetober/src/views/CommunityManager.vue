@@ -98,7 +98,7 @@
     </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 export default {
     data() {
         return {
@@ -108,15 +108,10 @@ export default {
         };
     },
     computed: {
-        ...mapGetters({
-            selectedCommunity: "getSelectedCommunity",
-            communities: "getCommunities",
-            user: "getUserData"
-        })
+        ...mapState(["communities", "user"])
     },
-    created() {
-        this.$store.dispatch("fetchCommunities");
-        // this.refreshUser();
+    async mounted() {
+        await this.$store.dispatch("fetchCommunities");
     },
     methods: {
         //User data and navigation

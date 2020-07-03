@@ -52,12 +52,9 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
-  created() {
-    this.$store.dispatch("fetchCommunities")
-  },
   methods: {
      navigateToComm(community_id) {
       const path = `/community/${community_id}`;
@@ -66,10 +63,8 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      communities: "communities",
-    }),
     ...mapGetters({
+      communities: "getCommunities",
       user: "getUserData"
     })
   },
