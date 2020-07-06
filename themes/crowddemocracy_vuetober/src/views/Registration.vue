@@ -11,7 +11,7 @@
       <div class="content-wrap">
         <b-row>
           <b-col lg="6">
-            <h1 class="z-header">Registrácia</h1>
+            <h1 class="a-header">Registrácia</h1>
             <ValidationObserver v-slot="{ passes }">
               <form class="form mt-3" @submit.prevent="passes(register)">
                 <ValidationProvider rules="required|email" v-slot="{ errors }">

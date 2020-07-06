@@ -4,7 +4,7 @@
       <Navbar></Navbar>
       <b-row>
         <b-col lg="6">
-          <h1 class="z-header">Prihlásenie</h1>
+          <h1 class="a-header">Prihlásenie</h1>
           <ValidationObserver v-slot="{ passes }">
             <form class="form" @submit.prevent="passes(login)">
               <ValidationProvider rules="required|email" v-slot="{ errors }">

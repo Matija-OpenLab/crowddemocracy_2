@@ -1,11 +1,9 @@
+import "./assets/z.scss";
 import Vue from "vue";
 import App from "./App.vue";
 
-
 import router from "./router";
-import store from './store'
-
-
+import store from "./store";
 
 import custom from "./custom";
 
@@ -17,5 +15,5 @@ new Vue({
     render: h => h(App),
     created() {
         custom.created(router, store);
-    },
+    }
 }).$mount("#app");

@@ -129,37 +129,37 @@ export default {
     font-weight: 50;
     color: #48486e;
   }
-}
-.inputs {
-  margin-left: 15%;
-  margin-top: 14%;
-  form p {
-    display: block;
-    font-size: 1.5em;
-    margin: 1em 0em;
-    width: 100%;
-    font-weight: 50;
-  }
-  form {
-    display: block;
-    margin: 1em 0em;
-  }
-  form input {
-    width: 100%;
-    border-radius: 8px;
-    border: 1px solid black;
-    &:focus {
-      outline: none;
+  .inputs {
+    margin-left: 15%;
+    margin-top: 14%;
+    form p {
+      display: block;
+      font-size: 1.5em;
+      margin: 1em 0em;
+      width: 100%;
+      font-weight: 50;
     }
-  }
-  form textarea {
-    resize: none;
-    width: 100%;
-    height: 10em;
-    border-radius: 8px;
-    border: 1px solid black;
-    &:focus {
-      outline: none;
+    form {
+      display: block;
+      margin: 1em 0em;
+    }
+    form input {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid black;
+      &:focus {
+        outline: none;
+      }
+    }
+    form textarea {
+      resize: none;
+      width: 100%;
+      height: 10em;
+      border-radius: 8px;
+      border: 1px solid black;
+      &:focus {
+        outline: none;
+      }
     }
   }
 }

@@ -44,21 +44,22 @@ export default {
   }
 }
 @media only screen and (max-width: 990px) {
-  /*Navigation*/
-  .question {
-    display: none;
-  }
-  .registration {
-    border-color: #48486e;
-    color: #48486e;
-    background-color: white;
-    width: 10em;
-    padding: 1em;
-    font-weight: bold;
-  }
-  .logo {
-    width: 7em;
-    margin-left: 0px;
+  .a-navbar {
+    .question {
+      display: none;
+    }
+    .registration {
+      border-color: #48486e;
+      color: #48486e;
+      background-color: white;
+      width: 10em;
+      padding: 1em;
+      font-weight: bold;
+    }
+    .logo {
+      width: 7em;
+      margin-left: 0px;
+    }
   }
 }
 </style>
