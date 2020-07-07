@@ -18,7 +18,7 @@
           v-b-modal.modal-prevent-closing
         >Nový príspevok</b-button>
         <div class="a-post" v-for="post in communityPosts" :key="post.id">
-          <h5 class="post-content">{{ post.content }}</h5>
+          <h5 class="content">{{ post.content }}</h5>
           <p class="yes">Áno: {{ post.vote_yes }}</p>
           <p class="no">Nie: {{ post.vote_no }}</p>
           <b-button variant="danger" class="delete-button" @click="deletePost(post.id)">Vymazať</b-button>
@@ -30,8 +30,8 @@
           </div>
         </div>
       </b-col>
-      <b-col class="background">
-        <img class="z-background" src="../assets/bg.png" />
+      <b-col class="z-background-image">
+        <img class="z-background-image" src="../assets/bg.png" />
       </b-col>
     </b-row>
     <div>
@@ -224,7 +224,7 @@ export default {
   .yes {
     color: green;
   }
-  .post-content {
+  .content {
     font-weight: 50;
   }
   .delete-button {
@@ -245,7 +245,6 @@ export default {
   }
   .new-post {
     width: 95%;
-    margin-left: 3%;
   }
 }
 </style>

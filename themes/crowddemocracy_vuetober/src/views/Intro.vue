@@ -6,7 +6,7 @@
         <b-col lg="6">
           <b-row>
             <b-col lg="12">
-              <h4 class="header">Ako využijete svoj hlas?</h4>
+              <h4 class="a-header">Ako využijete svoj hlas?</h4>
             </b-col>
             <b-col class="content">
               <h5 class="intro mt-5 z-center">

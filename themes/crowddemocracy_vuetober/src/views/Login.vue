@@ -4,19 +4,19 @@
       <Navbar></Navbar>
       <b-row>
         <b-col lg="6">
-          <h1 class="header">Prihlásenie</h1>
+          <h1 class="a-header">Prihlásenie</h1>
           <ValidationObserver v-slot="{ passes }">
             <form class="form" @submit.prevent="passes(login)">
               <ValidationProvider rules="required|email" v-slot="{ errors }">
                 <input type="text" placeholder="Email" v-model="email" />
-                <span class="error">{{ errors[0] }}</span>
+                <span class="z-error">{{ errors[0] }}</span>
               </ValidationProvider>
 
               <ValidationProvider rules="required|password_verification:8,16" v-slot="{ errors }">
                 <input type="password" placeholder="Heslo" v-model="password" />
-                <span class="error">{{ errors[0] }}</span>
+                <span class="z-error">{{ errors[0] }}</span>
               </ValidationProvider>
-              <span v-if="error.length" class="error">Uživateľ nebol najdeny</span>
+              <span v-if="error.length" class="z-error">Uživateľ nebol najdeny</span>
               <b-button class="login mt-2" type="submit">Prihlásiť</b-button>
             </form>
           </ValidationObserver>

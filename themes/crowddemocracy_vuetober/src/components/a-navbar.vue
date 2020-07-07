@@ -1,9 +1,7 @@
 <template>
   <b-row class="a-navbar">
     <b-col>
-      <img class="logo ml-3 mt-2" src="../assets/logo.png" />
-    </b-col>
-    <b-col>
+      <img class="logo ml-2 mt-2" src="../assets/logo.png" />
       <b-button class="registration" to="/registration">Registruj sa</b-button>
       <p class="question">Ešte nemáš účet?</p>
     </b-col>
@@ -46,21 +44,22 @@ export default {
   }
 }
 @media only screen and (max-width: 990px) {
-  /*Navigation*/
-  .question {
-    display: none;
-  }
-  .registration {
-    border-color: #48486e;
-    color: #48486e;
-    background-color: white;
-    width: 10em;
-    padding: 1em;
-    font-weight: bold;
-  }
-  .logo {
-    width: 7em;
-    margin-left: 0px;
+  .a-navbar {
+    .question {
+      display: none;
+    }
+    .registration {
+      border-color: #48486e;
+      color: #48486e;
+      background-color: white;
+      width: 10em;
+      padding: 1em;
+      font-weight: bold;
+    }
+    .logo {
+      width: 7em;
+      margin-left: 0px;
+    }
   }
 }
 </style>
