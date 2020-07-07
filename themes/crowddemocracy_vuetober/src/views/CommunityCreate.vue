@@ -82,23 +82,20 @@ export default {
     };
   },
 
-    computed: {
-        ...mapState([
-            "user"
-        ])
-    },
+  computed: {
+    ...mapState(["user"])
+  },
 
-    methods: {
-        createCommunity() {
-            let data = {
-                name: this.name,
-                desc: this.desc
-            };
-            this.$store
-                .dispatch("createCommunity", data)
-                .then(() => this.$router.push("/manage"))
-                .catch(() => (this.error = "Nepodarilo sa vytvorit komunitu"));
-        }
+  methods: {
+    createCommunity() {
+      let data = {
+        name: this.name,
+        desc: this.desc
+      };
+      this.$store
+        .dispatch("createCommunity", data)
+        .then(() => this.$router.push("/manage"))
+        .catch(() => (this.error = "Nepodarilo sa vytvorit komunitu"));
     }
   }
 };

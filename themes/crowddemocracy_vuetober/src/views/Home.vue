@@ -19,7 +19,7 @@
             <!--komunita div začiatok-->
             <div class="a-community mt-2 mb-3" v-for="community in communities" :key="community.id">
               <div @click="navigateToComm(community.id)">
-                <img
+                <!-- <img
                   v-if="community.icon_id === '0'"
                   class="community-logo"
                   src="../assets/com-log1.png"
@@ -82,25 +82,13 @@ import CommunityList from "../components/a-community-list.vue";
 import NavbarPhones from "../components/a-navbar-phones";
 
 export default {
-    components: {
-        NavbarPhones,
-        CommunityList
-    },
-    
-    computed: {
-        ...mapState([
-          "communities",
-          "user"
-        ])
-    },
+  components: {
+    NavbarPhones,
+    CommunityList
+  },
 
   computed: {
-    ...mapState({
-      communities: "communities"
-    }),
-    ...mapGetters({
-      user: "getUserData"
-    })
+    ...mapState(["communities", "user"])
   },
 
   async mounted() {

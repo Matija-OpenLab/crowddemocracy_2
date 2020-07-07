@@ -30,42 +30,35 @@
   </div>
 </template>
 <script>
-import {
-    ValidationProvider,
-    ValidationObserver,
-
-} from "vee-validate";
+import { ValidationProvider, ValidationObserver } from "vee-validate";
 
 import Footer from "../components/a-footer.vue";
 import Navbar from "../components/a-navbar.vue";
 
-
-
 export default {
-    components: {
-        ValidationProvider,
-        ValidationObserver,
-        Footer,
-        Navbar
-    },
-    data() {
-        return {
-            email: "",
-            password: "",
-            error: ""
-        };
-    },
-    methods: {
-        async login() {
-            let email = this.email;
-            let password = this.password;
-            try {
-                await this.$store.dispatch("login", { email, password });
-                this.$router.push("/home");
-            } catch{
-                this.error = "Invalid credencials";
-            }
-        }
+  components: {
+    ValidationProvider,
+    ValidationObserver,
+    Footer,
+    Navbar
+  },
+  data() {
+    return {
+      email: "",
+      password: "",
+      error: ""
+    };
+  },
+  methods: {
+    async login() {
+      let email = this.email;
+      let password = this.password;
+      try {
+        await this.$store.dispatch("login", { email, password });
+        this.$router.push("/home");
+      } catch {
+        this.error = "Invalid credencials";
+      }
     }
   }
 };

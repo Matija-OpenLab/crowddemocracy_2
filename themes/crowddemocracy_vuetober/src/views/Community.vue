@@ -45,7 +45,7 @@
               >Pridaj sa</b-button>
             </b-col>
           </b-row>
-          <b-row class="nav-row z-center">
+          <b-row class="nav-row">
             <b-col>
               <b-button class="nav-button" @click="notVoted">Nehlasoval som</b-button>
             </b-col>
@@ -64,7 +64,7 @@
                         "
           >
             <div class="posts my-4 mr-4">
-              <div class="a-post z-center mt-4" v-for="post in communityPosts" :key="post.id">
+              <div class="post mt-4" v-for="post in communityPosts" :key="post.id">
                 <p class="question-community mt-5">{{ post.content }}</p>
                 <span class="voted-num mt-5">Zahlasovalo {{ post.total_votes }}</span>
                 <div
@@ -101,7 +101,7 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import NavbarPhones from "../components/a-navbar-phones.vue";
 import CommunityList from "../components/a-community-list.vue";
 
@@ -232,46 +232,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.a-community-page {
-  .z-bg-white {
-    background-color: #f3f5f8;
-  }
-  .community-pic {
-    width: 80px;
-    height: auto;
-  }
-  .back-to-community {
-    color: #9a9eaa;
-    margin-top: 25px;
-    margin-left: 25px;
-  }
-  .logout {
-    background-color: #f3f5f8;
-    border-color: #f3f5f8;
-    color: #330066;
-    margin-left: 780px;
-    font-size: 15px;
-  }
-  .nav-button {
-    border: none;
-    color: #330066;
-  }
-  .nav-row {
-    border-bottom: 1px solid #d7d7c1;
-  }
-  .leave-community {
-    margin-left: 20px;
-  }
-  .posts {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0px;
-  }
+.yes-count {
+  display: inline;
+  margin-right: 2em;
 }
 .wrap {
   background-color: #f3f5f8;
 }
-/* horna cast kontentu - nazov, td */
 .community-pic {
   width: 80px;
   height: auto;
@@ -322,6 +289,7 @@ export default {
   background-color: white;
   border-radius: 15px;
   cursor: pointer;
+  text-align: center;
   margin: auto;
   transition: 1s;
   &:hover {
@@ -330,14 +298,45 @@ export default {
     box-shadow: 14px 34px 60px 19px rgba(0, 0, 0, 0.29);
   }
 }
-@media only screen and (max-width: 1230px) {
-  // .logout {
-  //   display: none;
-  // }
+.question-community {
+  color: skyblue;
+  font-size: 17px;
+  padding: 20px 0 px;
+}
+.change-vote {
+  border-color: black;
+  color: #48486e;
+  background-color: white;
+  width: 180px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 50px;
+}
+.vote-yes {
+  margin-top: 60px;
+  width: 120px;
+}
+.vote-no {
+  width: 120px;
+  margin-top: 60px;
+}
+.voted-num {
+  color: skyblue;
+}
+@media only screen and (max-width: 990px) {
+  .left-navbar {
+    display: none;
+  }
+  .logout {
+    display: none;
+  }
   .navbar {
     margin-top: 0px;
   }
   .logo {
+    display: none;
+  }
+  .list {
     display: none;
   }
   .com-pic {
