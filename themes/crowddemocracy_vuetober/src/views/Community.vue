@@ -2,13 +2,10 @@
   <div class="wrap">
     <NavbarPhones class="navbar-phones"></NavbarPhones>
     <b-container fluid class="content-wrap">
-      <b-row>
+      <b-row class>
         <CommunityList class="left-navbar"></CommunityList>
-        <b-col class="col z-bg-white">
-          <b-button
-            class="logout mt-3 z-bg-white d-none d-xl-block"
-            @click="logout"
-          >Odhlásenie z aplikácie</b-button>
+        <b-col height="100vh" class="col">
+          <b-button class="logout mt-3" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
           <b-row class="mt-5">
             <b-col class="community-pic mt-3 ml-2" cols="1">
               <img
@@ -104,7 +101,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import NavbarPhones from "../components/a-navbar-phones.vue";
 import CommunityList from "../components/a-community-list.vue";
 
@@ -114,17 +111,31 @@ export default {
       type: String
     }
   },
+  components: {
+    NavbarPhones,
+    CommunityList
+  },
   data() {
     return {
       lastSort: "latest"
     };
   },
-  created() {
-      this.$store.dispatch("fetchPosts", this.$props.id);    
-      this.$store.dispatch("selectCommunity", this.$props.id);  
-      this.sortPosts();  
-      
-},
+  computed: {
+    ...mapState({
+      community: "selectedCommunity",
+      communities: "communities"
+    }),
+    ...mapGetters({
+      communityPosts: "getPosts",
+      user: "getUserData"
+    })
+  },
+  async mounted() {
+    await this.$store.dispatch("fetchPosts", this.$props.id);
+    await this.$store.dispatch("fetchCommunities");
+    this.sortPosts();
+  },
+
   methods: {
     //Voting
 
@@ -132,8 +143,7 @@ export default {
       this.$store
         .dispatch("vote", { vote: vote, postId: postId })
         .then(() => {
-          //this.refreshUser();
-          //getpsots
+          //getpsots - backend ERR
         })
         .catch(err => console.error(err));
     },
@@ -141,8 +151,7 @@ export default {
       this.$store
         .dispatch("removeVote", postId)
         .then(() => {
-          //this.refreshUser();
-          //getposts
+          //getposts - backend ERR
         })
         .catch(err => console.error(err));
     },
@@ -153,20 +162,6 @@ export default {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
       });
-    },
-
-    refreshUser() {
-      this.$store
-        .dispatch("refresh")
-        .then(() => {})
-        .catch(err => {
-          console.error(err);
-        });
-    },
-
-    navigateToComm(community_id) {
-      const path = `/community/${community_id}`;
-      if (this.$route.path !== path) this.$router.push({ path: path });
     },
 
     joinCommunity(communityId) {
@@ -224,30 +219,15 @@ export default {
       }
       this.communityPosts.sort(compare);
     },
-    sortPosts(){
-          if (this.lastSort === "latest") {
-            this.latest();
-          } else if (this.lastSort === "notVoted") {
-            this.notVoted();
-          } else {
-            this.popular();
-          }
-  },
-  },
-  
-  computed: {
-    ...mapGetters({
-      communityPosts: "getPosts",
-      community: "getSelectedCommunity",
-      communities: "getCommunities",
-      user: "getUserData"
-    })
-  },
-
-  
-  components: {
-    NavbarPhones,
-    CommunityList
+    sortPosts() {
+      if (this.lastSort === "latest") {
+        this.latest();
+      } else if (this.lastSort === "notVoted") {
+        this.notVoted();
+      } else {
+        this.popular();
+      }
+    }
   }
 };
 </script>
@@ -401,4 +381,3 @@ export default {
   }
 }
 </style>
-

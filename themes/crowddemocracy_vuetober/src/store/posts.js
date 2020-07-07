@@ -1,94 +1,87 @@
 /* eslint-disable */
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  state: {
-    posts: []
-  },
-
-  mutations: {
-    postsAdded(state, posts){
-      state.posts = posts;
+    state: {
+        communityPosts: []
     },
-  },
-  actions: {
-    vote({
-      commit
-  }, postData) {
-      const url = `/api/v1/likes/${postData.vote}/${postData.postId}`;
+    getters: {
+        getPosts: state => state.communityPosts
+    },
+    mutations: {
+      postsAdded(state, communityPosts) {
+        console.log(postsData)
+        state.communityPosts = communityPosts;
+        }
+    },
+    actions: {
+        vote({ commit }, postData) {
+            const url = `/api/v1/likes/${postData.vote}/${postData.postId}`;
 
-          return axios({
-                  url: url,
-                  data: {
-                      token: this.state.token
-                  },
-                  method: "POST"
-              })
-              .then(() => {
-              })
-              .catch(err => {throw err});
-  },
-  removeVote({
-    commit
-}, postId) {
-    const url = `/api/v1/likes/remove_vote/${postId}`;
-        return axios({
-                url: url,
-                data: {
+            return axios
+                .post(url, {
                     token: this.state.token
-                },
-                method: "POST"
-            })
-            .then(() => {})
-            .catch(err => {throw err;});
-},
-createPost({
-  commit
-}, postData) {
-      axios({
-          url: "/api/v1/posts/create",
-          data: {
-              token: this.state.token,
-              content: postData.content,
-              community_id: postData.communityId
-          },
-          method: "POST"
-      }).then(() => {})
-        .catch(err => {throw err});
-},
-deletePost({
-  commit
-}, postId) {
-      axios({
-          url: "/api/v1/posts/remove",
-          data: {
-              token: this.state.token,
-              id: postId
-          },
-          method: "POST"
-      }).then(() => {})
-      .catch(err => {throw err});
-},
-finishPost({
-  commit
-}, postId) {
-      axios({
-          url: "/api/v1/posts/finish",
-          data: {
-              token: this.state.token,
-              id: postId
-          },
-          method: "POST"
-      }).then(() => {})
-      .catch(err => {throw err});
-},
-fetchPosts({commit}, communityId){
-  axios.get(`/api/v1/posts/community_id/${communityId}`).then(resp => {
-    commit("postsAdded", resp.data.posts)
-  })
-}
-  },
-  getters: {
-    getPosts: (state) => state.posts
-  },
+                })
+                .then(() => {})
+                .catch(err => {
+                    throw err;
+                });
+        },
+        removeVote({ commit }, postId) {
+            const url = `/api/v1/likes/remove_vote/${postId}`;
+            return axios
+                .post(url, {
+                    token: this.state.token
+                })
+                .then(() => {})
+                .catch(err => {
+                    throw err;
+                });
+        },
+        createPost({ commit }, postData) {
+            return axios
+                .post("/api/v1/posts/create", {
+                    token: this.state.token,
+                    content: postData.content,
+                    community_id: postData.communityId
+                })
+                .then(() => {})
+                .catch(err => {
+                    throw err;
+                });
+        },
+        deletePost({ commit }, postId) {
+            return axios
+                .post("/api/v1/posts/remove", {
+                    token: this.state.token,
+                    id: postId
+                })
+                .then(() => {})
+                .catch(err => {
+                    throw err;
+                });
+        },
+        finishPost({ commit }, postId) {
+            return axios
+                .post("/api/v1/posts/finish", {
+                    token: this.state.token,
+                    id: postId
+                })
+                .then(() => {})
+                .catch(err => {
+                    throw err;
+                });
+        },
+      async fetchPosts({ commit }, communityId) {
+            try {
+                let resp = await axios.get(
+                    `/api/v1/posts/community_id/${communityId}`
+                );
+              console.log(resp.data.posts)
+                commit("postsAdded", resp.data.posts);
+            } catch (err) {
+                throw err;
+            }
+        }
+    }
 };

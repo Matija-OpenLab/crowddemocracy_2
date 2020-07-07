@@ -3,7 +3,7 @@
     <NavbarPhones class="navbar-phones"></NavbarPhones>
     <b-container fluid class="content-wrap">
       <b-row>
-        <CommunityList></CommunityList>
+        <CommunityList class="left-navbar"></CommunityList>
         <b-col class="col">
           <b-button class="logout mt-0" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
           <b-row class="navbar mt-4">
@@ -55,10 +55,11 @@
                     <p
                       class="add-to-community"
                       v-if="
-                                            !user.communities.some(
-                                                comm => comm.id === community.id
-                                            )
-                                        "
+                                                !user.communities.some(
+                                                    comm =>
+                                                        comm.id === community.id
+                                                )
+                                            "
                       @click="joinCommunity(community.id)"
                     >+ pridaj sa do tejto komunity</p>
                   </b-col>
@@ -76,13 +77,38 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import CommunityList from "../components/a-community-list.vue";
 import NavbarPhones from "../components/a-navbar-phones";
+
 export default {
-  created() {
-      //this.$store.dispatch("refresh")
-      this.$store.dispatch("fetchCommunities");
+    components: {
+        NavbarPhones,
+        CommunityList
+    },
+    
+    computed: {
+        ...mapState([
+          "communities",
+          "user"
+        ])
+    },
+
+  computed: {
+    ...mapState({
+      communities: "communities"
+    }),
+    ...mapGetters({
+      user: "getUserData"
+    })
+  },
+
+  async mounted() {
+    try {
+      await this.$store.dispatch("fetchCommunities");
+    } catch (err) {
+      console.error(err);
+    }
   },
   methods: {
     //User navigation
@@ -98,7 +124,7 @@ export default {
         this.$router.push("/");
       });
     },
-    //Comm joining
+    //Comm joining / leaving
 
     joinCommunity(communityId) {
       this.$store
@@ -116,20 +142,10 @@ export default {
         .dispatch("leaveCommunity", communityId)
         .then(() => {
           // this.refreshUser();
-          this.$store.dispatch("getCommunities")
+          this.$store.dispatch("getCommunities");
         })
         .catch(err => console.error(err));
     }
-  },
-  computed: {
-    ...mapGetters({
-      communities: "getCommunities",
-      user: "getUserData"
-    })
-  },
-  components: {
-    NavbarPhones,
-    CommunityList
   }
 };
 </script>

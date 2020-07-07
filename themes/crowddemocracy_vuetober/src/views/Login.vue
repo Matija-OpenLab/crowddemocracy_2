@@ -22,7 +22,7 @@
           </ValidationObserver>
         </b-col>
         <b-col>
-          <img class="z-background" src="../assets/bg.png" />
+          <img class="z-background-image" src="../assets/bg.png" />
         </b-col>
       </b-row>
       <Footer></Footer>
@@ -31,64 +31,42 @@
 </template>
 <script>
 import {
-  ValidationProvider,
-  ValidationObserver,
-  setInteractionMode,
-  extend
+    ValidationProvider,
+    ValidationObserver,
+
 } from "vee-validate";
-import { required, email } from "vee-validate/dist/rules";
-setInteractionMode("eager");
+
 import Footer from "../components/a-footer.vue";
 import Navbar from "../components/a-navbar.vue";
 
-extend("required", {
-  ...required,
-  message: "Pole nesmie byť prázdne!"
-});
-extend("email", {
-  ...email,
-  message: "Nesprávny formát emailu!"
-});
 
-//Custom validation rules
-
-extend("password_verification", {
-  validate(value, { min, max }) {
-    const passRegex = new RegExp(
-      `^(?=.*)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{${min},${max}}`
-    );
-    return passRegex.test(value);
-  },
-  params: ["min", "max"],
-  message:
-    "Heslo musí obsahovať minimálne {min} znakov, najviac {max} znakov, obsahovať aspoň jedno veľké písmeno a jedno číslo."
-});
 
 export default {
-  components: {
-    ValidationProvider,
-    ValidationObserver,
-    Footer,
-    Navbar
-  },
-  data() {
-    return {
-      email: "",
-      password: "",
-      error: ""
-    };
-  },
-  methods: {
-    login() {
-      let email = this.email;
-      let password = this.password;
-      this.$store
-        .dispatch("login", { email, password })
-        .then(() => this.$router.push("/home"))
-        .catch(() => {
-          this.error = "Invalid credencials";
-        });
+    components: {
+        ValidationProvider,
+        ValidationObserver,
+        Footer,
+        Navbar
     },
+    data() {
+        return {
+            email: "",
+            password: "",
+            error: ""
+        };
+    },
+    methods: {
+        async login() {
+            let email = this.email;
+            let password = this.password;
+            try {
+                await this.$store.dispatch("login", { email, password });
+                this.$router.push("/home");
+            } catch{
+                this.error = "Invalid credencials";
+            }
+        }
+    }
   }
 };
 </script>
@@ -98,6 +76,10 @@ export default {
 
   .content-wrap {
     position: relative;
+  }
+  .logo {
+    width: 140px;
+    margin-left: 2em;
   }
   .form {
     margin-left: 130px;
@@ -127,6 +109,10 @@ export default {
 @media only screen and (max-width: 990px) {
   .a-login {
     .form {
+      .logo {
+        width: 7em;
+        margin-left: 0px;
+      }
       color: black;
       text-align: center;
       margin: 0px;

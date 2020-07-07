@@ -21,7 +21,7 @@
           </b-row>
         </b-col>
         <b-col>
-          <img class="z-background" src="../assets/bg.png" />
+          <img class="z-background-image" src="../assets/bg.png" />
         </b-col>
       </b-row>
       <Footer></Footer>
@@ -33,9 +33,6 @@ import Navbar from "../components/a-navbar.vue";
 import Footer from "../components/a-footer.vue";
 
 export default {
-  created() {
-    if (this.$store.getters.isLoggedIn) this.$router.push("/home");
-  },
   components: {
     Footer,
     Navbar
@@ -96,4 +93,3 @@ export default {
   }
 }
 </style>
-
