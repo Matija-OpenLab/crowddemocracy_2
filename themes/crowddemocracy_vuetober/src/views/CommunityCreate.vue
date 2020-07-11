@@ -46,7 +46,7 @@
         </div>
       </b-col>
       <b-col lg="6" sm="0">
-        <img class="z-background-image" src="../assets/bg.png" />
+        <img class="z-background-image" src="../assets/images/bg.png" />
       </b-col>
     </b-row>
   </div>
@@ -121,7 +121,7 @@ export default {
   .title {
     font-size: 4em;
     margin-left: 10%;
-    font-weight: 50;
+    font-weight: 300;
     color: #48486e;
   }
   .inputs {
@@ -160,20 +160,13 @@ export default {
 }
 
 @media only screen and (max-width: 990px) {
-  .community-buttons {
-    width: 95%;
-  }
-  .inputs {
-    margin-left: 5%;
-    margin-top: 14%;
-    form textarea {
-      width: 95%;
+  .a-community-create {
+    .community-buttons {
+      width: 100%;
     }
-    form input {
-      width: 95%;
-    }
-    form p {
-      width: 95%;
+
+    .inputs {
+      margin: 14% 5% 0;
     }
   }
 }

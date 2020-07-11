@@ -21,7 +21,7 @@
           </b-row>
         </b-col>
         <b-col>
-          <img class="z-background-image" src="../assets/bg.png" />
+          <img class="z-background-image" src="../assets/images/bg.png" />
         </b-col>
       </b-row>
       <Footer></Footer>
@@ -54,7 +54,7 @@ export default {
   }
   .intro {
     width: 500px;
-    font-weight: 50;
+    font-weight: 500;
     margin-left: 100px;
   }
   .login {

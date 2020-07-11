@@ -1,7 +1,7 @@
 <template>
   <b-row class="a-navbar">
     <b-col>
-      <img class="logo ml-2 mt-2" src="../assets/logo.png" />
+      <img class="logo ml-2 mt-2" src="../assets/images/logo.png" />
       <b-button class="registration" to="/registration">Registruj sa</b-button>
       <p class="question">Ešte nemáš účet?</p>
     </b-col>

@@ -22,7 +22,7 @@
           </ValidationObserver>
         </b-col>
         <b-col>
-          <img class="z-background-image" src="../assets/bg.png" />
+          <img class="z-background-image" src="../assets/images/bg.png" />
         </b-col>
       </b-row>
       <Footer></Footer>

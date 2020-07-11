@@ -1,6 +1,6 @@
 <template>
   <div class="a-left-navbar vh-100 p-0 z-bg-white d-none d-xl-block">
-    <img class="logo ml-2 mt-3" src="../assets/logo.png" />
+    <img class="logo ml-2 mt-3" src="../assets/images/logo.png" />
     <div class="ml-4 mt-5">
       <p class="list my-4">Zoznam komunít,kde si členom:</p>
       <div class="mt-3" v-for="community in communities" :key="community.id">
@@ -13,9 +13,21 @@
         >
           <b-row @click="navigateToComm(community.id)" class="community-side">
             <b-col cols="1">
-              <img v-if="community.icon_id === '0'" class="logo-list" src="../assets/com-log2.png" />
-              <img v-if="community.icon_id === '1'" class="logo-list" src="../assets/com-log2.png" />
-              <img v-if="community.icon_id === '2'" class="logo-list" src="../assets/com-log2.png" />
+              <img
+                v-if="community.icon_id === '0'"
+                class="logo-list"
+                src="../assets/images/com-log2.png"
+              />
+              <img
+                v-if="community.icon_id === '1'"
+                class="logo-list"
+                src="../assets/images/com-log2.png"
+              />
+              <img
+                v-if="community.icon_id === '2'"
+                class="logo-list"
+                src="../assets/images/com-log2.png"
+              />
             </b-col>
             <b-col class="ml-4">
               <p class="count-info mb-0">{{ community.user_count }} užívateľov</p>
@@ -61,7 +73,6 @@ export default {
 <style lang="scss" scoped>
 .a-left-navbar {
   height: 100vh;
-  border-right: 1px solid #d7d7c1;
   width: 20em;
 
   .logo {

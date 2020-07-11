@@ -1,4 +1,3 @@
-import "./assets/z.scss";
 import Vue from "vue";
 import App from "./App.vue";
 
@@ -6,6 +5,8 @@ import router from "./router";
 import store from "./store";
 
 import custom from "./custom";
+import "./assets/style/z.scss";
+import "./assets/style/a.scss";
 
 custom.setup();
 

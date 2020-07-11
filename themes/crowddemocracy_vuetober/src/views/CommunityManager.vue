@@ -42,7 +42,7 @@
         <h4 class="no-community">Ešte si si nevytvoril komunitu.</h4>
       </b-col>
       <b-col class="z-background-image">
-        <img class="z-background-image" src="../assets/bg.png" />
+        <img class="z-background-image" src="../assets/images/bg.png" />
       </b-col>
     </b-row>
     <div>

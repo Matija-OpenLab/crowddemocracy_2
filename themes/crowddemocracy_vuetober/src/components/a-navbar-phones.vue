@@ -2,7 +2,7 @@
   <b-container fluid class="mx-0 px-0 d-block d-xl-none">
     <b-navbar class="a-navbar-phones m-0" toggleable="md" type="dark">
       <b-navbar-brand href="#">
-        <img class="logo-navbar" src="../assets/logo.png" />
+        <img class="logo-navbar" src="../assets/images/logo.png" />
       </b-navbar-brand>
 
       <b-navbar-toggle target="toggle-collapse">
@@ -41,9 +41,7 @@ export default {
     }
   },
   computed: {
-    ...mapState([
-       "communities",
-    ]),
+    ...mapState(["communities"]),
     ...mapGetters({
       user: "getUserData"
     })
@@ -53,29 +51,28 @@ export default {
 <style lang="scss">
 .a-navbar-phones {
   background-color: #b3b3e6;
-}
-@media only screen and (max-width: 1230px) {
-  .a-navbar-phones {
-    background-color: #b3b3e6;
 
-    .logo-navbar {
-      height: 2em;
-    }
-    .toggler {
-      background-color: #7a5cc7;
-    }
-    .toggler:focus {
+  .toggler {
+    background-color: #7a5cc7;
+    &:focus {
       outline: none;
     }
   }
-}
-.navbar-toggler {
-  background-color: #7a5cc7;
-}
-.navbar-toggler:focus {
-  outline: none;
-}
-.nav-link {
-  color: black;
+
+  @media only screen and (max-width: 1230px) {
+    .a-navbar-phones {
+      background-color: #b3b3e6;
+
+      .logo-navbar {
+        height: 2em;
+      }
+      .toggler {
+        background-color: #7a5cc7;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
 }
 </style>

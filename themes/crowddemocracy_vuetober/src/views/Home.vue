@@ -1,76 +1,91 @@
 <template>
   <div class="a-homepage">
-    <NavbarPhones class="navbar-phones"></NavbarPhones>
+    <NavbarPhones></NavbarPhones>
     <b-container fluid class="content-wrap">
       <b-row>
         <CommunityList class="a-left-navbar"></CommunityList>
         <b-col class="col">
-          <b-button class="logout mt-0" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
-          <b-row class="navbar mt-4">
-            <b-col cols="1">
-              <img class="homepage-pic" src="../assets/homepage.png" />
-            </b-col>
-            <b-col>
-              <h1 class="welcome mt-1 ml-5">Vitajte v CrowdDemocracy</h1>
-              <p class="username mb-2 ml-5">Vitaj {{ user.name }}!</p>
-            </b-col>
-          </b-row>
-          <div class="communities mt-3 ml-1">
-            <!--komunita div začiatok-->
-            <div class="a-community mt-2 mb-3" v-for="community in communities" :key="community.id">
-              <div @click="navigateToComm(community.id)">
-                <!-- <img
-                  v-if="community.icon_id === '0'"
-                  class="community-logo"
-                  src="../assets/com-log1.png"
-                />
-                <img
-                  v-if="community.icon_id === '1'"
-                  class="community-logo"
-                  src="../assets/com-log2.png"
-                />
-                <img
-                  v-if="community.icon_id === '2'"
-                  class="community-logo"
-                  src="../assets/com-log3.png"
-                />-->
-                <p class="count mb-0 mt-3">{{ community.user_count }} užívateľov</p>
-                <p class="name z-bold z-center">{{ community.name }}</p>
-                <div v-if="community.icon_id === '0'" class="desc z-center color2">
-                  <p class="small-desc">Popis komunity</p>
-                  <p>{{ community.description }}</p>
-                </div>
-                <div v-if="community.icon_id === '1'" class="desc z-center color2">
-                  <p class="small-desc">Popis komunity</p>
-                  <p>{{ community.description }}</p>
-                </div>
-                <div v-if="community.icon_id === '2'" class="desc z-center color3">
-                  <p class="small-desc">Popis komunity</p>
-                  <p>{{ community.description }}</p>
-                </div>
-                <!-- <p class="com-create">{{ community.created_at.split(" ")[0] }}</p> -->
+          <b-button
+            class="logout mt-0"
+            @click="logout"
+            variant="bg-transparent"
+          >Odhlásenie z aplikácie</b-button>
+          <b-container class="border-left">
+            <b-row class="navbar mt-4">
+              <b-col cols="1">
+                <img class="homepage-pic" src="../assets/images/homepage.png" />
+              </b-col>
+              <b-col>
+                <h1 class="welcome mt-1 ml-5 font-weight-bold">
+                  Vitajte v Crowd
+                  <span class="font-weight-light">Democracy</span>
+                </h1>
+                <p class="username mb-2 ml-5 z-fs-s">Vitaj {{ user.name }}!</p>
+              </b-col>
+              <b-col cols="3">
+                <b-form-input placeholder="Vyhladaj"></b-form-input>
+              </b-col>
+            </b-row>
+            <div class="communities mt-3 ml-1">
+              <!--komunita div začiatok-->
+              <div
+                class="a-community mt-2 mb-3"
+                v-for="community in communities"
+                :key="community.id"
+              >
+                <div @click="navigateToComm(community.id)">
+                  <!-- <img
+                    v-if="community.icon_id === '0'"
+                    class="commuts/com-log1.png"
+                  />
+                  <img
+                    v-if="community.icon_id === '1'"
+                    class="community-logo"
+                    src="../assets/com-log2.png"
+                  />
+                  <img
+                    v-if="community.icon_id === '2'"
+                    class="community-logo"
+                    src="../assets/com-log3.png"
+                  />-->
+                  <p class="count mb-0 mt-3">{{ community.user_count }} užívateľov</p>
+                  <p class="name z-bold z-center">{{ community.name }}</p>
+                  <div v-if="community.icon_id === '0'" class="desc z-center color2">
+                    <p class="small-desc">Popis komunity</p>
+                    <p>{{ community.description }}</p>
+                  </div>
+                  <div v-if="community.icon_id === '1'" class="desc z-center color2">
+                    <p class="small-desc">Popis komunity</p>
+                    <p>{{ community.description }}</p>
+                  </div>
+                  <div v-if="community.icon_id === '2'" class="desc z-center color3">
+                    <p class="small-desc">Popis komunity</p>
+                    <p>{{ community.description }}</p>
+                  </div>
+                  <!-- <p class="com-create">{{ community.created_at.split(" ")[0] }}</p> -->
 
-                <b-row>
-                  <b-col cols="8">
-                    <p
-                      class="add-to-community"
-                      v-if="
-                                                !user.communities.some(
-                                                    comm =>
-                                                        comm.id === community.id
-                                                )
-                                            "
-                      @click="joinCommunity(community.id)"
-                    >+ pridaj sa do tejto komunity</p>
-                  </b-col>
-                  <b-col>
-                    <p class="z-center">{{ community.owner }}</p>
-                  </b-col>
-                </b-row>
+                  <b-row>
+                    <b-col cols="8">
+                      <p
+                        class="add-to-community"
+                        v-if="
+                                                  !user.communities.some(
+                                                      comm =>
+                                                          comm.id === community.id
+                                                  )
+                                              "
+                        @click="joinCommunity(community.id)"
+                      >+ pridaj sa do tejto komunity</p>
+                    </b-col>
+                    <b-col>
+                      <p class="z-center">{{ community.owner }}</p>
+                    </b-col>
+                  </b-row>
+                </div>
               </div>
+              <!-- komunita koniec -->
             </div>
-            <!-- komunita koniec -->
-          </div>
+          </b-container>
         </b-col>
       </b-row>
     </b-container>
@@ -142,8 +157,6 @@ export default {
   background-color: #f3f5f8;
   width: 100vw;
   .logout {
-    background-color: #f3f5f8;
-    border-color: #f3f5f8;
     color: #330066;
     margin-left: 77%;
     font-size: 15px;
@@ -153,9 +166,6 @@ export default {
   }
   .welcome {
     font-size: 32px;
-  }
-  .username {
-    font-size: 22px;
   }
   .desc {
     display: grid;
@@ -180,6 +190,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin: 0px;
+  }
+  .border-left {
+    border-left: 1px solid #e7e8ea;
   }
 }
 .a-community {

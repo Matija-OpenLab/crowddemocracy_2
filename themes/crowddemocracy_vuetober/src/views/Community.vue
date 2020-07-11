@@ -1,27 +1,27 @@
 <template>
   <div class="wrap">
-    <NavbarPhones class="navbar-phones"></NavbarPhones>
+    <NavbarPhones></NavbarPhones>
     <b-container fluid class="content-wrap">
       <b-row class>
         <CommunityList class="left-navbar"></CommunityList>
-        <b-col height="100vh" class="col">
+        <b-col class="col h-100vh">
           <b-button class="logout mt-3" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
           <b-row class="mt-5">
             <b-col class="community-pic mt-3 ml-2" cols="1">
               <img
                 v-if="community.icon_id === '0'"
                 class="community-pic"
-                src="../assets/com-log1.png"
+                src="../assets/images/com-log1.png"
               />
               <img
                 v-if="community.icon_id === '1'"
                 class="community-pic"
-                src="../assets/com-log2.png"
+                src="../assets/images/com-log2.png"
               />
               <img
                 v-if="community.icon_id === '2'"
                 class="community-pic"
-                src="../assets/com-log3.png"
+                src="../assets/images/com-log3.png"
               />
             </b-col>
             <b-col>
@@ -242,6 +242,9 @@ export default {
 .community-pic {
   width: 80px;
   height: auto;
+}
+.h-100vh {
+  min-height: calc(100vh - 66px);
 }
 .back-to-community {
   color: #9a9eaa;

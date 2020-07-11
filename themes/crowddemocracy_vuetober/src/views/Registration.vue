@@ -3,7 +3,7 @@
     <b-container fluid class="wrap-content">
       <b-row class="navbar">
         <b-col>
-          <img class="logo" src="../assets/logo.png" @click="toIntro()" />
+          <img class="logo" src="../assets/images/logo.png" @click="toIntro()" />
           <b-button class="login mt-1 z-bold" to="/login">Prihlás sa</b-button>
           <p class="question">Už máš účet?</p>
         </b-col>
@@ -58,7 +58,7 @@
             <Footer></Footer>
           </b-col>
           <b-col>
-            <img class="z-background-image" src="../assets/bg.png" />
+            <img class="z-background-image" src="../assets/images/bg.png" />
           </b-col>
         </b-row>
       </div>
@@ -68,12 +68,7 @@
 <script>
 /*eslint-disable*/
 import Footer from "../components/a-footer.vue";
-import {
-    ValidationProvider,
-    ValidationObserver,
-} from "vee-validate";
-
-
+import { ValidationProvider, ValidationObserver } from "vee-validate";
 
 export default {
   components: {
@@ -104,32 +99,32 @@ export default {
         .catch(() => (this.error = "Invalid credencials"));
     },
     data() {
-        return {
-            email: "",
-            username: "",
-            password: "",
-            password_confirmation: "",
-            error: ""
-        };
+      return {
+        email: "",
+        username: "",
+        password: "",
+        password_confirmation: "",
+        error: ""
+      };
     },
     methods: {
-        async register() {
-            let data = {
-                email: this.email,
-                password: this.password,
-                password_confirmation: this.password_confirmation,
-                name: this.username
-            };
-            try {
-                await this.$store.dispatch("register", data);
-                this.$router.push("/home");
-            } catch {
-                this.error = "Invalid credencials";
-            }
-        },
-        toIntro() {
-            this.$router.push("/");
+      async register() {
+        let data = {
+          email: this.email,
+          password: this.password,
+          password_confirmation: this.password_confirmation,
+          name: this.username
+        };
+        try {
+          await this.$store.dispatch("register", data);
+          this.$router.push("/home");
+        } catch {
+          this.error = "Invalid credencials";
         }
+      },
+      toIntro() {
+        this.$router.push("/");
+      }
     }
   }
 };
