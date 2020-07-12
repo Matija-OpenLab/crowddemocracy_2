@@ -1,9 +1,9 @@
 <template>
   <div class="wrap">
-    <NavbarPhones></NavbarPhones>
+    <a-navbar-phones></a-navbar-phones>
     <b-container fluid class="content-wrap">
       <b-row class>
-        <CommunityList class="left-navbar"></CommunityList>
+        <a-community-list class="left-navbar"></a-community-list>
         <b-col class="col h-100vh">
           <b-button class="logout mt-3" @click="logout" variant="danger">Odhlásenie z aplikácie</b-button>
           <b-row class="mt-5">
@@ -102,8 +102,6 @@
 </template>
 <script>
 import { mapGetters, mapState } from "vuex";
-import NavbarPhones from "../components/a-navbar-phones.vue";
-import CommunityList from "../components/a-community-list.vue";
 
 export default {
   props: {
@@ -112,8 +110,8 @@ export default {
     }
   },
   components: {
-    NavbarPhones,
-    CommunityList
+    "a-community-list": import("../components/a-community-list.vue"),
+    "a-navbar-phones": import("../components/a-navbar-phones.vue")
   },
   data() {
     return {

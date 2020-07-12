@@ -52,6 +52,9 @@ export default {
 .a-navbar-phones {
   background-color: #b3b3e6;
 
+  .logo-navbar {
+    height: 2em;
+  }
   .toggler {
     background-color: #7a5cc7;
     &:focus {

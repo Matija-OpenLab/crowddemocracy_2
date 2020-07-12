@@ -1,7 +1,7 @@
 <template>
   <div class="a-login m-0">
     <b-container fluid class="content-wrap">
-      <Navbar></Navbar>
+      <a-navbar></a-navbar>
       <b-row>
         <b-col lg="6">
           <h1 class="a-header">Prihlásenie</h1>
@@ -25,22 +25,19 @@
           <img class="z-background-image" src="../assets/images/bg.png" />
         </b-col>
       </b-row>
-      <Footer></Footer>
+      <a-footer></a-footer>
     </b-container>
   </div>
 </template>
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 
-import Footer from "../components/a-footer.vue";
-import Navbar from "../components/a-navbar.vue";
-
 export default {
   components: {
     ValidationProvider,
     ValidationObserver,
-    Footer,
-    Navbar
+    "a-navbar": import("../components/a-navbar.vue"),
+    "a-footer": import("../components/a-footer.vue")
   },
   data() {
     return {
